@@ -1,7 +1,7 @@
 export const NavStyles = {
     bodyWrapper: {
         width: { sm: "100%" },
-        bgColor: "#fff",
+        background: "#F9FAFD",
         height: { sm: "116px" },
         px: { sm: "51px" },
         py: { sm: "28px" },

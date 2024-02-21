@@ -6,15 +6,20 @@ import { SearchStyles } from "./styles/styles"
 import MenuIcon from "@mui/icons-material/Menu"
 import { useState } from "react"
 import Categories from "./categories/Categories"
+import { useQuery } from "@tanstack/react-query"
 
 const Search = () => {
     const [isShowCatalog, setIsShowCatalog] = useState<boolean>(false)
-    const [categories, setCategories] = useState<any[]>([])
+    const [categories, setCategories] = useState<any>([])
+
+    const { isPending, error, data, isFetching } = useQuery({
+        queryKey: ["categoriesList"],
+        queryFn: TestAxiosReq,
+    })
 
     const handleShowCatalog = async () => {
-        const getData = await TestAxiosReq("123")
         setIsShowCatalog((state: boolean) => !state)
-        setCategories(getData)
+        setCategories(data)
     }
 
     return (

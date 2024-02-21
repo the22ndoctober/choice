@@ -1,17 +1,12 @@
 import { Box } from "@mui/material"
 import CategoryItem from "./CategoryItem"
+import { CategoriesStyles } from "./styles/styles"
 
 const Categories = ({ categories }: any) => {
     return (
         <Box
             sx={{
-                width: 300,
-                height: { sm: 850 },
-                position: "absolute",
-                bottom: -850,
-                left: 51,
-                background: "#fff",
-                zIndex: 2000,
+                ...CategoriesStyles.wrapper,
             }}
         >
             {categories.categories.map((cat: any) => (

@@ -18,6 +18,7 @@ const Search = () => {
     })
 
     const handleShowCatalog = async () => {
+        console.log(data)
         setIsShowCatalog((state: boolean) => !state)
         setCategories(data)
     }

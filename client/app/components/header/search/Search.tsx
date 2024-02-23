@@ -1,6 +1,6 @@
 "use client"
 
-import { TestAxiosReq } from "@/api/test"
+import { GetProducts, TestAxiosReq } from "@/api/test"
 import { Box, Button } from "@mui/material"
 import { SearchStyles } from "./styles/styles"
 import MenuIcon from "@mui/icons-material/Menu"
@@ -10,7 +10,8 @@ import { useQuery } from "@tanstack/react-query"
 
 const Search = () => {
     const [isShowCatalog, setIsShowCatalog] = useState<boolean>(false)
-    const [categories, setCategories] = useState<any>([])
+
+    // GetProducts
 
     const { isPending, error, data, isFetching } = useQuery({
         queryKey: ["categoriesList"],
@@ -20,7 +21,6 @@ const Search = () => {
     const handleShowCatalog = async () => {
         console.log(data)
         setIsShowCatalog((state: boolean) => !state)
-        setCategories(data)
     }
 
     return (
@@ -33,7 +33,8 @@ const Search = () => {
                     <MenuIcon sx={{ fontSize: 30 }} />
                     Каталог
                 </Button>
-                {isShowCatalog ? <Categories categories={categories} /> : ""}
+
+                {isShowCatalog ? <Categories categories={data} /> : ""}
             </Box>
         </>
     )

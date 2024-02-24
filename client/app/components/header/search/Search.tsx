@@ -13,28 +13,33 @@ const Search = () => {
 
     // GetProducts
 
-    const { isPending, error, data, isFetching } = useQuery({
+    const { isLoading, error, data, isFetching } = useQuery({
         queryKey: ["categoriesList"],
         queryFn: TestAxiosReq,
     })
 
-    const handleShowCatalog = async () => {
-        console.log(data)
-        setIsShowCatalog((state: boolean) => !state)
-    }
+    if (isLoading) return <div>Loading</div>
 
     return (
         <>
-            <Box sx={{ ...SearchStyles.wrapper }}>
-                <Button
-                    onClick={handleShowCatalog}
-                    sx={{ ...SearchStyles.catalog__button }}
-                >
-                    <MenuIcon sx={{ fontSize: 30 }} />
-                    Каталог
-                </Button>
-
-                {isShowCatalog ? <Categories categories={data} /> : ""}
+            <Box
+                onMouseLeave={() => {
+                    setIsShowCatalog(false)
+                }}
+                sx={{ ...SearchStyles.wrapper }}
+            >
+                <Box>
+                    <Button
+                        onMouseEnter={() => {
+                            setIsShowCatalog(true)
+                        }}
+                        sx={{ ...SearchStyles.catalog__button }}
+                    >
+                        <MenuIcon sx={{ fontSize: 30 }} />
+                        Каталог
+                    </Button>
+                    {isShowCatalog ? <Categories categories={data} /> : ""}
+                </Box>
             </Box>
         </>
     )

@@ -4,15 +4,18 @@ import Grid from "@mui/material/Grid"
 import { GetCategoryProducts } from "@/api/test"
 import { useQuery } from "@tanstack/react-query"
 import { Colors } from "@/client"
-import { Box } from "@mui/material"
+import { Box, Button } from "@mui/material"
+import ProductLink from "./ProductLink"
 
 const CategoryItem = ({ categoryInfo }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
 
-    const { isPending, error, data, isFetching } = useQuery({
+    const { isLoading, error, data, isFetching } = useQuery({
         queryKey: [`products${categoryInfo.category_id}`],
         queryFn: (): any => GetCategoryProducts(categoryInfo.category_id),
     })
+
+    if (isLoading) return <div>Loading</div>
 
     return (
         <>
@@ -70,7 +73,14 @@ const CategoryItem = ({ categoryInfo }: any) => {
                     >
                         {data.products.length > 0 ? (
                             data.products.map((product: any) => (
-                                <div key={product.title}>{product.title}</div>
+                                <>
+                                    <ProductLink
+                                        key={product.product_id}
+                                        product_id={product.product_id}
+                                        category_id={categoryInfo.category_id}
+                                        product_title={product.title}
+                                    />
+                                </>
                             ))
                         ) : (
                             <div>Немає товару по даній категорії</div>

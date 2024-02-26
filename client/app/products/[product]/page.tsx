@@ -5,6 +5,8 @@ import { Box } from "@mui/material"
 import { useQuery } from "@tanstack/react-query"
 import Navigation from "@/app/components/header/navgitation/Navigation"
 import Search from "@/app/components/header/search/Search"
+import ProductItem from "@/app/components/main/products/ProductItem"
+import HeadLinks from "@/app/components/header/headLinks/HeadLinks"
 
 type productID = {
     params: { product_id: string }
@@ -31,7 +33,21 @@ export default function Product({ params }: any) {
         <>
             <Navigation />
             <Search />
-            <Box>{product.title}</Box>
+            <Box sx={{ px: { sm: "51px" }, py: { sm: "28px" } }}>
+                <HeadLinks
+                    links={[
+                        {
+                            url: params.product.substring(
+                                0,
+                                params.product.indexOf("_")
+                            ),
+                            title: "Category",
+                        },
+                        { url: params.product, title: product.title },
+                    ]}
+                />
+                <ProductItem product={product} />
+            </Box>
         </>
     )
 }

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query"
 import { Colors } from "@/client"
 import { Box, Button } from "@mui/material"
 import ProductLink from "./ProductLink"
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 
 const CategoryItem = ({ categoryInfo }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
@@ -34,25 +35,38 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         direction: "row",
                         columnGap: 2,
                         alignItems: "center",
+
                         p: 1,
                     }}
                     onClick={() => {
                         setIsShowProductsList((state: boolean) => !state)
                     }}
                 >
-                    <img
-                        src={categoryInfo.image}
-                        alt=""
-                        width={30}
-                        height={30}
-                    />
-                    <Box
+                    <Box>
+                        <img
+                            src={categoryInfo.image}
+                            alt=""
+                            width={30}
+                            height={30}
+                        />
+                    </Box>
+
+                    <Grid
+                        container
                         sx={{
                             color: isShowProductsList ? Colors.light : "#000",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: { sm: 220 },
+                            cursor: "pointer",
                         }}
                     >
-                        {categoryInfo.title}
-                    </Box>
+                        <Box sx={{ textWrap: "break-line" }}>
+                            {categoryInfo.title}
+                        </Box>
+
+                        <ArrowForwardIosIcon />
+                    </Grid>
                 </Grid>
                 {isShowProductsList && (
                     <Grid
@@ -68,7 +82,8 @@ const CategoryItem = ({ categoryInfo }: any) => {
                             bgcolor: "#fff",
                             columnGap: 2,
                             rowGap: 2,
-                            p: 4,
+                            px: 4,
+                            py: 2,
                         }}
                     >
                         {data.products.length > 0 ? (

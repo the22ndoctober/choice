@@ -111,3 +111,12 @@
     font-size: 42px !important;
     color: #706f6f !important;
 }
+
+.search-placeholder input::placeholder {
+    font-size: 30px;
+}
+
+.search-placeholder input {
+    width: 100% !important;
+    font-size: 30px;
+}

@@ -22,7 +22,7 @@ export const NavStyles = {
     },
     buttonWrapper__item: {
         fontFamily: "Inter",
-        fontSize: "29px",
+        fontSize: "23px",
         fontWeight: 300,
         lineHeight: "35px",
         letterSpacing: "0em",

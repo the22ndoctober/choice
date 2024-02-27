@@ -16,8 +16,8 @@ app.get("/test", async function (req, res) {
   console.log("response success");
 
   let clientServerOptions = {
-    baseUrl: "https://yevheniiseif.dntrade.com.ua",
-    method: "POST",
+    baseUrl: "https://api.dntrade.com.ua",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       ApiKey: process.env.API_KEY,
@@ -30,15 +30,19 @@ app.get("/test", async function (req, res) {
     (headers = clientServerOptions.headers)
   );
 
-  const resp = await post("/api/website/categories", {});
+  const resp = await post("/products/categories");
   const data = await resp.json();
 
-  res.json(data);
+  const filtred = data.categories.filter(
+    (cat) => cat.store_id === "A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4"
+  );
+
+  res.json(filtred);
 });
 
 app.post("/getCategoryProducts", async function (req, res) {
   let clientServerOptions = {
-    baseUrl: "https://yevheniiseif.dntrade.com.ua",
+    baseUrl: "https://api.dntrade.com.ua",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -52,9 +56,12 @@ app.post("/getCategoryProducts", async function (req, res) {
     (headers = clientServerOptions.headers)
   );
 
-  const resp = await post("/api/website/categories", {
-    category_id: req.body.category_id,
-  });
+  const resp = await post(
+    `/products/list?category_id=${req.body.category_id}`,
+    {
+      body: { category_id: req.body.category_id },
+    }
+  );
   const data = await resp.json();
 
   console.log(data);
@@ -62,11 +69,9 @@ app.post("/getCategoryProducts", async function (req, res) {
   res.json(data);
 });
 
-app.get("/getGoods", async function (req, res) {
-  console.log("response success");
-
+app.post("/getGoods", async function (req, res) {
   let clientServerOptions = {
-    baseUrl: "https://yevheniiseif.dntrade.com.ua",
+    baseUrl: "https://api.dntrade.com.ua",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -80,10 +85,13 @@ app.get("/getGoods", async function (req, res) {
     (headers = clientServerOptions.headers)
   );
 
-  const resp = await post("/api/website/products", {
-    store_id: "A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4",
+  const resp = await post(`/products/list`, {
+    product_id: req.body.product_id,
   });
+
   const data = await resp.json();
+
+  console.log(data);
 
   res.json(data);
 });

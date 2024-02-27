@@ -35,7 +35,7 @@ const AboutProduct = ({ product }: any) => {
                     <img
                         src={product.image_path}
                         alt=""
-                        style={{ width: "100%", height: "auto" }}
+                        style={{ width: 600, height: "auto" }}
                     />
                 </Box>
                 <Grid
@@ -45,8 +45,9 @@ const AboutProduct = ({ product }: any) => {
                         width: { sm: 600, overflow: "hidden", height: "80px" },
                     }}
                 >
-                    {(product.images || []).map((url: string) => (
+                    {(product.images || []).map((url: string, id: number) => (
                         <Box
+                            key={product.title + id}
                             sx={{
                                 width: { sm: 140 },
                                 height: 80,
@@ -60,7 +61,7 @@ const AboutProduct = ({ product }: any) => {
                             <img
                                 src={url}
                                 alt=""
-                                style={{ width: "100%", height: "auto" }}
+                                style={{ width: 140, height: "auto" }}
                             />
                         </Box>
                     ))}

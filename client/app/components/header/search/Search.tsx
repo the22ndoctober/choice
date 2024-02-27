@@ -73,7 +73,11 @@ const Search = () => {
                         <MenuIcon sx={{ fontSize: 30 }} />
                         Каталог
                     </Button>
-                    {isShowCatalog ? <Categories categories={data} /> : ""}
+                    {isShowCatalog && !isLoading ? (
+                        <Categories categories={data} />
+                    ) : (
+                        ""
+                    )}
                 </Box>
                 <SearchComp sx={{ ...SearchStyles.search__wrapper }}>
                     <StyledInputBase

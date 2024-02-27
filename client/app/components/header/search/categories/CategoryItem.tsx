@@ -11,12 +11,10 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 const CategoryItem = ({ categoryInfo }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
 
-    const { isLoading, error, data, isFetching } = useQuery({
+    const { isLoading, error, data } = useQuery({
         queryKey: [`products${categoryInfo.category_id}`],
         queryFn: (): any => GetCategoryProducts(categoryInfo.category_id),
     })
-
-    if (isLoading) return <div>Loading</div>
 
     return (
         <>
@@ -47,6 +45,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                             src={categoryInfo.image}
                             alt=""
                             width={30}
+                            key={1}
                             height={30}
                         />
                     </Box>
@@ -57,7 +56,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                             color: isShowProductsList ? Colors.light : "#000",
                             justifyContent: "space-between",
                             alignItems: "center",
-                            width: { sm: 220 },
+                            width: { sm: 270 },
                             cursor: "pointer",
                         }}
                     >
@@ -68,39 +67,45 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         <ArrowForwardIosIcon />
                     </Grid>
                 </Grid>
-                {isShowProductsList && (
-                    <Grid
-                        key={categoryInfo.title + "_content"}
-                        container
-                        direction={"column"}
-                        sx={{
-                            position: "absolute",
-                            top: 0,
-                            left: 300,
-                            width: { xl: 1200 },
-                            height: 850,
-                            bgcolor: "#fff",
-                            columnGap: 2,
-                            rowGap: 2,
-                            px: 4,
-                            py: 2,
-                        }}
-                    >
-                        {data.products.length > 0 ? (
-                            data.products.map((product: any) => (
-                                <>
-                                    <ProductLink
-                                        key={product.product_id}
-                                        product_id={product.product_id}
-                                        category_id={categoryInfo.category_id}
-                                        product_title={product.title}
-                                    />
-                                </>
-                            ))
-                        ) : (
-                            <div>Немає товару по даній категорії</div>
-                        )}
-                    </Grid>
+                {isLoading ? (
+                    <div>Loading</div>
+                ) : (
+                    isShowProductsList && (
+                        <Grid
+                            key={categoryInfo.title + "_content"}
+                            container
+                            direction={"column"}
+                            sx={{
+                                position: "absolute",
+                                top: 0,
+                                left: 400,
+                                width: { xl: 1200 },
+                                height: 850,
+                                bgcolor: "#fff",
+                                columnGap: 2,
+                                rowGap: 2,
+                                px: 4,
+                                py: 2,
+                            }}
+                        >
+                            {data.products.length > 0 ? (
+                                data.products.map((product: any) => (
+                                    <>
+                                        <ProductLink
+                                            key={product.product_id}
+                                            product_id={product.product_id}
+                                            category_id={
+                                                categoryInfo.category_id
+                                            }
+                                            product_title={product.title}
+                                        />
+                                    </>
+                                ))
+                            ) : (
+                                <div>Немає товару по даній категорії</div>
+                            )}
+                        </Grid>
+                    )
                 )}
             </Box>
         </>

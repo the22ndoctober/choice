@@ -9,7 +9,7 @@ const Categories = ({ categories }: any) => {
                 ...CategoriesStyles.wrapper,
             }}
         >
-            {categories.categories.map((cat: any) => (
+            {categories.map((cat: any) => (
                 <CategoryItem key={cat.category_id} categoryInfo={cat} />
             ))}
         </Box>

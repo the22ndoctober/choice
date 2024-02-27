@@ -27,7 +27,7 @@ const ProductLink = ({
             }}
             key={product_id}
             onClick={() => {
-                router.push(`/products/${category_id}_${product_id}`)
+                router.push(`/products/${product_id}`)
             }}
             sx={{
                 color: isProductHover ? Colors.light : Colors.maxDark,

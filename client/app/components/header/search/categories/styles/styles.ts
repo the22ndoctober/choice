@@ -1,6 +1,6 @@
 export const CategoriesStyles = {
     wrapper: {
-        width: 300,
+        width: 400,
         height: { sm: 850 },
         position: "absolute",
         bottom: -850,

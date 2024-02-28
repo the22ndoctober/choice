@@ -5,6 +5,7 @@ import { AdvertismentStyles } from "./styles/styles"
 import Slider from "react-slick"
 
 import { Box } from "@mui/material"
+import { Colors } from "@/client"
 
 const AdvertismentMain = () => {
     const settings = {
@@ -22,29 +23,69 @@ const AdvertismentMain = () => {
                 <Box sx={{ ...AdvertismentStyles.sliderWrapper }}>
                     <Slider {...settings}>
                         <Box
-                            sx={{ width: "100%", height: 700, bgcolor: "gray" }}
+                            sx={{
+                                width: "100%",
+                                height: 700,
+                                bgcolor: "gray",
+
+                                fontSize: "210px",
+                                color: Colors.paper,
+                                textAlign: "center",
+                            }}
                         >
-                            1
+                            Реклама 1
                         </Box>
                         <Box
-                            sx={{ width: "100%", height: 700, bgcolor: "gray" }}
+                            sx={{
+                                width: "100%",
+                                height: 700,
+                                bgcolor: "gray",
+
+                                fontSize: "210px",
+                                color: Colors.paper,
+                                textAlign: "center",
+                            }}
                         >
-                            2
+                            Блок 2
                         </Box>
                         <Box
-                            sx={{ width: "100%", height: 700, bgcolor: "gray" }}
+                            sx={{
+                                width: "100%",
+                                height: 700,
+                                bgcolor: "gray",
+
+                                fontSize: "210px",
+                                color: Colors.paper,
+                                textAlign: "center",
+                            }}
                         >
-                            3
+                            Блок 3
                         </Box>
                         <Box
-                            sx={{ width: "100%", height: 700, bgcolor: "gray" }}
+                            sx={{
+                                width: "100%",
+                                height: 700,
+                                bgcolor: "gray",
+
+                                fontSize: "210px",
+                                color: Colors.paper,
+                                textAlign: "center",
+                            }}
                         >
-                            4
+                            Блок 4
                         </Box>
                         <Box
-                            sx={{ width: "100%", height: 700, bgcolor: "gray" }}
+                            sx={{
+                                width: "100%",
+                                height: 700,
+                                bgcolor: "gray",
+
+                                fontSize: "210px",
+                                color: Colors.paper,
+                                textAlign: "center",
+                            }}
                         >
-                            5
+                            Блок 5
                         </Box>
                     </Slider>
                 </Box>

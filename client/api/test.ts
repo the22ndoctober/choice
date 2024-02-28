@@ -24,6 +24,14 @@ export async function GetProducts(params: any) {
     return data.data
 }
 
+export async function SearchProducts() {
+    const data = await axios.post("http://localhost:3002/searchProducts")
+
+    console.log(data.data)
+
+    return data.data
+}
+
 // const api_key = "fu0b42ncxnpzp5pg5q0gol1czrioliqoor4tfolcgzaathgd6ehjeh"
 
 // export async function TestAxiosReq(params: any) {

@@ -19,6 +19,7 @@ export const SearchStyles = {
         px: { sm: "22px" },
     },
     search__wrapper: {
+        ml: "0px !important",
         display: "flex",
         background: Colors.neutral,
         direction: "row",

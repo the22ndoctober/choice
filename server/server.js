@@ -40,6 +40,35 @@ app.get("/test", async function (req, res) {
   res.json(filtred);
 });
 
+app.post("/searchProducts", async function (req, res) {
+  console.log("response success");
+
+  let clientServerOptions = {
+    baseUrl: "https://api.dntrade.com.ua",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ApiKey: process.env.API_KEY,
+    },
+  };
+
+  const post = bent(
+    (baseUrl = clientServerOptions.baseUrl),
+    (method = clientServerOptions.method),
+    (headers = clientServerOptions.headers)
+  );
+
+  const resp = await post(
+    "/products/list?store_id=A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4",
+    {
+      store_id: "A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4",
+    }
+  );
+  const data = await resp.json();
+
+  res.json(data);
+});
+
 app.post("/getCategoryProducts", async function (req, res) {
   let clientServerOptions = {
     baseUrl: "https://api.dntrade.com.ua",
@@ -92,6 +121,33 @@ app.post("/getGoods", async function (req, res) {
   const data = await resp.json();
 
   console.log(data);
+
+  res.json(data);
+});
+
+app.get("/static", async function (req, res) {
+  console.log("cock suck");
+
+  let clientServerOptions = {
+    baseUrl: "https://api.dntrade.com.ua",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      ApiKey: process.env.API_KEY,
+    },
+  };
+
+  const post = bent(
+    (baseUrl = clientServerOptions.baseUrl),
+    (method = clientServerOptions.method),
+    (headers = clientServerOptions.headers)
+  );
+
+  const resp = await post(
+    "/products/list?store_id=A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4",
+    {}
+  );
+  const data = await resp.json();
 
   res.json(data);
 });

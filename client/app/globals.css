@@ -81,6 +81,7 @@
     padding: 0;
     margin: 0;
     font-family: "Inter", sans-serif !important;
+    font-weight: 400;
 }
 
 .global-content-wrapper {

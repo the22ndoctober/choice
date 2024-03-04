@@ -6,6 +6,14 @@ export async function TestAxiosReq(params: any) {
     return data.data
 }
 
+export async function GetCatSorted(params: any) {
+    const data = await axios.post("http://localhost:3002/getCatSorted", {
+        stores: ["5D06BC79-3901-46B3-A434-DEEA4965DC78"],
+    })
+
+    return data.data
+}
+
 export async function GetCategoryProducts(params: any) {
     const data = await axios.post("http://localhost:3002/getCategoryProducts", {
         category_id: params,

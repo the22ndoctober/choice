@@ -72,7 +72,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                 ) : (
                     isShowProductsList && (
                         <Grid
-                            key={categoryInfo.title + "_content"}
+                            key={categoryInfo.category_id + "_content"}
                             container
                             direction={"column"}
                             sx={{

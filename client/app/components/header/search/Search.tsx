@@ -1,6 +1,6 @@
 "use client"
 
-import { TestAxiosReq } from "@/api/test"
+import { GetCatSorted, SearchProducts, TestAxiosReq } from "@/api/test"
 import { Box, Button, Input } from "@mui/material"
 
 import { SearchStyles } from "./styles/styles"
@@ -19,6 +19,15 @@ const Search = () => {
         queryKey: ["categoriesList"],
         queryFn: TestAxiosReq,
     })
+
+    const sortedCats = useQuery({
+        queryKey: ["sortedCats"],
+        queryFn: GetCatSorted,
+    })
+
+    if (sortedCats.isSuccess) {
+        console.log(sortedCats.data)
+    }
 
     return (
         <>

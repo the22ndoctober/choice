@@ -16,18 +16,9 @@ const Search = () => {
     const [isShowCatalog, setIsShowCatalog] = useState<boolean>(false)
 
     const { isLoading, error, data, isFetching } = useQuery({
-        queryKey: ["categoriesList"],
-        queryFn: TestAxiosReq,
-    })
-
-    const sortedCats = useQuery({
         queryKey: ["sortedCats"],
         queryFn: GetCatSorted,
     })
-
-    if (sortedCats.isSuccess) {
-        console.log(sortedCats.data)
-    }
 
     return (
         <>
@@ -47,7 +38,9 @@ const Search = () => {
                         <MenuIcon sx={{ fontSize: 30 }} />
                         Каталог
                     </Button>
-                    {isShowCatalog && !isLoading ? (
+                    {isLoading ? (
+                        <div>Loading...</div>
+                    ) : isShowCatalog ? (
                         <Categories categories={data} />
                     ) : (
                         ""

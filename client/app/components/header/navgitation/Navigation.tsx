@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material"
+import { Grid, Typography, Box } from "@mui/material"
 import { NavStyles } from "./styles/styles"
 import Image from "next/image"
 import logo_src from "@/public/logo_nav.png"
@@ -15,28 +15,30 @@ const Navigtaion = () => {
 
     return (
         <>
-            <Grid container sx={{ ...NavStyles.bodyWrapper }}>
-                <Grid container sx={{ ...NavStyles.logoWrapper }}>
-                    <Image
-                        src={logo_src}
-                        alt="#"
-                        style={{ width: "100%", height: "auto" }}
-                    />
+            <Box sx={{ ...NavStyles.container }}>
+                <Grid container sx={{ ...NavStyles.bodyWrapper }}>
+                    <Grid container sx={{ ...NavStyles.logoWrapper }}>
+                        <Image
+                            src={logo_src}
+                            alt="#"
+                            style={{ width: "100%", height: "auto" }}
+                        />
+                    </Grid>
+                    <Grid container sx={{ ...NavStyles.buttonsWrapper }}>
+                        {NavButtons.map(
+                            (button: { key: string; value: string }) => (
+                                <Typography
+                                    key={button.key}
+                                    sx={{ ...NavStyles.buttonWrapper__item }}
+                                >
+                                    {button.value}
+                                </Typography>
+                            )
+                        )}
+                    </Grid>
+                    <Grid container sx={{ ...NavStyles.infoWrapper }}></Grid>
                 </Grid>
-                <Grid container sx={{ ...NavStyles.buttonsWrapper }}>
-                    {NavButtons.map(
-                        (button: { key: string; value: string }) => (
-                            <Typography
-                                key={button.key}
-                                sx={{ ...NavStyles.buttonWrapper__item }}
-                            >
-                                {button.value}
-                            </Typography>
-                        )
-                    )}
-                </Grid>
-                <Grid container sx={{ ...NavStyles.infoWrapper }}></Grid>
-            </Grid>
+            </Box>
         </>
     )
 }

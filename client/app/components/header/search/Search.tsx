@@ -22,31 +22,33 @@ const Search = () => {
 
     return (
         <>
-            <Box
-                onMouseLeave={() => {
-                    setIsShowCatalog(false)
-                }}
-                sx={{ ...SearchStyles.wrapper }}
-            >
-                <Box>
-                    <Button
-                        onMouseEnter={() => {
-                            setIsShowCatalog(true)
-                        }}
-                        sx={{ ...SearchStyles.catalog__button }}
-                    >
-                        <MenuIcon sx={{ fontSize: 30 }} />
-                        Каталог
-                    </Button>
-                    {isLoading ? (
-                        <div>Loading...</div>
-                    ) : isShowCatalog ? (
-                        <Categories categories={data} />
-                    ) : (
-                        ""
-                    )}
+            <Box sx={{ ...SearchStyles.container }}>
+                <Box
+                    onMouseLeave={() => {
+                        setIsShowCatalog(false)
+                    }}
+                    sx={{ ...SearchStyles.wrapper }}
+                >
+                    <Box>
+                        <Button
+                            onMouseEnter={() => {
+                                setIsShowCatalog(true)
+                            }}
+                            sx={{ ...SearchStyles.catalog__button }}
+                        >
+                            <MenuIcon sx={{ fontSize: 30 }} />
+                            Каталог
+                        </Button>
+                        {isLoading ? (
+                            <div>Loading...</div>
+                        ) : isShowCatalog ? (
+                            <Categories categories={data} />
+                        ) : (
+                            ""
+                        )}
+                    </Box>
+                    <SearchItem key={"search-component"} />
                 </Box>
-                <SearchItem key={"search-component"} />
             </Box>
         </>
     )

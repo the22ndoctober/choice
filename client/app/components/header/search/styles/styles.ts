@@ -1,8 +1,13 @@
 import { Colors } from "@/client"
 
 export const SearchStyles = {
-    wrapper: {
+    container: {
         background: { sm: Colors.maxDark },
+        width: "100%",
+    },
+    wrapper: {
+        width: { xl: 1440, lg: 1140 },
+        margin: "0 auto",
         px: { sm: "51px" },
         py: { sm: "24px" },
         position: { sm: "relative" },
@@ -24,7 +29,7 @@ export const SearchStyles = {
         background: Colors.neutral,
         direction: "row",
         justifyContent: "space-beetween",
-        minWidth: "60%",
+        width: "auto",
         pr: "20px",
         color: "#fff",
         alignItems: "center",

@@ -34,17 +34,6 @@ const SearchDropDrown = ({ products, productsIsLoading }: any) => {
                             </>
                         )}
                     </Grid>
-                    {/* <Grid container>
-                        {!categoriesIsLoading ? (
-                            <div>Завантажується</div>
-                        ) : (
-                            <>
-                                {categories.map((category: any) => (
-                                    <SearchProductItem category={category} />
-                                ))}
-                            </>
-                        )}
-                    </Grid> */}
                 </Grid>
             </Box>
         </>

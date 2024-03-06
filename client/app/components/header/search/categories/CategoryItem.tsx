@@ -7,6 +7,7 @@ import { Colors } from "@/client"
 import { Box, Button } from "@mui/material"
 import ProductLink from "./ProductLink"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import SubCategory from "./SubCategory"
 
 const CategoryItem = ({ categoryInfo }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
@@ -91,14 +92,18 @@ const CategoryItem = ({ categoryInfo }: any) => {
                             {data.products.length > 0 ? (
                                 data.products.map((product: any) => (
                                     <>
-                                        <ProductLink
+                                        <SubCategory
+                                            key={product.product_id}
+                                            categoryInfo={product}
+                                        />
+                                        {/* <ProductLink
                                             key={product.product_id}
                                             product_id={product.product_id}
                                             category_id={
                                                 categoryInfo.category_id
                                             }
                                             product_title={product.title}
-                                        />
+                                        /> */}
                                     </>
                                 ))
                             ) : (

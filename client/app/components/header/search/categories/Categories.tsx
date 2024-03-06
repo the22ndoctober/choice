@@ -10,7 +10,7 @@ const Categories = ({ categories }: any) => {
             }}
         >
             {categories.map((cat: any) => (
-                <CategoryItem key={cat.category_id} categoryInfo={cat} />
+                <CategoryItem key={cat.category_id[0]} categoryInfo={cat} />
             ))}
         </Box>
     )

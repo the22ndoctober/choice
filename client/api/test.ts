@@ -7,9 +7,9 @@ export async function TestAxiosReq(params: any) {
 }
 
 export async function GetCatSorted(params: any) {
-    const data = await axios.post("http://localhost:3002/getCatSorted", {
-        stores: ["A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4"],
-    })
+    const data = await axios.get("http://localhost:3002/getCatSorted")
+
+    console.log(data.data)
 
     return data.data
 }

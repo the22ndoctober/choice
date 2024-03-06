@@ -42,7 +42,7 @@ const Search = () => {
                         {isLoading ? (
                             <div>Loading...</div>
                         ) : isShowCatalog ? (
-                            <Categories categories={data} />
+                            <Categories categories={data.parent} />
                         ) : (
                             ""
                         )}

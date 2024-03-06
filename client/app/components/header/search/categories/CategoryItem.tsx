@@ -14,7 +14,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
 
     const { isLoading, error, data } = useQuery({
         queryKey: [`products${categoryInfo.category_id}`],
-        queryFn: (): any => GetCategoryProducts(categoryInfo.category_id),
+        queryFn: (): any => GetCategoryProducts(categoryInfo.category_id[0]),
     })
 
     return (
@@ -24,7 +24,6 @@ const CategoryItem = ({ categoryInfo }: any) => {
                     setIsShowProductsList(true)
                 }}
                 onMouseLeave={() => {
-                    console.log("it's me")
                     setIsShowProductsList(false)
                 }}
             >

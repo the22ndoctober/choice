@@ -19,8 +19,6 @@ export async function GetCategoryProducts(params: any) {
         category_id: params,
     })
 
-    console.log(data.data)
-
     return data.data
 }
 

@@ -54,34 +54,52 @@ function SortCategories(categories) {
       return
    })
 
-   return { parent: parentCategories, child: childCategories }
+   return { parents: parentCategories, childen: childCategories }
 }
 
-module.exports = { GetCats, SortCategories }
+function GenerateChildren(parents, children) {
+   let result = []
 
-// let res = [...categories.sort((a, b) => a.level - b.level)]
+   parents.map((parent) => {
+      let childrenHasParent = children.filter((child) =>
+         parent.category_id.some((id) => id === child.parent.id)
+      )
 
-//    categories
-//       .sort((a, b) => b.level - a.level)
-//       .map((child) => {
-//          if (child.parent !== null) {
-//             let currentCatState = res.find(
-//                (parent) => parent.category_id === child.category_id
-//             )
-//             res = res
-//                .map((parent) => {
-//                   if (parent.category_id === child.parent.id) {
-//                      return {
-//                         ...parent,
-//                         children: Object.hasOwn(parent, "children")
-//                            ? [...parent.children, currentCatState]
-//                            : [currentCatState],
-//                      }
-//                   }
-//                   return parent
-//                })
-//                .filter((parent) => parent.category_id !== child.category_id)
-//          }
+      if (childrenHasParent.length > 0) {
+         if (childrenHasParent.length > 1) {
+            let map = new Map()
+            let mutate = []
 
-//          return
-//       })
+            childrenHasParent.map((child, id) => {
+               if (map.has(child.title)) {
+                  mutate = mutate.map((val) => {
+                     if (val.title === child.title) {
+                        return {
+                           ...val,
+                           category_id: [...val.category_id, child.category_id],
+                        }
+                     }
+                     return val
+                  })
+                  return
+               }
+               map.set(child.title, id)
+               mutate.push({ ...child, category_id: [child.category_id] })
+               return
+            })
+
+            childrenHasParent = mutate
+         }
+
+         result.push({ ...parent, children: childrenHasParent })
+         return
+      }
+
+      result.push(parent)
+      return
+   })
+
+   return result
+}
+
+module.exports = { GetCats, SortCategories, GenerateChildren }

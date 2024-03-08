@@ -1,8 +1,8 @@
 import Image from "next/image"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Grid from "@mui/material/Grid"
 import { GetCategoryProducts } from "@/api/test"
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, useMutation } from "@tanstack/react-query"
 import { Colors } from "@/client"
 import { Box, Button } from "@mui/material"
 import ProductLink from "./ProductLink"
@@ -12,10 +12,9 @@ import SubCategory from "./SubCategory"
 const CategoryItem = ({ categoryInfo }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
 
-    const categoryQuery = useQuery({
+    const categoryMutatuion = useQuery({
         queryKey: [`products${categoryInfo.category_id}`],
-        queryFn: (): any => GetCategoryProducts(categoryInfo.category_id),
-        enabled: false,
+        queryFn: () => GetCategoryProducts(categoryInfo.category_id),
     })
 
     return (
@@ -68,49 +67,49 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         <ArrowForwardIosIcon />
                     </Grid>
                 </Grid>
-                {categoryQuery.isLoading ? (
-                    <div>Loading</div>
-                ) : (
-                    isShowProductsList && (
-                        <Grid
-                            key={categoryInfo.category_id + "_content"}
-                            container
-                            direction={"column"}
-                            sx={{
-                                position: "absolute",
-                                top: 0,
-                                left: 400,
-                                width: { xl: 1200 },
-                                height: 850,
-                                bgcolor: "#fff",
-                                columnGap: 2,
-                                rowGap: 2,
-                                px: 4,
-                                py: 2,
-                            }}
-                        >
-                            {data.products.length > 0 ? (
-                                data.products.map((product: any) => (
-                                    <>
-                                        <SubCategory
-                                            key={product.product_id}
-                                            categoryInfo={product}
-                                        />
-                                        {/* <ProductLink
-                                            key={product.product_id}
-                                            product_id={product.product_id}
-                                            category_id={
-                                                categoryInfo.category_id
-                                            }
-                                            product_title={product.title}
-                                        /> */}
-                                    </>
-                                ))
-                            ) : (
-                                <div>Немає товару по даній категорії</div>
-                            )}
-                        </Grid>
-                    )
+
+                {isShowProductsList && (
+                    <Grid
+                        key={categoryInfo.category_id + "_content"}
+                        container
+                        direction={"column"}
+                        sx={{
+                            position: "absolute",
+                            top: 0,
+                            left: 400,
+                            width: { xl: 1200 },
+                            height: 850,
+                            bgcolor: "#fff",
+                            columnGap: 2,
+                            rowGap: 2,
+                            px: 4,
+                            py: 2,
+                        }}
+                    >
+                        {categoryMutatuion.isLoading && <Box>Завантаження</Box>}
+                        {!categoryMutatuion.isLoading &&
+                            (categoryMutatuion.data.length > 0
+                                ? categoryMutatuion.data.map((product: any) => (
+                                      <ProductLink
+                                          key={product.product_id}
+                                          product_id={product.product_id}
+                                          category_id={categoryInfo.category_id}
+                                          product_title={product.title}
+                                      />
+                                  ))
+                                : !categoryInfo.children && (
+                                      <Box>
+                                          Немає продуктів в даній категорії
+                                      </Box>
+                                  ))}
+                        {categoryInfo.children &&
+                            categoryInfo.children.map((child: any) => (
+                                <SubCategory
+                                    key={child.product_id}
+                                    categoryInfo={child}
+                                />
+                            ))}
+                    </Grid>
                 )}
             </Box>
         </>

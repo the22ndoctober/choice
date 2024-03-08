@@ -39,12 +39,8 @@ const Search = () => {
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
                         </Button>
-                        {isLoading ? (
-                            <div>Loading...</div>
-                        ) : isShowCatalog ? (
-                            <Categories categories={data.parent} />
-                        ) : (
-                            ""
+                        {!isLoading && isShowCatalog && (
+                            <Categories categories={data} />
                         )}
                     </Box>
                     <SearchItem key={"search-component"} />

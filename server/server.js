@@ -1,7 +1,11 @@
 const express = require("express")
 const cors = require("cors")
 const bent = require("bent")
-const { GetCats, SortCategories } = require("./categories/categories")
+const {
+   GetCats,
+   SortCategories,
+   GenerateChildren,
+} = require("./categories/categories")
 
 require("dotenv").config()
 
@@ -40,11 +44,15 @@ app.get("/getCatSorted", async function (req, res) {
       res
    )
 
-   const sorted = SortCategories([...data])
+   // ...filtredStores,
 
-   console.log(sorted)
+   const { parents, childen } = SortCategories([...data])
 
-   res.json(sorted)
+   const finalArray = GenerateChildren(parents, childen)
+
+   console.log(finalArray)
+
+   res.json(finalArray)
 })
 
 app.get("/test", async function (req, res) {
@@ -120,17 +128,18 @@ app.post("/getCategoryProducts", async function (req, res) {
       (headers = clientServerOptions.headers)
    )
 
-   const resp = await post(
-      `/products/list?category_id=${req.body.category_id}`,
-      {
-         body: { category_id: req.body.category_id },
-      }
-   )
-   const data = await resp.json()
+   let result = []
 
-   console.log(data)
+   for (let i = 0; i < req.body.category_id.length; i++) {
+      const resp = await post(
+         `/products/list?category_id=${req.body.category_id[i]}`
+      )
+      const data = await resp.json()
 
-   res.json(data)
+      result.push(...data.products)
+   }
+
+   res.json(result)
 })
 
 app.post("/getGoods", async function (req, res) {

@@ -12,9 +12,10 @@ import SubCategory from "./SubCategory"
 const CategoryItem = ({ categoryInfo }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
 
-    const { isLoading, error, data } = useQuery({
+    const categoryQuery = useQuery({
         queryKey: [`products${categoryInfo.category_id}`],
-        queryFn: (): any => GetCategoryProducts(categoryInfo.category_id[0]),
+        queryFn: (): any => GetCategoryProducts(categoryInfo.category_id),
+        enabled: false,
     })
 
     return (
@@ -67,7 +68,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         <ArrowForwardIosIcon />
                     </Grid>
                 </Grid>
-                {isLoading ? (
+                {categoryQuery.isLoading ? (
                     <div>Loading</div>
                 ) : (
                     isShowProductsList && (

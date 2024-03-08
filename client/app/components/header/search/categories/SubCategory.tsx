@@ -40,7 +40,7 @@ const SubCatDropableItem = ({ title }: any) => {
 const SubCategory = ({ categoryInfo }: any) => {
     return (
         <>
-            {categoryInfo.children ? (
+            {categoryInfo ? (
                 <SubCategory />
             ) : (
                 <SubCatDropableItem title={categoryInfo.title} />

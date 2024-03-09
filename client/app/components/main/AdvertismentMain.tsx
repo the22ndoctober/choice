@@ -19,77 +19,79 @@ const AdvertismentMain = () => {
 
     return (
         <>
-            <Grid container sx={{ ...AdvertismentStyles.wrapper }}>
-                <Box sx={{ ...AdvertismentStyles.sliderWrapper }}>
-                    <Slider {...settings}>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: 700,
-                                bgcolor: "gray",
+            <Box sx={{ ...AdvertismentStyles.wrapper }}>
+                <Grid container sx={{ ...AdvertismentStyles.container }}>
+                    <Box sx={{ ...AdvertismentStyles.sliderWrapper }}>
+                        <Slider {...settings}>
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: 700,
+                                    bgcolor: "gray",
 
-                                fontSize: "210px",
-                                color: Colors.paper,
-                                textAlign: "center",
-                            }}
-                        >
-                            Реклама 1
-                        </Box>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: 700,
-                                bgcolor: "gray",
+                                    fontSize: "210px",
+                                    color: Colors.paper,
+                                    textAlign: "center",
+                                }}
+                            >
+                                Реклама 1
+                            </Box>
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: 700,
+                                    bgcolor: "gray",
 
-                                fontSize: "210px",
-                                color: Colors.paper,
-                                textAlign: "center",
-                            }}
-                        >
-                            Блок 2
-                        </Box>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: 700,
-                                bgcolor: "gray",
+                                    fontSize: "210px",
+                                    color: Colors.paper,
+                                    textAlign: "center",
+                                }}
+                            >
+                                Блок 2
+                            </Box>
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: 700,
+                                    bgcolor: "gray",
 
-                                fontSize: "210px",
-                                color: Colors.paper,
-                                textAlign: "center",
-                            }}
-                        >
-                            Блок 3
-                        </Box>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: 700,
-                                bgcolor: "gray",
+                                    fontSize: "210px",
+                                    color: Colors.paper,
+                                    textAlign: "center",
+                                }}
+                            >
+                                Блок 3
+                            </Box>
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: 700,
+                                    bgcolor: "gray",
 
-                                fontSize: "210px",
-                                color: Colors.paper,
-                                textAlign: "center",
-                            }}
-                        >
-                            Блок 4
-                        </Box>
-                        <Box
-                            sx={{
-                                width: "100%",
-                                height: 700,
-                                bgcolor: "gray",
+                                    fontSize: "210px",
+                                    color: Colors.paper,
+                                    textAlign: "center",
+                                }}
+                            >
+                                Блок 4
+                            </Box>
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: 700,
+                                    bgcolor: "gray",
 
-                                fontSize: "210px",
-                                color: Colors.paper,
-                                textAlign: "center",
-                            }}
-                        >
-                            Блок 5
-                        </Box>
-                    </Slider>
-                </Box>
-            </Grid>
+                                    fontSize: "210px",
+                                    color: Colors.paper,
+                                    textAlign: "center",
+                                }}
+                            >
+                                Блок 5
+                            </Box>
+                        </Slider>
+                    </Box>
+                </Grid>
+            </Box>
         </>
     )
 }

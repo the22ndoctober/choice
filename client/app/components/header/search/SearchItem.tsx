@@ -92,7 +92,7 @@ const SearchItem = () => {
             backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
-        width: "100%",
+        width: "auto",
         [theme.breakpoints.up("sm")]: {
             marginLeft: theme.spacing(1),
             width: "auto",
@@ -101,7 +101,7 @@ const SearchItem = () => {
 
     return (
         <>
-            <Box sx={{ position: "relative", minWidth: "60%" }}>
+            <Box sx={{ position: "relative", minWidth: { lg: "780px" } }}>
                 <SearchComp sx={{ ...SearchStyles.search__wrapper }}>
                     <StyledInputBase
                         autoFocus={true}

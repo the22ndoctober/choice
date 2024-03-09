@@ -18,8 +18,6 @@ export default function Product({ params }: any) {
 
     return (
         <>
-            <Navigation />
-            <Search />
             <Box sx={{ px: { sm: "51px" }, py: { sm: "28px" } }}>
                 <HeadLinks
                     links={[

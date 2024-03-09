@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "./globals.css"
 import { Provider } from "./Provider"
+import Navigation from "./components/header/navgitation/Navigation"
+import Search from "./components/header/search/Search"
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -17,7 +19,11 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <Provider>{children}</Provider>
+                <Provider>
+                    <Navigation />
+                    <Search />
+                    {children}
+                </Provider>
             </body>
         </html>
     )

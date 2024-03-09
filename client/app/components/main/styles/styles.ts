@@ -1,11 +1,15 @@
 export const AdvertismentStyles = {
     wrapper: {
-        px: { sm: "51px" },
         height: { sm: "100svh" },
         width: { sm: "100%" },
+    },
+    container: {
+        width: { xl: 1440, lg: 1140 },
+        py: "51px",
         display: "flex",
         justifyContent: { sm: "center" },
         alignItems: { sm: "center" },
+        margin: "0 auto",
     },
     sliderWrapper: {
         width: { sm: "90%" },

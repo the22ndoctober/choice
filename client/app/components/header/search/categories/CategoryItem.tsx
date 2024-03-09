@@ -30,40 +30,51 @@ const CategoryItem = ({ categoryInfo }: any) => {
                 <Grid
                     container
                     sx={{
-                        direction: "row",
+                        flexDirection: "row",
                         columnGap: 2,
                         alignItems: "center",
-
-                        p: 1,
+                        px: 4,
+                        py: 1,
                     }}
                     onClick={() => {
                         setIsShowProductsList((state: boolean) => !state)
                     }}
                 >
-                    <Box>
-                        <img
-                            src={categoryInfo.image}
-                            alt=""
-                            width={30}
-                            key={1}
-                            height={30}
-                        />
-                    </Box>
-
                     <Grid
                         container
                         sx={{
                             color: isShowProductsList ? Colors.light : "#000",
                             justifyContent: "space-between",
                             alignItems: "center",
-                            width: { sm: 270 },
                             cursor: "pointer",
                         }}
                     >
-                        <Box sx={{ textWrap: "break-line" }}>
-                            {categoryInfo.title}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                columnGap: "13px",
+                            }}
+                        >
+                            <Box>
+                                <img
+                                    src={categoryInfo.image}
+                                    alt=""
+                                    width={30}
+                                    key={1}
+                                    height={30}
+                                />
+                            </Box>
+                            <Box
+                                sx={{
+                                    textWrap: "break-line",
+                                    width: "auto",
+                                    maxWidth: 230,
+                                }}
+                            >
+                                {categoryInfo.title}
+                            </Box>
                         </Box>
-
                         <ArrowForwardIosIcon />
                     </Grid>
                 </Grid>
@@ -76,14 +87,12 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         sx={{
                             position: "absolute",
                             top: 0,
-                            left: 400,
-                            width: { xl: 1200 },
+                            left: { sm: 390 },
+                            width: { xl: "auto" },
                             height: 850,
                             bgcolor: "#fff",
                             columnGap: 2,
                             rowGap: 2,
-                            px: 4,
-                            py: 2,
                         }}
                     >
                         {categoryMutatuion.isLoading && <Box>Завантаження</Box>}

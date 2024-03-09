@@ -12,7 +12,7 @@ const SubCategory = ({ categoryInfo }: any) => {
     const [open, setOpen] = useState<boolean>(false)
 
     const categoryMutatuion = useQuery({
-        queryKey: [`products${categoryInfo.category_id}`],
+        queryKey: [`products_sub_${categoryInfo.category_id}`],
         queryFn: () => GetCategoryProducts(categoryInfo.category_id),
     })
 
@@ -29,7 +29,9 @@ const SubCategory = ({ categoryInfo }: any) => {
                         {open ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        {categoryMutatuion.isLoading && <Box>Завантаження</Box>}
+                        {categoryMutatuion.isLoading && (
+                            <Box>Завантажується</Box>
+                        )}
                         {!categoryMutatuion.isLoading &&
                         categoryMutatuion.data.length > 0 ? (
                             categoryMutatuion.data.map((product: any) => (

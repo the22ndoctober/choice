@@ -1,11 +1,13 @@
 export const CategoriesStyles = {
     wrapper: {
-        width: 400,
+        width: { lg: 400 },
         height: { sm: 850 },
         position: "absolute",
         bottom: -850,
-        left: 51,
+        left: 0,
         background: "#fff",
+        px: "5px",
+        py: "2px",
         zIndex: 2000,
     },
 }

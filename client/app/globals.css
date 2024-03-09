@@ -114,10 +114,11 @@
 }
 
 .search-placeholder input::placeholder {
-    font-size: 30px;
+    font-size: 16px;
+    color: "#fff";
 }
 
 .search-placeholder input {
     width: 100% !important;
-    font-size: 30px;
+    font-size: 16px;
 }

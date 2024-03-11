@@ -1,0 +1,16 @@
+.small-slider .slick-next {
+    right: 55px !important;
+    top: -40px !important;
+}
+
+.small-slider .slick-prev {
+    left: 1300px !important;
+    top: -40px;
+}
+
+@media (max-width: 1536px) {
+    .small-slider .slick-prev {
+        left: 1300px !important;
+        top: -40px;
+    }
+}

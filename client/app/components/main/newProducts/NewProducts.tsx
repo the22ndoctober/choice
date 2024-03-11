@@ -63,7 +63,7 @@ const cardsApi = [
     },
 ]
 
-const BestOffers = () => {
+const NewProducts = () => {
     const [width, setWidth] = useState(0)
     const [settings, setSettings] = useState({
         dots: true,
@@ -128,7 +128,7 @@ const BestOffers = () => {
                             color: Colors.black,
                         }}
                     >
-                        Найкращі пропозиції
+                        Новинки
                     </Typography>
                 </Box>
 
@@ -167,4 +167,4 @@ const BestOffers = () => {
     )
 }
 
-export default BestOffers
+export default NewProducts

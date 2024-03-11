@@ -110,7 +110,7 @@
 .slick-prev:before,
 .slick-next:before {
     font-size: 42px !important;
-    color: #706f6f !important;
+    color: #d9d9d9 !important;
 }
 
 .search-placeholder input::placeholder {

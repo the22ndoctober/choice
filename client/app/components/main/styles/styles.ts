@@ -13,6 +13,6 @@ export const AdvertismentStyles = {
     },
     sliderWrapper: {
         width: { sm: "90%" },
-        height: { sm: 800 },
+        height: { sm: "90svh" },
     },
 }

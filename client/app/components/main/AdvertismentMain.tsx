@@ -5,6 +5,11 @@ import { AdvertismentStyles } from "./styles/styles"
 import Slider from "react-slick"
 import { Box } from "@mui/material"
 import { Colors } from "@/client"
+import Image from "next/image"
+import banner1 from "@/public/Banner1.jpg"
+import banner2 from "@/public/Banner2.jpg"
+import banner3 from "@/public/Banner3.jpg"
+import banner4 from "@/public/Banner4.jpg"
 
 const AdvertismentMain = () => {
     const settings = {
@@ -24,68 +29,63 @@ const AdvertismentMain = () => {
                         <Slider {...settings}>
                             <Box
                                 sx={{
-                                    width: "100%",
-                                    height: 700,
+                                    width: 1136,
+                                    height: 550,
                                     bgcolor: "gray",
-
-                                    fontSize: "210px",
-                                    color: Colors.paper,
-                                    textAlign: "center",
                                 }}
                             >
-                                Реклама 1
+                                <Image
+                                    src={banner1}
+                                    alt=""
+                                    width={1136}
+                                    height={550}
+                                    style={{ margin: "0 auto" }}
+                                />
                             </Box>
                             <Box
                                 sx={{
-                                    width: "100%",
-                                    height: 700,
+                                    width: 1136,
+                                    height: 550,
                                     bgcolor: "gray",
-
-                                    fontSize: "210px",
-                                    color: Colors.paper,
-                                    textAlign: "center",
                                 }}
                             >
-                                Блок 2
+                                <Image
+                                    src={banner2}
+                                    alt=""
+                                    width={1136}
+                                    height={550}
+                                    style={{ margin: "0 auto" }}
+                                />
                             </Box>
                             <Box
                                 sx={{
-                                    width: "100%",
-                                    height: 700,
+                                    width: 1136,
+                                    height: 550,
                                     bgcolor: "gray",
-
-                                    fontSize: "210px",
-                                    color: Colors.paper,
-                                    textAlign: "center",
                                 }}
                             >
-                                Блок 3
+                                <Image
+                                    src={banner3}
+                                    alt=""
+                                    width={1136}
+                                    height={550}
+                                    style={{ margin: "0 auto" }}
+                                />
                             </Box>
                             <Box
                                 sx={{
-                                    width: "100%",
-                                    height: 700,
+                                    width: 1136,
+                                    height: 550,
                                     bgcolor: "gray",
-
-                                    fontSize: "210px",
-                                    color: Colors.paper,
-                                    textAlign: "center",
                                 }}
                             >
-                                Блок 4
-                            </Box>
-                            <Box
-                                sx={{
-                                    width: "100%",
-                                    height: 700,
-                                    bgcolor: "gray",
-
-                                    fontSize: "210px",
-                                    color: Colors.paper,
-                                    textAlign: "center",
-                                }}
-                            >
-                                Блок 5
+                                <Image
+                                    src={banner4}
+                                    alt=""
+                                    width={1136}
+                                    height={550}
+                                    style={{ margin: "0 auto" }}
+                                />
                             </Box>
                         </Slider>
                     </Box>

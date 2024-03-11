@@ -1,13 +1,13 @@
 import axios from "axios"
 
 export async function TestAxiosReq(params: any) {
-    const data = await axios.get("http://localhost:3002/test")
+    const data = await axios.get("http://92.205.105.0:3002/test")
 
     return data.data
 }
 
 export async function GetCatSorted(params: any) {
-    const data = await axios.get("http://localhost:3002/getCatSorted")
+    const data = await axios.get("http://92.205.105.0:3002/getCatSorted")
 
     console.log(data.data)
 
@@ -15,15 +15,18 @@ export async function GetCatSorted(params: any) {
 }
 
 export async function GetCategoryProducts(params: any) {
-    const data = await axios.post("http://localhost:3002/getCategoryProducts", {
-        category_id: params,
-    })
+    const data = await axios.post(
+        "http://92.205.105.0:3002/getCategoryProducts",
+        {
+            category_id: params,
+        }
+    )
 
     return data.data
 }
 
 export async function GetProducts(params: any) {
-    const data = await axios.post("http://localhost:3002/getGoods", {
+    const data = await axios.post("http://92.205.105.0:3002/getGoods", {
         product_id: params,
     })
 
@@ -31,7 +34,7 @@ export async function GetProducts(params: any) {
 }
 
 export async function SearchProducts() {
-    const data = await axios.post("http://localhost:3002/searchProducts")
+    const data = await axios.post("http://92.205.105.0:3002/searchProducts")
 
     console.log(data.data)
 

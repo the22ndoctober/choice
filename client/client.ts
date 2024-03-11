@@ -6,6 +6,8 @@ export enum Colors {
     dark = "#072849",
     maxDark = "#051B32",
     black = "#1A1A1A",
-    teal = "#2EA4FF",
+    teal = "#29B6F9",
     grey = "#706F6F",
+    lightBlue = "#73CFFB",
+    lightGreen = "#36C3BB",
 }

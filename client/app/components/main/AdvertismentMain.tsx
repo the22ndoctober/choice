@@ -3,7 +3,6 @@
 import Grid from "@mui/material/Grid"
 import { AdvertismentStyles } from "./styles/styles"
 import Slider from "react-slick"
-
 import { Box } from "@mui/material"
 import { Colors } from "@/client"
 

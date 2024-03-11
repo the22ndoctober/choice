@@ -101,7 +101,12 @@ const SearchItem = () => {
 
     return (
         <>
-            <Box sx={{ position: "relative", minWidth: { lg: "780px" } }}>
+            <Box
+                sx={{
+                    position: "relative",
+                    minWidth: { lg: "500px", xl: "780px" },
+                }}
+            >
                 <SearchComp sx={{ ...SearchStyles.search__wrapper }}>
                     <StyledInputBase
                         autoFocus={true}

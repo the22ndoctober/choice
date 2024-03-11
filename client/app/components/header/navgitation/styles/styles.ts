@@ -10,7 +10,6 @@ export const NavStyles = {
         display: "flex",
         justifyContent: "space-between",
         direction: { sm: "row" },
-        columnGap: { sm: "5%" },
     },
     logoWrapper: {
         width: { sm: "135px" },
@@ -21,7 +20,7 @@ export const NavStyles = {
         width: { sm: "auto" },
         display: "flex",
         direction: "row",
-        columnGap: { sm: "30px" },
+        columnGap: { lg: "18px", xl: "30px" },
     },
     buttonWrapper__item: {
         fontFamily: "Inter",

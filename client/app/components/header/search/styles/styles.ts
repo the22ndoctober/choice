@@ -12,7 +12,7 @@ export const SearchStyles = {
         alignItems: "center",
         position: { sm: "relative" },
         display: "flex",
-        columnGap: "50px",
+        columnGap: "55px",
     },
     catalog__button: {
         background: Colors.dark,
@@ -21,6 +21,7 @@ export const SearchStyles = {
         pl: { sm: "24px" },
         pr: { sm: "56px" },
         height: "40px",
+        width: 248,
         fontSize: { sm: "18px" },
         display: "flex",
         columnGap: { sm: "17px" },

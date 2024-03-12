@@ -1,13 +1,14 @@
 export const CategoriesStyles = {
     wrapper: {
-        width: { lg: 400 },
-        height: { sm: 850 },
+        width: { lg: 400, xl: 248 },
+        height: { sm: "80svh" },
         position: "absolute",
-        bottom: -850,
+        bottom: "-80svh",
         left: 0,
-        background: "#fff",
-        px: "5px",
-        py: "2px",
+        py: "24px",
         zIndex: 2000,
+        display: "flex",
+        flexDirection: "column",
+        rowGap: "10px",
     },
 }

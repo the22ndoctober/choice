@@ -101,11 +101,11 @@
 }
 
 .slick-next {
-    right: -50px !important;
+    right: 50px !important;
 }
 
 .slick-prev {
-    left: -50px !important;
+    left: 30px !important;
 }
 .slick-prev:before,
 .slick-next:before {

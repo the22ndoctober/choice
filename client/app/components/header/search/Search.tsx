@@ -18,8 +18,6 @@ import { favourites } from "../../static/favourites"
 import { cart } from "../../static/cart"
 
 const Search = () => {
-    const [isShowCatalog, setIsShowCatalog] = useState<boolean>(false)
-
     const { isLoading, error, data, isFetching } = useQuery({
         queryKey: ["sortedCats"],
         queryFn: GetCatSorted,
@@ -28,25 +26,13 @@ const Search = () => {
     return (
         <>
             <Box sx={{ ...SearchStyles.container }}>
-                <Box
-                    onMouseLeave={() => {
-                        setIsShowCatalog(false)
-                    }}
-                    sx={{ ...SearchStyles.wrapper }}
-                >
+                <Box sx={{ ...SearchStyles.wrapper }}>
                     <Box>
-                        <Button
-                            onMouseEnter={() => {
-                                setIsShowCatalog(true)
-                            }}
-                            sx={{ ...SearchStyles.catalog__button }}
-                        >
+                        <Button sx={{ ...SearchStyles.catalog__button }}>
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
                         </Button>
-                        {!isLoading && isShowCatalog && (
-                            <Categories categories={data} />
-                        )}
+                        {!isLoading && <Categories categories={data} />}
                     </Box>
                     <SearchItem key={"search-component"} />
                     <Grid container sx={{ alignItems: "center" }}>

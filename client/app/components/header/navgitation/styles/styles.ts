@@ -20,7 +20,7 @@ export const NavStyles = {
         width: { sm: "auto" },
         display: "flex",
         direction: "row",
-        columnGap: { lg: "18px", xl: "30px" },
+        columnGap: { lg: "18px", xl: "27px" },
     },
     buttonWrapper__item: {
         fontFamily: "Inter",

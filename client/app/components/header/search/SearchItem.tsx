@@ -99,7 +99,7 @@ const SearchItem = () => {
             <Box
                 sx={{
                     position: "relative",
-                    minWidth: { lg: "500px", xl: "780px" },
+                    minWidth: { lg: "500px", xl: "720px" },
                 }}
             >
                 <SearchComp sx={{ ...SearchStyles.search__wrapper }}>

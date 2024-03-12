@@ -24,72 +24,96 @@ const AdvertismentMain = () => {
     return (
         <>
             <Box sx={{ ...AdvertismentStyles.wrapper }}>
-                <Grid container sx={{ ...AdvertismentStyles.container }}>
-                    <Box sx={{ ...AdvertismentStyles.sliderWrapper }}>
-                        <Slider {...settings}>
-                            <Box
-                                sx={{
-                                    width: 1136,
-                                    height: 550,
-                                    bgcolor: "gray",
-                                }}
-                            >
-                                <Image
-                                    src={banner1}
-                                    alt=""
-                                    width={1136}
-                                    height={550}
-                                    style={{ margin: "0 auto" }}
-                                />
-                            </Box>
-                            <Box
-                                sx={{
-                                    width: 1136,
-                                    height: 550,
-                                    bgcolor: "gray",
-                                }}
-                            >
-                                <Image
-                                    src={banner2}
-                                    alt=""
-                                    width={1136}
-                                    height={550}
-                                    style={{ margin: "0 auto" }}
-                                />
-                            </Box>
-                            <Box
-                                sx={{
-                                    width: 1136,
-                                    height: 550,
-                                    bgcolor: "gray",
-                                }}
-                            >
-                                <Image
-                                    src={banner3}
-                                    alt=""
-                                    width={1136}
-                                    height={550}
-                                    style={{ margin: "0 auto" }}
-                                />
-                            </Box>
-                            <Box
-                                sx={{
-                                    width: 1136,
-                                    height: 550,
-                                    bgcolor: "gray",
-                                }}
-                            >
-                                <Image
-                                    src={banner4}
-                                    alt=""
-                                    width={1136}
-                                    height={550}
-                                    style={{ margin: "0 auto" }}
-                                />
-                            </Box>
-                        </Slider>
-                    </Box>
-                </Grid>
+                <Box
+                    sx={{
+                        width: {
+                            lg: 1140,
+                            xl: 1440,
+                            margin: "0 auto",
+                            display: "flex",
+                            justifyContent: "right",
+                        },
+                    }}
+                >
+                    <Grid container sx={{ ...AdvertismentStyles.container }}>
+                        <Box sx={{ ...AdvertismentStyles.sliderWrapper }}>
+                            <Slider {...settings}>
+                                <Box
+                                    sx={{
+                                        width: { lg: 900, xl: 1136 },
+                                        height: "auto",
+                                        bgcolor: "gray",
+                                        borderRadius: "15px",
+                                    }}
+                                >
+                                    <Image
+                                        src={banner1}
+                                        alt=""
+                                        style={{
+                                            margin: "0 auto",
+                                            width: "100%",
+                                            height: "auto",
+                                        }}
+                                    />
+                                </Box>
+                                <Box
+                                    sx={{
+                                        width: { lg: 900, xl: 1136 },
+                                        height: "auto",
+                                        bgcolor: "gray",
+                                        borderRadius: "15px",
+                                    }}
+                                >
+                                    <Image
+                                        src={banner2}
+                                        alt=""
+                                        style={{
+                                            margin: "0 auto",
+                                            width: "100%",
+                                            height: "auto",
+                                        }}
+                                    />
+                                </Box>
+                                <Box
+                                    sx={{
+                                        width: { lg: 900, xl: 1136 },
+                                        height: "auto",
+                                        bgcolor: "gray",
+                                        borderRadius: "15px",
+                                    }}
+                                >
+                                    <Image
+                                        src={banner3}
+                                        alt=""
+                                        style={{
+                                            margin: "0 auto",
+                                            width: "100%",
+                                            height: "auto",
+                                        }}
+                                    />
+                                </Box>
+                                <Box
+                                    sx={{
+                                        width: { lg: 900, xl: 1136 },
+                                        height: "auto",
+                                        bgcolor: "gray",
+                                        borderRadius: "15px",
+                                    }}
+                                >
+                                    <Image
+                                        src={banner4}
+                                        alt=""
+                                        style={{
+                                            margin: "0 auto",
+                                            width: "100%",
+                                            height: "auto",
+                                        }}
+                                    />
+                                </Box>
+                            </Slider>
+                        </Box>
+                    </Grid>
+                </Box>
             </Box>
         </>
     )

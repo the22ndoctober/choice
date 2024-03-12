@@ -33,8 +33,6 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         flexDirection: "row",
                         columnGap: 2,
                         alignItems: "center",
-                        px: 4,
-                        py: 1,
                     }}
                     onClick={() => {
                         setIsShowProductsList((state: boolean) => !state)
@@ -43,7 +41,9 @@ const CategoryItem = ({ categoryInfo }: any) => {
                     <Grid
                         container
                         sx={{
-                            color: isShowProductsList ? Colors.light : "#000",
+                            color: isShowProductsList
+                                ? Colors.teal
+                                : Colors.black,
                             justifyContent: "space-between",
                             alignItems: "center",
                             cursor: "pointer",
@@ -69,13 +69,26 @@ const CategoryItem = ({ categoryInfo }: any) => {
                                 sx={{
                                     textWrap: "break-line",
                                     width: "auto",
-                                    maxWidth: 230,
+                                    maxWidth: 180,
+                                    fontSize: "14px",
+                                    fontWeight: 400,
+                                    lineHeight: "17px",
+                                    letterSpacing: "0em",
+                                    textAlign: "left",
                                 }}
                             >
                                 {categoryInfo.title}
                             </Box>
                         </Box>
-                        <ArrowForwardIosIcon />
+                        <ArrowForwardIosIcon
+                            sx={{
+                                color: isShowProductsList
+                                    ? Colors.teal
+                                    : Colors.black,
+                                width: "13px",
+                                height: "13px",
+                            }}
+                        />
                     </Grid>
                 </Grid>
 
@@ -87,10 +100,10 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         sx={{
                             position: "absolute",
                             top: 0,
-                            left: { sm: 390 },
-                            width: { xl: "auto" },
-                            height: 850,
-                            bgcolor: "#fff",
+                            left: { sm: 248 },
+                            width: { xl: 1136 },
+                            height: "80svh",
+                            bgcolor: Colors.white,
                             columnGap: 2,
                             rowGap: 2,
                         }}

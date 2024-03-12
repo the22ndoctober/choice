@@ -6,6 +6,8 @@ import NewProducts from "./components/main/newProducts/NewProducts"
 import Smartphones from "./components/main/smartphones/Smartphones"
 import PopularBrends from "./components/main/popularBrends/PopularBrends"
 import VideoAbout from "./components/main/videoAbout/VideoAbout"
+import InfoMain from "./components/main/infoMain/InfoMain"
+import DeliveryInfo from "./components/main/deliveryInfo/DeliveryInfo"
 
 export default function Home() {
     return (
@@ -17,6 +19,8 @@ export default function Home() {
                 <Smartphones />
                 <PopularBrends />
                 <VideoAbout />
+                <InfoMain />
+                <DeliveryInfo />
             </Box>
         </>
     )

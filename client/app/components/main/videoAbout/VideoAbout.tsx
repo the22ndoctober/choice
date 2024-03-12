@@ -64,7 +64,7 @@ const VideoAbout = () => {
                                 display: "flex",
                                 alignItems: "center",
                                 width: { lg: 700, xl: 901 },
-                                height: { xl: 468 },
+                                height: { lg: 468 },
                             }}
                         >
                             <iframe

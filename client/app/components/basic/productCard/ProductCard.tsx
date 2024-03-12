@@ -9,7 +9,7 @@ import { favouritesTeal } from "../../static/favouritesTeal"
 import { cartCard } from "../../static/cartCard"
 
 const cardContainerStyles = {
-    width: { lg: 250, xl: 272 },
+    width: { lg: 255, xl: 272 },
     height: { lg: "auto" },
     background: Colors.paper,
     borderRadius: "15px",

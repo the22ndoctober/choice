@@ -134,7 +134,6 @@ const NewProducts = () => {
 
                 <Grid
                     container
-                    spacing={{ lg: "15px" }}
                     sx={{
                         justifyContent: "space-between",
                         width: { lg: 1140, xl: 1440 },

@@ -14,3 +14,24 @@
         top: -40px;
     }
 }
+
+.slider-brands .slick-next {
+    right: -235px !important;
+    top: -40px !important;
+}
+
+.slider-brands .slick-prev {
+    left: 1300px !important;
+    top: -40px;
+}
+
+@media only screen and (max-width: 1536px) {
+    .slider-brands .slick-prev {
+        left: 1020px !important;
+        top: -40px;
+    }
+    .slider-brands .slick-next {
+        right: -185px !important;
+        top: -40px !important;
+    }
+}

@@ -8,9 +8,9 @@
     top: -40px;
 }
 
-@media (max-width: 1536px) {
+@media only screen and (max-width: 1536px) {
     .small-slider .slick-prev {
-        left: 1300px !important;
+        left: 1020px !important;
         top: -40px;
     }
 }

@@ -90,19 +90,18 @@ const PopularBrends = () => {
 
                 <Grid
                     container
-                    spacing={{ lg: "15px" }}
                     sx={{
                         justifyContent: "space-between",
                         width: { lg: 1140, xl: 1440 },
                         height: "auto",
-                        position: "relative",
                     }}
                 >
                     <Box
                         className="small-slider"
                         sx={{
-                            width: { lg: 1140, xl: 1440 },
+                            width: { lg: 960, xl: 1155 },
                             height: { sm: "auto" },
+                            position: "relative",
                         }}
                     >
                         <Slider {...settings}>
@@ -113,12 +112,26 @@ const PopularBrends = () => {
                                         background: Colors.paper,
                                         borderRadius: "15px",
                                         height: { lg: 80 },
-                                        width: { lg: 190, xl: "272px" },
+                                        width: {
+                                            lg: "190px !important",
+                                            xl: "272px !important",
+                                        },
                                     }}
                                 ></Box>
                             ))}
                         </Slider>
                     </Box>
+                    <Box
+                        sx={{
+                            background: Colors.paper,
+                            borderRadius: "15px",
+                            height: { lg: 80 },
+                            width: {
+                                lg: "190px !important",
+                                xl: "272px !important",
+                            },
+                        }}
+                    ></Box>
                 </Grid>
             </Grid>
         </>

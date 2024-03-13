@@ -21,8 +21,6 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <Provider>
-                    <Navigation />
-                    <Search />
                     {children}
                     <Footer />
                 </Provider>

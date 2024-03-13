@@ -4,9 +4,9 @@ import { GetCatSorted, SearchProducts, TestAxiosReq } from "@/api/test"
 import { Box, Button, Input, Grid, Typography } from "@mui/material"
 
 import { SearchStyles } from "./styles/styles"
-
+import { useRouter } from "next/navigation"
 import MenuIcon from "@mui/icons-material/Menu"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Categories from "./categories/Categories"
 import { useQuery } from "@tanstack/react-query"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
@@ -17,11 +17,18 @@ import { profile } from "../../static/profile"
 import { favourites } from "../../static/favourites"
 import { cart } from "../../static/cart"
 
-const Search = () => {
+const Search = ({ params }: any) => {
+    const [openCat, setOpenCat] = useState<boolean>(true)
     const { isLoading, error, data, isFetching } = useQuery({
         queryKey: ["sortedCats"],
         queryFn: GetCatSorted,
     })
+
+    useEffect(() => {
+        if (params !== "") {
+            setOpenCat(false)
+        }
+    }, [params])
 
     return (
         <>
@@ -32,9 +39,14 @@ const Search = () => {
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
                         </Button>
-                        {!isLoading && <Categories categories={data} />}
+                        {!isLoading && openCat && (
+                            <Categories categories={data} />
+                        )}
                     </Box>
-                    <SearchItem key={"search-component"} />
+                    <SearchItem
+                        key={"search-component"}
+                        setOpenCat={setOpenCat}
+                    />
                     <Grid container sx={{ alignItems: "center" }}>
                         {geoIcon}
                         <Typography sx={{ color: Colors.white }}>
@@ -57,6 +69,10 @@ const Search = () => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                "& > svg:hover": {
+                                    stroke: Colors.teal,
+                                    fill: Colors.teal,
+                                },
                             }}
                         >
                             {profile}
@@ -68,6 +84,10 @@ const Search = () => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                "& > svg:hover": {
+                                    stroke: Colors.teal,
+                                    fill: Colors.teal,
+                                },
                             }}
                         >
                             {favourites}
@@ -79,6 +99,9 @@ const Search = () => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                "& > svg:hover": {
+                                    fill: Colors.teal,
+                                },
                             }}
                         >
                             {cart}

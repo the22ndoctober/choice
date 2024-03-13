@@ -26,6 +26,10 @@ export const SearchStyles = {
         display: "flex",
         columnGap: { sm: "17px" },
         borderRadius: "15px",
+        fontWeight: 500,
+        lineHeight: "22px",
+        letterSpacing: "0.75px",
+        textAlign: "left",
     },
     search__wrapper: {
         ml: "0px !important",
@@ -39,5 +43,6 @@ export const SearchStyles = {
         pr: "20px",
         color: "#fff",
         alignItems: "center",
+        zIndex: 500,
     },
 }

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid"
 import Typography from "@mui/material/Typography"
 import { useRouter } from "next/navigation"
 
-const SearchProductItem = ({ product }: any) => {
+const SearchProductItem = ({ product, setQuery, setOpenCat }: any) => {
     const router = useRouter()
 
     return (
@@ -21,6 +21,8 @@ const SearchProductItem = ({ product }: any) => {
                 }}
                 onClick={() => {
                     router.push(`/products/${product.product_id}`)
+                    setQuery("")
+                    setOpenCat(false)
                 }}
             >
                 <Box

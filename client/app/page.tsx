@@ -8,11 +8,15 @@ import PopularBrends from "./components/main/popularBrends/PopularBrends"
 import VideoAbout from "./components/main/videoAbout/VideoAbout"
 import InfoMain from "./components/main/infoMain/InfoMain"
 import DeliveryInfo from "./components/main/deliveryInfo/DeliveryInfo"
+import Navigation from "./components/header/navgitation/Navigation"
+import Search from "./components/header/search/Search"
 
-export default function Home() {
+export default function Home({ params }: any) {
     return (
         <>
             <Box className="global-content-wrapper">
+                <Navigation />
+                <Search params="" />
                 <AdvertismentMain />
                 <BestOffers />
                 <NewProducts />

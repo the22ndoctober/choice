@@ -5,7 +5,12 @@ import Grid from "@mui/material/Grid"
 
 import SearchProductItem from "./searchDropDown/SearchProductItem"
 
-const SearchDropDrown = ({ products, productsIsLoading }: any) => {
+const SearchDropDrown = ({
+    products,
+    productsIsLoading,
+    setQuery,
+    setOpenCat,
+}: any) => {
     return (
         <>
             <Box
@@ -14,27 +19,34 @@ const SearchDropDrown = ({ products, productsIsLoading }: any) => {
                     background: Colors.paper,
                     width: "100%",
                     height: { sm: 600 },
-                    overflowY: "scroll",
                     left: 0,
-                    zIndex: 999,
+
+                    zIndex: 400,
+                    py: "25px",
                 }}
             >
-                <Grid container sx={{ direction: "column" }}>
-                    <Grid container direction={"column"} rowGap={2} p={2}>
-                        {productsIsLoading ? (
-                            <div>Завантажується</div>
-                        ) : (
-                            <>
-                                {(products || []).map((product: any) => (
-                                    <SearchProductItem
-                                        product={product}
-                                        key={product.title}
-                                    />
-                                ))}
-                            </>
-                        )}
+                <Box
+                    sx={{ width: "100%", height: "100%", overflowY: "scroll" }}
+                >
+                    <Grid container sx={{ direction: "column" }}>
+                        <Grid container direction={"column"} rowGap={2} p={2}>
+                            {productsIsLoading ? (
+                                <div>Завантажується</div>
+                            ) : (
+                                <>
+                                    {(products || []).map((product: any) => (
+                                        <SearchProductItem
+                                            setOpenCat={setOpenCat}
+                                            setQuery={setQuery}
+                                            product={product}
+                                            key={product.title}
+                                        />
+                                    ))}
+                                </>
+                            )}
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Box>
             </Box>
         </>
     )

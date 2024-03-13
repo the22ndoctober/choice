@@ -1,3 +1,5 @@
+import { Colors } from "@/client"
+
 export const NavStyles = {
     container: {
         width: { sm: "100%" },
@@ -8,28 +10,31 @@ export const NavStyles = {
         width: { xl: 1440, lg: 1140 },
         py: { sm: "19px" },
         display: "flex",
-        justifyContent: "space-between",
+        columnGap: "84px",
         direction: { sm: "row" },
     },
     logoWrapper: {
-        width: { sm: "135px" },
+        width: { sm: "194px" },
         heigth: { sm: "43,91px" },
+        ml: "24px",
     },
     buttonsWrapper: {
         alignItems: { sm: "center" },
         width: { sm: "auto" },
         display: "flex",
         direction: "row",
-        columnGap: { lg: "18px", xl: "27px" },
+        columnGap: { lg: "18px", xl: "42px" },
     },
     buttonWrapper__item: {
-        fontFamily: "Inter",
+        boxSizing: "content-box",
         fontSize: "18px",
         fontWeight: 300,
-
         letterSpacing: "0em",
         textAlign: "left",
         cursor: "pointer",
+        "&:hover": {
+            color: Colors.teal,
+        },
     },
     infoWrapper: {
         position: "relative",

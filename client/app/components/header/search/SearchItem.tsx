@@ -9,10 +9,13 @@ import SearchDropDrown from "./SearchDropDrown"
 import { useMutation, useQuery } from "@tanstack/react-query"
 import { SearchProducts } from "@/api/test"
 import { useState, useEffect } from "react"
+import CloseIcon from "@mui/icons-material/Close"
+import { Colors } from "@/client"
 
-const SearchItem = () => {
+const SearchItem = ({ setOpenCat }: any) => {
     const [searchQuery, setSearchQuery] = useState<string>("")
     const [products, setProducts] = useState([])
+    const [open, setOpen] = useState<boolean>(false)
 
     //TANSTACK
     const { data, isLoading } = useQuery({
@@ -70,6 +73,7 @@ const SearchItem = () => {
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
         color: "inherit",
         width: "100%",
+
         "& input": {
             padding: theme.spacing(1, 1, 1, 0),
             // vertical padding + font size from searchIcon
@@ -88,6 +92,7 @@ const SearchItem = () => {
         },
         marginLeft: 0,
         width: "auto",
+        zIndex: 500,
         [theme.breakpoints.up("sm")]: {
             marginLeft: theme.spacing(1),
             width: "auto",
@@ -99,7 +104,7 @@ const SearchItem = () => {
             <Box
                 sx={{
                     position: "relative",
-                    minWidth: { lg: "500px", xl: "720px" },
+                    minWidth: { lg: "440px", xl: "680px" },
                 }}
             >
                 <SearchComp sx={{ ...SearchStyles.search__wrapper }}>
@@ -113,10 +118,20 @@ const SearchItem = () => {
                         }}
                     />
 
-                    <SearchIcon />
+                    {searchQuery !== "" && (
+                        <CloseIcon
+                            sx={{ zIndex: 500 }}
+                            onClick={() => {
+                                setSearchQuery("")
+                            }}
+                        />
+                    )}
+                    <SearchIcon sx={{ zIndex: 500 }} />
                 </SearchComp>
                 {searchQuery !== "" && (
                     <SearchDropDrown
+                        setOpenCat={setOpenCat}
+                        setQuery={setSearchQuery}
                         products={products}
                         productsIsLoading={isLoading}
                     />

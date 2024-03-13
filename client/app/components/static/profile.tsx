@@ -1,23 +1,26 @@
+import { Colors } from "@/client"
+
 export const profile = (
     <svg
-        width="32"
-        height="32"
-        viewBox="0 0 32 32"
+        width="28"
+        height="28"
+        viewBox="0 0 28 28"
         fill="none"
+        stroke={Colors.white}
         xmlns="http://www.w3.org/2000/svg"
     >
         <path
-            d="M9 21.5206V24.6248H23.486V21.5206C23.486 18.6634 21.1697 16.3471 18.3124 16.3471H14.1736C11.3163 16.3471 9 18.6634 9 21.5206Z"
-            stroke="#F9FAFD"
-            strokeWidth="1.03471"
-            strokeLinecap="round"
+            d="M5 21.1665V24.9998H22.8889V21.1665C22.8889 17.638 20.0285 14.7776 16.5 14.7776H11.3889C7.8604 14.7776 5 17.638 5 21.1665Z"
+            // stroke="#F9FAFD"
+            stroke-width="1.00669"
+            stroke-linecap="round"
         />
         <circle
-            cx="16.2428"
-            cy="10.1389"
-            r="3.6215"
-            stroke="#F9FAFD"
-            strokeWidth="1.03471"
+            cx="13.9442"
+            cy="7.11111"
+            r="4.60777"
+            // stroke="#F9FAFD"
+            stroke-width="1.00669"
         />
     </svg>
 )

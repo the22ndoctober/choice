@@ -61,7 +61,13 @@ const Navigtaion = () => {
         <>
             <Box sx={{ ...NavStyles.container }}>
                 <Grid container sx={{ ...NavStyles.bodyWrapper }}>
-                    <Grid container sx={{ ...NavStyles.logoWrapper }}>
+                    <Grid
+                        container
+                        sx={{ ...NavStyles.logoWrapper }}
+                        onClick={() => {
+                            router.push("/")
+                        }}
+                    >
                         {logoNav}
                     </Grid>
                     <Grid container sx={{ ...NavStyles.buttonsWrapper }}>

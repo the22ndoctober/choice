@@ -62,7 +62,7 @@ const NavPhoneComponent = () => {
         >
             <Grid sx={wrapperStyles}>
                 <Box sx={{ position: "static" }}>
-                    <Typography sx={typoStyles}>
+                    <Box sx={typoStyles}>
                         <Box sx={{ width: "25px" }}></Box>
                         {!open && "044 503 70 20"}
                         <Box
@@ -74,7 +74,7 @@ const NavPhoneComponent = () => {
                         >
                             {!open && <ExpandMoreIcon />}
                         </Box>
-                    </Typography>
+                    </Box>
                 </Box>
             </Grid>
             {open && (
@@ -90,7 +90,7 @@ const NavPhoneComponent = () => {
                         }}
                     >
                         <Box sx={{ position: "static" }}>
-                            <Typography sx={typoStyles}>
+                            <Box sx={typoStyles}>
                                 <Box sx={{ width: "25px" }}>
                                     {open && phoneIcon}
                                 </Box>
@@ -104,17 +104,17 @@ const NavPhoneComponent = () => {
                                 >
                                     {!open && <ExpandMoreIcon />}
                                 </Box>
-                            </Typography>
-                            <Typography sx={pStyles}>
+                            </Box>
+                            <Box sx={pStyles}>
                                 <Box sx={{ width: "25px" }}></Box>Оформити
                                 замовлення
-                            </Typography>
-                            <Typography sx={pStyles}>
+                            </Box>
+                            <Box sx={pStyles}>
                                 <Box sx={{ width: "25px" }}></Box>9:00 - 21:00
-                            </Typography>
+                            </Box>
                         </Box>
                         <Box sx={{ position: "static" }}>
-                            <Typography sx={typoStyles}>
+                            <Box sx={typoStyles}>
                                 <Box sx={{ width: "25px" }}>
                                     {open && phoneIcon}
                                 </Box>
@@ -128,27 +128,23 @@ const NavPhoneComponent = () => {
                                 >
                                     {!open && <ExpandMoreIcon />}
                                 </Box>
-                            </Typography>
-                            <Typography sx={pStyles}>
+                            </Box>
+                            <Box sx={pStyles}>
                                 <Box sx={{ width: "25px" }}></Box>Служба
                                 Підтримки
-                            </Typography>
-                            <Typography sx={pStyles}>
+                            </Box>
+                            <Box sx={pStyles}>
                                 <Box sx={{ width: "25px" }}></Box>9:00 - 21:00
-                            </Typography>
+                            </Box>
                         </Box>
                     </Grid>
-                    <Typography sx={{ fontSize: "14px", margin: "0 auto" }}>
-                        Або
-                    </Typography>
+                    <Box sx={{ fontSize: "14px", margin: "0 auto" }}>Або</Box>
                     <Grid
                         container
                         direction={"column"}
                         sx={{ px: "29px", rowGap: "14px", pb: "28px" }}
                     >
-                        <Typography sx={{ fontSize: "16px" }}>
-                            Передзвонити мені
-                        </Typography>
+                        <Box sx={{ fontSize: "16px" }}>Передзвонити мені</Box>
 
                         <InputBase
                             defaultValue={"+380"}

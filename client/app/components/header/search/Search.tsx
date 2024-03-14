@@ -2,7 +2,6 @@
 
 import { GetCatSorted, SearchProducts, TestAxiosReq } from "@/api/test"
 import { Box, Button, Input, Grid, Typography } from "@mui/material"
-
 import { SearchStyles } from "./styles/styles"
 import { useRouter } from "next/navigation"
 import MenuIcon from "@mui/icons-material/Menu"
@@ -16,13 +15,19 @@ import { Colors } from "@/client"
 import { profile } from "../../static/profile"
 import { favourites } from "../../static/favourites"
 import { cart } from "../../static/cart"
+import LoginForm from "@/app/components/login/LoginForm"
+import { useSession } from "next-auth/react"
 
 const Search = ({ params }: any) => {
     const [openCat, setOpenCat] = useState<boolean>(true)
+    const [openLogin, setOpenLogin] = useState<boolean>(false)
     const { isLoading, error, data, isFetching } = useQuery({
         queryKey: ["sortedCats"],
         queryFn: GetCatSorted,
     })
+
+    const { status } = useSession()
+    const router = useRouter()
 
     useEffect(() => {
         if (params !== "") {
@@ -74,6 +79,15 @@ const Search = ({ params }: any) => {
                                     fill: Colors.teal,
                                 },
                             }}
+                            onClick={() => {
+                                console.log(status)
+                                if (status === "unauthenticated") {
+                                    setOpenLogin(true)
+                                }
+                                if (status === "authenticated") {
+                                    router.push("/dashboard")
+                                }
+                            }}
                         >
                             {profile}
                         </Box>
@@ -109,6 +123,7 @@ const Search = ({ params }: any) => {
                     </Grid>
                 </Box>
             </Box>
+            {openLogin && <LoginForm setOpen={setOpenLogin} />}
         </>
     )
 }

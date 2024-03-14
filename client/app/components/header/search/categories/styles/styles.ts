@@ -6,7 +6,7 @@ export const CategoriesStyles = {
         bottom: "-80svh",
         left: 0,
         py: "24px",
-        zIndex: 2000,
+        zIndex: 1000,
         display: "flex",
         flexDirection: "column",
         rowGap: "10px",

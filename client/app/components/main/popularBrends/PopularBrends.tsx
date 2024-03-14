@@ -115,6 +115,7 @@ const PopularBrends = () => {
                         <Slider {...settings}>
                             {cardsApi.map((card: any) => (
                                 <Grid
+                                    key={card.id}
                                     container
                                     sx={{
                                         flexDirection: "column",

@@ -17,10 +17,40 @@ import { favourites } from "../../static/favourites"
 import { cart } from "../../static/cart"
 import LoginForm from "@/app/components/login/LoginForm"
 import { useSession } from "next-auth/react"
+import Cart from "../../order/Cart"
+
+const items = [
+    {
+        id: 0,
+        image: "/test_item.png",
+        title: "Redmi Note 8T 4/64",
+        price: 3200,
+        currency: " ₴",
+        amount: 35,
+    },
+    {
+        id: 1,
+        image: "/test_item.png",
+        title: "Samsung 7j 4/64",
+        price: 4200,
+        currency: " ₴",
+        amount: 1,
+    },
+    {
+        id: 2,
+        image: "/test_item.png",
+        title: "Motorola 4/64",
+        price: 5200,
+        currency: " ₴",
+        amount: 2,
+    },
+]
 
 const Search = ({ params }: any) => {
     const [openCat, setOpenCat] = useState<boolean>(true)
     const [openLogin, setOpenLogin] = useState<boolean>(false)
+    const [openCart, setOpenCart] = useState<boolean>(false)
+    const [cartAmount, setCartAmount] = useState<number>(0)
 
     const { isLoading, error, data, isFetching } = useQuery({
         queryKey: ["sortedCats"],
@@ -29,6 +59,10 @@ const Search = ({ params }: any) => {
 
     const { status } = useSession()
     const router = useRouter()
+
+    useEffect(() => {
+        setCartAmount(items.length)
+    }, [items.length])
 
     useEffect(() => {
         if (params !== "") {
@@ -114,17 +148,49 @@ const Search = ({ params }: any) => {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                position: "relative",
                                 "& > svg:hover": {
                                     fill: Colors.teal,
                                 },
                             }}
+                            onClick={() => {
+                                setOpenCart(true)
+                            }}
                         >
+                            {cartAmount > 0 && (
+                                <Box
+                                    sx={{
+                                        position: "absolute",
+                                        background: Colors.paper,
+                                        color: Colors.maxDark,
+                                        bottom: 0,
+                                        right: 5,
+                                        width: "15px",
+                                        height: "15px",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: "100%",
+                                        p: "8px",
+                                        fontSize: "10px",
+                                    }}
+                                >
+                                    {cartAmount}
+                                </Box>
+                            )}
                             {cart}
                         </Box>
                     </Grid>
                 </Box>
             </Box>
             {openLogin && <LoginForm setOpen={setOpenLogin} />}
+            {openCart && (
+                <Cart
+                    setOpen={setOpenCart}
+                    setCartAmount={setCartAmount}
+                    items={items}
+                />
+            )}
         </>
     )
 }

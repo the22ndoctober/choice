@@ -95,7 +95,7 @@ export default function LoginForm({ setOpen }) {
                                 onClick={() => {
                                     setOpen(false)
                                 }}
-                            />{" "}
+                            />
                         </Grid>
                         <InputBase
                             placeholder="Номер телефону"

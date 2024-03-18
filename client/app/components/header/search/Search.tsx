@@ -21,6 +21,7 @@ import { useSession } from "next-auth/react"
 const Search = ({ params }: any) => {
     const [openCat, setOpenCat] = useState<boolean>(true)
     const [openLogin, setOpenLogin] = useState<boolean>(false)
+
     const { isLoading, error, data, isFetching } = useQuery({
         queryKey: ["sortedCats"],
         queryFn: GetCatSorted,

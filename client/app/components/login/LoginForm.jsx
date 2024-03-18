@@ -8,7 +8,7 @@ import Box from "@mui/material/Box"
 import { Colors } from "@/client"
 import InputBase from "@mui/material/InputBase"
 import Button from "@mui/material/Button"
-import { makeStyles } from "@mui/material/styles"
+import { makeStyles } from "@mui/styles"
 import Grid from "@mui/material/Grid"
 import CloseIcon from "@mui/icons-material/Close"
 

@@ -15,7 +15,7 @@ function Provider({ children }: any) {
                     <ReactQueryStreamedHydration>
                         {children}
                     </ReactQueryStreamedHydration>
-                    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+                    <ReactQueryDevtools />
                 </QueryClientProvider>
             </SessionProvider>
         </>

@@ -14,7 +14,7 @@ const CartComp = ({ setOpen }: any) => {
 
     useEffect(() => {
         dispatch(
-            changeCart({
+            changeCart<any>({
                 type: "123",
                 payload: [...JSON.parse(localStorage.getItem("cart") ?? "")],
             })
@@ -87,9 +87,9 @@ const CartComp = ({ setOpen }: any) => {
                             {cart.map((item: any) => (
                                 <CartItem
                                     key={item.id}
-                                    setCart={() => {
+                                    setCart={() =>
                                         dispatch(
-                                            changeCart({
+                                            changeCart<any>({
                                                 type: "123",
                                                 payload: [
                                                     ...JSON.parse(
@@ -100,7 +100,7 @@ const CartComp = ({ setOpen }: any) => {
                                                 ],
                                             })
                                         )
-                                    }}
+                                    }
                                     id={item.id}
                                     title={item.title}
                                     image={item.image}

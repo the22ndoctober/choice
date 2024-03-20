@@ -7,7 +7,7 @@ import { Provider } from "./Provider"
 import Footer from "./components/footer/Footer"
 import { getServerSession } from "next-auth"
 
-import { authOptions } from "./api/auth/[...nextauth]/route"
+import authOptions from "./api/auth/[...nextauth]/options"
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -19,7 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    const session = await getServerSession(authOptions)
+    const session = await getServerSession<any>(authOptions)
 
     if (session) {
         console.log("YES!")

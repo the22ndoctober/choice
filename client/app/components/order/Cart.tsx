@@ -13,12 +13,12 @@ const CartComp = ({ setOpen }: any) => {
     const dispatch = useDispatch<any>()
 
     useEffect(() => {
-        dispatch(
-            changeCart<any>({
-                type: "123",
-                payload: [...JSON.parse(localStorage.getItem("cart") ?? "")],
-            })
-        )
+        if (
+            localStorage.getItem("cart") === null ||
+            localStorage.getItem("cart") === "[]"
+        ) {
+            localStorage.setItem("cart", JSON.stringify(cart))
+        }
     }, [])
 
     return (
@@ -87,20 +87,22 @@ const CartComp = ({ setOpen }: any) => {
                             {cart.map((item: any) => (
                                 <CartItem
                                     key={item.id}
-                                    setCart={() =>
-                                        dispatch(
-                                            changeCart<any>({
-                                                type: "123",
-                                                payload: [
-                                                    ...JSON.parse(
-                                                        localStorage.getItem(
-                                                            "cart"
-                                                        ) ?? ""
-                                                    ),
-                                                ],
-                                            })
-                                        )
-                                    }
+                                    setCart={async () => {
+                                        if (
+                                            localStorage.getItem("cart") !==
+                                            null
+                                        ) {
+                                            let local: any =
+                                                localStorage.getItem("cart")
+                                            const data = JSON.parse(local)
+                                            dispatch(
+                                                changeCart<any>({
+                                                    type: "123",
+                                                    payload: data,
+                                                })
+                                            )
+                                        }
+                                    }}
                                     id={item.id}
                                     title={item.title}
                                     image={item.image}

@@ -3,11 +3,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 import * as actions from "./cartActions"
 
+const local: any = localStorage.getItem("cart")
+
 const initialState = {
     cart:
-        [...JSON.parse(localStorage.getItem("cart") ?? "")][0] !== ""
-            ? [...JSON.parse(localStorage.getItem("cart") ?? "")]
-            : [
+        local === null || local === "[]"
+            ? [
                   {
                       id: 0,
                       image: "/test_item.png",
@@ -32,7 +33,8 @@ const initialState = {
                       currency: " ₴",
                       amount: 2,
                   },
-              ],
+              ]
+            : JSON.parse(local),
 }
 
 export const cartSlice = createSlice({

@@ -5,8 +5,22 @@ import { Box, Grid, Button } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import CartItem from "./CartItem"
 import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { changeCart, getCart } from "@/app/redux/cart/cartSlice"
 
-const Cart = ({ items, setOpen, setCartAmount }: any) => {
+const CartComp = ({ setOpen }: any) => {
+    const cart = useSelector(getCart)
+    const dispatch = useDispatch<any>()
+
+    useEffect(() => {
+        dispatch(
+            changeCart({
+                type: "123",
+                payload: [...JSON.parse(localStorage.getItem("cart") ?? "")],
+            })
+        )
+    }, [])
+
     return (
         <Grid
             container
@@ -70,9 +84,23 @@ const Cart = ({ items, setOpen, setCartAmount }: any) => {
                                 rowGap: "20px",
                             }}
                         >
-                            {items.map((item: any) => (
+                            {cart.map((item: any) => (
                                 <CartItem
                                     key={item.id}
+                                    setCart={() => {
+                                        dispatch(
+                                            changeCart({
+                                                type: "123",
+                                                payload: [
+                                                    ...JSON.parse(
+                                                        localStorage.getItem(
+                                                            "cart"
+                                                        ) ?? ""
+                                                    ),
+                                                ],
+                                            })
+                                        )
+                                    }}
                                     id={item.id}
                                     title={item.title}
                                     image={item.image}
@@ -113,7 +141,7 @@ const Cart = ({ items, setOpen, setCartAmount }: any) => {
                                 color: Colors.dark,
                             }}
                         >
-                            {items.reduce(
+                            {cart.reduce(
                                 (accumulator: number, currentItem: any) =>
                                     accumulator +
                                     currentItem.price * currentItem.amount,
@@ -191,4 +219,4 @@ const Cart = ({ items, setOpen, setCartAmount }: any) => {
     )
 }
 
-export default Cart
+export default CartComp

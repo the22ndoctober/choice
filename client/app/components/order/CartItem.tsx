@@ -3,7 +3,28 @@ import { Box, Grid } from "@mui/material"
 import React from "react"
 import { trashCart } from "../static/trashCart"
 
-const CartItem = ({ id, title, image, price, currency, amount }: any) => {
+const CartItem = ({
+    id,
+    setCart,
+    title,
+    image,
+    price,
+    currency,
+    amount,
+}: any) => {
+    const removeItemFromCart = () => {
+        let cart = JSON.parse(localStorage.getItem("cart") ?? "")
+
+        if (cart[0] === "") return
+
+        localStorage.setItem(
+            "cart",
+            JSON.stringify(cart.filter((item: any) => item.id !== id))
+        )
+
+        setCart()
+    }
+
     return (
         <Grid
             container
@@ -48,7 +69,7 @@ const CartItem = ({ id, title, image, price, currency, amount }: any) => {
                         >
                             {title}
                         </Box>
-                        {trashCart}
+                        <Box onClick={removeItemFromCart}>{trashCart}</Box>
                     </Grid>
                     <Box
                         sx={{

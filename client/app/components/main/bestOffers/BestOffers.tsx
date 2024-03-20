@@ -86,7 +86,6 @@ const BestOffers = () => {
     }, [])
 
     useEffect(() => {
-        console.log(width)
         if (width >= 1536) {
             setSettings((state: any) => {
                 return { ...state, slidesToShow: 5, slidesToScroll: 5 }

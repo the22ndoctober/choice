@@ -4,20 +4,24 @@ import { ReactQueryStreamedHydration } from "@tanstack/react-query-next-experime
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { SessionProvider } from "next-auth/react"
+import { Provider as Providers } from "react-redux"
+import { store } from "./redux/store"
 
 function Provider({ children }: any) {
     const [client] = useState(new QueryClient())
 
     return (
         <>
-            <SessionProvider>
-                <QueryClientProvider client={client}>
-                    <ReactQueryStreamedHydration>
-                        {children}
-                    </ReactQueryStreamedHydration>
-                    <ReactQueryDevtools />
-                </QueryClientProvider>
-            </SessionProvider>
+            <Providers store={store}>
+                <SessionProvider>
+                    <QueryClientProvider client={client}>
+                        <ReactQueryStreamedHydration>
+                            {children}
+                        </ReactQueryStreamedHydration>
+                        <ReactQueryDevtools />
+                    </QueryClientProvider>
+                </SessionProvider>
+            </Providers>
         </>
     )
 }

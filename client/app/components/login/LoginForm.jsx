@@ -8,20 +8,11 @@ import Box from "@mui/material/Box"
 import { Colors } from "@/client"
 import InputBase from "@mui/material/InputBase"
 import Button from "@mui/material/Button"
-import { makeStyles } from "@mui/styles"
+
 import Grid from "@mui/material/Grid"
 import CloseIcon from "@mui/icons-material/Close"
 
-const useStyles = makeStyles({
-    root: {
-        "&:hover": {
-            backgroundColor: Colors.lightGreen,
-        },
-    },
-})
-
 export default function LoginForm({ setOpen }) {
-    const classes = useStyles()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
@@ -129,8 +120,7 @@ export default function LoginForm({ setOpen }) {
                             }}
                         />
 
-                        <Button
-                            className={classes.root}
+                        <Box
                             onClick={handleSubmit}
                             sx={{
                                 borderRadius: "15px",
@@ -144,10 +134,16 @@ export default function LoginForm({ setOpen }) {
                                 textAlign: "center",
                                 height: "54px",
                                 textTransform: "none",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                "&:hover": {
+                                    backgroundColor: Colors.lightGreen,
+                                },
                             }}
                         >
                             Увійти
-                        </Button>
+                        </Box>
                         {error && (
                             <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
                                 {error}

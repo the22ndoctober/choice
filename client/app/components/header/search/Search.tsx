@@ -17,36 +17,13 @@ import { favourites } from "../../static/favourites"
 import { cart } from "../../static/cart"
 import LoginForm from "@/app/components/login/LoginForm"
 import { useSession } from "next-auth/react"
-import Cart from "../../order/Cart"
-
-const items = [
-    {
-        id: 0,
-        image: "/test_item.png",
-        title: "Redmi Note 8T 4/64",
-        price: 3200,
-        currency: " ₴",
-        amount: 35,
-    },
-    {
-        id: 1,
-        image: "/test_item.png",
-        title: "Samsung 7j 4/64",
-        price: 4200,
-        currency: " ₴",
-        amount: 1,
-    },
-    {
-        id: 2,
-        image: "/test_item.png",
-        title: "Motorola 4/64",
-        price: 5200,
-        currency: " ₴",
-        amount: 2,
-    },
-]
+import { getCart } from "@/app/redux/cart/cartSlice"
+import { useSelector } from "react-redux"
+import CartComp from "../../order/Cart"
 
 const Search = ({ params }: any) => {
+    const cartList = useSelector(getCart)
+
     const [openCat, setOpenCat] = useState<boolean>(true)
     const [openLogin, setOpenLogin] = useState<boolean>(false)
     const [openCart, setOpenCart] = useState<boolean>(false)
@@ -61,8 +38,8 @@ const Search = ({ params }: any) => {
     const router = useRouter()
 
     useEffect(() => {
-        setCartAmount(items.length)
-    }, [items.length])
+        setCartAmount(cartList.length)
+    }, [cartList.length])
 
     useEffect(() => {
         if (params !== "") {
@@ -184,13 +161,7 @@ const Search = ({ params }: any) => {
                 </Box>
             </Box>
             {openLogin && <LoginForm setOpen={setOpenLogin} />}
-            {openCart && (
-                <Cart
-                    setOpen={setOpenCart}
-                    setCartAmount={setCartAmount}
-                    items={items}
-                />
-            )}
+            {openCart && <CartComp setOpen={setOpenCart} />}
         </>
     )
 }

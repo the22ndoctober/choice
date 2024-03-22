@@ -3,25 +3,8 @@ import { Box, Grid } from "@mui/material"
 import React from "react"
 import { trashCart } from "../static/trashCart"
 
-const CartItem = ({
-    id,
-    setCart,
-    title,
-    image,
-    price,
-    currency,
-    amount,
-}: any) => {
+const CartItem = ({ id, setCart, title, image, price, currency }: any) => {
     const removeItemFromCart = () => {
-        let cart = JSON.parse(localStorage.getItem("cart") ?? "")
-
-        if (cart[0] === "") return
-
-        localStorage.setItem(
-            "cart",
-            JSON.stringify(cart.filter((item: any) => item.id !== id))
-        )
-
         setCart()
     }
 
@@ -98,7 +81,7 @@ const CartItem = ({
                             borderRadius: "15px",
                         }}
                     >
-                        {price + ` ${currency}`}
+                        {price + ` ${currency === "грн." && "₴"}`}
                     </Box>
                     <Grid
                         container
@@ -146,7 +129,7 @@ const CartItem = ({
                                     textAlign: "center",
                                 }}
                             >
-                                {amount}
+                                1
                             </Box>
                             <Box
                                 sx={{
@@ -179,7 +162,7 @@ const CartItem = ({
                                 borderRadius: "15px",
                             }}
                         >
-                            {price * amount + ` ${currency}`}
+                            {price + ` ${currency === "грн." && "₴"}`}
                         </Box>
                     </Grid>
                 </Grid>

@@ -31,7 +31,7 @@ const InfoMain = () => {
 
     return (
         <>
-            <Box sx={{ width: "100%", height: "100svh", py: "65px" }}>
+            <Box sx={{ width: "100%", height: "auto", py: "65px" }}>
                 <Grid
                     container
                     sx={{

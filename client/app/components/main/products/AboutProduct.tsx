@@ -5,9 +5,11 @@ import Image from "next/image"
 import { Colors } from "@/client"
 import Typography from "@mui/material/Typography"
 import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket"
+import { useDispatch } from "react-redux"
+import { changeCart } from "@/app/redux/cart/cartSlice"
 
 const AboutProduct = ({ product }: any) => {
-    console.log(product)
+    const dispatch = useDispatch()
 
     return (
         <>
@@ -127,6 +129,14 @@ const AboutProduct = ({ product }: any) => {
                             py: "15px",
                             textAlign: "center",
                             columnGap: 2,
+                        }}
+                        onClick={() => {
+                            dispatch(
+                                changeCart<any>({
+                                    type: "ADD_ITEM",
+                                    payload: product,
+                                })
+                            )
                         }}
                     >
                         <ShoppingBasketIcon

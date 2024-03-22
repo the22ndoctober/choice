@@ -4,22 +4,12 @@ import { Colors } from "@/client"
 import { Box, Grid, Button } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import CartItem from "./CartItem"
-import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { changeCart, getCart } from "@/app/redux/cart/cartSlice"
 
 const CartComp = ({ setOpen }: any) => {
     const cart = useSelector(getCart)
     const dispatch = useDispatch<any>()
-
-    useEffect(() => {
-        if (
-            localStorage.getItem("cart") === null ||
-            localStorage.getItem("cart") === "[]"
-        ) {
-            localStorage.setItem("cart", JSON.stringify(cart))
-        }
-    }, [])
 
     return (
         <Grid
@@ -86,8 +76,8 @@ const CartComp = ({ setOpen }: any) => {
                         >
                             {cart.map((item: any) => (
                                 <CartItem
-                                    key={item.id}
-                                    setCart={async () => {
+                                    key={item.product_id}
+                                    setCart={() => {
                                         if (
                                             localStorage.getItem("cart") !==
                                             null
@@ -97,18 +87,17 @@ const CartComp = ({ setOpen }: any) => {
                                             const data = JSON.parse(local)
                                             dispatch(
                                                 changeCart<any>({
-                                                    type: "123",
-                                                    payload: data,
+                                                    type: "REMOVE_ITEM",
+                                                    payload: item.product_id,
                                                 })
                                             )
                                         }
                                     }}
-                                    id={item.id}
+                                    id={item.product_id}
                                     title={item.title}
-                                    image={item.image}
-                                    price={item.price}
+                                    image={item.image_path}
+                                    price={parseInt(item.price)}
                                     currency={item.currency}
-                                    amount={item.amount}
                                 />
                             ))}
                         </Grid>
@@ -145,8 +134,7 @@ const CartComp = ({ setOpen }: any) => {
                         >
                             {cart.reduce(
                                 (accumulator: number, currentItem: any) =>
-                                    accumulator +
-                                    currentItem.price * currentItem.amount,
+                                    accumulator + parseInt(currentItem.price),
                                 0
                             ) + " ₴"}
                         </Box>

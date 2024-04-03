@@ -20,8 +20,10 @@ import { useSession } from "next-auth/react"
 import { getCart } from "@/app/redux/cart/cartSlice"
 import { useSelector } from "react-redux"
 import CartComp from "../../order/Cart"
+import authOptions from "@/app/api/auth/[...nextauth]/options"
+import { getServerSession } from "next-auth"
 
-const Search = ({ params }: any) => {
+const Search = async ({ params, session }: any) => {
     const cartList = useSelector(getCart)
 
     const [openCat, setOpenCat] = useState<boolean>(true)
@@ -131,7 +133,7 @@ const Search = ({ params }: any) => {
                                 },
                             }}
                             onClick={() => {
-                                setOpenCart(true)
+                                session && setOpenCart(true)
                             }}
                         >
                             {cartAmount > 0 && (

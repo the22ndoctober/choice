@@ -18,8 +18,10 @@ import { cart } from "../../static/cart"
 import LoginForm from "@/app/components/login/LoginForm"
 import { useSession } from "next-auth/react"
 import { getCart } from "@/app/redux/cart/cartSlice"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import CartComp from "../../order/Cart"
+import { getCategories } from "@/app/redux/categories/categoriesSlice"
+import CircularProgress from "@mui/joy/CircularProgress"
 
 const Search = ({ params, session }: any) => {
     const cartList = useSelector(getCart)
@@ -29,13 +31,18 @@ const Search = ({ params, session }: any) => {
     const [openCart, setOpenCart] = useState<boolean>(false)
     const [cartAmount, setCartAmount] = useState<number>(0)
 
-    const { isLoading, error, data, isFetching } = useQuery({
-        queryKey: ["sortedCats"],
-        queryFn: GetCatSorted,
-    })
-
     const { status } = useSession()
     const router = useRouter()
+    const dispacth = useDispatch()
+    const data = useSelector((state: any) => state.categories.data)
+    const getStatus = useSelector((state: any) => state.categories.status)
+
+    useEffect(() => {
+        if (getStatus === "idle") {
+            console.log(1)
+            dispacth<any>(getCategories())
+        }
+    }, [getStatus])
 
     useEffect(() => {
         setCartAmount(cartList.length)
@@ -56,8 +63,12 @@ const Search = ({ params, session }: any) => {
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
                         </Button>
-                        {!isLoading && openCat && (
+                        {getStatus === "success" && openCat ? (
                             <Categories categories={data} />
+                        ) : (
+                            getStatus === "loading" && (
+                                <CircularProgress thickness={1} />
+                            )
                         )}
                     </Box>
                     <SearchItem

@@ -5,15 +5,16 @@ import ProductLink from "./ProductLink"
 import { ListItemButton, Collapse, List, Box } from "@mui/material"
 import ExpandLess from "@mui/icons-material/ExpandLess"
 import ExpandMore from "@mui/icons-material/ExpandMore"
-import { useMutation, useQuery } from "@tanstack/react-query"
-import { GetCategoryProducts } from "@/api/test"
+import { useQuery } from "@tanstack/react-query"
+import { GetCategoryProducts, GetSubCats } from "@/api/test"
 
 const SubCategory = ({ categoryInfo }: any) => {
     const [open, setOpen] = useState<boolean>(false)
 
     const categoryMutatuion = useQuery({
-        queryKey: [`products_sub_${categoryInfo.category_id}`],
-        queryFn: () => GetCategoryProducts(categoryInfo.category_id),
+        queryKey: [`products${categoryInfo.category.category_id}`],
+        queryFn: () => GetCategoryProducts(categoryInfo.category.category_id),
+        refetchOnMount: false,
     })
 
     const handleClick = () => {
@@ -25,25 +26,33 @@ const SubCategory = ({ categoryInfo }: any) => {
             <Box sx={{ width: 300 }}>
                 <List>
                     <ListItemButton onClick={handleClick}>
-                        {categoryInfo.title}
+                        {categoryInfo.category.title}
                         {open ? <ExpandLess /> : <ExpandMore />}
                     </ListItemButton>
                     <Collapse in={open} timeout="auto" unmountOnExit>
-                        {categoryMutatuion.isLoading && (
-                            <Box>Завантажується</Box>
-                        )}
-                        {!categoryMutatuion.isLoading &&
-                        categoryMutatuion.data.length > 0 ? (
+                        {categoryInfo.child !== null &&
+                            categoryInfo.child.map((child: any) => (
+                                <SubCategory
+                                    key={child.product_id}
+                                    categoryInfo={child}
+                                />
+                            ))}
+
+                        {categoryMutatuion.isLoading ? (
+                            <Box>Завантаження товару</Box>
+                        ) : categoryMutatuion.data.length > 0 ? (
                             categoryMutatuion.data.map((product: any) => (
                                 <ProductLink
-                                    key={product.product_id}
+                                    key={product.title}
                                     product_id={product.product_id}
                                     category_id={categoryInfo.category_id}
                                     product_title={product.title}
                                 />
                             ))
                         ) : (
-                            <Box>Немає товару в даній категорії</Box>
+                            categoryMutatuion.data === null && (
+                                <Box>Немає продуктів в даній категорії</Box>
+                            )
                         )}
                     </Collapse>
                 </List>

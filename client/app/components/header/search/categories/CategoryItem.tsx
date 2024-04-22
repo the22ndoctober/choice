@@ -1,7 +1,7 @@
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
 import Grid from "@mui/material/Grid"
-import { GetCategoryProducts } from "@/api/test"
+import { GetCategoryProducts, GetSubCats } from "@/api/test"
 import { useQuery, useMutation } from "@tanstack/react-query"
 import { Colors } from "@/client"
 import { Box, Button } from "@mui/material"
@@ -9,13 +9,8 @@ import ProductLink from "./ProductLink"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import SubCategory from "./SubCategory"
 
-const CategoryItem = ({ categoryInfo }: any) => {
+const CategoryItem = ({ categoryInfo, scrollOffset }: any) => {
     const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
-
-    const categoryMutatuion = useQuery({
-        queryKey: [`products${categoryInfo.category_id}`],
-        queryFn: () => GetCategoryProducts(categoryInfo.category_id),
-    })
 
     return (
         <>
@@ -47,6 +42,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                             justifyContent: "space-between",
                             alignItems: "center",
                             cursor: "pointer",
+                            paddingY: "5px",
                         }}
                     >
                         <Box
@@ -58,7 +54,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         >
                             <Box>
                                 <img
-                                    src={categoryInfo.image}
+                                    src={categoryInfo.category.image}
                                     alt=""
                                     width={30}
                                     key={1}
@@ -77,7 +73,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                                     textAlign: "left",
                                 }}
                             >
-                                {categoryInfo.title}
+                                {categoryInfo.category.title}
                             </Box>
                         </Box>
                         <ArrowForwardIosIcon
@@ -98,7 +94,7 @@ const CategoryItem = ({ categoryInfo }: any) => {
                         container
                         direction={"column"}
                         sx={{
-                            position: "absolute",
+                            position: "fixed",
                             top: 0,
                             left: { sm: 248 },
                             width: { xl: 1136 },
@@ -108,29 +104,30 @@ const CategoryItem = ({ categoryInfo }: any) => {
                             rowGap: 2,
                         }}
                     >
-                        {categoryMutatuion.isLoading && <Box>Завантаження</Box>}
-                        {!categoryMutatuion.isLoading &&
-                            (categoryMutatuion.data.length > 0
-                                ? categoryMutatuion.data.map((product: any) => (
-                                      <ProductLink
-                                          key={product.product_id}
-                                          product_id={product.product_id}
-                                          category_id={categoryInfo.category_id}
-                                          product_title={product.title}
-                                      />
-                                  ))
-                                : !categoryInfo.children && (
-                                      <Box>
-                                          Немає продуктів в даній категорії
-                                      </Box>
-                                  ))}
-                        {categoryInfo.children &&
-                            categoryInfo.children.map((child: any) => (
+                        {categoryInfo.child !== null &&
+                            categoryInfo.child.map((child: any) => (
                                 <SubCategory
                                     key={child.product_id}
                                     categoryInfo={child}
                                 />
                             ))}
+
+                        {/* {categoryMutatuion.isLoading ? (
+                            <Box>Завантаження товару</Box>
+                        ) : categoryMutatuion.data.length > 0 ? (
+                            categoryMutatuion.data.map((product: any) => (
+                                <ProductLink
+                                    key={product.title}
+                                    product_id={product.product_id}
+                                    category_id={categoryInfo.category_id}
+                                    product_title={product.title}
+                                />
+                            ))
+                        ) : (
+                            getSubCats === null && (
+                                <Box>Немає продуктів в даній категорії</Box>
+                            )
+                        )} */}
                     </Grid>
                 )}
             </Box>

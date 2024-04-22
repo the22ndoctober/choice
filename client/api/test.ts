@@ -48,7 +48,7 @@ export async function TestAxiosReq(params: any) {
 }
 
 export async function GetCatSorted(params: any) {
-    const data = await axios.get("http://localhost:3002/getCatSorted")
+    const data = await axios.get("http://localhost:3002/getBaseCatSorted")
 
     console.log(data.data)
 
@@ -59,6 +59,16 @@ export async function GetCategoryProducts(params: any) {
     const data = await axios.post("http://localhost:3002/getCategoryProducts", {
         category_id: params,
     })
+
+    return data.data
+}
+
+export async function GetSubCats(params: any) {
+    const data = await axios.post("http://localhost:3002/getSubCats", {
+        category_id: params,
+    })
+
+    console.log(data.data)
 
     return data.data
 }

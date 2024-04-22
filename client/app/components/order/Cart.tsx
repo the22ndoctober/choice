@@ -6,6 +6,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import CartItem from "./CartItem"
 import { useSelector, useDispatch } from "react-redux"
 import { changeCart, getCart } from "@/app/redux/cart/cartSlice"
+import { cartNoProducts } from "../static/cartNoProducts"
 
 const CartComp = ({ setOpen }: any) => {
     const cart = useSelector(getCart)
@@ -31,7 +32,7 @@ const CartComp = ({ setOpen }: any) => {
                     background: Colors.paper,
                     borderRadius: "15px",
                     width: { lg: 892 },
-                    height: "85svh",
+                    height: cart.length > 0 ? "85svh" : 443,
                     p: "32px 28px",
                     boxShadow: `10px 10px 10px -11px rgba(0,0,0,0.75)`,
                 }}
@@ -44,7 +45,12 @@ const CartComp = ({ setOpen }: any) => {
                         height: "100%",
                     }}
                 >
-                    <Grid container sx={{ justifyContent: "space-between" }}>
+                    <Grid
+                        container
+                        sx={{
+                            justifyContent: "space-between",
+                        }}
+                    >
                         <Box
                             sx={{
                                 fontFamily: "Inter",
@@ -64,145 +70,214 @@ const CartComp = ({ setOpen }: any) => {
                             }}
                         />
                     </Grid>
-                    <Box sx={{ overflowY: "scroll", height: 345 }}>
-                        <Grid
-                            container
-                            sx={{
-                                flexDirection: "column",
+                    {cart.length > 0 ? (
+                        <>
+                            <Box sx={{ overflowY: "scroll", height: 345 }}>
+                                <Grid
+                                    container
+                                    sx={{
+                                        flexDirection: "column",
 
-                                width: 836,
-                                rowGap: "20px",
-                            }}
-                        >
-                            {cart.map((item: any) => (
-                                <CartItem
-                                    key={item.product_id}
-                                    setCart={() => {
-                                        if (
-                                            localStorage.getItem("cart") !==
-                                            null
-                                        ) {
-                                            let local: any =
-                                                localStorage.getItem("cart")
-                                            const data = JSON.parse(local)
-                                            dispatch(
-                                                changeCart<any>({
-                                                    type: "REMOVE_ITEM",
-                                                    payload: item.product_id,
-                                                })
-                                            )
-                                        }
+                                        width: 836,
+                                        rowGap: "20px",
                                     }}
-                                    id={item.product_id}
-                                    title={item.title}
-                                    image={item.image_path}
-                                    price={parseInt(item.price)}
-                                    currency={item.currency}
-                                />
-                            ))}
-                        </Grid>
-                    </Box>
-                    <Grid
-                        container
-                        sx={{
-                            justifyContent: "right",
-                            alignItems: "ceter",
-                            columnGap: "93px",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                fontSize: "20px",
-                                fonWeight: 500,
-                                lineHeight: "24px",
-                                letterSpacing: "0em",
-                                textAlign: "left",
-                                color: Colors.black,
-                            }}
-                        >
-                            Разом:
-                        </Box>
-                        <Box
-                            sx={{
-                                fontSize: "24px",
-                                fontWeight: 800,
-                                lineHeight: "29px",
-                                letterSpacing: "0em",
-                                textAlign: "right",
-                                color: Colors.dark,
-                            }}
-                        >
-                            {cart.reduce(
-                                (accumulator: number, currentItem: any) =>
-                                    accumulator + parseInt(currentItem.price),
-                                0
-                            ) + " ₴"}
-                        </Box>
-                    </Grid>
-                    <Grid
-                        container
-                        sx={{
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                        }}
-                    >
-                        <Button
-                            sx={{
-                                borderRadius: "15px",
-                                width: { lg: 240 },
-                                color: Colors.grey,
-                                outline: `2px solid ${Colors.grey}`,
-                                fontSize: "16px",
-                                fontWeight: "500",
-                                lineHeight: "22px",
-                                letterSpacing: "0em",
-                                textAlign: "center",
-                                height: "54px",
-                                textTransform: "none",
-                            }}
-                        >
-                            Продовжити покупки
-                        </Button>
+                                >
+                                    {cart.map((item: any) => (
+                                        <CartItem
+                                            key={item.product_id}
+                                            setCart={() => {
+                                                if (
+                                                    localStorage.getItem(
+                                                        "cart"
+                                                    ) !== null
+                                                ) {
+                                                    let local: any =
+                                                        localStorage.getItem(
+                                                            "cart"
+                                                        )
+                                                    const data =
+                                                        JSON.parse(local)
+                                                    dispatch(
+                                                        changeCart<any>({
+                                                            type: "REMOVE_ITEM",
+                                                            payload:
+                                                                item.product_id,
+                                                        })
+                                                    )
+                                                }
+                                            }}
+                                            id={item.product_id}
+                                            title={item.title}
+                                            image={item.image_path}
+                                            price={parseInt(item.price)}
+                                            currency={item.currency}
+                                        />
+                                    ))}
+                                </Grid>
+                            </Box>
+                            <Grid
+                                container
+                                sx={{
+                                    justifyContent: "right",
+                                    alignItems: "ceter",
+                                    columnGap: "93px",
+                                }}
+                            >
+                                <Box
+                                    sx={{
+                                        fontSize: "20px",
+                                        fonWeight: 500,
+                                        lineHeight: "24px",
+                                        letterSpacing: "0em",
+                                        textAlign: "left",
+                                        color: Colors.black,
+                                    }}
+                                >
+                                    Разом:
+                                </Box>
+                                <Box
+                                    sx={{
+                                        fontSize: "24px",
+                                        fontWeight: 800,
+                                        lineHeight: "29px",
+                                        letterSpacing: "0em",
+                                        textAlign: "right",
+                                        color: Colors.dark,
+                                    }}
+                                >
+                                    {cart.reduce(
+                                        (
+                                            accumulator: number,
+                                            currentItem: any
+                                        ) =>
+                                            accumulator +
+                                            parseInt(currentItem.price),
+                                        0
+                                    ) + " ₴"}
+                                </Box>
+                            </Grid>
+                            <Grid
+                                container
+                                sx={{
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <Button
+                                    sx={{
+                                        borderRadius: "15px",
+                                        width: { lg: 240 },
+                                        color: Colors.grey,
+                                        outline: `2px solid ${Colors.grey}`,
+                                        fontSize: "16px",
+                                        fontWeight: "500",
+                                        lineHeight: "22px",
+                                        letterSpacing: "0em",
+                                        textAlign: "center",
+                                        height: "54px",
+                                        textTransform: "none",
+                                    }}
+                                >
+                                    Продовжити покупки
+                                </Button>
+                                <Grid
+                                    container
+                                    sx={{ columnGap: "16px", width: "auto" }}
+                                >
+                                    <Button
+                                        sx={{
+                                            borderRadius: "15px",
+                                            width: { lg: 240 },
+                                            color: Colors.maxDark,
+                                            outline: `2px solid ${Colors.maxDark}`,
+                                            fontSize: "16px",
+                                            fontWeight: "500",
+                                            lineHeight: "22px",
+                                            letterSpacing: "0em",
+                                            textAlign: "center",
+                                            height: "54px",
+                                            textTransform: "none",
+                                        }}
+                                    >
+                                        Оплата частинами
+                                    </Button>
+                                    <Button
+                                        sx={{
+                                            borderRadius: "15px",
+                                            width: { lg: 240 },
+                                            color: Colors.white,
+                                            background: Colors.maxDark,
+                                            fontSize: "16px",
+                                            fontWeight: "500",
+                                            lineHeight: "22px",
+                                            letterSpacing: "0em",
+                                            textAlign: "center",
+                                            height: "54px",
+                                            textTransform: "none",
+                                        }}
+                                    >
+                                        Оформити замовлення
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </>
+                    ) : (
                         <Grid
                             container
-                            sx={{ columnGap: "16px", width: "auto" }}
+                            sx={{
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                p: "36px",
+                            }}
                         >
-                            <Button
+                            <Grid
+                                container
                                 sx={{
-                                    borderRadius: "15px",
-                                    width: { lg: 240 },
-                                    color: Colors.maxDark,
-                                    outline: `2px solid ${Colors.maxDark}`,
-                                    fontSize: "16px",
-                                    fontWeight: "500",
-                                    lineHeight: "22px",
-                                    letterSpacing: "0em",
-                                    textAlign: "center",
-                                    height: "54px",
-                                    textTransform: "none",
+                                    width: { lg: 250 },
+                                    flexDirection: "column",
+                                    rowGap: "36px",
                                 }}
                             >
-                                Оплата частинами
-                            </Button>
-                            <Button
-                                sx={{
-                                    borderRadius: "15px",
-                                    width: { lg: 240 },
-                                    color: Colors.white,
-                                    background: Colors.maxDark,
-                                    fontSize: "16px",
-                                    fontWeight: "500",
-                                    lineHeight: "22px",
-                                    letterSpacing: "0em",
-                                    textAlign: "center",
-                                    height: "54px",
-                                    textTransform: "none",
-                                }}
-                            >
-                                Оформити замовлення
-                            </Button>
+                                <Grid
+                                    container
+                                    sx={{
+                                        flexDirection: "column",
+                                        rowGap: "28px",
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            fontSize: "24px",
+                                            fontWeight: 600,
+                                            lineHeight: "29.05px",
+                                            textAlign: "left",
+                                            color: Colors.maxDark,
+                                        }}
+                                    >
+                                        Твій кошик порожній
+                                    </Box>
+                                    <Box
+                                        sx={{
+                                            fontSize: "16px",
+                                            fontWeight: 400,
+                                            lineHeight: "19.36px",
+                                            textAlign: "left",
+                                            color: Colors.grey,
+                                        }}
+                                    >
+                                        Короткий текст відносно порожнього
+                                        кошику
+                                    </Box>
+                                </Grid>
+                                <button className="button-cart-home">
+                                    Перейти до головної
+                                </button>
+                            </Grid>
+                            <Box sx={{ width: { lg: 306 }, mt: "-80px" }}>
+                                {cartNoProducts}
+                            </Box>
                         </Grid>
-                    </Grid>
+                    )}
                 </Grid>
             </Box>
         </Grid>

@@ -1,3 +1,5 @@
+"use client"
+
 export const changeCart = (state: any, action: any) => {
     if (action.type === "ADD_ITEM") {
         if (

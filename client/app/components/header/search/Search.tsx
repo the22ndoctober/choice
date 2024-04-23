@@ -58,7 +58,7 @@ const Search = ({ params, session }: any) => {
         <>
             <Box sx={{ ...SearchStyles.container }}>
                 <Box sx={{ ...SearchStyles.wrapper }}>
-                    <Box>
+                    <Box sx={{ position: "relative" }}>
                         <Button sx={{ ...SearchStyles.catalog__button }}>
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
@@ -67,7 +67,14 @@ const Search = ({ params, session }: any) => {
                             <Categories categories={data} />
                         ) : (
                             getStatus === "loading" && (
-                                <CircularProgress thickness={1} />
+                                <CircularProgress
+                                    thickness={1}
+                                    sx={{
+                                        position: "absolute",
+                                        top: 350,
+                                        left: "50%",
+                                    }}
+                                />
                             )
                         )}
                     </Box>

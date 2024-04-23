@@ -94,7 +94,7 @@ const CategoryItem = ({ categoryInfo, scrollOffset }: any) => {
                         container
                         direction={"column"}
                         sx={{
-                            position: "fixed",
+                            position: "absolute",
                             top: 0,
                             left: { sm: 248 },
                             width: { xl: 1136 },

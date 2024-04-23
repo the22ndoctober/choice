@@ -15,7 +15,6 @@ const Categories = ({ categories }: any) => {
                 height: { sm: "70svh" },
                 overflowY: "scroll",
                 position: "absolute",
-                bottom: "-80svh",
                 left: 0,
                 py: "24px",
                 zIndex: 1000,

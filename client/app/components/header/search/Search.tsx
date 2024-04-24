@@ -63,19 +63,8 @@ const Search = ({ params, session }: any) => {
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
                         </Button>
-                        {getStatus === "success" && openCat ? (
+                        {getStatus === "success" && openCat && (
                             <Categories categories={data} />
-                        ) : (
-                            getStatus === "loading" && (
-                                <CircularProgress
-                                    thickness={1}
-                                    sx={{
-                                        position: "absolute",
-                                        top: 350,
-                                        left: "50%",
-                                    }}
-                                />
-                            )
                         )}
                     </Box>
                     <SearchItem

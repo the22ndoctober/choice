@@ -6,6 +6,7 @@ import { Provider } from "./Provider"
 import Footer from "./components/footer/Footer"
 import { getServerSession } from "next-auth"
 import authOptions from "./api/auth/[...nextauth]/options"
+import BackdropLoading from "./components/basic/backdropLoading/BackdropLoading"
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -26,6 +27,7 @@ export default async function RootLayout({
         <html lang="en">
             <body>
                 <Provider>
+                    <BackdropLoading />
                     {children}
                     <Footer />
                 </Provider>

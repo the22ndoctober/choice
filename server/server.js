@@ -96,12 +96,12 @@ app.post("/getCategoryProducts", async function (req, res) {
 
   let result = [];
 
-  req.body.category_id.map(async (id) => {
-    const resp = await post(`/products/list?category_id=${id}`);
-    const data = await resp.json();
+  // req.body.category_id.map(async (id) => {
+  //   const resp = await post(`/products/list?category_id=${id}`);
+  //   const data = await resp.json();
 
-    result.push(...data.products);
-  });
+  //   result.push(...data.products);
+  // });
 
   res.json(result);
 });

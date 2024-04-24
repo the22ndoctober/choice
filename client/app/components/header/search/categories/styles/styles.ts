@@ -5,5 +5,6 @@ export const CategoriesStyles = {
         zIndex: 1000,
         display: "flex",
         flexDirection: "column",
+        overflow: "hidden",
     },
 }

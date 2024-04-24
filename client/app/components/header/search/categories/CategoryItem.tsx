@@ -9,17 +9,17 @@ import ProductLink from "./ProductLink"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import SubCategory from "./SubCategory"
 
-const CategoryItem = ({ categoryInfo, scrollOffset }: any) => {
-    const [isShowProductsList, setIsShowProductsList] = useState<boolean>(false)
-
+const CategoryItem = ({
+    categoryInfo,
+    scrollOffset,
+    setSelected,
+    selectedCat,
+}: any) => {
     return (
         <>
             <Box
                 onMouseEnter={() => {
-                    setIsShowProductsList(true)
-                }}
-                onMouseLeave={() => {
-                    setIsShowProductsList(false)
+                    setSelected(categoryInfo)
                 }}
             >
                 <Grid
@@ -28,17 +28,22 @@ const CategoryItem = ({ categoryInfo, scrollOffset }: any) => {
                         flexDirection: "row",
                         columnGap: 2,
                         alignItems: "center",
+
+                        overflowX: "hidden",
                     }}
                     onClick={() => {
-                        setIsShowProductsList((state: boolean) => !state)
+                        setSelected(categoryInfo)
                     }}
                 >
                     <Grid
                         container
                         sx={{
-                            color: isShowProductsList
-                                ? Colors.teal
-                                : Colors.black,
+                            color:
+                                selectedCat !== null &&
+                                selectedCat.category.title ===
+                                    categoryInfo.category.title
+                                    ? Colors.teal
+                                    : Colors.black,
                             justifyContent: "space-between",
                             alignItems: "center",
                             cursor: "pointer",
@@ -78,58 +83,18 @@ const CategoryItem = ({ categoryInfo, scrollOffset }: any) => {
                         </Box>
                         <ArrowForwardIosIcon
                             sx={{
-                                color: isShowProductsList
-                                    ? Colors.teal
-                                    : Colors.black,
+                                color:
+                                    selectedCat !== null &&
+                                    selectedCat.category.title ===
+                                        categoryInfo.category.title
+                                        ? Colors.teal
+                                        : Colors.black,
                                 width: "13px",
                                 height: "13px",
                             }}
                         />
                     </Grid>
                 </Grid>
-
-                {isShowProductsList && (
-                    <Grid
-                        key={categoryInfo.category_id + "_content"}
-                        container
-                        direction={"column"}
-                        sx={{
-                            position: "absolute",
-                            top: 0,
-                            left: { sm: 248 },
-                            width: { xl: 1136 },
-                            height: "80svh",
-                            bgcolor: Colors.white,
-                            columnGap: 2,
-                            rowGap: 2,
-                        }}
-                    >
-                        {categoryInfo.child !== null &&
-                            categoryInfo.child.map((child: any) => (
-                                <SubCategory
-                                    key={child.product_id}
-                                    categoryInfo={child}
-                                />
-                            ))}
-
-                        {/* {categoryMutatuion.isLoading ? (
-                            <Box>Завантаження товару</Box>
-                        ) : categoryMutatuion.data.length > 0 ? (
-                            categoryMutatuion.data.map((product: any) => (
-                                <ProductLink
-                                    key={product.title}
-                                    product_id={product.product_id}
-                                    category_id={categoryInfo.category_id}
-                                    product_title={product.title}
-                                />
-                            ))
-                        ) : (
-                            getSubCats === null && (
-                                <Box>Немає продуктів в даній категорії</Box>
-                            )
-                        )} */}
-                    </Grid>
-                )}
             </Box>
         </>
     )

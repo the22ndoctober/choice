@@ -67,6 +67,8 @@ const Categories = ({ categories }: any) => {
                             bgcolor: Colors.white,
                             columnGap: 2,
                             rowGap: 2,
+                            px: 4,
+                            py: 2,
                         }}
                     >
                         {selectedCategory.child !== null &&

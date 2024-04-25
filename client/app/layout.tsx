@@ -5,7 +5,7 @@ import "./globals.css"
 import { Provider } from "./Provider"
 import Footer from "./components/footer/Footer"
 import { getServerSession } from "next-auth"
-import { authOptions } from "@/app/api/authoptions/auth"
+import authOptions from "@/app/api/auth/[...nextauth]/authOptions"
 import BackdropLoading from "./components/basic/backdropLoading/BackdropLoading"
 
 export const metadata: Metadata = {

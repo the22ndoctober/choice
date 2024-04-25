@@ -7,7 +7,7 @@ const {
   GenerateChildren,
   GetSubCats,
 } = require("./categories/categories");
-const { connectMongoDB } = require("./lib/mongodb");
+const smsVerify = require("./smsVerify.js/smsVerify");
 
 require("dotenv").config();
 
@@ -19,7 +19,7 @@ const PORT = 3002;
 
 app.listen(PORT);
 
-connectMongoDB();
+smsVerify.smsVerify(app, PORT);
 
 app.get("/test", async function (req, res) {
   console.log("response success");

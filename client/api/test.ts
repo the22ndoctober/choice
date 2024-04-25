@@ -88,3 +88,33 @@ export async function SearchProducts() {
 
     return data.data
 }
+
+export async function SendOTP(phoneNumber: string) {
+    try {
+        const response = await axios.post("http://localhost:3002/send-otp", {
+            phoneNumber: phoneNumber,
+        })
+        if (response.data.success) {
+            console.log("Yeah we sent it!")
+        } else {
+            console.log("something went wrong")
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function DeleteOTP(phoneNumber: string) {
+    try {
+        const response = await axios.post("http://localhost:3002/delete", {
+            phoneNumber: phoneNumber,
+        })
+        if (response.data) {
+            console.log(response.data)
+        } else {
+            console.log("something went wrong")
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}

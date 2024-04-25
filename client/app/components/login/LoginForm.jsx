@@ -11,27 +11,38 @@ import Button from "@mui/material/Button"
 
 import Grid from "@mui/material/Grid"
 import CloseIcon from "@mui/icons-material/Close"
+import { SendOTP } from "@/api/test"
 
 export default function LoginForm({ setOpen }) {
-    const [phone, setPhone] = useState("")
+    const [phone, setPhone] = useState("+380")
 
     const [error, setError] = useState("")
 
-    const handleSubmit = async () => {
-        try {
-            const res = await signIn("credentials", {
-                phone,
-                redirect: false,
-            })
-
-            if (res.error) {
-                setError("Invalid Credentials")
-                return
-            }
-            setOpen(false)
-        } catch (error) {
-            console.log(error)
+    useEffect(() => {
+        if (!(phone.slice(0, 4) === "+380")) {
+            setError("Неправильний номер")
+            return
         }
+        setError("")
+    }, [phone])
+
+    const handleSubmit = async () => {
+        SendOTP(phone)
+
+        // try {
+        //     const res = await signIn("credentials", {
+        //         phone,
+        //         redirect: false,
+        //     })
+
+        //     if (res.error) {
+        //         setError("Invalid Credentials")
+        //         return
+        //     }
+        //     setOpen(false)
+        // } catch (error) {
+        //     console.log(error)
+        // }
     }
 
     return (
@@ -50,7 +61,7 @@ export default function LoginForm({ setOpen }) {
                 <Box
                     sx={{
                         width: 401,
-                        height: 451,
+                        height: 300,
                         position: "absolute",
                         top: "50%",
                         left: "50%",
@@ -63,7 +74,12 @@ export default function LoginForm({ setOpen }) {
                 >
                     <Grid
                         container
-                        sx={{ flexDirection: "column", rowGap: "20px" }}
+                        sx={{
+                            flexDirection: "column",
+                            rowGap: "20px",
+                            justifyContent: "center",
+                            height: "100%",
+                        }}
                     >
                         <Grid
                             container
@@ -103,13 +119,17 @@ export default function LoginForm({ setOpen }) {
                             }}
                         />
 
-                        <Box
+                        <Button
+                            disabled={error.length > 0 ? true : false}
                             onClick={handleSubmit}
                             sx={{
                                 borderRadius: "15px",
                                 width: "100%",
                                 color: Colors.white,
-                                background: Colors.teal,
+                                background:
+                                    error.length > 0
+                                        ? Colors.grey
+                                        : Colors.neutral,
                                 fontSize: "18px",
                                 fontWeight: "600",
                                 lineHeight: "22px",
@@ -126,20 +146,7 @@ export default function LoginForm({ setOpen }) {
                             }}
                         >
                             Увійти
-                        </Box>
-                        {error && (
-                            <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-                                {error}
-                            </div>
-                        )}
-
-                        <Link
-                            className="text-sm mt-3 text-right"
-                            href={"/register"}
-                        >
-                            Don't have an account?{" "}
-                            <span className="underline">Register</span>
-                        </Link>
+                        </Button>
                     </Grid>
                 </Box>
             </Box>

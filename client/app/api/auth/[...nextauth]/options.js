@@ -1,7 +1,6 @@
 import { connectMongoDB } from "@/lib/mongodb"
 import User from "@/models/user"
 import CredentialsProvider from "next-auth/providers/credentials"
-import bcrypt from "bcryptjs"
 
 const authOptions = {
     providers: [
@@ -10,22 +9,13 @@ const authOptions = {
             credentials: {},
 
             async authorize(credentials) {
-                const { email, password } = credentials
+                const { phone } = credentials
 
                 try {
                     await connectMongoDB()
-                    const user = await User.findOne({ email })
+                    const user = await User.findOne({ phone })
 
                     if (!user) {
-                        return null
-                    }
-
-                    const passwordsMatch = await bcrypt.compare(
-                        password,
-                        user.password
-                    )
-
-                    if (!passwordsMatch) {
                         return null
                     }
 

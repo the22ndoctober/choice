@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation"
 
 export default function RegisterForm() {
     const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [phone, setPhone] = useState("")
+
     const [error, setError] = useState("")
 
     const router = useRouter()
@@ -15,7 +15,7 @@ export default function RegisterForm() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (!name || !email || !password) {
+        if (!name || !phone) {
             setError("All fields are necessary.")
             return
         }
@@ -26,11 +26,12 @@ export default function RegisterForm() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ phone }),
             })
 
             const { user } = await resUserExists.json()
 
+            console.log(user)
             if (user) {
                 setError("User already exists.")
                 return
@@ -43,8 +44,7 @@ export default function RegisterForm() {
                 },
                 body: JSON.stringify({
                     name,
-                    email,
-                    password,
+                    phone,
                 }),
             })
 
@@ -72,14 +72,9 @@ export default function RegisterForm() {
                         placeholder="Full Name"
                     />
                     <input
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={(e) => setPhone(e.target.value)}
                         type="text"
                         placeholder="Email"
-                    />
-                    <input
-                        onChange={(e) => setPassword(e.target.value)}
-                        type="password"
-                        placeholder="Password"
                     />
                     <button className="bg-green-600 text-white font-bold cursor-pointer px-6 py-2">
                         Register

@@ -26,7 +26,7 @@ export default function UserInfo() {
                 </div>
                 <div>
                     Email:{" "}
-                    <span className="font-bold">{session?.user?.email}</span>
+                    <span className="font-bold">{session?.user?.phone}</span>
                 </div>
                 <button
                     onClick={() => {

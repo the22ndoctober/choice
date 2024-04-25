@@ -13,15 +13,14 @@ import Grid from "@mui/material/Grid"
 import CloseIcon from "@mui/icons-material/Close"
 
 export default function LoginForm({ setOpen }) {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [phone, setPhone] = useState("")
+
     const [error, setError] = useState("")
 
     const handleSubmit = async () => {
         try {
             const res = await signIn("credentials", {
-                email,
-                password,
+                phone,
                 redirect: false,
             })
 
@@ -90,24 +89,8 @@ export default function LoginForm({ setOpen }) {
                         </Grid>
                         <InputBase
                             placeholder="Номер телефону"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            sx={{
-                                width: "100%",
-                                height: "54px",
-                                border: `2px solid ${Colors.grey}`,
-                                borderRadius: "15px",
-                                "& .MuiInputBase-input": {
-                                    ml: "-10px",
-                                    textAlign: "center",
-                                },
-                            }}
-                        />
-                        <InputBase
-                            defaultValue={"+380"}
-                            placeholder="Пароль"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                             sx={{
                                 width: "100%",
                                 height: "54px",

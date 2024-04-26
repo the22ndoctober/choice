@@ -6,7 +6,7 @@ import Box from "@mui/material/Box"
 import { ProductStyles } from "./styles/styles"
 import AboutProduct from "./AboutProduct"
 import ProductInfo from "./ProductInfo"
-import ProductPhoto from "./ProductPhoto"
+import { Colors } from "@/client"
 
 const ProductItem = ({ product }: any) => {
     const [renderedPage, setRenderedPage] = useState<any>(
@@ -14,8 +14,17 @@ const ProductItem = ({ product }: any) => {
     )
 
     return (
-        <Grid container sx={{ ...ProductStyles.pageWrapper }}>
-            <Grid container sx={{ ...ProductStyles.switchBarWrapper }}>
+        <Grid container sx={{ direction: "column", background: Colors.paper }}>
+            <Grid
+                container
+                sx={{
+                    columnGap: 2,
+                    px: "36px",
+                    py: "19px",
+                    fontSize: "20px",
+                    cursor: "pointer",
+                }}
+            >
                 <Box
                     onClick={() => {
                         setRenderedPage(<AboutProduct product={product} />)
@@ -31,21 +40,15 @@ const ProductItem = ({ product }: any) => {
                 >
                     Характеристики
                 </Box>
-                |
-                <Box
-                    onClick={() => {
-                        setRenderedPage(
-                            <ProductPhoto productPhoto={product.photo} />
-                        )
-                    }}
-                >
-                    Фото
-                </Box>
             </Grid>
             <Grid
                 container
                 direction={"row"}
-                sx={{ ...ProductStyles.blockWrapper }}
+                sx={{
+                    px: "36px",
+                    py: "19px",
+                    width: { sm: "100%" },
+                }}
             >
                 {renderedPage}
             </Grid>

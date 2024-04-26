@@ -50,7 +50,7 @@ app.get("/test", async function (req, res) {
 });
 
 app.post("/searchProducts", async function (req, res) {
-  console.log("response success");
+  console.log("request started");
 
   let clientServerOptions = {
     baseUrl: "https://api.dntrade.com.ua",
@@ -67,15 +67,34 @@ app.post("/searchProducts", async function (req, res) {
     (headers = clientServerOptions.headers)
   );
 
-  const resp = await post(
-    "/products/list?store_id=A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4",
-    {
-      store_id: "A1BDE61D-A7D3-456C-ABC0-4C3EA672D5E4",
-    }
+  const get = bent(
+    (baseUrl = clientServerOptions.baseUrl),
+    (method = "GET"),
+    (headers = clientServerOptions.headers)
   );
-  const data = await resp.json();
 
-  res.json(data);
+  const stores = await get("/products/stores").then((data) => data.json());
+
+  console.log("stores geted");
+
+  const filtredStores = stores.stores
+    .filter((store) => store.is_sell === true)
+    .map((store) => store.id);
+
+  filtredStores.push("5D06BC79-3901-46B3-A434-DEEA4965DC78");
+
+  const parsedData = [];
+
+  for (const i of filtredStores) {
+    const resp = await post(`/products/list?store_id=${i}`);
+    const data = await resp.json();
+
+    parsedData.push(...data.products);
+  }
+
+  console.log("search ended");
+
+  res.json(parsedData);
 });
 
 app.post("/getCategoryProducts", async function (req, res) {
@@ -180,7 +199,7 @@ app.post("/getProducts", async function (req, res) {
 
   const data = await resp.json();
 
-  console.log(data);
+  if (data.products) console.log(data);
 
   res.json(data);
 });

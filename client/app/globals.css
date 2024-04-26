@@ -77,3 +77,9 @@
 .button-cart-home:hover {
     background-color: #29b6f9;
 }
+.favouritesBlue {
+    fill: "none !important";
+}
+.favouritesBlue:hover {
+    fill: #0c4178;
+}

@@ -1,4 +1,5 @@
-const API_BASE_URL = process.env.API_BASE_URL || "http://localhost:3002"
+const API_BASE_URL = "http://localhost:3002"
+// process.env.API_BASE_URL ||
 
 export const endpoints = {
     getCategories: "/getAllCategories",

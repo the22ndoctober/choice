@@ -36,26 +36,26 @@ const SearchItem = ({ setOpenCat }: any) => {
                 let result = []
 
                 let start = 0
-                const middle = Math.floor(data.products.length / 2)
-                let end = data.products.length - 1
+                const middle = Math.floor(data.length / 2)
+                let end = data.length - 1
 
                 while (end !== middle) {
                     if (result.length > 3) break
 
                     if (
-                        data.products[start].title
+                        data[start].title
                             .toLowerCase()
                             .includes(searchQuery.toLowerCase())
                     ) {
-                        result.push(data.products[start])
+                        result.push(data[start])
                         if (result.length > 3) break
                     }
                     if (
-                        data.products[end].title
+                        data[end].title
                             .toLowerCase()
                             .includes(searchQuery.toLowerCase())
                     ) {
-                        result.push(data.products[end])
+                        result.push(data[end])
                         if (result.length > 3) break
                     }
 

@@ -16,17 +16,19 @@ async function GetCats(store_id) {
     (headers = clientServerOptions.headers)
   );
 
-  const parsedData = [];
-  let iteratorBlocker = 0;
-
-  for (const i of store_id) {
-    const resp = await get(`/products/categories?store_id=${i}`);
+  async function getCategories(store) {
+    const resp = await get(`/products/categories?store_id=${store}`);
     const data = await resp.json();
-
-    parsedData.push(...data.categories);
+    return data;
   }
 
-  console.log("1");
+  const response = await Promise.all(
+    store_id.map((store) => getCategories(store))
+  );
+
+  const parsedData = [];
+
+  response.map((categories) => parsedData.push(...categories.categories));
 
   class Category {
     constructor(category, child = null) {

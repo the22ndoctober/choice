@@ -83,18 +83,23 @@ app.post("/searchProducts", async function (req, res) {
 
   filtredStores.push("5D06BC79-3901-46B3-A434-DEEA4965DC78");
 
-  const parsedData = [];
-
-  for (const i of filtredStores) {
-    const resp = await post(`/products/list?store_id=${i}`);
+  async function getProductByStore(store) {
+    const resp = await post(`/products/list?store_id=${store}`);
     const data = await resp.json();
-
-    parsedData.push(...data.products);
+    return data;
   }
 
-  console.log("search ended");
+  const parsedData = await Promise.all(
+    filtredStores.map((store) => getProductByStore(store))
+  );
 
-  res.json(parsedData);
+  const response = [];
+  parsedData.map((array) => {
+    response.push(...array.products);
+  }),
+    console.log("search ended");
+
+  res.json(response);
 });
 
 app.post("/getCategoryProducts", async function (req, res) {

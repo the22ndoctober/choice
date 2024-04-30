@@ -33,6 +33,8 @@ export const getCategories = () => async (dispatch) => {
 
         const response = await getRequest(url)
 
+        console.log(response)
+
         dispatch(categoriesSuccess(response))
     } catch (error) {
         dispatch(categoriesFailure(error.message))

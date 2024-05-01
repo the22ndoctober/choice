@@ -31,20 +31,21 @@ async function GetCats(store_id) {
   response.map((categories) => parsedData.push(...categories.categories));
 
   class Category {
-    constructor(category, child = null) {
+    constructor(category, parentClass = null, child = null) {
       this.category = category;
       this.child = child;
+      this.parentClass = parentClass;
     }
     childLink() {
       return this.child;
     }
 
-    setChild(newChild) {
-      this.child = this.child === null ? [newChild] : [...this.child, newChild];
+    parentLink() {
+      return this.parentClass;
     }
 
-    addCategoryId(newId) {
-      this.category.category_id = [...this.category_id, newId];
+    setChild(newChild) {
+      this.child = this.child === null ? [newChild] : [...this.child, newChild];
     }
   }
 
@@ -70,36 +71,48 @@ async function GetCats(store_id) {
 
   let categories = quickSort(parsedData);
 
-  const map = new Map();
+  console.log(categories[categories.length - 1]);
+
+  function sameTitleHandle(cats) {
+    const map = new Map();
+    const result = [];
+
+    for (let i = 0; i < cats.length; i++) {
+      if (map.has(cats[i].title)) {
+        const idx = result.findIndex((cat) => cat.title === cats[i].title);
+        if (result[idx].level === cats[i].level) {
+          result[idx] = {
+            ...result[idx],
+            category_id: [...result[idx].category_id, cats[i].category_id],
+          };
+        }
+      }
+      result.push({ ...cats[i], category_id: [cats[i].category_id] });
+      map.set(cats[i].title, cats[i].title);
+    }
+
+    return result;
+  }
+
+  const sameTitleLess = sameTitleHandle(categories);
   let filtred = [];
-
-  categories.map((cat) => {
-    if (map.has(cat.title) && cat.level === 1) {
-      const targetID = filtred.findIndex(
-        (item) => cat.title === item.category.title
-      );
-
-      filtred[targetID].category.category_id = [
-        ...filtred[targetID].category.category_id,
-        cat.category_id,
-      ];
-      return;
-    }
-
-    map.set(cat.title, cat.category_id);
-
+  sameTitleLess.map((cat) => {
     if (cat.parent === null) {
-      filtred.push(new Category({ ...cat, category_id: [cat.category_id] }));
+      filtred.push(new Category(cat));
       return;
     }
 
-    const parentIndex = filtred.findIndex((item) =>
-      item.category.category_id.some((idx) => idx === cat.parent.id)
+    const parentId = filtred.findIndex((category) =>
+      category.category.category_id.some((idx) => idx === cat.parent.id)
     );
 
-    if (parentIndex === -1) return;
+    console.log(parentId);
 
-    filtred[parentIndex].setChild(new Category(cat));
+    const childCat = new Category(cat, filtred[parentId]);
+
+    filtred[parentId].setChild(childCat);
+
+    filtred.push(childCat);
   });
 
   return filtred;

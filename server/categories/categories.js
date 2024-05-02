@@ -1,6 +1,8 @@
 const bent = require("bent");
 
 async function GetCats(store_id) {
+  console.log("started");
+
   let clientServerOptions = {
     baseUrl: "https://api.dntrade.com.ua",
     method: "GET",
@@ -30,25 +32,6 @@ async function GetCats(store_id) {
 
   response.map((categories) => parsedData.push(...categories.categories));
 
-  class Category {
-    constructor(category, parentClass = null, child = null) {
-      this.category = category;
-      this.child = child;
-      this.parentClass = parentClass;
-    }
-    childLink() {
-      return this.child;
-    }
-
-    parentLink() {
-      return this.parentClass;
-    }
-
-    setChild(newChild) {
-      this.child = this.child === null ? [newChild] : [...this.child, newChild];
-    }
-  }
-
   function quickSort(result) {
     if (result.length <= 1) {
       return result;
@@ -71,8 +54,6 @@ async function GetCats(store_id) {
 
   let categories = quickSort(parsedData);
 
-  console.log(categories[categories.length - 1]);
-
   function sameTitleHandle(cats) {
     const map = new Map();
     const result = [];
@@ -86,6 +67,7 @@ async function GetCats(store_id) {
             category_id: [...result[idx].category_id, cats[i].category_id],
           };
         }
+        continue;
       }
       result.push({ ...cats[i], category_id: [cats[i].category_id] });
       map.set(cats[i].title, cats[i].title);
@@ -95,27 +77,10 @@ async function GetCats(store_id) {
   }
 
   const sameTitleLess = sameTitleHandle(categories);
-  let filtred = [];
-  sameTitleLess.map((cat) => {
-    if (cat.parent === null) {
-      filtred.push(new Category(cat));
-      return;
-    }
 
-    const parentId = filtred.findIndex((category) =>
-      category.category.category_id.some((idx) => idx === cat.parent.id)
-    );
+  console.log("ended");
 
-    console.log(parentId);
-
-    const childCat = new Category(cat, filtred[parentId]);
-
-    filtred[parentId].setChild(childCat);
-
-    filtred.push(childCat);
-  });
-
-  return filtred;
+  return sameTitleLess;
 }
 
 module.exports = { GetCats };

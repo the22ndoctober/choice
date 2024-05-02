@@ -46,19 +46,24 @@ const Categories = ({ categories }: any) => {
                             overflowY: "scroll",
                         }}
                     >
-                        {categories.map((cat: any) => (
-                            <CategoryItem
-                                key={cat.category.title}
-                                categoryInfo={cat}
-                                setSelected={setSelectedCategory}
-                                selectedCat={selectedCategory}
-                            />
-                        ))}
+                        {categories.map((cat: any) => {
+                            if (cat.level > 1) {
+                                return
+                            }
+                            return (
+                                <CategoryItem
+                                    key={cat.title}
+                                    categoryInfo={cat}
+                                    setSelected={setSelectedCategory}
+                                    selectedCat={selectedCategory}
+                                />
+                            )
+                        })}
                     </Box>
                 </Box>
                 {selectedCategory !== null && (
                     <Grid
-                        key={selectedCategory.category.category_id + "_content"}
+                        key={selectedCategory.category_id + "_content"}
                         container
                         direction={"column"}
                         sx={{
@@ -71,18 +76,18 @@ const Categories = ({ categories }: any) => {
                             py: 2,
                         }}
                     >
-                        {selectedCategory.child !== null &&
+                        {/* {selectedCategory.child !== null &&
                             selectedCategory.child.map((child: any) => (
                                 <>
                                     <Box key={child.category.product_id}>
                                         {child.category.title}
                                     </Box>
-                                    {/* <SubCategory
+                                    <SubCategory
                                     key={child.product_id}
                                     selectedCategory={child}
-                                /> */}
+                                />
                                 </>
-                            ))}
+                            ))} */}
 
                         {/* {categoryMutatuion.isLoading ? (
                             <Box>Завантаження товару</Box>

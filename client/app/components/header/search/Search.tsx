@@ -37,12 +37,10 @@ const Search = ({ params, session }: any) => {
     const data = useSelector((state: any) => state.categories.data)
     const getStatus = useSelector((state: any) => state.categories.status)
 
-    useEffect(() => {
-        if (getStatus === "idle") {
-            console.log(1)
-            dispacth<any>(getCategories())
-        }
-    }, [getStatus])
+    if (getStatus === "idle") {
+        console.log(1)
+        dispacth<any>(getCategories())
+    }
 
     useEffect(() => {
         setCartAmount(cartList.length)

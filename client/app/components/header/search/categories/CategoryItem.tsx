@@ -40,8 +40,7 @@ const CategoryItem = ({
                         sx={{
                             color:
                                 selectedCat !== null &&
-                                selectedCat.category.title ===
-                                    categoryInfo.category.title
+                                selectedCat.title === categoryInfo.title
                                     ? Colors.teal
                                     : Colors.black,
                             justifyContent: "space-between",
@@ -59,7 +58,7 @@ const CategoryItem = ({
                         >
                             <Box>
                                 <img
-                                    src={categoryInfo.category.image}
+                                    src={categoryInfo.image}
                                     alt=""
                                     width={30}
                                     key={1}
@@ -78,15 +77,14 @@ const CategoryItem = ({
                                     textAlign: "left",
                                 }}
                             >
-                                {categoryInfo.category.title}
+                                {categoryInfo.title}
                             </Box>
                         </Box>
                         <ArrowForwardIosIcon
                             sx={{
                                 color:
                                     selectedCat !== null &&
-                                    selectedCat.category.title ===
-                                        categoryInfo.category.title
+                                    selectedCat.title === categoryInfo.title
                                         ? Colors.teal
                                         : Colors.black,
                                 width: "13px",

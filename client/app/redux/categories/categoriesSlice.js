@@ -16,8 +16,8 @@ export const categoriesSlice = createSlice({
             state.status = "loading"
         },
         categoriesSuccess: (state, action) => {
-            state.data = action.payload
             state.status = "success"
+            state.data = action.payload
         },
         categoriesFailure: (state, action) => {
             state.status = "error"
@@ -33,9 +33,45 @@ export const getCategories = () => async (dispatch) => {
 
         const response = await getRequest(url)
 
-        console.log(response)
+        // class Category {
+        //     constructor(category, child = null) {
+        //         this.category = category
+        //         this.child = child
+        //     }
+        //     childLink() {
+        //         return this.child
+        //     }
+
+        //     setChild(newChild) {
+        //         this.child =
+        //             this.child === null ? [newChild] : [...this.child, newChild]
+        //     }
+        // }
+
+        // let filtred = []
+
+        // response.map((cat) => {
+        //     if (cat.parent === null) {
+        //         filtred.push(new Category(cat))
+        //         return
+        //     }
+
+        //     const parentId = filtred.findIndex((category) =>
+        //         category.category.category_id.some(
+        //             (idx) => idx === cat.parent.id
+        //         )
+        //     )
+
+        //     const childCat = new Category(cat)
+
+        //     filtred[parentId].setChild(childCat)
+
+        //     filtred.push(childCat)
+        // })
 
         dispatch(categoriesSuccess(response))
+
+        console.log(response)
     } catch (error) {
         dispatch(categoriesFailure(error.message))
     }

@@ -23,11 +23,6 @@ const SearchItem = ({ setOpenCat }: any) => {
         queryFn: SearchProducts,
     })
 
-    const SearchCategoriesQuery = useMutation({
-        mutationKey: ["search", "categories"],
-        mutationFn: SearchProducts,
-    })
-
     //Use Effect
 
     useEffect(() => {

@@ -33,6 +33,8 @@ export const getCategories = () => async (dispatch) => {
 
         const response = await getRequest(url)
 
+        console.log(response)
+
         class Category {
             constructor(category, child = null) {
                 this.category = category

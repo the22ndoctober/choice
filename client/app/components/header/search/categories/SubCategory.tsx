@@ -12,14 +12,10 @@ import { Colors } from "@/client"
 const SubCategory = ({ categoryInfo, parent }: any) => {
     const [open, setOpen] = useState<boolean>(false)
 
-    const categoryMutatuion = useQuery({
+    const { data, isLoading, isSuccess } = useQuery({
         queryKey: [`products${categoryInfo.category.category_id}`],
         queryFn: () => GetCategoryProducts(categoryInfo.category.category_id),
     })
-
-    const handleClick = () => {
-        setOpen((state: boolean) => !state)
-    }
 
     const level2Styles = {
         color: Colors.dark,
@@ -35,6 +31,10 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
         fontWeight: 400,
         fontSize: "14px",
         lineHeight: "17px",
+    }
+
+    if (isLoading) {
+        categoryInfo.category.category_id
     }
 
     return (
@@ -56,19 +56,39 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                 >
                     {categoryInfo.category.title}
                 </Box>
-                {categoryInfo.child !== null && (
+                {categoryInfo.child !== null ? (
                     <Grid
                         container
                         sx={{ flexDirection: "column", rowGap: "3px" }}
                     >
                         {categoryInfo.child.map((child: any) => (
-                            <SubCategory
-                                key={child.category.title}
-                                parent={parent}
-                                categoryInfo={child}
-                            />
+                            <Box
+                                key={child.category.product_id}
+                                sx={
+                                    child.category.level < 3
+                                        ? level2Styles
+                                        : level3Styles
+                                }
+                            >
+                                {child.category.title}
+                            </Box>
                         ))}
                     </Grid>
+                ) : (
+                    !isLoading && (
+                        <Grid
+                            container
+                            sx={{ flexDirection: "column", rowGap: "3px" }}
+                        >
+                            {data.map((product: any) => (
+                                <ProductLink
+                                    category_id={product.category.category_id}
+                                    product_id={product.product_id}
+                                    product_title={product.title}
+                                />
+                            ))}
+                        </Grid>
+                    )
                 )}
             </Grid>
         </>

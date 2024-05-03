@@ -95,7 +95,24 @@ export async function SendOTP(phoneNumber: string) {
             phoneNumber: phoneNumber,
         })
         if (response.data.success) {
-            console.log("Yeah we sent it!")
+            return response.data.success
+        } else {
+            console.log("something went wrong")
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export async function VerifyOtpRequest(phoneNumber: string, userOTP: string) {
+    console.log(phoneNumber, userOTP)
+    try {
+        const response = await axios.post("http://localhost:3002/verify-otp", {
+            phoneNumber: phoneNumber,
+            userOTP: userOTP,
+        })
+        if (response.data.success) {
+            return response.data.success
         } else {
             console.log("something went wrong")
         }

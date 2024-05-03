@@ -1,3 +1,5 @@
+"use client"
+
 import { styled, alpha } from "@mui/material/styles"
 import InputBase from "@mui/material/InputBase"
 import Box from "@mui/material/Box"
@@ -11,10 +13,12 @@ import { SearchProducts } from "@/api/test"
 import { useState, useEffect } from "react"
 import CloseIcon from "@mui/icons-material/Close"
 import { Colors } from "@/client"
+import { useSelector } from "react-redux"
 
-const SearchItem = ({ setOpenCat }: any) => {
+const SearchItem = ({ pageName, setOpenCat }: any) => {
     const [searchQuery, setSearchQuery] = useState<string>("")
     const [products, setProducts] = useState([])
+    const [categories, setCategories] = useState([])
     const [open, setOpen] = useState<boolean>(false)
 
     //TANSTACK
@@ -23,45 +27,59 @@ const SearchItem = ({ setOpenCat }: any) => {
         queryFn: SearchProducts,
     })
 
+    const categoriesData = useSelector((state: any) => state.categories.data)
+    const categoriesLoading = useSelector(
+        (state: any) => state.categories.status
+    )
+
     //Use Effect
 
     useEffect(() => {
         if (searchQuery !== "") {
-            const filtred = (): any => {
-                let result = []
-
-                let start = 0
-                const middle = Math.floor(data.length / 2)
-                let end = data.length - 1
-
-                while (end !== middle) {
-                    if (result.length > 3) break
-
+            let result = data.filter(
+                function (product: any) {
                     if (
-                        data[start].title
-                            .toLowerCase()
-                            .includes(searchQuery.toLowerCase())
+                        this.count < 4 &&
+                        product.title
+                            .toUpperCase()
+                            .includes(searchQuery.toUpperCase())
                     ) {
-                        result.push(data[start])
-                        if (result.length > 3) break
+                        this.count++
+                        return true
                     }
-                    if (
-                        data[end].title
-                            .toLowerCase()
-                            .includes(searchQuery.toLowerCase())
-                    ) {
-                        result.push(data[end])
-                        if (result.length > 3) break
-                    }
+                    return false
+                },
+                { count: 0 }
+            )
 
-                    start = start + 1
-                    end = end - 1
-                }
-                return result
-            }
-
-            setProducts(filtred())
+            setProducts(result)
+            return
         }
+        setProducts([])
+    }, [searchQuery])
+
+    useEffect(() => {
+        if (searchQuery !== "") {
+            let result = categoriesData.filter(
+                function (category: any) {
+                    if (
+                        this.count < 4 &&
+                        category.title
+                            .toUpperCase()
+                            .includes(searchQuery.toUpperCase())
+                    ) {
+                        this.count++
+                        return true
+                    }
+                    return false
+                },
+                { count: 0 }
+            )
+
+            setCategories(result)
+            return
+        }
+        setCategories([])
     }, [searchQuery])
 
     //STYLED
@@ -109,7 +127,9 @@ const SearchItem = ({ setOpenCat }: any) => {
                         placeholder="Пошук"
                         value={searchQuery}
                         onChange={(e) => {
-                            setSearchQuery(e.target.value)
+                            if (!isLoading)
+                                return setSearchQuery(e.target.value)
+                            setSearchQuery("")
                         }}
                     />
 
@@ -123,12 +143,15 @@ const SearchItem = ({ setOpenCat }: any) => {
                     )}
                     <SearchIcon sx={{ zIndex: 500 }} />
                 </SearchComp>
-                {searchQuery !== "" && (
+                {searchQuery !== "" && pageName !== "search" && (
                     <SearchDropDrown
+                        query={searchQuery}
                         setOpenCat={setOpenCat}
                         setQuery={setSearchQuery}
                         products={products}
                         productsIsLoading={isLoading}
+                        categories={categories}
+                        categoriesIsLoading={categoriesLoading}
                     />
                 )}
             </Box>

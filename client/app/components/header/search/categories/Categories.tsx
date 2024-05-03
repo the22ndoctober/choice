@@ -20,7 +20,7 @@ const Categories = ({ categories }: any) => {
                 position: "absolute",
                 left: 0,
                 py: "36px",
-                zIndex: 1000,
+                zIndex: 301,
             }}
             onMouseLeave={() => {
                 setSelectedCategory(null)
@@ -36,14 +36,21 @@ const Categories = ({ categories }: any) => {
             >
                 <Box
                     sx={{
-                        ...CategoriesStyles.wrapper,
+                        width: { lg: 400, xl: 248 },
+                        height: { sm: "80svh" },
+                        zIndex: 1000,
+                        display: "flex",
+                        flexDirection: "column",
+                        overflow: "hidden",
                     }}
                 >
                     <Box
                         sx={{
-                            width: { md: 248 + 13 },
+                            width: { md: 261 },
                             height: "100%",
                             overflowY: "scroll",
+                            display: "flex",
+                            flexDirection: "column",
                         }}
                     >
                         {categories.map((cat: any) => {
@@ -67,7 +74,7 @@ const Categories = ({ categories }: any) => {
                         container
                         direction={"column"}
                         sx={{
-                            width: { xl: 1136 },
+                            width: { xl: 1200 },
                             height: "80svh",
                             bgcolor: Colors.white,
                             columnGap: 2,

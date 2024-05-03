@@ -11,10 +11,12 @@ import Button from "@mui/material/Button"
 
 import Grid from "@mui/material/Grid"
 import CloseIcon from "@mui/icons-material/Close"
-import { SendOTP } from "@/api/test"
+import { SendOTP, VerifyOtpRequest } from "@/api/test"
 
 export default function LoginForm({ setOpen }) {
     const [phone, setPhone] = useState("+380")
+    const [otpQuery, setOtpQuery] = useState("")
+    const [verifyOtp, setVerifyOtp] = useState(false)
 
     const [error, setError] = useState("")
 
@@ -27,23 +29,78 @@ export default function LoginForm({ setOpen }) {
     }, [phone])
 
     const handleSubmit = async () => {
-        SendOTP(phone)
-
-        // try {
-        //     const res = await signIn("credentials", {
-        //         phone,
-        //         redirect: false,
-        //     })
-
-        //     if (res.error) {
-        //         setError("Invalid Credentials")
-        //         return
-        //     }
-        //     setOpen(false)
-        // } catch (error) {
-        //     console.log(error)
-        // }
+        const resp = await SendOTP(phone)
+        if (resp) {
+            setVerifyOtp(true)
+        }
     }
+
+    const handleOtpVerify = async () => {
+        const resp = await VerifyOtpRequest(phone, otpQuery)
+        console.log(resp)
+        if (resp) {
+            try {
+                const res = await signIn("credentials", {
+                    phone,
+                    redirect: "false",
+                })
+
+                if (res.error) {
+                    setError("Invalid Credentials")
+                    return
+                }
+                setOpen(false)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    const otpContent = (
+        <>
+            <InputBase
+                placeholder="ХХХХХХ"
+                value={otpQuery}
+                onChange={(e) => setOtpQuery(e.target.value)}
+                sx={{
+                    width: "100%",
+                    height: "54px",
+                    border: `2px solid ${Colors.grey}`,
+                    borderRadius: "15px",
+                    "& .MuiInputBase-input": {
+                        ml: "-10px",
+                        textAlign: "center",
+                    },
+                }}
+            />
+
+            <Button
+                disabled={error.length > 0 ? true : false}
+                onClick={handleOtpVerify}
+                sx={{
+                    borderRadius: "15px",
+                    width: "100%",
+                    color: Colors.white,
+                    background: error.length > 0 ? Colors.grey : Colors.neutral,
+                    fontSize: "18px",
+                    fontWeight: "600",
+                    lineHeight: "22px",
+                    letterSpacing: "0em",
+                    textAlign: "center",
+                    height: "54px",
+                    textTransform: "none",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    "&:hover": {
+                        backgroundColor: Colors.lightGreen,
+                    },
+                }}
+            >
+                Підтвердити
+            </Button>
+        </>
+    )
 
     return (
         <>
@@ -95,7 +152,7 @@ export default function LoginForm({ setOpen }) {
                                     textAlign: "left",
                                 }}
                             >
-                                Вхід
+                                {verifyOtp ? "Введіть 6-значний код" : "Вхід"}
                             </Box>
                             <CloseIcon
                                 onClick={() => {
@@ -103,50 +160,57 @@ export default function LoginForm({ setOpen }) {
                                 }}
                             />
                         </Grid>
-                        <InputBase
-                            placeholder="Номер телефону"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            sx={{
-                                width: "100%",
-                                height: "54px",
-                                border: `2px solid ${Colors.grey}`,
-                                borderRadius: "15px",
-                                "& .MuiInputBase-input": {
-                                    ml: "-10px",
-                                    textAlign: "center",
-                                },
-                            }}
-                        />
 
-                        <Button
-                            disabled={error.length > 0 ? true : false}
-                            onClick={handleSubmit}
-                            sx={{
-                                borderRadius: "15px",
-                                width: "100%",
-                                color: Colors.white,
-                                background:
-                                    error.length > 0
-                                        ? Colors.grey
-                                        : Colors.neutral,
-                                fontSize: "18px",
-                                fontWeight: "600",
-                                lineHeight: "22px",
-                                letterSpacing: "0em",
-                                textAlign: "center",
-                                height: "54px",
-                                textTransform: "none",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                "&:hover": {
-                                    backgroundColor: Colors.lightGreen,
-                                },
-                            }}
-                        >
-                            Увійти
-                        </Button>
+                        {verifyOtp ? (
+                            otpContent
+                        ) : (
+                            <>
+                                {" "}
+                                <InputBase
+                                    placeholder="Номер телефону"
+                                    value={phone}
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    sx={{
+                                        width: "100%",
+                                        height: "54px",
+                                        border: `2px solid ${Colors.grey}`,
+                                        borderRadius: "15px",
+                                        "& .MuiInputBase-input": {
+                                            ml: "-10px",
+                                            textAlign: "center",
+                                        },
+                                    }}
+                                />
+                                <Button
+                                    disabled={error.length > 0 ? true : false}
+                                    onClick={handleSubmit}
+                                    sx={{
+                                        borderRadius: "15px",
+                                        width: "100%",
+                                        color: Colors.white,
+                                        background:
+                                            error.length > 0
+                                                ? Colors.grey
+                                                : Colors.neutral,
+                                        fontSize: "18px",
+                                        fontWeight: "600",
+                                        lineHeight: "22px",
+                                        letterSpacing: "0em",
+                                        textAlign: "center",
+                                        height: "54px",
+                                        textTransform: "none",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        "&:hover": {
+                                            backgroundColor: Colors.lightGreen,
+                                        },
+                                    }}
+                                >
+                                    Увійти
+                                </Button>
+                            </>
+                        )}
                     </Grid>
                 </Box>
             </Box>

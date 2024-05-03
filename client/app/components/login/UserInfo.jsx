@@ -22,11 +22,10 @@ export default function UserInfo() {
             <div className="shadow-lg p-8 bg-zince-300/10 flex flex-col gap-2 my-6">
                 <div>
                     Name:{" "}
-                    <span className="font-bold">{session?.user?.name}</span>
+                    <span className="font-bold">{session?.user?.phone}</span>
                 </div>
                 <div>
-                    Email:{" "}
-                    <span className="font-bold">{session?.user?.phone}</span>
+                    Phone: <span className="font-bold">{session?.phone}</span>
                 </div>
                 <button
                     onClick={() => {

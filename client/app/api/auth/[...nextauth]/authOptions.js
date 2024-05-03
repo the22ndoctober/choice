@@ -6,20 +6,15 @@ const authOptions = {
     providers: [
         CredentialsProvider({
             name: "credentials",
-            credentials: {},
+            credentials: {
+                phone: "+380932131",
+            },
 
             async authorize(credentials) {
                 const { phone } = credentials
 
                 try {
-                    await connectMongoDB()
-                    const user = await User.findOne({ phone })
-
-                    if (!user) {
-                        return null
-                    }
-
-                    return user
+                    return phone
                 } catch (error) {
                     console.log("Error: ", error)
                 }

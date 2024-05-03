@@ -4,6 +4,7 @@ import { GetCatSorted, SearchProducts, TestAxiosReq } from "@/api/test"
 import { Box, Button, Input, Grid, Typography } from "@mui/material"
 import { SearchStyles } from "./styles/styles"
 import { useRouter } from "next/navigation"
+
 import MenuIcon from "@mui/icons-material/Menu"
 import { useState, useEffect } from "react"
 import Categories from "./categories/Categories"
@@ -66,6 +67,7 @@ const Search = ({ params, session }: any) => {
                         )}
                     </Box>
                     <SearchItem
+                        pageName={params}
                         key={"search-component"}
                         setOpenCat={setOpenCat}
                     />

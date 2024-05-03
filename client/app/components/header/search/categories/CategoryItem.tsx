@@ -46,7 +46,7 @@ const CategoryItem = ({
                             justifyContent: "space-between",
                             alignItems: "center",
                             cursor: "pointer",
-                            paddingY: "5px",
+                            // paddingY: "5px",
                         }}
                     >
                         <Box
@@ -82,6 +82,7 @@ const CategoryItem = ({
                         </Box>
                         <ArrowForwardIosIcon
                             sx={{
+                                mr: "6px",
                                 color:
                                     selectedCat !== null &&
                                     selectedCat.title === categoryInfo.title

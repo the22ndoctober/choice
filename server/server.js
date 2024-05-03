@@ -50,8 +50,6 @@ app.get("/test", async function (req, res) {
 });
 
 app.post("/searchProducts", async function (req, res) {
-  console.log("request started");
-
   let clientServerOptions = {
     baseUrl: "https://api.dntrade.com.ua",
     method: "POST",
@@ -75,13 +73,11 @@ app.post("/searchProducts", async function (req, res) {
 
   const stores = await get("/products/stores").then((data) => data.json());
 
-  console.log("stores geted");
-
   const filtredStores = stores.stores
     .filter((store) => store.is_sell === true)
     .map((store) => store.id);
 
-  filtredStores.push("5D06BC79-3901-46B3-A434-DEEA4965DC78");
+  // filtredStores.push("5D06BC79-3901-46B3-A434-DEEA4965DC78");
 
   async function getProductByStore(store) {
     const resp = await post(`/products/list?store_id=${store}`);
@@ -97,9 +93,7 @@ app.post("/searchProducts", async function (req, res) {
   parsedData.map((array) => {
     response.push(...array.products);
   }),
-    console.log("search ended");
-
-  res.json(response);
+    res.json(response);
 });
 
 app.post("/getCategoryProducts", async function (req, res) {

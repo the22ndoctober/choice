@@ -54,12 +54,12 @@ const Categories = ({ categories }: any) => {
                         }}
                     >
                         {categories.map((cat: any) => {
-                            if (cat.level > 1) {
+                            if (cat.category.level > 1) {
                                 return
                             }
                             return (
                                 <CategoryItem
-                                    key={cat.title}
+                                    key={cat.category.title}
                                     categoryInfo={cat}
                                     setSelected={setSelectedCategory}
                                     selectedCat={selectedCategory}
@@ -72,31 +72,46 @@ const Categories = ({ categories }: any) => {
                     <Grid
                         key={selectedCategory.category_id + "_content"}
                         container
-                        direction={"column"}
                         sx={{
                             width: { xl: 1200 },
-                            height: "80svh",
+
                             bgcolor: Colors.white,
-                            columnGap: 2,
-                            rowGap: 2,
-                            px: 4,
-                            py: 2,
                         }}
                     >
-                        {/* {selectedCategory.child !== null &&
-                            selectedCategory.child.map((child: any) => (
-                                <>
-                                    <Box key={child.category.product_id}>
-                                        {child.category.title}
-                                    </Box>
-                                    <SubCategory
-                                    key={child.product_id}
-                                    selectedCategory={child}
-                                />
-                                </>
-                            ))} */}
-
-                        {/* {categoryMutatuion.isLoading ? (
+                        <Grid
+                            container
+                            direction={"column"}
+                            sx={{
+                                maxWidth: { lg: 350 },
+                                height: "80svh",
+                                columnGap: 2,
+                                rowGap: 2,
+                                px: 4,
+                                py: 1,
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    color: Colors.dark,
+                                    fontStyle: "normal",
+                                    fontWeight: 400,
+                                    fontSize: "16px",
+                                    lineHeight: "19px",
+                                }}
+                            >
+                                {selectedCategory.category.title}
+                            </Box>
+                            {selectedCategory.child !== null &&
+                                selectedCategory.child.map((child: any) => (
+                                    <>
+                                        <SubCategory
+                                            key={child.product_id}
+                                            categoryInfo={child}
+                                            parent={selectedCategory}
+                                        />
+                                    </>
+                                ))}
+                            {/* {categoryMutatuion.isLoading ? (
                             <Box>Завантаження товару</Box>
                         ) : categoryMutatuion.data.length > 0 ? (
                             categoryMutatuion.data.map((product: any) => (
@@ -112,6 +127,7 @@ const Categories = ({ categories }: any) => {
                                 <Box>Немає продуктів в даній категорії</Box>
                             )
                         )} */}
+                        </Grid>
                     </Grid>
                 )}
             </Box>

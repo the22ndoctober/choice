@@ -33,43 +33,43 @@ export const getCategories = () => async (dispatch) => {
 
         const response = await getRequest(url)
 
-        // class Category {
-        //     constructor(category, child = null) {
-        //         this.category = category
-        //         this.child = child
-        //     }
-        //     childLink() {
-        //         return this.child
-        //     }
+        class Category {
+            constructor(category, child = null) {
+                this.category = category
+                this.child = child
+            }
+            childLink() {
+                return this.child
+            }
 
-        //     setChild(newChild) {
-        //         this.child =
-        //             this.child === null ? [newChild] : [...this.child, newChild]
-        //     }
-        // }
+            setChild(newChild) {
+                this.child =
+                    this.child === null ? [newChild] : [...this.child, newChild]
+            }
+        }
 
-        // let filtred = []
+        let filtred = []
 
-        // response.map((cat) => {
-        //     if (cat.parent === null) {
-        //         filtred.push(new Category(cat))
-        //         return
-        //     }
+        for (let i = 0; i < response.length; i++) {
+            if (response[i].parent === null) {
+                filtred.push(new Category(response[i]))
+                continue
+            }
 
-        //     const parentId = filtred.findIndex((category) =>
-        //         category.category.category_id.some(
-        //             (idx) => idx === cat.parent.id
-        //         )
-        //     )
+            filtred.push(new Category(response[i]))
 
-        //     const childCat = new Category(cat)
+            const findParentIdx = filtred.findIndex((cat) =>
+                cat.category.category_id.some(
+                    (idx) => idx === response[i].parent.id
+                )
+            )
 
-        //     filtred[parentId].setChild(childCat)
+            filtred[findParentIdx].setChild(filtred[i])
+        }
 
-        //     filtred.push(childCat)
-        // })
+        console.log(filtred)
 
-        dispatch(categoriesSuccess(response))
+        dispatch(categoriesSuccess(filtred))
 
         console.log(response)
     } catch (error) {

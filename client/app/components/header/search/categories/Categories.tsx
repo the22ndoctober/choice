@@ -16,7 +16,7 @@ const Categories = ({ categories }: any) => {
             sx={{
                 width: { xl: 1440, lg: 1140 },
                 margin: "0 auto",
-                height: { sm: "80svh" },
+                height: { sm: "100svh" },
                 position: "absolute",
                 left: 0,
                 py: "36px",
@@ -37,18 +37,17 @@ const Categories = ({ categories }: any) => {
                 <Box
                     sx={{
                         width: { lg: 400, xl: 248 },
-                        height: { sm: "80svh" },
+                        height: "auto",
                         zIndex: 1000,
                         display: "flex",
                         flexDirection: "column",
-                        overflow: "hidden",
                     }}
                 >
                     <Box
                         sx={{
                             width: { md: 261 },
-                            height: "100%",
-                            overflowY: "scroll",
+                            height: "100svh",
+
                             display: "flex",
                             flexDirection: "column",
                         }}
@@ -74,7 +73,7 @@ const Categories = ({ categories }: any) => {
                         container
                         sx={{
                             width: { xl: 1200 },
-
+                            height: "auto",
                             bgcolor: Colors.white,
                         }}
                     >
@@ -111,22 +110,6 @@ const Categories = ({ categories }: any) => {
                                         />
                                     </>
                                 ))}
-                            {/* {categoryMutatuion.isLoading ? (
-                            <Box>Завантаження товару</Box>
-                        ) : categoryMutatuion.data.length > 0 ? (
-                            categoryMutatuion.data.map((product: any) => (
-                                <ProductLink
-                                    key={product.title}
-                                    product_id={product.product_id}
-                                    category_id={selectedCategory.category_id}
-                                    product_title={product.title}
-                                />
-                            ))
-                        ) : (
-                            getSubCats === null && (
-                                <Box>Немає продуктів в даній категорії</Box>
-                            )
-                        )} */}
                         </Grid>
                     </Grid>
                 )}

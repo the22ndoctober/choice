@@ -33,10 +33,6 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
         lineHeight: "17px",
     }
 
-    if (isLoading) {
-        categoryInfo.category.category_id
-    }
-
     return (
         <>
             <Grid
@@ -56,7 +52,7 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                 >
                     {categoryInfo.category.title}
                 </Box>
-                {categoryInfo.child !== null ? (
+                {categoryInfo.child !== null && (
                     <Grid
                         container
                         sx={{ flexDirection: "column", rowGap: "3px" }}
@@ -74,22 +70,29 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                             </Box>
                         ))}
                     </Grid>
-                ) : (
-                    !isLoading && (
+                )}
+
+                {categoryInfo.child === null &&
+                    (!isLoading ? (
                         <Grid
                             container
                             sx={{ flexDirection: "column", rowGap: "3px" }}
                         >
-                            {data.map((product: any) => (
-                                <ProductLink
-                                    category_id={product.category.category_id}
-                                    product_id={product.product_id}
-                                    product_title={product.title}
-                                />
-                            ))}
+                            {data.map(
+                                (product: any, id: number) =>
+                                    id < 5 && (
+                                        <Box>123</Box>
+                                        // <ProductLink
+                                        //     category_id={product.category_id}
+                                        //     product_id={product.product_id}
+                                        //     product_title={product.title}
+                                        // />
+                                    )
+                            )}
                         </Grid>
-                    )
-                )}
+                    ) : (
+                        <Box>Завантаження</Box>
+                    ))}
             </Grid>
         </>
     )

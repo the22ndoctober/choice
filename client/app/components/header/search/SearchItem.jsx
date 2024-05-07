@@ -15,11 +15,11 @@ import CloseIcon from "@mui/icons-material/Close"
 import { Colors } from "@/client"
 import { useSelector } from "react-redux"
 
-const SearchItem = ({ pageName, setOpenCat }: any) => {
-    const [searchQuery, setSearchQuery] = useState<string>("")
+const SearchItem = ({ pageName, setOpenCat }) => {
+    const [searchQuery, setSearchQuery] = useState("")
     const [products, setProducts] = useState([])
     const [categories, setCategories] = useState([])
-    const [open, setOpen] = useState<boolean>(false)
+    const [open, setOpen] = useState(false)
 
     //TANSTACK
     const { data, isLoading } = useQuery({
@@ -27,17 +27,15 @@ const SearchItem = ({ pageName, setOpenCat }: any) => {
         queryFn: SearchProducts,
     })
 
-    const categoriesData = useSelector((state: any) => state.categories.data)
-    const categoriesLoading = useSelector(
-        (state: any) => state.categories.status
-    )
+    const categoriesData = useSelector((state) => state.categories.data)
+    const categoriesLoading = useSelector((state) => state.categories.status)
 
     //Use Effect
 
     useEffect(() => {
         if (searchQuery !== "") {
             let result = data.filter(
-                function (product: any) {
+                function (product) {
                     if (
                         this.count < 4 &&
                         product.title
@@ -61,7 +59,7 @@ const SearchItem = ({ pageName, setOpenCat }: any) => {
     useEffect(() => {
         if (searchQuery !== "") {
             let result = categoriesData.filter(
-                function (category: any) {
+                function (category) {
                     if (
                         this.count < 4 &&
                         category.title

@@ -7,10 +7,138 @@ import CartItem from "./CartItem"
 import { useSelector, useDispatch } from "react-redux"
 import { changeCart, getCart } from "@/app/redux/cart/cartSlice"
 import { cartNoProducts } from "../static/cartNoProducts"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+
+const ClearModal = ({ open, setOpen, handler }: any) => {
+    return (
+        <>
+            {open && (
+                <Box
+                    sx={{
+                        display: "flex",
+                        width: "100%",
+                        height: "100%",
+                        zIndex: 2000,
+                        backdropFilter: `blur(8px)`,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        position: "fixed",
+                        top: 0,
+                        left: 0,
+                    }}
+                >
+                    <Box
+                        sx={{
+                            background: Colors.paper,
+                            borderRadius: "15px",
+                            width: { lg: 409 },
+                            height: 186,
+                            p: "32px 28px",
+                            boxShadow: `10px 10px 10px -11px rgba(0,0,0,0.75)`,
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Grid
+                            container
+                            sx={{
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Box
+                                sx={{
+                                    color: Colors.neutral,
+                                    fontSize: "18px",
+                                    fontWeight: 600,
+                                    lineHeight: "21.78px",
+                                }}
+                            >
+                                Видалити всі товари із кошику?
+                            </Box>
+                            <CloseIcon
+                                sx={{ cursor: "pointer" }}
+                                onClick={() => {
+                                    setOpen(false)
+                                }}
+                            />
+                        </Grid>
+                        <Box
+                            sx={{
+                                color: Colors.grey,
+                                fontSize: "14px",
+                                fontWeight: 500,
+                                lineHeight: "16.94px",
+                            }}
+                        >
+                            Відмінити цю дію буде не можливо.
+                        </Box>
+                        <Grid container sx={{ columnGap: "8px" }}>
+                            <Box
+                                sx={{
+                                    border: `2px solid ${Colors.neutral}`,
+                                    color: Colors.neutral,
+                                    borderRadius: "15px",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    lineHeight: "16.94px",
+                                    flex: "1 1 0",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    py: "14px",
+                                }}
+                                onClick={() => {
+                                    setOpen(false)
+                                }}
+                            >
+                                Залишити
+                            </Box>
+                            <Box
+                                onClick={() => {
+                                    handler()
+                                    setOpen(false)
+                                }}
+                                sx={{
+                                    background: Colors.neutral,
+                                    color: Colors.white,
+                                    borderRadius: "15px",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    lineHeight: "16.94px",
+                                    flex: "1 1 0",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    py: "14px",
+                                }}
+                            >
+                                Видалити
+                            </Box>
+                        </Grid>
+                    </Box>
+                </Box>
+            )}
+        </>
+    )
+}
 
 const CartComp = ({ setOpen }: any) => {
     const cart = useSelector(getCart)
     const dispatch = useDispatch<any>()
+    const router = useRouter()
+    const [clearModal, setClearModal] = useState(false)
+
+    const removeAllHandle = () => {
+        dispatch(
+            changeCart<any>({
+                type: "REMOVE_ALL",
+                payload: null,
+            })
+        )
+    }
 
     return (
         <Grid
@@ -111,6 +239,7 @@ const CartComp = ({ setOpen }: any) => {
                                             image={item.image_path}
                                             price={parseInt(item.price)}
                                             currency={item.currency}
+                                            code={item.code}
                                         />
                                     ))}
                                 </Grid>
@@ -142,7 +271,8 @@ const CartComp = ({ setOpen }: any) => {
                                         lineHeight: "29px",
                                         letterSpacing: "0em",
                                         textAlign: "right",
-                                        color: Colors.dark,
+                                        color: Colors.neutral,
+                                        pr: "34px",
                                     }}
                                 >
                                     {cart.reduce(
@@ -177,6 +307,9 @@ const CartComp = ({ setOpen }: any) => {
                                         height: "54px",
                                         textTransform: "none",
                                     }}
+                                    onClick={() => {
+                                        setOpen(false)
+                                    }}
                                 >
                                     Продовжити покупки
                                 </Button>
@@ -188,8 +321,8 @@ const CartComp = ({ setOpen }: any) => {
                                         sx={{
                                             borderRadius: "15px",
                                             width: { lg: 240 },
-                                            color: Colors.maxDark,
-                                            outline: `2px solid ${Colors.maxDark}`,
+                                            color: Colors.neutral,
+                                            outline: `2px solid ${Colors.neutral}`,
                                             fontSize: "16px",
                                             fontWeight: "500",
                                             lineHeight: "22px",
@@ -198,15 +331,18 @@ const CartComp = ({ setOpen }: any) => {
                                             height: "54px",
                                             textTransform: "none",
                                         }}
+                                        onClick={() => {
+                                            setClearModal(true)
+                                        }}
                                     >
-                                        Оплата частинами
+                                        Очистити всі
                                     </Button>
                                     <Button
                                         sx={{
                                             borderRadius: "15px",
                                             width: { lg: 240 },
                                             color: Colors.white,
-                                            background: Colors.maxDark,
+                                            background: Colors.neutral,
                                             fontSize: "16px",
                                             fontWeight: "500",
                                             lineHeight: "22px",
@@ -214,6 +350,9 @@ const CartComp = ({ setOpen }: any) => {
                                             textAlign: "center",
                                             height: "54px",
                                             textTransform: "none",
+                                        }}
+                                        onClick={() => {
+                                            router.push("/order")
                                         }}
                                     >
                                         Оформити замовлення
@@ -269,7 +408,13 @@ const CartComp = ({ setOpen }: any) => {
                                         кошику
                                     </Box>
                                 </Grid>
-                                <button className="button-cart-home">
+                                <button
+                                    className="button-cart-home"
+                                    onClick={() => {
+                                        router.push("/")
+                                        setOpen(false)
+                                    }}
+                                >
                                     Перейти до головної
                                 </button>
                             </Grid>
@@ -280,6 +425,11 @@ const CartComp = ({ setOpen }: any) => {
                     )}
                 </Grid>
             </Box>
+            <ClearModal
+                open={clearModal}
+                setOpen={setClearModal}
+                handler={removeAllHandle}
+            />
         </Grid>
     )
 }

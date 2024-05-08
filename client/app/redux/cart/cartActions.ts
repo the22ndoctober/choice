@@ -24,6 +24,10 @@ export const changeCart = (state: any, action: any) => {
         localStorage.setItem("cart", JSON.stringify(result))
         return result
     }
+    if (action.type === "REMOVE_ALL") {
+        localStorage.setItem("cart", JSON.stringify([]))
+        return []
+    }
 
     return state
 }

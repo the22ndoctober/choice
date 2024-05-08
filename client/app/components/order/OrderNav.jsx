@@ -159,7 +159,7 @@ const OrderNav = () => {
                                 fontWeight: 600,
                                 lineHeight: "29.05px",
                                 color: Colors.white,
-                                width: "fit-content",
+                                textAlign: "right",
                             }}
                         >
                             044 503 70 20

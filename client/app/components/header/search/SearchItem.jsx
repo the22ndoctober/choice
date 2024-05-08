@@ -57,7 +57,6 @@ const SearchItem = ({ pageName, setOpenCat }) => {
     }, [searchQuery])
 
     useEffect(() => {
-        console.log(categoriesData)
         if (searchQuery !== "") {
             let result = categoriesData.filter(
                 function (category) {

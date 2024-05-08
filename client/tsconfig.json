@@ -28,7 +28,8 @@
         ".next/types/**/*.ts",
         "app/components/login/LoginForm.jsx",
         "app/api/auth/[...nextauth]/route.js",
-        "app/api/authoptions/auth.js"
+        "app/api/authoptions/auth.js",
+        "app/components/header/search/SearchItem.jsx"
     ],
     "exclude": ["node_modules"]
 }

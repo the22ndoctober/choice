@@ -1,6 +1,5 @@
 "use client"
 
-import { GetCatSorted, SearchProducts, TestAxiosReq } from "@/api/test"
 import { Box, Button, Input, Grid, Typography } from "@mui/material"
 import { SearchStyles } from "./styles/styles"
 import { useRouter } from "next/navigation"

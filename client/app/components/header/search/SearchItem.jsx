@@ -57,12 +57,13 @@ const SearchItem = ({ pageName, setOpenCat }) => {
     }, [searchQuery])
 
     useEffect(() => {
+        console.log(categoriesData)
         if (searchQuery !== "") {
             let result = categoriesData.filter(
                 function (category) {
                     if (
                         this.count < 4 &&
-                        category.title
+                        category.category.title
                             .toUpperCase()
                             .includes(searchQuery.toUpperCase())
                     ) {

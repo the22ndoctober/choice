@@ -115,7 +115,10 @@ const SearchDropDrown = ({
                                                     }}
                                                 >
                                                     <img
-                                                        src={category.image}
+                                                        src={
+                                                            category.category
+                                                                .image
+                                                        }
                                                         alt=""
                                                         style={{
                                                             width: 50,
@@ -124,7 +127,9 @@ const SearchDropDrown = ({
                                                         }}
                                                     />
                                                 </Box>
-                                                <Box>{category.title}</Box>
+                                                <Box>
+                                                    {category.category.title}
+                                                </Box>
                                             </Grid>
                                         </>
                                     )

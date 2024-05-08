@@ -138,7 +138,7 @@ const Search = ({ params, session }: any) => {
                                 },
                             }}
                             onClick={() => {
-                                session && setOpenCart(true)
+                                setOpenCart(true)
                             }}
                         >
                             {cartAmount > 0 && (

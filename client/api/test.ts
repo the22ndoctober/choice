@@ -41,14 +41,16 @@ import axios from "axios"
 //     return data.data
 // }
 
+const baseURL = process.env.API_BASE_URL || "http://localhost:3002"
+
 export async function TestAxiosReq(params: any) {
-    const data = await axios.get("http://localhost:3002/test")
+    const data = await axios.get(baseURL + "/server/test")
 
     return data.data
 }
 
 export async function GetCatSorted(params: any) {
-    const data = await axios.get("http://localhost:3002/getBaseCatSorted")
+    const data = await axios.get(baseURL + "/server/getBaseCatSorted")
 
     console.log(data.data)
 
@@ -56,7 +58,7 @@ export async function GetCatSorted(params: any) {
 }
 
 export async function GetCategoryProducts(params: any) {
-    const data = await axios.post("http://localhost:3002/getCategoryProducts", {
+    const data = await axios.post(baseURL + "/server/getCategoryProducts", {
         category_id: params,
     })
 
@@ -64,7 +66,7 @@ export async function GetCategoryProducts(params: any) {
 }
 
 export async function GetSubCats(params: any) {
-    const data = await axios.post("http://localhost:3002/getSubCats", {
+    const data = await axios.post(baseURL + "/server/getSubCats", {
         category_id: params,
     })
 
@@ -74,7 +76,7 @@ export async function GetSubCats(params: any) {
 }
 
 export async function GetProducts(params: any) {
-    const data = await axios.post("http://localhost:3002/getGoods", {
+    const data = await axios.post(baseURL + "/server/getGoods", {
         product_id: params,
     })
 
@@ -82,7 +84,7 @@ export async function GetProducts(params: any) {
 }
 
 export async function SearchProducts() {
-    const data = await axios.post("http://localhost:3002/searchProducts")
+    const data = await axios.post(baseURL + "/server/searchProducts")
 
     console.log(data.data)
 
@@ -91,7 +93,7 @@ export async function SearchProducts() {
 
 export async function SendOTP(phoneNumber: string) {
     try {
-        const response = await axios.post("http://localhost:3002/send-otp", {
+        const response = await axios.post(baseURL + "/server/send-otp", {
             phoneNumber: phoneNumber,
         })
         if (response.data.success) {
@@ -107,7 +109,7 @@ export async function SendOTP(phoneNumber: string) {
 export async function VerifyOtpRequest(phoneNumber: string, userOTP: string) {
     console.log(phoneNumber, userOTP)
     try {
-        const response = await axios.post("http://localhost:3002/verify-otp", {
+        const response = await axios.post(baseURL + "/server/verify-otp", {
             phoneNumber: phoneNumber,
             userOTP: userOTP,
         })
@@ -123,9 +125,12 @@ export async function VerifyOtpRequest(phoneNumber: string, userOTP: string) {
 
 export async function DeleteOTP(phoneNumber: string) {
     try {
-        const response = await axios.post("http://localhost:3002/delete", {
-            phoneNumber: phoneNumber,
-        })
+        const response = await axios.post(
+            baseURL + "http://localhost:3002/delete",
+            {
+                phoneNumber: phoneNumber,
+            }
+        )
         if (response.data) {
             console.log(response.data)
         } else {

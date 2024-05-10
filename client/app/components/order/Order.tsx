@@ -207,13 +207,25 @@ const Order = () => {
                                         color:
                                             active === steps.cradentials
                                                 ? Colors.maxDark
+                                                : userPhone !== "" &&
+                                                  userName !== ""
+                                                ? Colors.maxDark
                                                 : Colors.grey,
                                         border: `1px solid ${
                                             active === steps.cradentials
                                                 ? Colors.maxDark
+                                                : userPhone !== "" &&
+                                                  userName !== ""
+                                                ? Colors.maxDark
                                                 : Colors.grey
                                         }`,
                                         borderRadius: "100%",
+                                        background:
+                                            active !== steps.cradentials &&
+                                            userPhone !== "" &&
+                                            userName !== ""
+                                                ? Colors.maxDark
+                                                : "none",
                                         width: "24px",
                                         height: "24px",
                                         display: "flex",
@@ -229,10 +241,16 @@ const Order = () => {
                                         color:
                                             active === steps.cradentials
                                                 ? Colors.maxDark
+                                                : userPhone !== "" &&
+                                                  userName !== ""
+                                                ? Colors.maxDark
                                                 : Colors.grey,
                                         fontSize: "18px",
                                         fontWeight:
                                             active === steps.cradentials
+                                                ? 600
+                                                : userPhone !== "" &&
+                                                  userName !== ""
                                                 ? 600
                                                 : 500,
                                         lineHeight: "21.78px",
@@ -252,6 +270,65 @@ const Order = () => {
                                     setUserPhone={setUserPhone}
                                 />
                             )}
+                            {active !== steps.cradentials &&
+                                userName !== "" &&
+                                userPhone !== "" && (
+                                    <Grid
+                                        container
+                                        sx={{
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                color: Colors.grey,
+                                                fontSize: "14px",
+                                                fontWeight: 400,
+                                                lineHeight: "16.94px",
+                                            }}
+                                        >
+                                            ПІБ, номер телефону
+                                        </Box>
+                                        <Box
+                                            sx={{
+                                                display: "flex",
+                                                alignItems: "center",
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() => {
+                                                setActive(steps.cradentials)
+                                            }}
+                                        >
+                                            <svg
+                                                width="17"
+                                                height="17"
+                                                viewBox="0 0 17 17"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M4.25793 14.8651C4.02843 15.0946 3.73039 15.2432 3.40854 15.2885C2.41688 15.4282 1.56493 14.5763 1.70464 13.5846C1.74998 13.2628 1.89855 12.9647 2.12804 12.7352L11.674 3.1893L13.8039 5.31918L4.25793 14.8651Z"
+                                                    fill="#706F6F"
+                                                />
+                                                <path
+                                                    d="M14.511 4.61207L12.3811 2.48219L12.7346 2.12864C13.3204 1.54285 14.2721 1.54477 14.8602 2.13292C15.4484 2.72107 15.4503 3.67273 14.8645 4.25852L14.511 4.61207Z"
+                                                    fill="#706F6F"
+                                                />
+                                            </svg>
+                                            <Box
+                                                sx={{
+                                                    textDecoration: "underline",
+
+                                                    fontSize: "12px",
+                                                    fontWeight: 400,
+                                                    lineHeight: "14.52px",
+                                                }}
+                                            >
+                                                Змінити
+                                            </Box>
+                                        </Box>
+                                    </Grid>
+                                )}
                             <Box
                                 sx={{
                                     display: "flex",
@@ -648,6 +725,25 @@ const Order = () => {
                                         cart[0].currency}
                                 </Box>
                             </Grid>
+                            <Box
+                                sx={{
+                                    background: Colors.neutral,
+                                    color: Colors.white,
+                                    borderRadius: "15px",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    lineHeight: "16.94px",
+                                    flex: "1 1 0",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    py: "14px",
+                                    px: "38px",
+                                    width: "fit-content",
+                                }}
+                            >
+                                Замовлення підтверджую
+                            </Box>
                         </Box>
                     </Grid>
                 </Grid>

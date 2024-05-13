@@ -287,7 +287,7 @@ const Order = () => {
                                                 lineHeight: "16.94px",
                                             }}
                                         >
-                                            ПІБ, номер телефону
+                                            {userName}, {userPhone}
                                         </Box>
                                         <Box
                                             sx={{

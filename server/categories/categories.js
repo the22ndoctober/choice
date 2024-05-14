@@ -1,8 +1,6 @@
 const bent = require("bent");
 
 async function GetCats(store_id) {
-  console.log("started");
-
   let clientServerOptions = {
     baseUrl: "https://api.dntrade.com.ua",
     method: "GET",
@@ -59,24 +57,41 @@ async function GetCats(store_id) {
     let result = [];
 
     cats.map((category, i) => {
-      let category_id = category.category_id;
+      const category_id = category.category_id;
+      const store_id = category.store_id;
 
-      if (map.has(category.title)) {
-        const idx = result.findIndex((value) => value.title === category.title);
-
-        if (category.level === result[idx].level) {
-          if (result[idx].category_id.some((cat) => cat !== category_id)) {
-            result[idx].category_id = [...result[idx].category_id, category_id];
-          }
-          result[idx].store_id = [...result[idx].store_id, category.store_id];
-          return;
-        }
+      if (!map.has(category.title)) {
+        map.set(category.title, category.title);
+        result.push({
+          ...category,
+          category_id: new Array(category_id),
+          store_id: new Array(store_id),
+        });
+        return;
       }
-      map.set(category.title, category.title);
+
+      const IDX = result.findIndex(
+        (cat) =>
+          cat.title === category.title &&
+          cat.level === category.level &&
+          cat.store_id.every((id) => id !== category.store_id)
+      );
+
+      if (IDX !== -1) {
+        result[IDX] = {
+          ...result[IDX],
+          category_id: result[IDX].category_id.some((id) => id === category_id)
+            ? result[IDX].category_id
+            : [...result[IDX].category_id, category_id],
+          store_id: [...result[IDX].store_id, store_id],
+        };
+        return;
+      }
+
       result.push({
         ...category,
-        store_id: [category.store_id],
-        category_id: [category_id],
+        category_id: new Array(category_id),
+        store_id: new Array(store_id),
       });
     });
 
@@ -84,6 +99,8 @@ async function GetCats(store_id) {
   }
 
   const sameTitleLess = sameTitleHandle(categories);
+
+  sameTitleLess.sort((a, b) => b.title - a.title);
 
   return sameTitleLess;
 }

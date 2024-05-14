@@ -16,8 +16,9 @@ const Categories = ({ categories }: any) => {
             sx={{
                 width: { xl: 1440, lg: 1140 },
                 margin: "0 auto",
-                height: { sm: "100svh" },
+                height: { sm: "70svh" },
                 position: "absolute",
+
                 left: 0,
                 py: "36px",
                 zIndex: 301,
@@ -46,25 +47,29 @@ const Categories = ({ categories }: any) => {
                     <Box
                         sx={{
                             width: { md: 261 },
-                            height: "100svh",
-
+                            height: "70svh",
                             display: "flex",
                             flexDirection: "column",
+                            justifyContent: "space-between",
                         }}
                     >
-                        {categories.map((cat: any) => {
-                            if (cat.category.level > 1) {
-                                return
-                            }
-                            return (
-                                <CategoryItem
-                                    key={cat.category.title}
-                                    categoryInfo={cat}
-                                    setSelected={setSelectedCategory}
-                                    selectedCat={selectedCategory}
-                                />
-                            )
-                        })}
+                        {categories
+                            .toSorted((a: any, b: any) => {
+                                b.category.title - a.category.title
+                            })
+                            .map((cat: any) => {
+                                if (cat.category.level > 1) {
+                                    return
+                                }
+                                return (
+                                    <CategoryItem
+                                        key={cat.category.title}
+                                        categoryInfo={cat}
+                                        setSelected={setSelectedCategory}
+                                        selectedCat={selectedCategory}
+                                    />
+                                )
+                            })}
                     </Box>
                 </Box>
                 {selectedCategory !== null && (
@@ -73,20 +78,22 @@ const Categories = ({ categories }: any) => {
                         container
                         sx={{
                             width: { xl: 1200 },
-                            height: "auto",
                             bgcolor: Colors.white,
+                            height: "66svh",
                         }}
                     >
                         <Grid
                             container
                             direction={"column"}
                             sx={{
-                                maxWidth: { lg: 350 },
-                                height: "80svh",
+                                width: "100%",
+                                height: "100%",
+                                flexWrap: "wrap",
                                 columnGap: 2,
                                 rowGap: 2,
                                 px: 4,
-                                py: 1,
+                                pt: 1,
+                                pb: 1,
                             }}
                         >
                             <Box
@@ -96,6 +103,7 @@ const Categories = ({ categories }: any) => {
                                     fontWeight: 400,
                                     fontSize: "16px",
                                     lineHeight: "19px",
+                                    maxWidth: { lg: 350 },
                                 }}
                             >
                                 {selectedCategory.category.title}

@@ -30,8 +30,11 @@ const ProductLink = ({
                 router.push(`/products/${product_id}`)
             }}
             sx={{
-                color: isProductHover ? Colors.light : Colors.maxDark,
+                color: isProductHover ? Colors.dark : Colors.grey,
                 cursor: "pointer",
+                fontSize: "14px",
+                fontWeight: 400,
+                lineHeight: "16.94px",
             }}
         >
             {product_title}

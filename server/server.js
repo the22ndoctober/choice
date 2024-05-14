@@ -54,10 +54,12 @@ app.post("/server/searchProducts", async function (req, res) {
   const stores = await get("/products/stores").then((data) => data.json());
 
   const filtredStores = stores.stores
-    .filter((store) => store.is_sell === true)
+    .filter(
+      (store) =>
+        store.is_sell === true &&
+        store.id !== "E4DB401B-717D-4F09-A223-B9E9D0446361"
+    )
     .map((store) => store.id);
-
-  // filtredStores.push("5D06BC79-3901-46B3-A434-DEEA4965DC78");
 
   async function getProductByStore(store) {
     const resp = await post(`/products/list?store_id=${store}`);
@@ -98,8 +100,6 @@ app.post("/server/getCategoryProducts", async function (req, res) {
 
     return data.products;
   }
-
-  console.log(req.body.category_id);
 
   const parsedData = await Promise.all(
     req.body.category_id.map((cat) => getCategoryProducts(cat))
@@ -202,11 +202,18 @@ app.get("/server/getAllCategories", async function (req, res) {
     (method = clientServerOptions.method),
     (headers = clientServerOptions.headers)
   );
+  const skipStores = [
+    "E4DB401B-717D-4F09-A223-B9E9D0446361",
+    "459307A2-460B-4052-84E5-16145AD098DD",
+  ];
 
   const stores = await post("/products/stores").then((data) => data.json());
 
   const filtredStores = stores.stores
-    .filter((store) => store.is_sell === true)
+    .filter(
+      (store) =>
+        store.is_sell === true && skipStores.every((str) => str !== store.id)
+    )
     .map((store) => store.id);
 
   const data = await GetCats(filtredStores);

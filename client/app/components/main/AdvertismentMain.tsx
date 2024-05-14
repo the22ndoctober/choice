@@ -29,10 +29,10 @@ const AdvertismentMain = () => {
                         width: {
                             lg: 1140,
                             xl: 1440,
-                            margin: "0 auto",
-                            display: "flex",
-                            justifyContent: "right",
                         },
+                        margin: "0 auto",
+                        display: "flex",
+                        justifyContent: "right",
                     }}
                 >
                     <Grid container sx={{ ...AdvertismentStyles.container }}>

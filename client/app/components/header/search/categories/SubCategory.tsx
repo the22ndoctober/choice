@@ -40,6 +40,7 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                 sx={{
                     flexDirection: "column",
                     rowGap: "3px",
+                    maxWidth: { lg: 350 },
                 }}
             >
                 <Box
@@ -78,15 +79,14 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                             container
                             sx={{ flexDirection: "column", rowGap: "3px" }}
                         >
-                            {data.map(
+                            {data[0].map(
                                 (product: any, id: number) =>
-                                    id < 5 && (
-                                        <Box>123</Box>
-                                        // <ProductLink
-                                        //     category_id={product.category_id}
-                                        //     product_id={product.product_id}
-                                        //     product_title={product.title}
-                                        // />
+                                    id < 4 && (
+                                        <ProductLink
+                                            category_id={product.category_id}
+                                            product_id={product.product_id}
+                                            product_title={product.title}
+                                        />
                                     )
                             )}
                         </Grid>

@@ -28,8 +28,6 @@ const CategoryItem = ({
                         flexDirection: "row",
                         columnGap: 2,
                         alignItems: "center",
-
-                        overflowX: "hidden",
                     }}
                     onClick={() => {
                         setSelected(categoryInfo)

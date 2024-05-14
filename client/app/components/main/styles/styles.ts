@@ -1,6 +1,6 @@
 export const AdvertismentStyles = {
     wrapper: {
-        height: { sm: "80svh" },
+        height: { sm: "70svh" },
         width: { sm: "100%" },
     },
     container: {

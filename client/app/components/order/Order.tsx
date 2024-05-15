@@ -7,6 +7,8 @@ import { useSelector } from "react-redux"
 import { getCart } from "@/app/redux/cart/cartSlice"
 import { useEffect, useState } from "react"
 import { TestAxiosReq } from "@/api/test"
+import { useMutation } from "@tanstack/react-query"
+import { getNovaPoshtaCities } from "@/api/novaPoshta"
 
 const OrderCradentials = ({
     active,
@@ -124,8 +126,36 @@ const OrderCradentials = ({
     )
 }
 
-const OrderDelivery = ({ active, setActive, steps }: any) => {
-    return <></>
+const OrderDelivery = ({
+    cityQuery,
+    setCityQuery,
+    steps,
+    active,
+    setActive,
+}: any) => {
+    return (
+        <>
+            <Grid container sx={{ flexDirection: "column" }}>
+                <InputBase
+                    placeholder="Введіть назву міста"
+                    value={cityQuery}
+                    onChange={(e) => setCityQuery(e.target.value)}
+                    sx={{
+                        width: "100%",
+                        py: "8px",
+                        border: `2px solid ${Colors.grey}`,
+
+                        borderRadius: "15px",
+
+                        "& .MuiInputBase-input": {
+                            px: "24px",
+                            color: Colors.maxDark,
+                        },
+                    }}
+                />
+            </Grid>
+        </>
+    )
 }
 const OrderPayment = ({ active, setActive, steps }: any) => {
     return <></>
@@ -140,11 +170,21 @@ const Order = () => {
     const [active, setActive] = useState(steps.cradentials)
     const [userName, setUserName] = useState("")
     const [userPhone, setUserPhone] = useState("+380")
+    const [cityQuery, setCityQuery] = useState("")
     const cart = useSelector(getCart)
-    console.log(cart)
+
+    const citySearchMutation = useMutation({
+        mutationKey: ["/orderCities"],
+        mutationFn: (query: string) => getNovaPoshtaCities(query),
+    })
+
     useEffect(() => {
         TestAxiosReq()
     }, [])
+
+    useEffect(() => {
+        citySearchMutation.mutate(cityQuery)
+    }, [cityQuery])
 
     return (
         <>
@@ -380,7 +420,15 @@ const Order = () => {
                                     Доставка
                                 </Box>
                             </Box>
-
+                            {active === steps.delivery && (
+                                <OrderDelivery
+                                    cityQuery={cityQuery}
+                                    setCityQuery={setCityQuery}
+                                    steps={steps}
+                                    active={active}
+                                    setActive={setActive}
+                                />
+                            )}
                             <Box
                                 sx={{
                                     display: "flex",

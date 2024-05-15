@@ -60,6 +60,8 @@ async function GetCats(store_id) {
       const category_id = category.category_id;
       const store_id = category.store_id;
 
+      if (category.title === "Послуги") return;
+
       if (!map.has(category.title)) {
         map.set(category.title, category.title);
         result.push({

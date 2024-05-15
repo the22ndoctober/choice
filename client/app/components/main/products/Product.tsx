@@ -10,6 +10,8 @@ import HeadLinks from "@/app/components/header/headLinks/HeadLinks"
 import DeliveryInfo from "../deliveryInfo/DeliveryInfo"
 import { Colors } from "@/client"
 import parse from "html-react-parser"
+import { logoSquare } from "../../static/logo"
+import CircularProgress from "@mui/joy/CircularProgress/CircularProgress"
 
 export default function Product({ params }: any) {
     const { isLoading, error, data, isSuccess }: any = useQuery({
@@ -17,7 +19,28 @@ export default function Product({ params }: any) {
         queryFn: () => GetProducts(params.product),
     })
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading)
+        return (
+            <Box
+                sx={{
+                    width: "100%",
+                    height: "100%",
+                    background: Colors.white,
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    zIndex: 1000,
+                    rowGap: 3,
+                }}
+            >
+                {logoSquare}
+                <CircularProgress size="lg" />
+            </Box>
+        )
 
     if (data.error) return <div>No such product</div>
 

@@ -37,7 +37,7 @@ const Categories = ({ categories }: any) => {
             >
                 <Box
                     sx={{
-                        width: { lg: 400, xl: 248 },
+                        width: { lg: 230, xl: 248 },
                         height: "auto",
                         zIndex: 1000,
                         display: "flex",
@@ -46,7 +46,7 @@ const Categories = ({ categories }: any) => {
                 >
                     <Box
                         sx={{
-                            width: { md: 261 },
+                            width: { lg: 230, xl: 261 },
                             height: "70svh",
                             display: "flex",
                             flexDirection: "column",

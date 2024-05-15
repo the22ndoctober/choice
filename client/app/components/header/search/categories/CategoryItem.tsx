@@ -45,7 +45,6 @@ const CategoryItem = ({
                             justifyContent: "space-between",
                             alignItems: "center",
                             cursor: "pointer",
-                            // paddingY: "5px",
                         }}
                     >
                         <Box
@@ -68,8 +67,8 @@ const CategoryItem = ({
                                 sx={{
                                     textWrap: "break-line",
                                     width: "auto",
-                                    maxWidth: 180,
-                                    fontSize: "14px",
+                                    maxWidth: { lg: 150, xl: 180 },
+                                    fontSize: { lg: "12px", xl: "14px" },
                                     fontWeight: 400,
                                     lineHeight: "17px",
                                     letterSpacing: "0em",

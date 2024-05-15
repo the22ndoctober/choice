@@ -1,14 +1,17 @@
 "use client"
 
 import { Box, Grid, InputBase } from "@mui/material"
+import CircularProgress from "@mui/joy/CircularProgress"
 import OrderNav from "./OrderNav"
 import { Colors } from "@/client"
 import { useSelector } from "react-redux"
 import { getCart } from "@/app/redux/cart/cartSlice"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { TestAxiosReq } from "@/api/test"
 import { useMutation } from "@tanstack/react-query"
-import { getNovaPoshtaCities } from "@/api/novaPoshta"
+import { getNovaPoshtaCities, getNovaPoshtaDepartment } from "@/api/novaPoshta"
+import Radio from "@mui/joy/Radio"
+import RadioGroup from "@mui/joy/RadioGroup"
 
 const OrderCradentials = ({
     active,
@@ -129,36 +132,654 @@ const OrderCradentials = ({
 const OrderDelivery = ({
     cityQuery,
     setCityQuery,
+    citySearchMutation,
     steps,
     active,
     setActive,
+    deliveryOption,
+    setDeliveryOption,
+    deliveryLocale,
+    setDeliveryLocale,
+    deliveryDepartment,
+    setDeliveryDepartment,
+    departmentsSearchMutation,
+    shortQuery,
+    setShortQuery,
 }: any) => {
+    const [showOptions, setShowOptions] = useState(false)
+    const [showDepartments, setShowDepartmentes] = useState(false)
+    const [selected, setSelected] = useState("")
+
     return (
         <>
-            <Grid container sx={{ flexDirection: "column" }}>
-                <InputBase
-                    placeholder="Введіть назву міста"
-                    value={cityQuery}
-                    onChange={(e) => setCityQuery(e.target.value)}
+            <Grid
+                container
+                onBlur={() => {
+                    setShowOptions(false)
+                }}
+                sx={{ flexDirection: "column", px: "34px", rowGap: "22px" }}
+            >
+                <Box
                     sx={{
-                        width: "100%",
-                        py: "8px",
-                        border: `2px solid ${Colors.grey}`,
-
-                        borderRadius: "15px",
-
-                        "& .MuiInputBase-input": {
-                            px: "24px",
-                            color: Colors.maxDark,
-                        },
+                        fontSize: "16px",
+                        fontWeight: "600",
+                        lineHeight: "19.36px",
                     }}
-                />
+                >
+                    Ваше місто
+                </Box>
+                <Box>
+                    <InputBase
+                        onFocus={() => {
+                            setShowOptions(true)
+                        }}
+                        placeholder="Введіть назву міста"
+                        value={cityQuery}
+                        onChange={(e) => setCityQuery(e.target.value)}
+                        sx={{
+                            width: "100%",
+                            py: "8px",
+                            border: `2px solid ${Colors.grey}`,
+                            zIndex: 11,
+                            borderRadius: "15px",
+                            background: Colors.paper,
+
+                            "& .MuiInputBase-input": {
+                                px: "24px",
+                                color: Colors.maxDark,
+                            },
+                        }}
+                    />
+                    <Box
+                        sx={{
+                            width: "100%",
+                            height: "0px",
+                            position: "relative",
+                        }}
+                    >
+                        <Grid
+                            container
+                            sx={{
+                                flexDirection: "column",
+                                position: "absolute",
+                                top: -5,
+                                left: 0,
+                                width: "100%",
+                                height: "fit-content",
+                                zIndex: 10,
+                            }}
+                        >
+                            {showOptions &&
+                                (citySearchMutation.isPending ? (
+                                    <Box
+                                        sx={{
+                                            width: "100%",
+                                            textAlign: "center",
+                                            py: "12px",
+                                            border: `1px solid ${Colors.light}`,
+                                            background: Colors.paper,
+                                        }}
+                                    >
+                                        <CircularProgress size="sm" />
+                                    </Box>
+                                ) : citySearchMutation.data.length === 0 ||
+                                  citySearchMutation.data[0].Addresses
+                                      .length === 0 ? (
+                                    <Box
+                                        sx={{
+                                            width: "100%",
+                                            textAlign: "center",
+                                            py: "12px",
+                                            border: `1px solid ${Colors.light}`,
+                                            background: Colors.paper,
+                                        }}
+                                    >
+                                        Немає підходящого міста
+                                    </Box>
+                                ) : (
+                                    citySearchMutation.data[0].Addresses.map(
+                                        (cities: any) => {
+                                            return (
+                                                <Box
+                                                    key={cities.Present}
+                                                    onMouseEnter={() => {
+                                                        setSelected(
+                                                            cities.Present
+                                                        )
+                                                    }}
+                                                    onMouseLeave={() => {
+                                                        setSelected("")
+                                                    }}
+                                                    sx={{
+                                                        width: "100%",
+                                                        textAlign: "center",
+                                                        py: "12px",
+                                                        border: `1px solid ${Colors.light}`,
+                                                        background:
+                                                            selected ===
+                                                            cities.Present
+                                                                ? Colors.dark
+                                                                : Colors.paper,
+                                                        color:
+                                                            selected ===
+                                                            cities.Present
+                                                                ? Colors.paper
+                                                                : Colors.black,
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onMouseDown={() => {
+                                                        setCityQuery(
+                                                            cities.Present
+                                                        )
+                                                        setShortQuery(
+                                                            cities.MainDescription
+                                                        )
+                                                    }}
+                                                >
+                                                    {cities.Present}
+                                                </Box>
+                                            )
+                                        }
+                                    )
+                                ))}
+                        </Grid>
+                    </Box>
+                    <Grid container sx={{ columnGap: "6px" }}>
+                        <Box
+                            onClick={() => {
+                                setCityQuery("м. Черкаси, Черкаська обл.")
+                                setShortQuery("Черкаси")
+                            }}
+                            sx={{
+                                cursor: "pointer",
+                                py: "12px",
+                                textDecoration: "underline",
+                                color: Colors.grey,
+                                fontSize: "14px",
+                            }}
+                        >
+                            Черкаси
+                        </Box>
+                        <Box
+                            onClick={() => {
+                                setCityQuery("м. Золотоноша, Черкаська обл.")
+                                setShortQuery("Золотоноша")
+                            }}
+                            sx={{
+                                cursor: "pointer",
+                                py: "12px",
+                                textDecoration: "underline",
+                                color: Colors.grey,
+                                fontSize: "14px",
+                            }}
+                        >
+                            Золотоноша
+                        </Box>
+                        <Box
+                            onClick={() => {
+                                setCityQuery("м. Київ, Київська обл.")
+                                setShortQuery("Київ")
+                            }}
+                            sx={{
+                                cursor: "pointer",
+                                py: "12px",
+                                textDecoration: "underline",
+                                color: Colors.grey,
+                                fontSize: "14px",
+                            }}
+                        >
+                            Київ
+                        </Box>
+                    </Grid>
+                    {citySearchMutation.isSuccess &&
+                        citySearchMutation.data.length > 0 &&
+                        citySearchMutation.data[0].Addresses.length > 0 &&
+                        citySearchMutation.data[0].Addresses.some(
+                            (item: any) => item.Present === cityQuery
+                        ) && (
+                            <OrderCityOptions
+                                cityQuery={cityQuery}
+                                option={deliveryOption}
+                                setOption={setDeliveryOption}
+                            />
+                        )}
+                </Box>
+                {(deliveryOption === "Доставка курʼєром в Черкасах" ||
+                    deliveryOption ===
+                        "Доставка курʼєром по адресі “Нова пошта”" ||
+                    deliveryOption === "Доставка у відділення “Укр Пошта”") && (
+                    <Grid
+                        container
+                        sx={{ flexDirection: "column", rowGap: "12px" }}
+                    >
+                        <Box
+                            sx={{
+                                fontSize: "16px",
+                                fontWeight: "600",
+                                lineHeight: "19.36px",
+                            }}
+                        >
+                            {deliveryOption ===
+                            "Доставка у відділення “Укр Пошта”"
+                                ? "Номер відділення Укр пошти"
+                                : "Адреса доставки"}
+                        </Box>
+                        <InputBase
+                            placeholder="Введіть адрессу доставки"
+                            value={deliveryLocale}
+                            onChange={(e) => setDeliveryLocale(e.target.value)}
+                            sx={{
+                                width: "100%",
+                                py: "8px",
+                                border: `2px solid ${Colors.grey}`,
+                                zIndex: 11,
+                                borderRadius: "15px",
+                                background: Colors.paper,
+
+                                "& .MuiInputBase-input": {
+                                    px: "24px",
+                                    color: Colors.maxDark,
+                                },
+                            }}
+                        />
+                        <Box
+                            onClick={() => {
+                                if (deliveryLocale !== "") {
+                                    setActive(steps.payment)
+                                }
+                            }}
+                            sx={{
+                                background: Colors.neutral,
+                                color: Colors.white,
+                                borderRadius: "15px",
+                                fontSize: "14px",
+                                fontWeight: 600,
+                                lineHeight: "16.94px",
+
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                py: "14px",
+                                px: "38px",
+                                width: "fit-content",
+                                height: "fit-content",
+                            }}
+                        >
+                            Далі
+                        </Box>
+                    </Grid>
+                )}
+                {deliveryOption === 'Самовивіз з магазину "Choice"' &&
+                    deliveryLocale !== "" && (
+                        <Box
+                            onClick={() => {
+                                setActive(steps.payment)
+                            }}
+                            sx={{
+                                background: Colors.neutral,
+                                color: Colors.white,
+                                borderRadius: "15px",
+                                fontSize: "14px",
+                                fontWeight: 600,
+                                lineHeight: "16.94px",
+
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                py: "14px",
+                                px: "38px",
+                                width: "fit-content",
+                                height: "fit-content",
+                            }}
+                        >
+                            Далі
+                        </Box>
+                    )}
+
+                {deliveryOption === "Доставка у відділення “Нова пошта”" && (
+                    <Grid
+                        container
+                        onBlur={() => {
+                            setShowDepartmentes(false)
+                        }}
+                        sx={{
+                            flexDirection: "column",
+
+                            rowGap: "22px",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                fontSize: "16px",
+                                fontWeight: "600",
+                                lineHeight: "19.36px",
+                            }}
+                        >
+                            Відділення “Нової пошти”
+                        </Box>
+                        <Box>
+                            <InputBase
+                                onFocus={() => {
+                                    setShowDepartmentes(true)
+                                }}
+                                placeholder="Введіть відділення “Нової пошти”"
+                                value={deliveryDepartment}
+                                onChange={(e) =>
+                                    setDeliveryDepartment(e.target.value)
+                                }
+                                sx={{
+                                    width: "100%",
+                                    py: "8px",
+                                    border: `2px solid ${Colors.grey}`,
+                                    zIndex: 11,
+                                    borderRadius: "15px",
+                                    background: Colors.paper,
+
+                                    "& .MuiInputBase-input": {
+                                        px: "24px",
+                                        color: Colors.maxDark,
+                                    },
+                                }}
+                            />
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    height: "0px",
+                                    position: "relative",
+                                }}
+                            >
+                                <Grid
+                                    container
+                                    sx={{
+                                        flexDirection: "column",
+                                        position: "absolute",
+                                        top: -5,
+                                        left: 0,
+                                        width: "100%",
+                                        height: "fit-content",
+                                        zIndex: 10,
+                                    }}
+                                >
+                                    {showDepartments &&
+                                        (departmentsSearchMutation.isPending ? (
+                                            <Box
+                                                sx={{
+                                                    width: "100%",
+                                                    textAlign: "center",
+                                                    py: "12px",
+                                                    border: `1px solid ${Colors.light}`,
+                                                    background: Colors.paper,
+                                                }}
+                                            >
+                                                <CircularProgress size="sm" />
+                                            </Box>
+                                        ) : departmentsSearchMutation.data
+                                              .length === 0 ? (
+                                            <Box
+                                                sx={{
+                                                    width: "100%",
+                                                    textAlign: "center",
+                                                    py: "12px",
+                                                    border: `1px solid ${Colors.light}`,
+                                                    background: Colors.paper,
+                                                }}
+                                            >
+                                                Немає підходящого відділення
+                                            </Box>
+                                        ) : (
+                                            departmentsSearchMutation.data.map(
+                                                (departments: any) => {
+                                                    return (
+                                                        <Box
+                                                            key={
+                                                                departments.Description
+                                                            }
+                                                            onMouseEnter={() => {
+                                                                setSelected(
+                                                                    departments.Description
+                                                                )
+                                                            }}
+                                                            onMouseLeave={() => {
+                                                                setSelected("")
+                                                            }}
+                                                            sx={{
+                                                                width: "100%",
+                                                                textAlign:
+                                                                    "center",
+                                                                py: "12px",
+                                                                border: `1px solid ${Colors.light}`,
+                                                                background:
+                                                                    selected ===
+                                                                    departments.Description
+                                                                        ? Colors.dark
+                                                                        : Colors.paper,
+                                                                color:
+                                                                    selected ===
+                                                                    departments.Description
+                                                                        ? Colors.paper
+                                                                        : Colors.black,
+                                                                cursor: "pointer",
+                                                            }}
+                                                            onMouseDown={() => {
+                                                                setDeliveryDepartment(
+                                                                    departments.Description
+                                                                )
+                                                            }}
+                                                        >
+                                                            {
+                                                                departments.Description
+                                                            }
+                                                        </Box>
+                                                    )
+                                                }
+                                            )
+                                        ))}
+                                </Grid>
+                            </Box>
+                        </Box>
+                        {deliveryDepartment !== "" && (
+                            <Box
+                                onClick={() => {
+                                    setActive(steps.payment)
+                                }}
+                                sx={{
+                                    background: Colors.neutral,
+                                    color: Colors.white,
+                                    borderRadius: "15px",
+                                    fontSize: "14px",
+                                    fontWeight: 600,
+                                    lineHeight: "16.94px",
+
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    py: "14px",
+                                    px: "38px",
+                                    width: "fit-content",
+                                    height: "fit-content",
+                                }}
+                            >
+                                Далі
+                            </Box>
+                        )}
+                    </Grid>
+                )}
+
+                {deliveryOption === 'Самовивіз з магазину "Choice"' && (
+                    <Box
+                        onClick={() => {
+                            setActive(steps.payment)
+                        }}
+                        sx={{
+                            background: Colors.neutral,
+                            color: Colors.white,
+                            borderRadius: "15px",
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            lineHeight: "16.94px",
+
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            py: "14px",
+                            px: "38px",
+                            width: "fit-content",
+                            height: "fit-content",
+                        }}
+                    >
+                        Далі
+                    </Box>
+                )}
             </Grid>
         </>
     )
 }
 const OrderPayment = ({ active, setActive, steps }: any) => {
     return <></>
+}
+
+const OrderCityOptions = ({ cityQuery, option, setOption }: any) => {
+    const value1 = 'Самовивіз з магазину "Choice"'
+    const value2 = "Доставка курʼєром в Черкасах"
+    const value3 = "Доставка у відділення “Нова пошта”"
+    const value4 = "Доставка курʼєром по адресі “Нова пошта”"
+    const value5 = "Доставка у відділення “Укр Пошта”"
+
+    return (
+        <>
+            <Grid
+                container
+                sx={{
+                    flexDirection: "column",
+                    rowGap: "12px",
+                }}
+            >
+                <Box
+                    sx={{
+                        fontSize: "16px",
+                        fontWeight: 600,
+                        lineHeight: "19.36px",
+                    }}
+                >
+                    Спосіб доставки
+                </Box>
+                {cityQuery === "м. Черкаси, Черкаська обл." ? (
+                    <>
+                        <RadioGroup name="radio-buttons-group">
+                            <Radio
+                                checked={value1 === option ? true : false}
+                                onClick={(e: any) => {
+                                    setOption(e.target.value)
+                                }}
+                                value={value1}
+                                label='Самовивіз з магазину "Choice"'
+                                size="sm"
+                                sx={{ color: Colors.dark }}
+                            />
+                            <Box
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 400,
+                                    lineHeight: "14.52px",
+                                    color: Colors.grey,
+                                    py: "6px",
+                                }}
+                            >
+                                Заберіть товар в найближчій точці видачі
+                            </Box>
+                            <Radio
+                                checked={value2 === option ? true : false}
+                                onClick={(e: any) => {
+                                    setOption(e.target.value)
+                                }}
+                                value={value2}
+                                label="Доставка курʼєром в Черкасах"
+                                size="sm"
+                            />
+                            <Box
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 400,
+                                    lineHeight: "14.52px",
+                                    color: Colors.grey,
+                                    py: "6px",
+                                }}
+                            >
+                                Вартість доставки: 50 грн, сума замовлення від
+                                1000грн - доставка БЕЗКОШТОВНО
+                            </Box>
+                        </RadioGroup>
+                    </>
+                ) : (
+                    <>
+                        <RadioGroup name="radio-buttons-group">
+                            <Radio
+                                checked={value3 === option ? true : false}
+                                onClick={(e: any) => {
+                                    setOption(e.target.value)
+                                }}
+                                value={value3}
+                                label={value3}
+                                size="sm"
+                                sx={{ color: Colors.dark }}
+                            />
+                            <Box
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 400,
+                                    lineHeight: "14.52px",
+                                    color: Colors.grey,
+                                    py: "6px",
+                                }}
+                            >
+                                Доставка по предоплаті 150 грн.
+                            </Box>
+                            <Radio
+                                checked={value4 === option ? true : false}
+                                onClick={(e: any) => {
+                                    setOption(e.target.value)
+                                }}
+                                value={value4}
+                                label={value4}
+                                size="sm"
+                            />
+                            <Box
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 400,
+                                    lineHeight: "14.52px",
+                                    color: Colors.grey,
+                                    py: "6px",
+                                }}
+                            >
+                                Доставка по предоплаті 150 грн.
+                            </Box>
+                            <Radio
+                                checked={value5 === option ? true : false}
+                                onClick={(e: any) => {
+                                    setOption(e.target.value)
+                                }}
+                                value={value5}
+                                label={value5}
+                                size="sm"
+                            />
+                            <Box
+                                sx={{
+                                    fontSize: "12px",
+                                    fontWeight: 400,
+                                    lineHeight: "14.52px",
+                                    color: Colors.grey,
+                                    py: "6px",
+                                }}
+                            >
+                                Доставка по предоплаті 100 грн.
+                            </Box>
+                        </RadioGroup>
+                    </>
+                )}
+            </Grid>
+        </>
+    )
 }
 
 const Order = () => {
@@ -171,11 +792,21 @@ const Order = () => {
     const [userName, setUserName] = useState("")
     const [userPhone, setUserPhone] = useState("+380")
     const [cityQuery, setCityQuery] = useState("")
+    const [shortQuery, setShortQuery] = useState("")
+    const [deliveryOption, setDeliveryOption] = useState("")
+    const [deliveryLocale, setDeliveryLocale] = useState("")
+    const [deliveryDepartment, setDeliveryDepartment] = useState("")
     const cart = useSelector(getCart)
 
     const citySearchMutation = useMutation({
         mutationKey: ["/orderCities"],
         mutationFn: (query: string) => getNovaPoshtaCities(query),
+    })
+
+    const departmentsSearchMutation = useMutation({
+        mutationKey: ["/orderDepartments"],
+        mutationFn: () =>
+            getNovaPoshtaDepartment(shortQuery, deliveryDepartment),
     })
 
     useEffect(() => {
@@ -184,7 +815,13 @@ const Order = () => {
 
     useEffect(() => {
         citySearchMutation.mutate(cityQuery)
+        setDeliveryOption("")
+        setDeliveryLocale("")
     }, [cityQuery])
+
+    useEffect(() => {
+        departmentsSearchMutation.mutate()
+    }, [deliveryDepartment])
 
     return (
         <>
@@ -380,19 +1017,26 @@ const Order = () => {
                                     sx={{
                                         fontSize: "12px",
                                         fontWeight:
-                                            active === steps.delivery
+                                            active === steps.delivery ||
+                                            active === steps.payment
                                                 ? 600
                                                 : 500,
                                         lineHeight: "14.52px",
                                         color:
-                                            active === steps.delivery
+                                            active === steps.delivery ||
+                                            active === steps.payment
                                                 ? Colors.maxDark
                                                 : Colors.grey,
                                         border: `1px solid ${
-                                            active === steps.delivery
+                                            active === steps.delivery ||
+                                            active === steps.payment
                                                 ? Colors.maxDark
                                                 : Colors.grey
                                         }`,
+                                        background:
+                                            active === steps.payment
+                                                ? Colors.maxDark
+                                                : "none",
                                         borderRadius: "100%",
                                         width: "24px",
                                         height: "24px",
@@ -406,12 +1050,14 @@ const Order = () => {
                                 <Box
                                     sx={{
                                         color:
-                                            active === steps.delivery
+                                            active === steps.delivery ||
+                                            active === steps.payment
                                                 ? Colors.maxDark
                                                 : Colors.grey,
                                         fontSize: "18px",
                                         fontWeight:
-                                            active === steps.delivery
+                                            active === steps.delivery ||
+                                            active === steps.payment
                                                 ? 600
                                                 : 500,
                                         lineHeight: "21.78px",
@@ -424,9 +1070,23 @@ const Order = () => {
                                 <OrderDelivery
                                     cityQuery={cityQuery}
                                     setCityQuery={setCityQuery}
+                                    citySearchMutation={citySearchMutation}
                                     steps={steps}
                                     active={active}
                                     setActive={setActive}
+                                    deliveryOption={deliveryOption}
+                                    setDeliveryOption={setDeliveryOption}
+                                    deliveryLocale={deliveryLocale}
+                                    setDeliveryLocale={setDeliveryLocale}
+                                    deliveryDepartment={deliveryDepartment}
+                                    setDeliveryDepartment={
+                                        setDeliveryDepartment
+                                    }
+                                    departmentsSearchMutation={
+                                        departmentsSearchMutation
+                                    }
+                                    shortQuery={shortQuery}
+                                    setShortQuery={setShortQuery}
                                 />
                             )}
                             <Box
@@ -480,6 +1140,12 @@ const Order = () => {
                                     Оплата
                                 </Box>
                             </Box>
+                            {active === steps.payment && (
+                                <Box>
+                                    Завершіть замовлення і з вами зв'яжеться
+                                    менеджер для уточнення данних
+                                </Box>
+                            )}
                         </Box>
                         <Box
                             sx={{
@@ -490,6 +1156,7 @@ const Order = () => {
                                 flex: "3 1 0",
                                 p: "46px 34px",
                                 rowGap: "20px",
+                                maxHeight: "fit-content",
                             }}
                         >
                             <Box
@@ -739,6 +1406,43 @@ const Order = () => {
                                         cart[0].currency}
                                 </Box>
                             </Grid>
+                            {deliveryOption ===
+                                "Доставка курʼєром в Черкасах" &&
+                                cart.reduce(
+                                    (acc: any, item: any) =>
+                                        acc + parseInt(item.price),
+                                    0
+                                ) < 1000 && (
+                                    <Grid
+                                        container
+                                        sx={{
+                                            justifyContent: "space-between",
+                                            borderBottom: `2px solid ${Colors.white}`,
+                                            pb: "13px",
+                                        }}
+                                    >
+                                        <Box
+                                            sx={{
+                                                color: Colors.grey,
+                                                fontSize: "14px",
+                                                fontWeight: 400,
+                                                lineHeight: "16.94px",
+                                            }}
+                                        >
+                                            Доставка курʼєром в Черкасах
+                                        </Box>
+                                        <Box
+                                            sx={{
+                                                color: Colors.grey,
+                                                fontSize: "18px",
+                                                fontWeight: 600,
+                                                lineHeight: "21.78px",
+                                            }}
+                                        >
+                                            50 {cart[0].currency}
+                                        </Box>
+                                    </Grid>
+                                )}
                             <Grid
                                 container
                                 sx={{
@@ -769,29 +1473,41 @@ const Order = () => {
                                             acc + parseInt(item.price),
                                         0
                                     ) +
+                                        (deliveryOption ===
+                                            "Доставка курʼєром в Черкасах" &&
+                                        cart.reduce(
+                                            (acc: any, item: any) =>
+                                                acc + parseInt(item.price),
+                                            0
+                                        ) < 1000
+                                            ? 50
+                                            : 0) +
                                         " " +
                                         cart[0].currency}
                                 </Box>
                             </Grid>
-                            <Box
-                                sx={{
-                                    background: Colors.neutral,
-                                    color: Colors.white,
-                                    borderRadius: "15px",
-                                    fontSize: "14px",
-                                    fontWeight: 600,
-                                    lineHeight: "16.94px",
-                                    flex: "1 1 0",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    py: "14px",
-                                    px: "38px",
-                                    width: "fit-content",
-                                }}
-                            >
-                                Замовлення підтверджую
-                            </Box>
+                            {active === steps.payment && (
+                                <Box
+                                    sx={{
+                                        background: Colors.neutral,
+                                        color: Colors.white,
+                                        borderRadius: "15px",
+                                        fontSize: "14px",
+                                        fontWeight: 600,
+                                        lineHeight: "16.94px",
+                                        cursor: "pointer",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        py: "14px",
+                                        px: "38px",
+                                        width: "fit-content",
+                                        height: "fit-content",
+                                    }}
+                                >
+                                    Замовлення підтверджую
+                                </Box>
+                            )}
                         </Box>
                     </Grid>
                 </Grid>

@@ -12,12 +12,16 @@ import { Colors } from "@/client"
 import parse from "html-react-parser"
 import { logoSquare } from "../../static/logo"
 import CircularProgress from "@mui/joy/CircularProgress/CircularProgress"
+import { useRouter } from "next/navigation"
 
 export default function Product({ params }: any) {
     const { isLoading, error, data, isSuccess }: any = useQuery({
         queryKey: ["product", params.product],
         queryFn: () => GetProducts(params.product),
+        retry: false,
     })
+
+    const router = useRouter()
 
     if (isLoading)
         return (
@@ -42,7 +46,39 @@ export default function Product({ params }: any) {
             </Box>
         )
 
-    if (data.error) return <div>No such product</div>
+    if (error)
+        return (
+            <Box
+                sx={{
+                    width: "100%",
+                    height: "100%",
+                    background: Colors.white,
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    zIndex: 1000,
+                    rowGap: 3,
+                }}
+            >
+                Продукт не знайдений
+                <Box
+                    sx={{
+                        color: Colors.dark,
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => {
+                        router.push("/")
+                    }}
+                >
+                    Повернутися на головну
+                </Box>
+            </Box>
+        )
 
     return (
         <>

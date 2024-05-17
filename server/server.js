@@ -124,15 +124,21 @@ app.post("/server/getGoods", async function (req, res) {
     (headers = clientServerOptions.headers)
   );
 
-  const resp = await post(`/products/list`, {
-    product_id: req.body.product_id,
-  });
+  try {
+    const resp = await post(`/products/list`, {
+      product_id: req.body.product_id,
+    });
 
-  const data = await resp.json();
+    const data = await resp.json();
 
-  console.log(data);
-
-  res.json(data);
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(401).send("error");
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 app.get("/server/static", async function (req, res) {
@@ -175,16 +181,21 @@ app.post("/server/getProducts", async function (req, res) {
     (method = clientServerOptions.method),
     (headers = clientServerOptions.headers)
   );
+  try {
+    const resp = await post(`/products/list`, {
+      product_id: req.body.product_id,
+    });
 
-  const resp = await post(`/products/list`, {
-    product_id: req.body.product_id,
-  });
+    const data = await resp.json();
 
-  const data = await resp.json();
-
-  if (data.products) console.log(data);
-
-  res.json(data);
+    if (data.products) {
+      res.json(data);
+    } else {
+      res.status(401).send("Error");
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 app.get("/server/getAllCategories", async function (req, res) {

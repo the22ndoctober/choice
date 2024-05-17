@@ -30,6 +30,8 @@ const AdvertismentMain = () => {
                             lg: 1140,
                             xl: 1440,
                         },
+                        height: "fit-content",
+
                         margin: "0 auto",
                         display: "flex",
                         justifyContent: "right",

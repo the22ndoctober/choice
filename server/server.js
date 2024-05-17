@@ -8,6 +8,7 @@ const {
   GetSubCats,
 } = require("./categories/categories");
 const smsVerify = require("./smsVerify.js/smsVerify");
+const dashBoardOrders = require("./user/dashboardOrders");
 
 require("dotenv").config();
 
@@ -20,6 +21,7 @@ const PORT = 3002;
 app.listen(PORT);
 
 smsVerify.smsVerify(app, PORT);
+dashBoardOrders.DashboardOrders(app, PORT, bent);
 
 app.get("/server/test", async function (req, res) {
   if (req.headers.secret !== process.env.SECRET_KEY) {

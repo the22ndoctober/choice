@@ -10,7 +10,7 @@ export const NavStyles = {
         width: { xl: 1440, lg: 1140 },
         py: { sm: "19px" },
         display: "flex",
-        columnGap: "84px",
+        justifyContent: "space-between",
         direction: { sm: "row" },
     },
     logoWrapper: {
@@ -23,11 +23,11 @@ export const NavStyles = {
         width: { sm: "auto" },
         display: "flex",
         direction: "row",
-        columnGap: { lg: "18px", xl: "42px" },
+        columnGap: "12px",
     },
     buttonWrapper__item: {
         boxSizing: "content-box",
-        fontSize: "18px",
+        fontSize: { lg: "15px", xl: "18px" },
         fontWeight: 300,
         letterSpacing: "0em",
         textAlign: "left",
@@ -41,7 +41,7 @@ export const NavStyles = {
         display: "flex",
         flexDirection: "row",
         width: "auto",
-        columnGap: { sm: "20px" },
+
         alignItems: "center",
     },
 }

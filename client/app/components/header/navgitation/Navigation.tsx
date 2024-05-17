@@ -63,14 +63,21 @@ const Navigtaion = () => {
                 <Grid container sx={{ ...NavStyles.bodyWrapper }}>
                     <Grid
                         container
-                        sx={{ ...NavStyles.logoWrapper }}
+                        sx={{ ...NavStyles.logoWrapper, flex: "2 1 0" }}
                         onClick={() => {
                             router.push("/")
                         }}
                     >
                         {logoNav}
                     </Grid>
-                    <Grid container sx={{ ...NavStyles.buttonsWrapper }}>
+                    <Grid
+                        container
+                        sx={{
+                            ...NavStyles.buttonsWrapper,
+                            flex: "5 1 0",
+                            justifyContent: "center",
+                        }}
+                    >
                         {NavButtons.map(
                             (button: {
                                 key: string
@@ -87,19 +94,30 @@ const Navigtaion = () => {
                             )
                         )}
                     </Grid>
-                    <Grid container sx={{ ...NavStyles.infoWrapper }}>
+                    <Grid
+                        container
+                        sx={{ ...NavStyles.infoWrapper, flex: "3 1 0" }}
+                    >
                         <NavPhoneComponent />
                         <Box sx={{ display: "flex", columnGap: "12px" }}>
                             <Typography
                                 sx={{
-                                    fontSize: { lg: "18px", fontWeight: 600 },
+                                    fontSize: {
+                                        lg: "14px",
+                                        xl: "18px",
+                                        fontWeight: 600,
+                                    },
                                 }}
                             >
                                 УКР
                             </Typography>
                             <Typography
                                 sx={{
-                                    fontSize: { lg: "18px", fontWeight: 300 },
+                                    fontSize: {
+                                        lg: "14px",
+                                        xl: "18px",
+                                        fontWeight: 300,
+                                    },
                                 }}
                             >
                                 РУС

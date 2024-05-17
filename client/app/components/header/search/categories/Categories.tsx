@@ -39,6 +39,7 @@ const Categories = ({ categories }: any) => {
                     sx={{
                         width: { lg: 230, xl: 248 },
                         height: "auto",
+
                         zIndex: 1000,
                         display: "flex",
                         flexDirection: "column",
@@ -78,8 +79,10 @@ const Categories = ({ categories }: any) => {
                         container
                         sx={{
                             width: { xl: 1200 },
-                            bgcolor: Colors.white,
+                            bgcolor: Colors.paper,
                             height: "66svh",
+                            minHeight: { lg: "555px" },
+                            overflowX: "scroll",
                         }}
                     >
                         <Grid

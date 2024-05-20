@@ -51,7 +51,6 @@ const Categories = ({ categories }: any) => {
                             height: "960px",
                             display: "flex",
                             flexDirection: "column",
-                            justifyContent: "space-between",
                             background: Colors.paper,
                         }}
                     >

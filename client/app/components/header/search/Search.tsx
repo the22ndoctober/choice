@@ -40,7 +40,7 @@ const Search = ({ params, session }: any) => {
     }
 
     useEffect(() => {
-        setCartAmount(cartList.length !== null ? cartList.length : 0)
+        setCartAmount(cartList !== null ? cartList.length : 0)
     }, [cartList])
 
     useEffect(() => {

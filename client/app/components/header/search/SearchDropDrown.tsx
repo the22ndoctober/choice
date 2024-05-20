@@ -58,7 +58,7 @@ const SearchDropDrown = ({
                             >
                                 Популярні товари
                             </Box>
-                            {productsIsLoading ? (
+                            {productsIsLoading === "loading" ? (
                                 <div>Завантажується</div>
                             ) : (
                                 products.length > 0 &&
@@ -270,8 +270,8 @@ const SearchDropDrown = ({
                                 cursor: "pointer",
                             }}
                             onClick={() => {
-                                router.refresh
-                                router.push("/search")
+                                router.push(`/search?query=${query}`)
+                                setQuery("")
                             }}
                         >
                             Дивитися всі результати

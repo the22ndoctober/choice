@@ -1,13 +1,22 @@
 import { connectMongoDB } from "@/lib/mongodb"
 import User from "@/models/user"
 import { NextResponse } from "next/server"
+import { v4 as uuidv4 } from "uuid"
 
 export async function POST(req) {
     try {
         const { name, phone } = await req.json()
+        const uiid = uuidv4()
 
         await connectMongoDB()
-        await User.create({ name, phone })
+        await User.create({
+            id: uiid,
+            name,
+            phone,
+            createdAt: new Date(),
+            updateAt: new Date(),
+            orders: [],
+        })
 
         return NextResponse.json(
             { message: "User registered." },

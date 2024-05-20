@@ -13,7 +13,11 @@ import { SearchProducts } from "@/api/test"
 import { useState, useEffect } from "react"
 import CloseIcon from "@mui/icons-material/Close"
 import { Colors } from "@/client"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import {
+    productsLoading,
+    getProducts,
+} from "@/app/redux/products/productsSlice"
 
 const SearchItem = ({ pageName, setOpenCat }) => {
     const [searchQuery, setSearchQuery] = useState("")
@@ -21,20 +25,22 @@ const SearchItem = ({ pageName, setOpenCat }) => {
     const [categories, setCategories] = useState([])
     const [open, setOpen] = useState(false)
 
-    //TANSTACK
-    const { data, isLoading } = useQuery({
-        queryKey: ["search", "product"],
-        queryFn: SearchProducts,
-    })
+    const dispatch = useDispatch()
+
+    const productsData = useSelector((state) => state.products.data)
+    const productsLoading = useSelector((state) => state.products.status)
 
     const categoriesData = useSelector((state) => state.categories.data)
     const categoriesLoading = useSelector((state) => state.categories.status)
 
     //Use Effect
+    if (productsLoading === "idle") {
+        dispatch(getProducts())
+    }
 
     useEffect(() => {
         if (searchQuery !== "") {
-            let result = data.filter(
+            let result = productsData.filter(
                 function (product) {
                     if (
                         this.count < 4 &&
@@ -125,7 +131,7 @@ const SearchItem = ({ pageName, setOpenCat }) => {
                         placeholder="Пошук"
                         value={searchQuery}
                         onChange={(e) => {
-                            if (!isLoading)
+                            if (productsLoading !== "loading")
                                 return setSearchQuery(e.target.value)
                             setSearchQuery("")
                         }}
@@ -147,7 +153,7 @@ const SearchItem = ({ pageName, setOpenCat }) => {
                         setOpenCat={setOpenCat}
                         setQuery={setSearchQuery}
                         products={products}
-                        productsIsLoading={isLoading}
+                        productsIsLoading={productsLoading}
                         categories={categories}
                         categoriesIsLoading={categoriesLoading}
                     />

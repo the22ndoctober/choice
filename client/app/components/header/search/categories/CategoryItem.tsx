@@ -1,13 +1,14 @@
-import Image from "next/image"
+"use client"
+
 import React, { useEffect, useState } from "react"
 import Grid from "@mui/material/Grid"
-import { GetCategoryProducts, GetSubCats } from "@/api/test"
-import { useQuery, useMutation } from "@tanstack/react-query"
+
 import { Colors } from "@/client"
 import { Box, Button } from "@mui/material"
-import ProductLink from "./ProductLink"
+
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import SubCategory from "./SubCategory"
+import { useRouter } from "next/navigation"
 
 const CategoryItem = ({
     categoryInfo,
@@ -15,6 +16,8 @@ const CategoryItem = ({
     setSelected,
     selectedCat,
 }: any) => {
+    const router = useRouter()
+
     return (
         <>
             <Box
@@ -73,6 +76,12 @@ const CategoryItem = ({
                                     lineHeight: "17px",
                                     letterSpacing: "0em",
                                     textAlign: "left",
+                                    cursor: "pointer",
+                                }}
+                                onClick={() => {
+                                    router.push(
+                                        `/categories?query=${categoryInfo.category.title}`
+                                    )
                                 }}
                             >
                                 {categoryInfo.category.title}

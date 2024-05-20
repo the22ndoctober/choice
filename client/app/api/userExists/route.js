@@ -6,7 +6,7 @@ export async function POST(req) {
     try {
         await connectMongoDB()
         const { phone } = await req.json()
-        console.log(phone)
+
         const user = await User.findOne({ phone }).select("_id")
         console.log("user: ", user)
         return NextResponse.json({ user })

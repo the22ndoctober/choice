@@ -4,8 +4,6 @@ import "slick-carousel/slick/slick-theme.css"
 import "./globals.css"
 import { Provider } from "./Provider"
 import Footer from "./components/footer/Footer"
-import { getServerSession } from "next-auth"
-import authOptions from "@/app/api/auth/[...nextauth]/authOptions"
 import BackdropLoading from "./components/basic/backdropLoading/BackdropLoading"
 
 export const metadata: Metadata = {
@@ -18,11 +16,6 @@ export default async function RootLayout({
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    const session = await getServerSession<any>(authOptions)
-
-    if (session) {
-        console.log("YES!")
-    }
     return (
         <html lang="en">
             <body>

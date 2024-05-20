@@ -68,7 +68,7 @@ export async function GetCatSorted(params: any) {
 }
 
 export async function GetCategoryProducts(params: any) {
-    const data = await axios.post(
+    const result = await axios.post(
         baseURL + "/server/getCategoryProducts",
         {
             category_id: params,
@@ -80,7 +80,7 @@ export async function GetCategoryProducts(params: any) {
         }
     )
 
-    return data.data
+    return result.data
 }
 
 export async function GetSubCats(params: any) {
@@ -124,8 +124,6 @@ export async function SearchProducts() {
         },
     })
 
-    console.log(data.data)
-
     return data.data
 }
 
@@ -168,7 +166,7 @@ export async function VerifyOtpRequest(phoneNumber: string, userOTP: string) {
             }
         )
         if (response.data.success) {
-            return response.data.success
+            return response.data
         } else {
             console.log("something went wrong")
         }

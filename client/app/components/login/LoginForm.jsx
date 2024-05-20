@@ -39,20 +39,10 @@ export default function LoginForm({ setOpen }) {
         const resp = await VerifyOtpRequest(phone, otpQuery)
         console.log(resp)
         if (resp) {
-            try {
-                const res = await signIn("credentials", {
-                    phone,
-                    redirect: "false",
-                })
-
-                if (res.error) {
-                    setError("Invalid Credentials")
-                    return
-                }
-                setOpen(false)
-            } catch (error) {
-                console.log(error)
-            }
+            localStorage.setItem("CHOICE_JWT", resp.jwt)
+            setOpen(false)
+        } else {
+            alert("something went wrong")
         }
     }
 

@@ -48,10 +48,11 @@ const Categories = ({ categories }: any) => {
                     <Box
                         sx={{
                             width: { lg: 230, xl: 261 },
-                            height: "70svh",
+                            height: "960px",
                             display: "flex",
                             flexDirection: "column",
                             justifyContent: "space-between",
+                            background: Colors.paper,
                         }}
                     >
                         {categories

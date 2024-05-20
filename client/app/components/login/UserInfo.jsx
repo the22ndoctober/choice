@@ -9,7 +9,7 @@ import { useEffect, useState } from "react"
 import { Colors } from "@/client"
 import BestOffers from "@/app/components/main/bestOffers/BestOffers"
 import DeliveryInfo from "@/app/components/main/deliveryInfo/DeliveryInfo"
-import { getDashboardOrders } from "@/api/dashboard"
+import { getDashboardOrders, getProfileByJWT } from "@/api/dashboard"
 import { useQuery } from "@tanstack/react-query"
 import MyOrders from "./DashboarItems/MyOrders"
 import MyCabinet from "./DashboarItems/MyCabinet"
@@ -31,7 +31,13 @@ export default function UserInfo() {
 
     const { isLoading, error, data, isSuccess } = useQuery({
         queryKey: ["dashboard"],
-        queryFn: () => getDashboardOrders({ phone: "+380636415468" }),
+        queryFn: () =>
+            getProfileByJWT({
+                JWT:
+                    localStorage.getItem("CHOICE_JWT") !== null
+                        ? localStorage.getItem("CHOICE_JWT") !== null
+                        : "",
+            }),
         retry: false,
         refetchOnReconnect: false,
     })
@@ -51,11 +57,9 @@ export default function UserInfo() {
         }
     }, [activeSideBar])
 
-    useEffect(() => {
-        if (status === "unauthenticated") {
-            router.replace("/")
-        }
-    }, [status])
+    if (localStorage.getItem("CHOICE_JWT") === null) {
+        router.replace("/")
+    }
 
     return (
         <>
@@ -213,7 +217,7 @@ export default function UserInfo() {
                                             color: Colors.black,
                                         }}
                                     >
-                                        Едуард Кучеренко
+                                        {data.name}
                                     </Box>
                                     <Box
                                         sx={{
@@ -223,7 +227,7 @@ export default function UserInfo() {
                                             color: Colors.grey,
                                         }}
                                     >
-                                        +380636415468
+                                        {data.phone}
                                     </Box>
                                 </Grid>
                             </Box>
@@ -471,7 +475,8 @@ export default function UserInfo() {
 
                                 <Box
                                     onClick={() => {
-                                        signOut()
+                                        localStorage.removeItem("CHOICE_JWT")
+                                        router.push("/")
                                     }}
                                     sx={{
                                         fontSize: "20px",

@@ -38,7 +38,6 @@ const Search = ({ params, session }: any) => {
     const getStatus = useSelector((state: any) => state.categories.status)
 
     if (getStatus === "idle") {
-        console.log(1)
         dispacth<any>(getCategories())
     }
 
@@ -56,7 +55,19 @@ const Search = ({ params, session }: any) => {
         <>
             <Box sx={{ ...SearchStyles.container }}>
                 <Box sx={{ ...SearchStyles.wrapper }}>
-                    <Box sx={{ position: "relative" }}>
+                    <Box
+                        sx={{ position: "relative" }}
+                        onMouseEnter={() => {
+                            if (params !== "") {
+                                setOpenCat(true)
+                            }
+                        }}
+                        onMouseLeave={() => {
+                            if (params !== "") {
+                                setOpenCat(false)
+                            }
+                        }}
+                    >
                         <Button sx={{ ...SearchStyles.catalog__button }}>
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
@@ -98,11 +109,11 @@ const Search = ({ params, session }: any) => {
                                 },
                             }}
                             onClick={() => {
-                                console.log(status)
-                                if (status === "unauthenticated") {
+                                if (
+                                    localStorage.getItem("CHOICE_JWT") === null
+                                ) {
                                     setOpenLogin(true)
-                                }
-                                if (status === "authenticated") {
+                                } else {
                                     router.push("/dashboard")
                                 }
                             }}

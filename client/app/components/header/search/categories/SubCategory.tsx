@@ -8,6 +8,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore"
 import { useQuery } from "@tanstack/react-query"
 import { GetCategoryProducts, GetSubCats } from "@/api/test"
 import { Colors } from "@/client"
+import { useRouter } from "next/navigation"
 
 const SubCategory = ({ categoryInfo, parent }: any) => {
     const [open, setOpen] = useState<boolean>(false)
@@ -17,12 +18,15 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
         queryFn: () => GetCategoryProducts(categoryInfo.category.category_id),
     })
 
+    const router = useRouter()
+
     const level2Styles = {
         color: Colors.dark,
         fontStyle: "normal",
         fontWeight: 400,
         fontSize: "16px",
         lineHeight: "19px",
+        cursor: "pointer",
     }
 
     const level3Styles = {
@@ -31,6 +35,7 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
         fontWeight: 400,
         fontSize: "14px",
         lineHeight: "17px",
+        cursor: "pointer",
     }
 
     return (
@@ -50,6 +55,11 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                             ? level2Styles
                             : level3Styles
                     }
+                    onClick={() => {
+                        router.push(
+                            `/categories?query=${categoryInfo.category.title}`
+                        )
+                    }}
                 >
                     {categoryInfo.category.title}
                 </Box>
@@ -66,6 +76,11 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                                         ? level2Styles
                                         : level3Styles
                                 }
+                                onClick={() => {
+                                    router.push(
+                                        `/categories?query=${child.category.title}`
+                                    )
+                                }}
                             >
                                 {child.category.title}
                             </Box>

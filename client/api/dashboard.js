@@ -25,3 +25,27 @@ export const getDashboardOrders = async ({ phone }) => {
         console.log(error)
     }
 }
+
+export const getProfileByJWT = async ({ JWT }) => {
+    try {
+        const response = await axios.post(
+            baseURL + "/server/getProfileByJWT",
+            {
+                JWT: JWT,
+            },
+            {
+                headers: {
+                    'secret': process.env.SECRET_KEY, // prettier-ignore
+                },
+            }
+        )
+
+        if (response) {
+            return response.data
+        } else {
+            alert(1)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

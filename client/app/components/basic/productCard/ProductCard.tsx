@@ -252,9 +252,7 @@ const ProductCard = ({
                             fontWeight: 800,
                         }}
                     >
-                        {price +
-                            " " +
-                            (currency?.toUpperCase() === "ГРН." && "₴")}
+                        {price + " " + "₴"}
                     </Button>
                     <Box
                         sx={{

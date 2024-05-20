@@ -51,7 +51,7 @@ const Categories = ({ categories }: any) => {
                             height: "960px",
                             display: "flex",
                             flexDirection: "column",
-                            background: Colors.paper,
+                            background: Colors.white,
                         }}
                     >
                         {categories
@@ -79,7 +79,7 @@ const Categories = ({ categories }: any) => {
                         container
                         sx={{
                             width: { xl: 1200 },
-                            bgcolor: Colors.paper,
+                            bgcolor: Colors.white,
                             height: "66svh",
                             minHeight: { lg: "555px" },
                             overflowX: "scroll",

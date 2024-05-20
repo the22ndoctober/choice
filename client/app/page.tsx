@@ -10,16 +10,8 @@ import InfoMain from "./components/main/infoMain/InfoMain"
 import DeliveryInfo from "./components/main/deliveryInfo/DeliveryInfo"
 import Navigation from "./components/header/navgitation/Navigation"
 import Search from "./components/header/search/Search"
-import { getServerSession } from "next-auth"
-import { authOptions } from "./api/auth/[...nextauth]/route"
 
 export default async function Home({ params }: any) {
-    // const session = await getServerSession<any>(authOptions)
-
-    // if (session) {
-    //     console.log("YES!")
-    // }
-
     return (
         <>
             <Box className="global-content-wrapper">

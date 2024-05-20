@@ -1,37 +1,39 @@
+require("dotenv").config();
+const mongoose = require("mongoose");
+
+const orderSchema = new mongoose.Schema({
+  id: String,
+  createdAt: Date,
+  updatedAt: Date,
+  status: String,
+  cart: [
+    {
+      product_id: String,
+      store_id: String,
+      title: String,
+      img_path: String,
+      amount: Number,
+      price: String,
+      currency: String,
+    },
+  ],
+});
+
+const userSchema = new mongoose.Schema({
+  id: String,
+  name: String,
+  phone: String,
+  jwt: String,
+  createdAt: Date,
+  updatedAt: Date,
+  orders: [orderSchema],
+});
+
 function DashboardOrders(app, PORT, bent) {
-  require("dotenv").config();
-  const mongoose = require("mongoose");
   const { connectMongoDB } = require("../lib/mongodb");
 
   connectMongoDB();
   const db = mongoose.connection;
-
-  const orderSchema = new mongoose.Schema({
-    id: String,
-    createdAt: Date,
-    updatedAt: Date,
-    status: String,
-    cart: [
-      {
-        product_id: String,
-        store_id: String,
-        title: String,
-        img_path: String,
-        amount: Number,
-        price: String,
-        currency: String,
-      },
-    ],
-  });
-
-  const userSchema = new mongoose.Schema({
-    id: String,
-    name: String,
-    phone: String,
-    createdAt: Date,
-    updatedAt: Date,
-    orders: [orderSchema],
-  });
 
   const User = mongoose.model("User", userSchema);
 
@@ -53,12 +55,40 @@ function DashboardOrders(app, PORT, bent) {
 
     try {
       const user = await User.findOne({ phone: req.body.phone });
-      console.log(user);
-      res.json(user);
+      if (user) {
+        res.json(user);
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  app.post("/server/getProfileByJWT", async function (req, res) {
+    let clientServerOptions = {
+      baseUrl: "https://api.dntrade.com.ua",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ApiKey: process.env.API_KEY,
+      },
+    };
+
+    const post = bent(
+      (baseUrl = clientServerOptions.baseUrl),
+      (method = clientServerOptions.method),
+      (headers = clientServerOptions.headers)
+    );
+
+    try {
+      const user = await User.findOne({ JWT: req.body.JWT });
+      if (user) {
+        res.json(user);
+      }
+      res.status(401).send("No valid user");
     } catch (error) {
       res.status(500).send(error);
     }
   });
 }
 
-module.exports = { DashboardOrders };
+module.exports = { DashboardOrders, orderSchema, userSchema };

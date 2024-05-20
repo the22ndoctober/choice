@@ -41,7 +41,7 @@ const Search = ({ params, session }: any) => {
 
     useEffect(() => {
         setCartAmount(cartList.length)
-    }, [cartList.length])
+    }, [cartList])
 
     useEffect(() => {
         if (params !== "") {

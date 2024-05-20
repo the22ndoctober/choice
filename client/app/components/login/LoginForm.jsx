@@ -1,9 +1,6 @@
 "use client"
 
-import Link from "next/link"
 import { useState, useEffect } from "react"
-import { signIn } from "next-auth/react"
-
 import Box from "@mui/material/Box"
 import { Colors } from "@/client"
 import InputBase from "@mui/material/InputBase"
@@ -39,7 +36,7 @@ export default function LoginForm({ setOpen }) {
         const resp = await VerifyOtpRequest(phone, otpQuery)
         console.log(resp)
         if (resp) {
-            localStorage.setItem("CHOICE_JWT", resp.jwt)
+            window?.localStorage?.setItem("CHOICE_JWT", resp.jwt)
             setOpen(false)
         } else {
             alert("something went wrong")

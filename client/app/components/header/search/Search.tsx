@@ -16,7 +16,6 @@ import { profile } from "../../static/profile"
 import { favourites } from "../../static/favourites"
 import { cart } from "../../static/cart"
 import LoginForm from "@/app/components/login/LoginForm"
-import { useSession } from "next-auth/react"
 import { getCart } from "@/app/redux/cart/cartSlice"
 import { useSelector, useDispatch } from "react-redux"
 import CartComp from "../../order/Cart"
@@ -31,7 +30,6 @@ const Search = ({ params, session }: any) => {
     const [openCart, setOpenCart] = useState<boolean>(false)
     const [cartAmount, setCartAmount] = useState<number>(0)
 
-    const { status } = useSession()
     const router = useRouter()
     const dispacth = useDispatch()
     const data = useSelector((state: any) => state.categories.data)

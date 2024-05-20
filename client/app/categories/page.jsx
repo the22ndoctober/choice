@@ -2,6 +2,7 @@ import React from "react"
 import Navigation from "@/app/components/header/navgitation/Navigation"
 import Search from "@/app/components/header/search/Search"
 import CategoriesSearch from "../components/header/search/productsSearch/CategoriesSearch"
+import { Suspense } from "react"
 
 const CategoriesSearchPage = ({ params }) => {
     console.log(params)
@@ -9,7 +10,9 @@ const CategoriesSearchPage = ({ params }) => {
         <>
             <Navigation />
             <Search params={params.query} />
-            <CategoriesSearch />
+            <Suspense>
+                <CategoriesSearch />
+            </Suspense>
         </>
     )
 }

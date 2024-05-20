@@ -1355,7 +1355,7 @@ const Order = () => {
                                             >
                                                 {parseInt(item.price) +
                                                     " " +
-                                                    item.currency}
+                                                    "₴"}
                                             </Box>
                                         </Grid>
                                     </Grid>
@@ -1403,7 +1403,7 @@ const Order = () => {
                                         0
                                     ) +
                                         " " +
-                                        cart[0].currency}
+                                        "₴"}
                                 </Box>
                             </Grid>
                             {deliveryOption ===
@@ -1439,7 +1439,7 @@ const Order = () => {
                                                 lineHeight: "21.78px",
                                             }}
                                         >
-                                            50 {cart[0].currency}
+                                            50 ₴
                                         </Box>
                                     </Grid>
                                 )}
@@ -1483,7 +1483,7 @@ const Order = () => {
                                             ? 50
                                             : 0) +
                                         " " +
-                                        cart[0].currency}
+                                        "₴"}
                                 </Box>
                             </Grid>
                             {active === steps.payment && (

@@ -1,9 +1,6 @@
 "use client"
 
 import { Box, Grid } from "@mui/material"
-import { signOut } from "next-auth/react"
-import { useSession } from "next-auth/react"
-import { redirect } from "next/navigation"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Colors } from "@/client"
@@ -15,7 +12,6 @@ import MyOrders from "./DashboarItems/MyOrders"
 import MyCabinet from "./DashboarItems/MyCabinet"
 
 export default function UserInfo() {
-    const { data: session, status } = useSession()
     const sideBarOptions = {
         MyCabinet: "Мій кабінет",
         MyOrders: "Мої замовлення",
@@ -34,8 +30,8 @@ export default function UserInfo() {
         queryFn: () =>
             getProfileByJWT({
                 JWT:
-                    localStorage.getItem("CHOICE_JWT") !== null
-                        ? localStorage.getItem("CHOICE_JWT") !== null
+                    global?.window?.localStorage?.getItem("CHOICE_JWT") !== null
+                        ? localStorage.getItem("CHOICE_JWT")
                         : "",
             }),
         retry: false,
@@ -57,7 +53,7 @@ export default function UserInfo() {
         }
     }, [activeSideBar])
 
-    if (localStorage.getItem("CHOICE_JWT") === null) {
+    if (global?.window?.localStorage?.getItem("CHOICE_JWT") === null) {
         router.replace("/")
     }
 
@@ -217,7 +213,7 @@ export default function UserInfo() {
                                             color: Colors.black,
                                         }}
                                     >
-                                        {data.name}
+                                        {isSuccess && data.name}
                                     </Box>
                                     <Box
                                         sx={{
@@ -227,7 +223,7 @@ export default function UserInfo() {
                                             color: Colors.grey,
                                         }}
                                     >
-                                        {data.phone}
+                                        {isSuccess && data.phone}
                                     </Box>
                                 </Grid>
                             </Box>

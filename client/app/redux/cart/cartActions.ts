@@ -2,6 +2,7 @@
 
 export const changeCart = (state: any, action: any) => {
     if (action.type === "ADD_ITEM") {
+        console.log(state)
         if (
             state.some(
                 (item: any) => item.product_id === action.payload.product_id
@@ -12,7 +13,7 @@ export const changeCart = (state: any, action: any) => {
 
         let result = [...state, action.payload]
 
-        localStorage.setItem("cart", JSON.stringify(result))
+        global?.window?.localStorage.setItem("cart", JSON.stringify(result))
 
         return result
     }
@@ -21,11 +22,11 @@ export const changeCart = (state: any, action: any) => {
             (item: any) => item.product_id !== action.payload
         )
 
-        localStorage.setItem("cart", JSON.stringify(result))
+        global?.window?.localStorage.setItem("cart", JSON.stringify(result))
         return result
     }
     if (action.type === "REMOVE_ALL") {
-        localStorage.setItem("cart", JSON.stringify([]))
+        global?.window?.localStorage.setItem("cart", JSON.stringify([]))
         return []
     }
 

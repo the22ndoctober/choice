@@ -47,22 +47,12 @@ const ProductCard = ({
                 sx={{
                     width: "fit-content",
                     flexDirection: "column",
-                    background: Colors.white,
+                    background: Colors.paper,
                     borderRadius: "15px",
                     rowGap: { lg: "10px" },
                     p: { lg: "20px", xl: "22px" },
                 }}
             >
-                <Grid container sx={tagsWrapperStyles}>
-                    {tags.map((tag: any) => (
-                        <Box
-                            key={tag.title}
-                            sx={{ ...tagStyles, background: tag.color }}
-                        >
-                            {tag.title}
-                        </Box>
-                    ))}
-                </Grid>
                 <Box
                     sx={{
                         width: { lg: 200, xl: 224 },
@@ -241,9 +231,9 @@ const ProductCard = ({
                     <Button
                         sx={{
                             fontSize: { lg: "24px" },
-                            color: Colors.dark,
+                            color: Colors.neutral,
                             background: "none",
-                            border: `1px solid ${Colors.dark}`,
+                            border: `1px solid ${Colors.neutral}`,
                             borderRadius: "15px",
                             textAlign: "center",
                             px: { lg: 2 },
@@ -258,7 +248,7 @@ const ProductCard = ({
                         sx={{
                             p: "7px",
                             "& path": {
-                                stroke: Colors.dark,
+                                stroke: Colors.neutral,
                             },
                         }}
                     >
@@ -284,7 +274,7 @@ const ProductCard = ({
                         sx={{
                             ...cartButtonStyles,
 
-                            background: active ? Colors.teal : Colors.dark,
+                            background: active ? Colors.teal : Colors.neutral,
                         }}
                     >
                         {cartCard}

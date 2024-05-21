@@ -71,7 +71,7 @@ const CategoryItem = ({
                                     textWrap: "break-line",
                                     width: "auto",
                                     maxWidth: { lg: 150, xl: 180 },
-                                    fontSize: { lg: "12px", xl: "14px" },
+                                    fontSize: { lg: "14px", xl: "14px" },
                                     fontWeight: 400,
                                     lineHeight: "17px",
                                     letterSpacing: "0em",

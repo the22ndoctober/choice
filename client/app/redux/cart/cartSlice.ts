@@ -6,7 +6,10 @@ import * as actions from "./cartActions"
 const local: any = global?.window?.localStorage?.getItem("cart")
 
 const initialState = {
-    cart: local === undefined || local === "[]" ? [] : JSON.parse(local),
+    cart:
+        local === undefined || local === null || local === "[]"
+            ? []
+            : JSON.parse(local),
 }
 
 export const cartSlice = createSlice({

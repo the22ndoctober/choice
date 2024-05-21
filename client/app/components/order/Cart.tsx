@@ -160,7 +160,7 @@ const CartComp = ({ setOpen }: any) => {
                     background: Colors.paper,
                     borderRadius: "15px",
                     width: { lg: 892 },
-                    height: cart.length > 0 ? "85svh" : 443,
+                    height: cart !== null && cart.length > 0 ? "85svh" : 443,
                     p: "32px 28px",
                     boxShadow: `10px 10px 10px -11px rgba(0,0,0,0.75)`,
                 }}

@@ -51,10 +51,30 @@ const Search = ({ params, session }: any) => {
 
     return (
         <>
-            <Box sx={{ ...SearchStyles.container }}>
-                <Box sx={{ ...SearchStyles.wrapper }}>
+            <Box
+                sx={{
+                    background: { sm: Colors.maxDark },
+                    width: "100%",
+                }}
+            >
+                <Box
+                    sx={{
+                        width: { xl: 1440, lg: 1368 },
+                        margin: "0 auto",
+                        height: { sm: "69px" },
+                        alignItems: "center",
+                        position: { sm: "relative" },
+                        display: "flex",
+                    }}
+                >
                     <Box
-                        sx={{ position: "relative" }}
+                        sx={{
+                            position: "relative",
+                            flex: "2 1 0",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                        }}
                         onMouseEnter={() => {
                             if (params !== "") {
                                 setOpenCat(true)
@@ -66,7 +86,24 @@ const Search = ({ params, session }: any) => {
                             }
                         }}
                     >
-                        <Button sx={{ ...SearchStyles.catalog__button }}>
+                        <Button
+                            sx={{
+                                background: Colors.dark,
+                                color: Colors.white,
+                                textTransform: "none !important",
+                                pl: { sm: "24px" },
+                                pr: { sm: "56px" },
+                                height: "40px",
+                                fontSize: { sm: "18px" },
+                                display: "flex",
+                                columnGap: { sm: "17px" },
+                                borderRadius: "15px",
+                                fontWeight: 500,
+                                lineHeight: "22px",
+                                letterSpacing: "0.75px",
+                                textAlign: "left",
+                            }}
+                        >
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
                         </Button>
@@ -79,100 +116,108 @@ const Search = ({ params, session }: any) => {
                         key={"search-component"}
                         setOpenCat={setOpenCat}
                     />
-                    <Grid container sx={{ alignItems: "center" }}>
-                        {geoIcon}
-                        <Typography sx={{ color: Colors.white }}>
-                            Черкаси
-                        </Typography>
-                        <ExpandMoreIcon sx={{ color: Colors.white }} />
-                    </Grid>
-                    <Grid
-                        container
+                    <Box
                         sx={{
-                            alignItems: "center",
-                            columnGap: "8px",
-                            justifyContent: "space-between",
+                            display: "flex",
+                            flex: "3 1 0",
                         }}
                     >
-                        <Box
+                        <Grid container sx={{ alignItems: "center" }}>
+                            {geoIcon}
+                            <Typography sx={{ color: Colors.white }}>
+                                Черкаси
+                            </Typography>
+                            <ExpandMoreIcon sx={{ color: Colors.white }} />
+                        </Grid>
+                        <Grid
+                            container
                             sx={{
-                                width: "40px",
-                                height: "40px",
-                                display: "flex",
                                 alignItems: "center",
-                                justifyContent: "center",
-                                "& > svg:hover": {
-                                    stroke: Colors.teal,
-                                    fill: Colors.teal,
-                                },
-                            }}
-                            onClick={() => {
-                                if (
-                                    localStorage.getItem("CHOICE_JWT") === null
-                                ) {
-                                    setOpenLogin(true)
-                                } else {
-                                    router.push("/dashboard")
-                                }
+                                columnGap: "8px",
+                                justifyContent: "space-between",
                             }}
                         >
-                            {profile}
-                        </Box>
-                        <Box
-                            sx={{
-                                width: "40px",
-                                height: "40px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                "& > svg:hover": {
-                                    stroke: Colors.teal,
-                                    fill: Colors.teal,
-                                },
-                            }}
-                        >
-                            {favourites}
-                        </Box>
-                        <Box
-                            sx={{
-                                width: "40px",
-                                height: "40px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                position: "relative",
-                                "& > svg:hover": {
-                                    fill: Colors.teal,
-                                },
-                            }}
-                            onClick={() => {
-                                setOpenCart(true)
-                            }}
-                        >
-                            {cartAmount > 0 && (
-                                <Box
-                                    sx={{
-                                        position: "absolute",
-                                        background: Colors.paper,
-                                        color: Colors.maxDark,
-                                        bottom: 0,
-                                        right: 5,
-                                        width: "15px",
-                                        height: "15px",
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        borderRadius: "100%",
-                                        p: "8px",
-                                        fontSize: "10px",
-                                    }}
-                                >
-                                    {cartAmount}
-                                </Box>
-                            )}
-                            {cart}
-                        </Box>
-                    </Grid>
+                            <Box
+                                sx={{
+                                    width: "40px",
+                                    height: "40px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    "& > svg:hover": {
+                                        stroke: Colors.teal,
+                                        fill: Colors.teal,
+                                    },
+                                }}
+                                onClick={() => {
+                                    if (
+                                        localStorage.getItem("CHOICE_JWT") ===
+                                        null
+                                    ) {
+                                        setOpenLogin(true)
+                                    } else {
+                                        router.push("/dashboard")
+                                    }
+                                }}
+                            >
+                                {profile}
+                            </Box>
+                            <Box
+                                sx={{
+                                    width: "40px",
+                                    height: "40px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    "& > svg:hover": {
+                                        stroke: Colors.teal,
+                                        fill: Colors.teal,
+                                    },
+                                }}
+                            >
+                                {favourites}
+                            </Box>
+                            <Box
+                                sx={{
+                                    width: "40px",
+                                    height: "40px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    position: "relative",
+                                    "& > svg:hover": {
+                                        fill: Colors.teal,
+                                    },
+                                }}
+                                onClick={() => {
+                                    setOpenCart(true)
+                                }}
+                            >
+                                {cartAmount > 0 && (
+                                    <Box
+                                        sx={{
+                                            position: "absolute",
+                                            background: Colors.paper,
+                                            color: Colors.maxDark,
+                                            bottom: 0,
+                                            right: 5,
+                                            width: "15px",
+                                            height: "15px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            borderRadius: "100%",
+                                            p: "8px",
+                                            fontSize: "10px",
+                                        }}
+                                    >
+                                        {cartAmount}
+                                    </Box>
+                                )}
+                                {cart}
+                            </Box>
+                        </Grid>
+                    </Box>
                 </Box>
             </Box>
             {openLogin && <LoginForm setOpen={setOpenLogin} />}

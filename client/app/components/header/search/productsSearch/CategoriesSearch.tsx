@@ -88,7 +88,13 @@ const CategoriesSearch = () => {
     }, [selectedPage])
 
     return (
-        <Box sx={{ minHeight: "70svh", width: "100%" }}>
+        <Box
+            sx={{
+                minHeight: "70svh",
+                width: "100%",
+                background: Colors.white,
+            }}
+        >
             <Grid
                 container
                 sx={{
@@ -97,7 +103,7 @@ const CategoriesSearch = () => {
                     width: { xl: 1440, lg: 1140 },
                     minHeight: "70svh",
                     flexBasis: "auto",
-                    my: "24px",
+                    py: "24px",
                 }}
             >
                 <Box
@@ -119,7 +125,7 @@ const CategoriesSearch = () => {
                         sx={{
                             flexDirection: "column",
                             flex: "1 1 0",
-                            background: Colors.white,
+                            background: Colors.paper,
                             borderRadius: "15px",
                         }}
                     ></Grid>

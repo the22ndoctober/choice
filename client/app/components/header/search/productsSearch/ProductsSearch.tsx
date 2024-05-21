@@ -51,16 +51,22 @@ const ProductsSearch = () => {
     }, [selectedPage])
 
     return (
-        <Box sx={{ minHeight: "70svh", width: "100%" }}>
+        <Box
+            sx={{
+                minHeight: "70svh",
+                width: "100%",
+                background: Colors.white,
+            }}
+        >
             <Grid
                 container
                 direction={"column"}
                 sx={{
                     margin: "0 auto",
-                    width: { xl: 1440, lg: 1140 },
+                    width: { xl: 1440, lg: 1368 },
                     minHeight: "70svh",
                     flexBasis: "auto",
-                    my: "24px",
+                    py: "24px",
                 }}
             >
                 <Box
@@ -84,10 +90,10 @@ const ProductsSearch = () => {
                     container
                     sx={{
                         flexWrap: "wrap",
-                        columnGap: "10px",
-                        rowGap: "10px",
+                        columnGap: "24px",
+                        rowGap: "24px",
                         "& > div": {
-                            width: "calc(25% - 10px) !important",
+                            width: "calc(25% - 24px)",
                         },
                     }}
                 >

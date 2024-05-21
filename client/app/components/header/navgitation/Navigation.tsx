@@ -8,6 +8,7 @@ import logo_src from "@/public/logo_nav.png"
 import { useRouter } from "next/navigation"
 import NavPhoneComponent from "./NavPhoneComponent"
 import { logoNav } from "../../static/logo"
+import { Colors } from "@/client"
 
 const Navigtaion = () => {
     const router = useRouter()
@@ -59,11 +60,30 @@ const Navigtaion = () => {
 
     return (
         <>
-            <Box sx={{ ...NavStyles.container }}>
-                <Grid container sx={{ ...NavStyles.bodyWrapper }}>
+            <Box
+                sx={{
+                    width: { sm: "100%" },
+                    background: "#F9FAFD",
+                }}
+            >
+                <Grid
+                    container
+                    sx={{
+                        margin: "0 auto",
+                        width: { xl: 1440, lg: 1368 },
+                        py: { sm: "19px" },
+                        display: "flex",
+                        justifyContent: "space-between",
+                        direction: { sm: "row" },
+                    }}
+                >
                     <Grid
                         container
-                        sx={{ ...NavStyles.logoWrapper, flex: "2 1 0" }}
+                        sx={{
+                            heigth: { sm: "43,91px" },
+
+                            flex: "2 1 0",
+                        }}
                         onClick={() => {
                             router.push("/")
                         }}
@@ -73,37 +93,79 @@ const Navigtaion = () => {
                     <Grid
                         container
                         sx={{
-                            ...NavStyles.buttonsWrapper,
+                            alignItems: { sm: "center" },
+                            width: { sm: "auto" },
+                            display: "flex",
+                            direction: "row",
+
                             flex: "5 1 0",
-                            justifyContent: "center",
                         }}
                     >
-                        {NavButtons.map(
-                            (button: {
-                                key: string
-                                value: string
-                                handle: any
-                            }) => (
-                                <Typography
-                                    key={button.key}
-                                    sx={{ ...NavStyles.buttonWrapper__item }}
-                                    onClick={button.handle}
-                                >
-                                    {button.value}
-                                </Typography>
-                            )
-                        )}
+                        <Box
+                            sx={{
+                                display: "flex",
+
+                                pl: "46px",
+                                width: "600px",
+                                justifyContent: "space-between",
+                            }}
+                        >
+                            {NavButtons.map(
+                                (button: {
+                                    key: string
+                                    value: string
+                                    handle: any
+                                }) => (
+                                    <Typography
+                                        key={button.key}
+                                        sx={{
+                                            boxSizing: "content-box",
+                                            fontSize: {
+                                                lg: "18px",
+                                                xl: "18px",
+                                            },
+                                            fontWeight: 300,
+                                            letterSpacing: "0em",
+                                            textAlign: "left",
+                                            cursor: "pointer",
+                                            "&:hover": {
+                                                color: Colors.teal,
+                                            },
+                                        }}
+                                        onClick={button.handle}
+                                    >
+                                        {button.value}
+                                    </Typography>
+                                )
+                            )}
+                        </Box>
                     </Grid>
                     <Grid
                         container
-                        sx={{ ...NavStyles.infoWrapper, flex: "3 1 0" }}
+                        sx={{
+                            position: "relative",
+                            display: "flex",
+                            flexDirection: "row",
+                            width: "auto",
+
+                            alignItems: "center",
+
+                            flex: "3 1 0",
+                            justifyContent: "space-between",
+                        }}
                     >
                         <NavPhoneComponent />
-                        <Box sx={{ display: "flex", columnGap: "12px" }}>
+                        <Box
+                            sx={{
+                                display: "flex",
+                                columnGap: "12px",
+                                alignItems: "center",
+                            }}
+                        >
                             <Typography
                                 sx={{
                                     fontSize: {
-                                        lg: "14px",
+                                        lg: "18px",
                                         xl: "18px",
                                         fontWeight: 600,
                                     },
@@ -114,7 +176,7 @@ const Navigtaion = () => {
                             <Typography
                                 sx={{
                                     fontSize: {
-                                        lg: "14px",
+                                        lg: "18px",
                                         xl: "18px",
                                         fontWeight: 300,
                                     },

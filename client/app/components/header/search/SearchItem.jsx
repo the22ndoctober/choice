@@ -108,11 +108,11 @@ const SearchItem = ({ pageName, setOpenCat }) => {
             backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
-        width: "auto",
+        width: "554px",
         zIndex: 500,
         [theme.breakpoints.up("sm")]: {
             marginLeft: theme.spacing(1),
-            width: "auto",
+            width: "554px",
         },
     }))
 
@@ -121,10 +121,24 @@ const SearchItem = ({ pageName, setOpenCat }) => {
             <Box
                 sx={{
                     position: "relative",
-                    minWidth: { lg: "440px", xl: "680px" },
+                    flex: "5 1 0",
                 }}
             >
-                <SearchComp sx={{ ...SearchStyles.search__wrapper }}>
+                <SearchComp
+                    sx={{
+                        ml: "46px !important",
+                        display: "flex",
+                        background: Colors.neutral,
+                        direction: "row",
+                        borderRadius: "15px",
+                        height: "40px",
+                        width: "554px",
+                        pr: "20px",
+                        color: "#fff",
+                        alignItems: "center",
+                        zIndex: 500,
+                    }}
+                >
                     <StyledInputBase
                         autoFocus={true}
                         className="search-placeholder"

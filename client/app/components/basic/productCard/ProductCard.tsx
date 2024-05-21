@@ -10,25 +10,6 @@ import { cartCard } from "../../static/cartCard"
 import { useDispatch } from "react-redux"
 import { changeCart } from "@/app/redux/cart/cartSlice"
 
-const tagsWrapperStyles = {
-    columnGap: { lg: "8px", xl: "10px" },
-    justifyContent: "left",
-}
-
-const tagStyles = {
-    color: Colors.white,
-    borderRadius: "15px",
-    p: { lg: "8px", xl: "8px" },
-    fontSize: { lg: "12px" },
-}
-
-const cartButtonStyles = {
-    background: Colors.teal,
-    borderRadius: "15px",
-    py: { lg: 1 },
-    px: { lg: "12px" },
-}
-
 const ProductCard = ({
     title,
     price,
@@ -45,23 +26,34 @@ const ProductCard = ({
             <Grid
                 container
                 sx={{
-                    width: "fit-content",
+                    width: "inherit",
                     flexDirection: "column",
                     background: Colors.paper,
                     borderRadius: "15px",
                     rowGap: { lg: "10px" },
-                    p: { lg: "20px", xl: "22px" },
+                    overflow: "hidden",
+                    WebkitBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                    MozBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                    boxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                    transformOrigin: "center",
+                    transitionDuration: "0.3s",
+                    ":hover": {
+                        scale: "1.05",
+                        WebkitBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                        MozBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                        boxShadow: "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                    },
                 }}
             >
                 <Box
                     sx={{
-                        width: { lg: 200, xl: 224 },
-                        height: { lg: "250px" },
                         display: "flex",
                         justifyContent: "center",
-                        background: Colors.paper,
+                        background: Colors.white,
                         margin: "0 auto",
                         overflow: "hidden",
+                        width: "100%",
+                        height: { lg: "257px", xl: "317px" },
                     }}
                 >
                     {img_path === undefined ? (
@@ -70,7 +62,7 @@ const ProductCard = ({
                             alt=""
                             style={{
                                 width: "100%",
-                                height: "100%",
+                                height: "auto",
                                 margin: "0 auto",
                             }}
                         />
@@ -199,12 +191,16 @@ const ProductCard = ({
                         </svg>
                     )}
                 </Box>
-                <Grid container sx={{ flexDirection: "column", mt: "12px" }}>
+                <Grid
+                    container
+                    sx={{ flexDirection: "column", mt: "12px", rowGap: "12px" }}
+                >
                     <Box
                         sx={{
                             color: Colors.grey,
                             fontSize: "12px",
                             maxWidth: "270px",
+                            px: { lg: "20px", xl: "22px" },
                         }}
                     >
                         {product ? product.code : ""}
@@ -214,8 +210,9 @@ const ProductCard = ({
                             color: Colors.black,
                             fontSize: "16px",
                             fontWeight: 500,
-                            minHeight: "70px",
-                            maxWidth: "240px",
+                            minHeight: "60px",
+
+                            px: { lg: "20px", xl: "22px" },
                         }}
                     >
                         {title}
@@ -226,6 +223,8 @@ const ProductCard = ({
                     sx={{
                         justifyContent: "space-between",
                         alignItems: "center",
+                        px: { lg: "20px", xl: "22px" },
+                        pb: { lg: "20px", xl: "22px" },
                     }}
                 >
                     <Button
@@ -236,8 +235,8 @@ const ProductCard = ({
                             border: `1px solid ${Colors.neutral}`,
                             borderRadius: "15px",
                             textAlign: "center",
-                            px: { lg: 2 },
-                            py: { lg: 1 },
+                            px: { lg: 0.8, xl: 2 },
+                            py: { lg: 0.8, xl: 1 },
                             lineHeight: "1",
                             fontWeight: 800,
                         }}
@@ -246,7 +245,9 @@ const ProductCard = ({
                     </Button>
                     <Box
                         sx={{
-                            p: "7px",
+                            p: { lg: "3px", xl: "7px" },
+                            display: "flex",
+
                             "& path": {
                                 stroke: Colors.neutral,
                             },
@@ -272,8 +273,9 @@ const ProductCard = ({
                             }
                         }}
                         sx={{
-                            ...cartButtonStyles,
-
+                            borderRadius: "15px",
+                            py: { lg: "5px", xl: 1 },
+                            px: { lg: "5px", xl: "12px" },
                             background: active ? Colors.teal : Colors.neutral,
                         }}
                     >

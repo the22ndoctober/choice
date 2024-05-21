@@ -6,7 +6,7 @@ export const SearchStyles = {
         width: "100%",
     },
     wrapper: {
-        width: { xl: 1440, lg: 1140 },
+        width: { xl: 1440, lg: 1368 },
         margin: "0 auto",
         height: { sm: "69px" },
         alignItems: "center",

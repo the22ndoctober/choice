@@ -30,6 +30,7 @@ const NavPhoneComponent = () => {
         minWidth: { lg: "264px" },
         zIndex: { sm: 5 },
         position: "relative",
+        justifyContent: "space-between",
     }
 
     const typoStyles = {
@@ -60,10 +61,26 @@ const NavPhoneComponent = () => {
                 setOpen(false)
             }}
         >
-            <Grid sx={wrapperStyles}>
-                <Box sx={{ position: "static" }}>
-                    <Box sx={typoStyles}>
-                        <Box sx={{ width: "25px" }}></Box>
+            <Grid
+                sx={{
+                    alignItems: "center",
+                    minWidth: { lg: "264px" },
+                    zIndex: { sm: 5 },
+                    position: "relative",
+                }}
+            >
+                <Box sx={{ position: "static", display: "flex" }}>
+                    <Box
+                        sx={{
+                            fontSize: "24px",
+                            color: Colors.maxDark,
+                            display: "flex",
+
+                            alignItems: "center",
+                            columnGap: "12px",
+                            postion: open ? "absolute" : "static",
+                        }}
+                    >
                         {!open && "044 503 70 20"}
                         <Box
                             sx={{

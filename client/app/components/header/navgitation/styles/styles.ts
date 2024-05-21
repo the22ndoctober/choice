@@ -7,7 +7,7 @@ export const NavStyles = {
     },
     bodyWrapper: {
         margin: "0 auto",
-        width: { xl: 1440, lg: 1140 },
+        width: { xl: 1440, lg: 1368 },
         py: { sm: "19px" },
         display: "flex",
         justifyContent: "space-between",

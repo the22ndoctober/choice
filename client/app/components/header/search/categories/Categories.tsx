@@ -14,13 +14,13 @@ const Categories = ({ categories }: any) => {
     return (
         <Box
             sx={{
-                width: { xl: 1440, lg: 1140 },
+                width: { xl: 1440, lg: 1368 },
                 margin: "0 auto",
                 height: { sm: "70svh" },
                 position: "absolute",
-
+                top: "69px",
                 left: 0,
-                py: "36px",
+
                 zIndex: 301,
             }}
             onMouseLeave={() => {
@@ -33,6 +33,7 @@ const Categories = ({ categories }: any) => {
                     width: "100%",
                     height: "100%",
                     display: "flex",
+                    py: "28px",
                 }}
             >
                 <Box

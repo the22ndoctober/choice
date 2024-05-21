@@ -198,7 +198,7 @@ const CartComp = ({ setOpen }: any) => {
                             }}
                         />
                     </Grid>
-                    {cart.length > 0 ? (
+                    {cart !== null && cart.length > 0 ? (
                         <>
                             <Box sx={{ overflowY: "scroll", height: 345 }}>
                                 <Grid

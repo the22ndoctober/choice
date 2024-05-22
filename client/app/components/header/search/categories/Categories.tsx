@@ -12,121 +12,125 @@ const Categories = ({ categories }: any) => {
     const [selectedCategory, setSelectedCategory] = useState<any>(null)
 
     return (
-        <Box
-            sx={{
-                width: { xl: 1440, lg: 1368 },
-                margin: "0 auto",
-                height: { sm: "70svh" },
-                position: "absolute",
-                top: "69px",
-                left: 0,
-
-                zIndex: 301,
-            }}
-            onMouseLeave={() => {
-                setSelectedCategory(null)
-            }}
-        >
+        <>
             <Box
                 sx={{
-                    position: "relative",
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    py: "28px",
+                    width: { xl: 1440, lg: 1368 },
+                    margin: "0 auto",
+                    height: "fit-content",
+                    position: "absolute",
+                    top: "69px",
+                    left: 0,
+
+                    zIndex: 301,
+                }}
+                onMouseLeave={() => {
+                    setSelectedCategory(null)
                 }}
             >
                 <Box
                     sx={{
-                        width: { lg: 230, xl: 248 },
-                        height: "auto",
-
-                        zIndex: 1000,
+                        position: "relative",
+                        width: "100%",
+                        height: "100%",
                         display: "flex",
-                        flexDirection: "column",
                     }}
                 >
                     <Box
                         sx={{
-                            width: { lg: 230, xl: 261 },
-                            height: "960px",
+                            width: { lg: 230, xl: 248 },
+                            height: "auto",
+
+                            zIndex: 1000,
                             display: "flex",
                             flexDirection: "column",
-                            background: Colors.white,
                         }}
                     >
-                        {categories
-                            .toSorted((a: any, b: any) => {
-                                b.category.title - a.category.title
-                            })
-                            .map((cat: any) => {
-                                if (cat.category.level > 1) {
-                                    return
-                                }
-                                return (
-                                    <CategoryItem
-                                        key={cat.category.title}
-                                        categoryInfo={cat}
-                                        setSelected={setSelectedCategory}
-                                        selectedCat={selectedCategory}
-                                    />
-                                )
-                            })}
-                    </Box>
-                </Box>
-                {selectedCategory !== null && (
-                    <Grid
-                        key={selectedCategory.category_id + "_content"}
-                        container
-                        sx={{
-                            width: { xl: 1200 },
-                            bgcolor: Colors.white,
-                            height: "66svh",
-                            minHeight: { lg: "555px" },
-                            overflowX: "scroll",
-                        }}
-                    >
-                        <Grid
-                            container
-                            direction={"column"}
+                        <Box
                             sx={{
-                                width: "100%",
-                                height: "100%",
-                                flexWrap: "wrap",
-                                columnGap: 2,
-                                rowGap: 2,
-                                px: 4,
-                                pt: 1,
-                                pb: 1,
+                                width: { lg: 230, xl: 261 },
+                                py: "28px",
+                                minHeight: { lg: "555px" },
+                                display: "flex",
+                                flexDirection: "column",
+                                background: Colors.white,
+                                border: "2px solid red",
                             }}
                         >
-                            <Box
+                            {categories
+                                .toSorted((a: any, b: any) => {
+                                    b.category.title - a.category.title
+                                })
+                                .map((cat: any) => {
+                                    if (cat.category.level > 1) {
+                                        return
+                                    }
+                                    return (
+                                        <CategoryItem
+                                            key={cat.category.title}
+                                            categoryInfo={cat}
+                                            setSelected={setSelectedCategory}
+                                            selectedCat={selectedCategory}
+                                        />
+                                    )
+                                })}
+                        </Box>
+                    </Box>
+                    {selectedCategory !== null && (
+                        <Grid
+                            key={selectedCategory.category_id + "_content"}
+                            container
+                            sx={{
+                                width: { xl: 1200 },
+                                bgcolor: Colors.white,
+                                height: { lg: "570px" },
+                                overflowX: "scroll",
+                                py: "28px",
+                                border: "2px solid blue",
+                            }}
+                        >
+                            <Grid
+                                container
+                                direction={"column"}
                                 sx={{
-                                    color: Colors.dark,
-                                    fontStyle: "normal",
-                                    fontWeight: 400,
-                                    fontSize: "16px",
-                                    lineHeight: "19px",
-                                    maxWidth: { lg: 350 },
+                                    width: "100%",
+                                    height: "100%",
+                                    flexWrap: "wrap",
+                                    columnGap: 2,
+                                    rowGap: 2,
+                                    px: 4,
+                                    pt: 1,
+                                    pb: 1,
                                 }}
                             >
-                                {selectedCategory.category.title}
-                            </Box>
-                            {selectedCategory.child !== null &&
-                                selectedCategory.child.map((child: any) => (
-                                    <>
-                                        <SubCategory
-                                            key={child.product_id}
-                                            categoryInfo={child}
-                                            parent={selectedCategory}
-                                        />
-                                    </>
-                                ))}
+                                <Box
+                                    sx={{
+                                        color: Colors.dark,
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        fontSize: "16px",
+                                        lineHeight: "19px",
+                                        maxWidth: { lg: 350 },
+                                    }}
+                                >
+                                    {selectedCategory.category.title}
+                                </Box>
+                                {selectedCategory.child !== null &&
+                                    selectedCategory.child.map((child: any) => (
+                                        <>
+                                            <SubCategory
+                                                key={child.product_id}
+                                                categoryInfo={child}
+                                                parent={selectedCategory}
+                                            />
+                                        </>
+                                    ))}
+                            </Grid>
                         </Grid>
-                    </Grid>
-                )}
+                    )}
+                </Box>
             </Box>
-        </Box>
+        </>
     )
 }
 

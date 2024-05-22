@@ -31,7 +31,7 @@ const AdvertismentMain = () => {
                             xl: 1440,
                         },
                         height: "fit-content",
-
+                        minHeight: "70svh",
                         margin: "0 auto",
                         display: "flex",
                         justifyContent: "right",

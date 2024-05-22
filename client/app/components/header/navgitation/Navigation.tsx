@@ -64,6 +64,7 @@ const Navigtaion = () => {
                 sx={{
                     width: { sm: "100%" },
                     background: "#F9FAFD",
+                    height: "85px",
                 }}
             >
                 <Grid
@@ -73,6 +74,7 @@ const Navigtaion = () => {
                         width: { xl: 1440, lg: 1368 },
                         py: { sm: "19px" },
                         display: "flex",
+                        alignItems: "center",
                         justifyContent: "space-between",
                         direction: { sm: "row" },
                     }}

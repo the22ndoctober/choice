@@ -55,7 +55,6 @@ const Search = ({ params, session }: any) => {
                 sx={{
                     background: { sm: Colors.maxDark },
                     width: "100%",
-                    zIndex: 5,
                 }}
             >
                 <Box
@@ -64,7 +63,7 @@ const Search = ({ params, session }: any) => {
                         margin: "0 auto",
                         height: { sm: "69px" },
                         alignItems: "center",
-                        position: { sm: "relative" },
+                        position: "relative",
                         display: "flex",
                     }}
                 >
@@ -223,19 +222,6 @@ const Search = ({ params, session }: any) => {
             </Box>
             {openLogin && <LoginForm setOpen={setOpenLogin} />}
             {openCart && <CartComp setOpen={setOpenCart} />}
-            {/* <Box
-                sx={{
-                    width: "100%",
-                    position: "absolute",
-                    height: "100%",
-                    top: "154px",
-                    left: 0,
-                    background: "black",
-                    opacity: "0.5",
-                    zIndex: 2,
-                    transitionDuration: "0.3s",
-                }}
-            /> */}
         </>
     )
 }

@@ -66,7 +66,9 @@ export const getCategories = () => async (dispatch) => {
                 )
             )
 
-            filtred[findParentIdx].setChild(filtred[i])
+            if (findParentIdx !== -1) {
+                filtred[findParentIdx].setChild(filtred[i])
+            }
         }
 
         console.log(filtred)

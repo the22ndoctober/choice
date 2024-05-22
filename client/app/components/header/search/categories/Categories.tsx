@@ -21,7 +21,6 @@ const Categories = ({ categories }: any) => {
                     position: "absolute",
                     top: "69px",
                     left: 0,
-
                     zIndex: 301,
                 }}
                 onMouseLeave={() => {
@@ -54,7 +53,6 @@ const Categories = ({ categories }: any) => {
                                 display: "flex",
                                 flexDirection: "column",
                                 background: Colors.white,
-                                border: "2px solid red",
                             }}
                         >
                             {categories
@@ -86,7 +84,6 @@ const Categories = ({ categories }: any) => {
                                 height: { lg: "570px" },
                                 overflowX: "scroll",
                                 py: "28px",
-                                border: "2px solid blue",
                             }}
                         >
                             <Grid

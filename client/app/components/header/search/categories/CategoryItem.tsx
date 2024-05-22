@@ -8,7 +8,6 @@ import { Box, Button } from "@mui/material"
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import SubCategory from "./SubCategory"
-import { useRouter } from "next/navigation"
 
 const CategoryItem = ({
     categoryInfo,
@@ -16,8 +15,6 @@ const CategoryItem = ({
     setSelected,
     selectedCat,
 }: any) => {
-    const router = useRouter()
-
     return (
         <>
             <Box
@@ -78,11 +75,6 @@ const CategoryItem = ({
                                     letterSpacing: "0em",
                                     textAlign: "left",
                                     cursor: "pointer",
-                                }}
-                                onClick={() => {
-                                    router.push(
-                                        `/categories?query=${categoryInfo.category.title}`
-                                    )
                                 }}
                             >
                                 {categoryInfo.category.title}

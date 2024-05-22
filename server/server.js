@@ -103,11 +103,18 @@ app.post("/server/getCategoryProducts", async function (req, res) {
     return data.products;
   }
 
-  const parsedData = await Promise.all(
-    req.body.category_id.map((cat) => getCategoryProducts(cat))
-  );
-
-  res.json(parsedData);
+  try {
+    const parsedData = await Promise.all(
+      req.body.category_id.map((cat) => getCategoryProducts(cat))
+    );
+    if (parsedData) {
+      res.json(parsedData);
+    } else {
+      res.status(401).send("no data");
+    }
+  } catch (error) {
+    res.status(500).send("Error when trying to get products");
+  }
 });
 
 app.post("/server/getGoods", async function (req, res) {

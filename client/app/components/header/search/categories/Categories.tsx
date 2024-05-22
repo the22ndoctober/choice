@@ -7,9 +7,11 @@ import { useRef, useState } from "react"
 import { relative } from "path"
 import { Colors } from "@/client"
 import SubCategory from "./SubCategory"
+import { useRouter } from "next/navigation"
 
 const Categories = ({ categories }: any) => {
     const [selectedCategory, setSelectedCategory] = useState<any>(null)
+    const router = useRouter()
 
     return (
         <>
@@ -110,6 +112,11 @@ const Categories = ({ categories }: any) => {
                                         lineHeight: "19px",
                                         maxWidth: { lg: 350 },
                                         cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                        router.push(
+                                            `/categories?query=${selectedCategory.category.title}`
+                                        )
                                     }}
                                 >
                                     {selectedCategory.category.title}

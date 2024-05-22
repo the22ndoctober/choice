@@ -47,12 +47,13 @@ const Categories = ({ categories }: any) => {
                     >
                         <Box
                             sx={{
-                                width: { lg: 230, xl: 261 },
+                                width: { lg: 248, xl: 261 },
                                 py: "28px",
-                                minHeight: { lg: "555px" },
+                                minHeight: { lg: "610px" },
                                 display: "flex",
                                 flexDirection: "column",
                                 background: Colors.white,
+                                justifyContent: "space-between",
                             }}
                         >
                             {categories
@@ -81,7 +82,7 @@ const Categories = ({ categories }: any) => {
                             sx={{
                                 width: { xl: 1200 },
                                 bgcolor: Colors.white,
-                                height: { lg: "570px" },
+                                height: { lg: "610px" },
                                 overflowX: "scroll",
                                 py: "28px",
                             }}
@@ -108,6 +109,7 @@ const Categories = ({ categories }: any) => {
                                         fontSize: "16px",
                                         lineHeight: "19px",
                                         maxWidth: { lg: 350 },
+                                        cursor: "pointer",
                                     }}
                                 >
                                     {selectedCategory.category.title}

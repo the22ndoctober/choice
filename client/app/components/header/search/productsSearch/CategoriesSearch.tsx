@@ -73,7 +73,7 @@ const CategoriesSearch = () => {
         if (getProducts.isSuccess) {
             setPagesAmount(
                 new Array(
-                    Math.floor(
+                    Math.ceil(
                         getProducts.data[0].length / (endPivot - startPivot + 1)
                     )
                 ).fill(1)
@@ -84,7 +84,7 @@ const CategoriesSearch = () => {
 
     useEffect(() => {
         setStartPivot(8 * (selectedPage + 1) - 8)
-        setEndPivot(8 * (selectedPage + 1))
+        setEndPivot(8 * (selectedPage + 1) - 1)
     }, [selectedPage])
 
     return (
@@ -153,7 +153,10 @@ const CategoriesSearch = () => {
                                 getProducts.isSuccess &&
                                 getProducts.data[0].map(
                                     (product: any, id: number) => {
-                                        if (id >= startPivot && id < endPivot) {
+                                        if (
+                                            id >= startPivot &&
+                                            id <= endPivot
+                                        ) {
                                             return (
                                                 <ProductCard
                                                     key={

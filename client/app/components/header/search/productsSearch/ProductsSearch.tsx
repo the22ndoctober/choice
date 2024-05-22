@@ -23,6 +23,10 @@ const ProductsSearch = () => {
     const status = useSelector((state: any) => state.products.status)
 
     useEffect(() => {
+        console.log(endPivot, startPivot)
+    }, [selectedPage])
+
+    useEffect(() => {
         if (status === "success") {
             setProductsToShow(
                 products.filter((item: any) =>
@@ -39,7 +43,7 @@ const ProductsSearch = () => {
     useEffect(() => {
         setPagesAmount(
             new Array(
-                Math.floor(productsToShow.length / (endPivot - startPivot + 1))
+                Math.ceil(productsToShow.length / (endPivot - startPivot + 1))
             ).fill(1)
         )
         console.log(productsToShow)
@@ -47,7 +51,7 @@ const ProductsSearch = () => {
 
     useEffect(() => {
         setStartPivot(8 * (selectedPage + 1) - 8)
-        setEndPivot(8 * (selectedPage + 1))
+        setEndPivot(8 * (selectedPage + 1) - 1)
     }, [selectedPage])
 
     return (
@@ -103,7 +107,7 @@ const ProductsSearch = () => {
                         productsToShow.map(
                             (product: any, id: number) =>
                                 id >= startPivot &&
-                                id < endPivot && (
+                                id <= endPivot && (
                                     <ProductCard
                                         key={
                                             product.product_id +

@@ -1,7 +1,6 @@
 "use client"
 
 import Grid from "@mui/material/Grid"
-import { AdvertismentStyles } from "./styles/styles"
 import Slider from "react-slick"
 import { Box } from "@mui/material"
 import { Colors } from "@/client"
@@ -23,27 +22,44 @@ const AdvertismentMain = () => {
 
     return (
         <>
-            <Box sx={{ ...AdvertismentStyles.wrapper }}>
+            <Box
+                sx={{
+                    width: { sm: "100%" },
+                    height: "610px",
+                }}
+            >
                 <Box
                     sx={{
                         width: {
-                            lg: 1140,
+                            lg: 1368,
                             xl: 1440,
                         },
-                        height: "fit-content",
-                        minHeight: "70svh",
+                        height: "610px",
                         margin: "0 auto",
                         display: "flex",
                         justifyContent: "right",
                     }}
                 >
-                    <Grid container sx={{ ...AdvertismentStyles.container }}>
-                        <Box sx={{ ...AdvertismentStyles.sliderWrapper }}>
+                    <Grid
+                        container
+                        sx={{
+                            width: { xl: 1105, lg: 1050 },
+                            height: "610px",
+                            py: "28px",
+                            justifyContent: { sm: "right" },
+                            alignItems: { sm: "center" },
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: { sm: "100%" },
+                            }}
+                        >
                             <Slider {...settings}>
                                 <Box
                                     sx={{
-                                        width: { lg: 900, xl: 1136 },
-                                        height: "auto",
+                                        width: "auto",
+                                        height: "100%",
                                         bgcolor: "gray",
                                         borderRadius: "15px",
                                     }}

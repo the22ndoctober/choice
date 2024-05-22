@@ -55,6 +55,7 @@ const CategoryItem = ({
                                 display: "flex",
                                 alignItems: "center",
                                 columnGap: "13px",
+                                px: "12px",
                             }}
                         >
                             <Box>
@@ -70,7 +71,7 @@ const CategoryItem = ({
                                 sx={{
                                     textWrap: "break-line",
                                     width: "auto",
-                                    maxWidth: { lg: 150, xl: 180 },
+                                    maxWidth: { lg: 162 },
                                     fontSize: { lg: "14px", xl: "14px" },
                                     fontWeight: 400,
                                     lineHeight: "17px",

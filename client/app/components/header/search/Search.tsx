@@ -91,8 +91,8 @@ const Search = ({ params, session }: any) => {
                                 background: Colors.dark,
                                 color: Colors.white,
                                 textTransform: "none !important",
-                                width: { lg: 230, xl: 261 },
-                                pl: { sm: "24px" },
+                                width: { lg: 248, xl: 261 },
+                                pl: { sm: "42px" },
                                 pr: { sm: "56px" },
                                 height: "40px",
                                 fontSize: { sm: "18px" },
@@ -224,6 +224,21 @@ const Search = ({ params, session }: any) => {
             </Box>
             {openLogin && <LoginForm setOpen={setOpenLogin} />}
             {openCart && <CartComp setOpen={setOpenCart} />}
+            {params !== "" && openCat && (
+                <Box
+                    sx={{
+                        width: "100%",
+                        height: "100%",
+                        position: "absolute",
+                        top: 154,
+                        left: 0,
+                        background: "black",
+                        zIndex: 100,
+                        opacity: 0.5,
+                        transitionDuration: "0.5s",
+                    }}
+                />
+            )}
         </>
     )
 }

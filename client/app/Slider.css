@@ -1,16 +1,16 @@
 .small-slider .slick-next {
-    right: 55px !important;
+    right: 25px !important;
     top: -40px !important;
 }
 
 .small-slider .slick-prev {
-    left: 1300px !important;
+    left: 1320px !important;
     top: -40px;
 }
 
 @media only screen and (max-width: 1536px) {
     .small-slider .slick-prev {
-        left: 1020px !important;
+        left: 1270px !important;
         top: -40px;
     }
 }
@@ -27,11 +27,42 @@
 
 @media only screen and (max-width: 1536px) {
     .slider-brands .slick-prev {
-        left: 1020px !important;
+        left: 1270px !important;
         top: -40px;
     }
     .slider-brands .slick-next {
-        right: -185px !important;
+        right: -245px !important;
         top: -40px !important;
     }
+}
+
+.slick-slide {
+    width: calc(20% - 24px);
+}
+
+.slider-brands .slick-slide {
+    width: calc(25% - 24px);
+}
+
+.slick-track {
+    display: flex;
+    gap: 12px;
+    margin-left: "-12px";
+}
+
+.slick-list {
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+}
+.slider-brands .slick-list {
+    overflow-x: hidden;
+    overflow-y: visible;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    display: flex;
+    align-items: center;
 }

@@ -22,7 +22,7 @@ export default async function Home({ params }: any) {
                 <NewProducts />
                 <Smartphones />
                 <PopularBrends />
-                <VideoAbout />
+                {/* <VideoAbout /> */}
                 <InfoMain />
                 <DeliveryInfo />
             </Box>

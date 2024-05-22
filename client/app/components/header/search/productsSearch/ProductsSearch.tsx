@@ -7,6 +7,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import ProductCard from "@/app/components/basic/productCard/ProductCard"
 import { Colors } from "@/client"
+import BestOffers from "@/app/components/main/bestOffers/BestOffers"
 
 const ProductsSearch = () => {
     const searchParams = useSearchParams()!
@@ -94,8 +95,7 @@ const ProductsSearch = () => {
                     container
                     sx={{
                         flexWrap: "wrap",
-                        columnGap: "24px",
-                        rowGap: "24px",
+                        justifyContent: "space-between",
                         "& > div": {
                             width: "calc(25% - 24px)",
                         },
@@ -167,6 +167,7 @@ const ProductsSearch = () => {
                         )
                     })}
                 </Grid>
+                <BestOffers />
             </Grid>
         </Box>
     )

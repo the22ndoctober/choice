@@ -35,7 +35,7 @@ const InfoMain = () => {
                 <Grid
                     container
                     sx={{
-                        width: { lg: 1140, xl: 1440 },
+                        width: { lg: 1368, xl: 1440 },
                         height: "100%",
                         margin: "0 auto",
                         flexDirection: "column",
@@ -58,7 +58,7 @@ const InfoMain = () => {
                         sx={{
                             width: "100%",
                             height: 448,
-                            justifyContent: "space-between",
+                            columnGap: "28px",
                         }}
                     >
                         {infoBlock.map((block) => (
@@ -71,7 +71,7 @@ const InfoMain = () => {
                                     borderRadius: "15px",
                                     flexDirection: "column",
                                     justifyContent: "space-between",
-                                    width: { lg: 355, xl: 452 },
+                                    flex: "1 1 0",
                                     height: "100%",
                                 }}
                             >
@@ -81,7 +81,6 @@ const InfoMain = () => {
                                         flexDirection: "column",
                                         rowGap: { lg: "15px", xl: "19px" },
                                         textWrap: "wrap",
-                                        maxWidth: { lg: 270, xl: 310 },
                                     }}
                                 >
                                     <Typography

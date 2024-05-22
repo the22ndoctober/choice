@@ -85,21 +85,21 @@ const NewProducts = () => {
             window.removeEventListener("resize", updateWindowDimensions)
     }, [])
 
-    useEffect(() => {
-        console.log(width)
-        if (width >= 1536) {
-            setSettings((state: any) => {
-                return { ...state, slidesToShow: 5, slidesToScroll: 5 }
-            })
-            return
-        }
-        if (width >= 1200 && width < 1536) {
-            setSettings((state: any) => {
-                return { ...state, slidesToShow: 4, slidesToScroll: 4 }
-            })
-            return
-        }
-    }, [width])
+    // useEffect(() => {
+    //     console.log(width)
+    //     if (width >= 1536) {
+    //         setSettings((state: any) => {
+    //             return { ...state, slidesToShow: 5, slidesToScroll: 5 }
+    //         })
+    //         return
+    //     }
+    //     if (width >= 1200 && width < 1536) {
+    //         setSettings((state: any) => {
+    //             return { ...state, slidesToShow: 4, slidesToScroll: 4 }
+    //         })
+    //         return
+    //     }
+    // }, [width])
 
     return (
         <>
@@ -108,7 +108,7 @@ const NewProducts = () => {
                 sx={{
                     flexDirection: "column",
                     rowGap: "27px",
-                    width: { lg: 1140, xl: 1440 },
+                    width: { lg: 1368, xl: 1440 },
                     margin: "0 auto",
                     height: "auto",
                     pt: "34px",
@@ -136,7 +136,7 @@ const NewProducts = () => {
                     container
                     sx={{
                         justifyContent: "space-between",
-                        width: { lg: 1140, xl: 1440 },
+                        width: { lg: 1368, xl: 1440 },
                         height: "auto",
                         position: "relative",
                     }}
@@ -144,7 +144,7 @@ const NewProducts = () => {
                     <Box
                         className="small-slider"
                         sx={{
-                            width: { lg: 1140, xl: 1440 },
+                            width: { lg: 1368, xl: 1440 },
                             height: { sm: "auto" },
                         }}
                     >

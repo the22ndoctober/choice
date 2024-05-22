@@ -15,6 +15,7 @@ import Select, { selectClasses } from "@mui/joy/Select"
 import Option from "@mui/joy/Option"
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import BestOffers from "@/app/components/main/bestOffers/BestOffers"
 //
 
 const RecursiveSelect = ({
@@ -228,6 +229,7 @@ const CategoriesSearch = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
+                            cursor: "pointer",
                         }}
                         onClick={() => {
                             router.push("/")
@@ -262,6 +264,7 @@ const CategoriesSearch = () => {
                                     fontWeight: 400,
                                     fontSize: "12px",
                                     lineHeight: "15px",
+                                    cursor: "pointer",
                                 }}
                                 onClick={() => {
                                     router.push(
@@ -359,7 +362,7 @@ const CategoriesSearch = () => {
                             container
                             sx={{
                                 flexWrap: "wrap",
-                                columnGap: "16px",
+                                justifyContent: "space-between",
                                 rowGap: "16px",
                                 "& > div": {
                                     width: "calc(25% - 16px) !important",
@@ -441,6 +444,7 @@ const CategoriesSearch = () => {
                         </Grid>
                     </Grid>
                 </Grid>
+                <BestOffers />
             </Grid>
         </Box>
     )

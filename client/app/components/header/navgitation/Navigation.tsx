@@ -134,7 +134,7 @@ const Navigtaion = () => {
                                                 color: Colors.teal,
                                             },
                                         }}
-                                        onClick={button.handle}
+                                        // onClick={button.handle}
                                     >
                                         {button.value}
                                     </Typography>

@@ -13,7 +13,7 @@ const OrderNav = () => {
                     container
                     sx={{
                         margin: "0 auto",
-                        width: { xl: 1440, lg: 1140 },
+                        width: { xl: 1440, lg: 1368 },
                         height: "100%",
                         justifyContent: "space-between",
                     }}

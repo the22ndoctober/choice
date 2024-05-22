@@ -112,6 +112,9 @@ const Categories = ({ categories }: any) => {
                                         lineHeight: "19px",
                                         maxWidth: { lg: 350 },
                                         cursor: "pointer",
+                                        ":hover": {
+                                            color: Colors.teal,
+                                        },
                                     }}
                                     onClick={() => {
                                         router.push(

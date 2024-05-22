@@ -73,32 +73,32 @@ const BestOffers = () => {
         slidesToScroll: 5,
     })
 
-    useEffect(() => {
-        const updateWindowDimensions = () => {
-            const newWidth = window.innerWidth
-            setWidth(newWidth)
-        }
+    // useEffect(() => {
+    //     const updateWindowDimensions = () => {
+    //         const newWidth = window.innerWidth
+    //         setWidth(newWidth)
+    //     }
 
-        window.addEventListener("resize", updateWindowDimensions)
+    //     window.addEventListener("resize", updateWindowDimensions)
 
-        return () =>
-            window.removeEventListener("resize", updateWindowDimensions)
-    }, [])
+    //     return () =>
+    //         window.removeEventListener("resize", updateWindowDimensions)
+    // }, [])
 
-    useEffect(() => {
-        if (width >= 1536) {
-            setSettings((state: any) => {
-                return { ...state, slidesToShow: 5, slidesToScroll: 5 }
-            })
-            return
-        }
-        if (width >= 1200 && width < 1536) {
-            setSettings((state: any) => {
-                return { ...state, slidesToShow: 4, slidesToScroll: 4 }
-            })
-            return
-        }
-    }, [width])
+    // useEffect(() => {
+    //     if (width >= 1536) {
+    //         setSettings((state: any) => {
+    //             return { ...state, slidesToShow: 5, slidesToScroll: 5 }
+    //         })
+    //         return
+    //     }
+    //     if (width >= 1200 && width < 1536) {
+    //         setSettings((state: any) => {
+    //             return { ...state, slidesToShow: 4, slidesToScroll: 4 }
+    //         })
+    //         return
+    //     }
+    // }, [width])
 
     return (
         <>
@@ -107,7 +107,7 @@ const BestOffers = () => {
                 sx={{
                     flexDirection: "column",
                     rowGap: "27px",
-                    width: { lg: 1140, xl: 1440 },
+                    width: { lg: 1368, xl: 1440 },
                     margin: "0 auto",
                     height: "auto",
                     pt: "34px",
@@ -135,7 +135,7 @@ const BestOffers = () => {
                     container
                     sx={{
                         justifyContent: "space-between",
-                        width: { lg: 1140, xl: 1440 },
+                        width: { lg: 1368, xl: 1440 },
                         height: "auto",
                         position: "relative",
                     }}
@@ -143,7 +143,7 @@ const BestOffers = () => {
                     <Box
                         className="small-slider"
                         sx={{
-                            width: { lg: 1140, xl: 1440 },
+                            width: { lg: 1368, xl: 1440 },
                             height: { sm: "auto" },
                         }}
                     >

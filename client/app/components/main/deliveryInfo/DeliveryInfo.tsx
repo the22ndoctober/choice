@@ -52,7 +52,7 @@ const DeliveryInfo = () => {
             <Grid
                 container
                 sx={{
-                    width: { lg: 1140, xl: 1440 },
+                    width: { lg: 1368, xl: 1440 },
                     height: "100%",
                     margin: "0 auto",
                     justifyContent: "space-between",

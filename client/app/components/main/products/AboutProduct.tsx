@@ -35,7 +35,7 @@ const AboutProduct = ({ product }: any) => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        background: Colors.white,
+                        background: Colors.paper,
                     }}
                 >
                     {product.image_path !== null ? (
@@ -268,22 +268,34 @@ const AboutProduct = ({ product }: any) => {
                         >
                             {product.price + product.currency}
                         </Box>
-                        <Grid container sx={{ columnGap: "10px" }}>
+                        <Grid
+                            container
+                            sx={{
+                                columnGap: "10px",
+                                justifyContent: "space-between",
+                            }}
+                        >
                             <Box
                                 sx={{
                                     borderRadius: "10px",
                                     display: "flex",
                                     alignItems: "center",
-                                    justifyContent: "center",
+
                                     color: Colors.white,
                                     background: Colors.neutral,
                                     fontSize: "20px",
                                     fontWeight: 500,
                                     lineHeight: "24.2px",
                                     py: "11px",
-                                    px: "37.5px",
+                                    pr: "42px",
+                                    pl: "36px",
+                                    justifyContent: "start",
                                     textAlign: "center",
                                     columnGap: 2,
+                                    cursor: "pointer",
+                                    ":hover": {
+                                        background: Colors.lightGreen,
+                                    },
                                 }}
                                 onClick={() => {
                                     dispatch(

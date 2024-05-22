@@ -11,7 +11,7 @@ const VideoAbout = () => {
                     container
                     sx={{
                         width: {
-                            lg: 1140,
+                            lg: 1368,
                             xl: 1440,
                             py: "48px",
                             margin: "0 auto",

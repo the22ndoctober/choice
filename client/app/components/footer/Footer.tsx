@@ -18,7 +18,7 @@ const Footer = () => {
                 <Grid
                     container
                     sx={{
-                        width: { lg: "1140px", xl: "1440px" },
+                        width: { lg: 1368, xl: 1440 },
                         rowGap: { lg: "140px", xl: "186px" },
                         margin: "0 auto",
                         columnGap: { lg: "144px", xl: "186px" },
@@ -29,7 +29,7 @@ const Footer = () => {
                         sx={{
                             flexDirection: "column",
                             rowGap: "30px",
-                            maxWidth: "220px",
+                            flex: "1 1 0",
                         }}
                     >
                         {logoWhite}
@@ -105,8 +105,8 @@ const Footer = () => {
                     <Grid
                         container
                         sx={{
-                            columnGap: { lg: "72px", xl: "154px" },
-                            width: { lg: 700, xl: 900 },
+                            flex: "4 1 0",
+                            columnGap: "145px",
                         }}
                     >
                         <Box

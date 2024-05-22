@@ -237,22 +237,24 @@ const ProductCard = ({
                         pb: { lg: "20px", xl: "22px" },
                     }}
                 >
-                    <Button
+                    <Box
                         sx={{
                             fontSize: { lg: "24px" },
+                            px: "8px",
                             color: Colors.neutral,
                             background: "none",
+                            height: "38px",
+                            display: "flex",
+                            alignItems: "center",
                             border: `1px solid ${Colors.neutral}`,
-                            borderRadius: "15px",
+                            borderRadius: "12px",
                             textAlign: "center",
-                            px: { lg: 0.8, xl: 2 },
-                            py: { lg: 0.8, xl: 1 },
                             lineHeight: "1",
                             fontWeight: 800,
                         }}
                     >
                         {price + " " + "₴"}
-                    </Button>
+                    </Box>
                     <Box
                         sx={{
                             p: { lg: "3px", xl: "7px" },
@@ -283,9 +285,11 @@ const ProductCard = ({
                             }
                         }}
                         sx={{
-                            borderRadius: "15px",
-                            py: { lg: "5px", xl: 1 },
-                            px: { lg: "5px", xl: "12px" },
+                            borderRadius: "12px",
+                            height: "38px",
+                            display: "flex",
+                            alignItems: "center",
+                            px: { lg: "12px" },
                             background: active ? Colors.teal : Colors.neutral,
                         }}
                     >

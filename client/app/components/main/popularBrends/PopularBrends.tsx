@@ -73,7 +73,7 @@ const PopularBrends = () => {
                 sx={{
                     flexDirection: "column",
                     rowGap: "27px",
-                    width: { lg: 1140, xl: 1440 },
+                    width: { lg: 1368, xl: 1440 },
                     margin: "0 auto",
                     height: "auto",
                     pt: "34px",
@@ -100,7 +100,7 @@ const PopularBrends = () => {
                 <Grid
                     container
                     sx={{
-                        width: { lg: 1140, xl: 1440 },
+                        width: { lg: 1368, xl: 1440 },
                         height: "auto",
                         position: "relative",
                     }}
@@ -108,7 +108,7 @@ const PopularBrends = () => {
                     <Box
                         className="slider-brands"
                         sx={{
-                            width: { lg: 912, xl: 1150 },
+                            width: { lg: "calc(80%)" },
                             height: { sm: "auto" },
                         }}
                     >
@@ -119,10 +119,6 @@ const PopularBrends = () => {
                                     container
                                     sx={{
                                         flexDirection: "column",
-                                        width: {
-                                            lg: "218px !important",
-                                            xl: `270px !important`,
-                                        },
                                     }}
                                 >
                                     <Box
@@ -139,6 +135,23 @@ const PopularBrends = () => {
                                             display: "flex",
                                             justifyContent: "center",
                                             alignItems: "center",
+                                            WebkitBoxShadow:
+                                                "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                                            MozBoxShadow:
+                                                "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                                            boxShadow:
+                                                "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                                            transformOrigin: "center",
+                                            transitionDuration: "0.3s",
+                                            ":hover": {
+                                                scale: "1.05",
+                                                WebkitBoxShadow:
+                                                    "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                                                MozBoxShadow:
+                                                    "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                                                boxShadow:
+                                                    "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                                            },
                                         }}
                                     >
                                         {card.svg}
@@ -162,15 +175,30 @@ const PopularBrends = () => {
                             borderRadius: "15px",
                             height: { lg: 80 },
                             width: {
-                                lg: "218px !important",
-                                xl: "270px !important",
+                                lg: "calc(20% - 12px)",
                             },
+                            ml: "12px",
+                            my: "15px",
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
                             fontSize: "24px",
                             fontWeight: 500,
                             color: Colors.grey,
+                            WebkitBoxShadow:
+                                "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                            MozBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                            boxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
+                            transformOrigin: "center",
+                            transitionDuration: "0.3s",
+                            ":hover": {
+                                scale: "1.05",
+                                WebkitBoxShadow:
+                                    "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                                MozBoxShadow:
+                                    "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                                boxShadow: "3px 3px 11px -4px rgba(0,0,0,0.56)",
+                            },
                         }}
                     >
                         Всі бренди

@@ -836,7 +836,7 @@ const Order = () => {
                 <Grid
                     container
                     sx={{
-                        width: { xl: 1440, lg: 1140 },
+                        width: { xl: 1440, lg: 1368 },
                         margin: "0 auto",
                         flexDirection: "column",
                         py: "38px",
@@ -849,7 +849,6 @@ const Order = () => {
                             fontSize: "32px",
                             fontWeight: 600,
                             lineHeight: "38.73px",
-                            px: "34px",
                         }}
                     >
                         Оформлення замовлення
@@ -1492,17 +1491,19 @@ const Order = () => {
                                         background: Colors.neutral,
                                         color: Colors.white,
                                         borderRadius: "15px",
-                                        fontSize: "14px",
+                                        fontSize: "18px",
                                         fontWeight: 600,
                                         lineHeight: "16.94px",
                                         cursor: "pointer",
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        py: "14px",
+                                        py: "24px",
                                         px: "38px",
-                                        width: "fit-content",
                                         height: "fit-content",
+                                        ":hover": {
+                                            background: Colors.lightGreen,
+                                        },
                                     }}
                                 >
                                     Замовлення підтверджую

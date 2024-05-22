@@ -27,6 +27,9 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
         fontSize: "16px",
         lineHeight: "19px",
         cursor: "pointer",
+        ":hover": {
+            color: Colors.teal,
+        },
     }
 
     const level3Styles = {
@@ -36,6 +39,9 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
         fontSize: "14px",
         lineHeight: "17px",
         cursor: "pointer",
+        ":hover": {
+            color: Colors.dark,
+        },
     }
 
     return (

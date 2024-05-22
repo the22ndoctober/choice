@@ -13,6 +13,7 @@ import parse from "html-react-parser"
 import { logoSquare } from "../../static/logo"
 import CircularProgress from "@mui/joy/CircularProgress/CircularProgress"
 import { useRouter } from "next/navigation"
+import BestOffers from "../bestOffers/BestOffers"
 
 export default function Product({ params }: any) {
     const { isLoading, error, data, isSuccess }: any = useQuery({
@@ -82,7 +83,7 @@ export default function Product({ params }: any) {
 
     return (
         <>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: "100%", background: Colors.white }}>
                 <Box
                     sx={{
                         width: { xl: "1440px" },
@@ -107,7 +108,7 @@ export default function Product({ params }: any) {
                     />
                     <ProductItem product={data.products[0]} />
 
-                    <Grid container sx={{ justifyContent: "space-between" }}>
+                    {/* <Grid container sx={{ justifyContent: "space-between" }}>
                         <Grid
                             container
                             direction={"column"}
@@ -292,9 +293,10 @@ export default function Product({ params }: any) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <DeliveryInfo />
+                    </Grid> */}
+                    <BestOffers />
                 </Box>
+                <DeliveryInfo />
             </Box>
         </>
     )

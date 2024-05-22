@@ -86,11 +86,12 @@ const Search = ({ params, session }: any) => {
                             }
                         }}
                     >
-                        <Button
+                        <Box
                             sx={{
                                 background: Colors.dark,
                                 color: Colors.white,
                                 textTransform: "none !important",
+                                width: { lg: 230, xl: 261 },
                                 pl: { sm: "24px" },
                                 pr: { sm: "56px" },
                                 height: "40px",
@@ -102,11 +103,12 @@ const Search = ({ params, session }: any) => {
                                 lineHeight: "22px",
                                 letterSpacing: "0.75px",
                                 textAlign: "left",
+                                alignItems: "center",
                             }}
                         >
                             <MenuIcon sx={{ fontSize: 30 }} />
                             Каталог
-                        </Button>
+                        </Box>
                         {getStatus === "success" && openCat && (
                             <Categories categories={data} />
                         )}

@@ -350,6 +350,9 @@ const CartComp = ({ setOpen }: any) => {
                                             textAlign: "center",
                                             height: "54px",
                                             textTransform: "none",
+                                            ":hover": {
+                                                background: Colors.lightGreen,
+                                            },
                                         }}
                                         onClick={() => {
                                             router.push("/order")

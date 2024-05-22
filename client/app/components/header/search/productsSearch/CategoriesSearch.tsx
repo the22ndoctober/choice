@@ -100,7 +100,7 @@ const CategoriesSearch = () => {
                 sx={{
                     flexDirection: "column",
                     margin: "0 auto",
-                    width: { xl: 1440, lg: 1140 },
+                    width: { xl: 1440, lg: 1368 },
                     minHeight: "70svh",
                     flexBasis: "auto",
                     py: "24px",

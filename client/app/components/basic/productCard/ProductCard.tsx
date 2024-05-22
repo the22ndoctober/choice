@@ -9,6 +9,7 @@ import { favouritesTeal } from "../../static/favouritesTeal"
 import { cartCard } from "../../static/cartCard"
 import { useDispatch } from "react-redux"
 import { changeCart } from "@/app/redux/cart/cartSlice"
+import { useRouter } from "next/navigation"
 
 const ProductCard = ({
     title,
@@ -20,6 +21,7 @@ const ProductCard = ({
 }: any) => {
     const [active, setActive] = useState<boolean>(false)
     const dispatch = useDispatch()
+    const router = useRouter()
 
     return (
         <>
@@ -54,6 +56,10 @@ const ProductCard = ({
                         overflow: "hidden",
                         width: "100%",
                         height: { lg: "257px", xl: "317px" },
+                    }}
+                    onClick={() => {
+                        product.product_id &&
+                            router.push(`/products/${product.product_id}`)
                     }}
                 >
                     {img_path === undefined ? (
@@ -194,6 +200,10 @@ const ProductCard = ({
                 <Grid
                     container
                     sx={{ flexDirection: "column", mt: "12px", rowGap: "12px" }}
+                    onClick={() => {
+                        product.product_id &&
+                            router.push(`/products/${product.product_id}`)
+                    }}
                 >
                     <Box
                         sx={{

@@ -6,7 +6,6 @@ import { useQuery } from "@tanstack/react-query"
 import Navigation from "@/app/components/header/navgitation/Navigation"
 import Search from "@/app/components/header/search/Search"
 import ProductItem from "@/app/components/main/products/ProductItem"
-import HeadLinks from "@/app/components/header/headLinks/HeadLinks"
 import DeliveryInfo from "../deliveryInfo/DeliveryInfo"
 import { Colors } from "@/client"
 import parse from "html-react-parser"
@@ -14,17 +13,70 @@ import { logoSquare } from "../../static/logo"
 import CircularProgress from "@mui/joy/CircularProgress/CircularProgress"
 import { useRouter } from "next/navigation"
 import BestOffers from "../bestOffers/BestOffers"
+import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 
 export default function Product({ params }: any) {
-    const { isLoading, error, data, isSuccess }: any = useQuery({
-        queryKey: ["product", params.product],
-        queryFn: () => GetProducts(params.product),
-        retry: false,
-    })
+    // const { isLoading, error, data, isSuccess }: any = useQuery({
+    //     queryKey: ["product", params.product],
+    //     queryFn: () => GetProducts(params.product),
+    //     retry: false,
+    // })
+
+    const [data, setData] = useState<any>(null)
+
+    const [rootCat, setRootCat] = useState<any>([])
+    const [targetCat, setTargetCat] = useState<any>(null)
+
+    const products = useSelector((state: any) => state.products.data)
+    const status = useSelector((state: any) => state.products.status)
+
+    const categories = useSelector((state: any) => state.categories.data)
+    const categoriesStatus = useSelector(
+        (state: any) => state.categories.status
+    )
 
     const router = useRouter()
 
-    if (isLoading)
+    useEffect(() => {
+        if (status === "success" && categoriesStatus === "success") {
+            const destination = products.find(
+                (product: any) => product.product_id === params.product
+            )
+            setData(destination)
+        }
+    }, [status, categoriesStatus])
+
+    useEffect(() => {
+        if (categoriesStatus === "success" && data !== null && data) {
+            const targetCatTarget = categories.find(
+                (cat: any) => cat.category.title === data.category.title
+            )
+
+            let result = []
+            let rootCatTarget = structuredClone(targetCatTarget)
+            result.push(rootCatTarget)
+
+            while (rootCatTarget.category.parent !== null) {
+                rootCatTarget = categories.find(
+                    (cat: any) =>
+                        cat.category.title ===
+                        rootCatTarget.category.parent.title
+                )
+                result.push(rootCatTarget)
+            }
+
+            setRootCat(result.reverse())
+            setTargetCat(targetCatTarget)
+        }
+        return () => {
+            setRootCat([])
+            setTargetCat(null)
+        }
+    }, [categoriesStatus, data])
+
+    if (status === "loading")
         return (
             <Box
                 sx={{
@@ -47,7 +99,7 @@ export default function Product({ params }: any) {
             </Box>
         )
 
-    if (error || !data) {
+    if (status === "error" || !data || data === null) {
         return (
             <Box
                 sx={{
@@ -95,7 +147,88 @@ export default function Product({ params }: any) {
                         py: { sm: "28px" },
                     }}
                 >
-                    <ProductItem product={data.products[0]} />
+                    <Box
+                        sx={{
+                            display: "flex",
+                            columnGap: "6px",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                router.push("/")
+                            }}
+                        >
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 20 20"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M15.1534 9.74023C14.9116 9.74023 14.7216 9.93023 14.7216 10.172V15.5609H12.5281V13.2292C12.5281 11.9856 11.509 10.9666 10.2654 10.9666C9.02184 10.9666 8.00279 11.9856 8.00279 13.2292V15.5609H5.8265V10.172C5.8265 9.93023 5.6365 9.74023 5.39469 9.74023C5.15288 9.74023 4.96289 9.93023 4.96289 10.172V15.9927C4.96289 16.2346 5.15288 16.4245 5.39469 16.4245H8.43459C8.6764 16.4245 8.86639 16.2346 8.86639 15.9927V13.2292C8.86639 12.452 9.48819 11.8302 10.2654 11.8302C11.0427 11.8302 11.6645 12.452 11.6645 13.2292V15.9927C11.6645 16.2346 11.8545 16.4245 12.0963 16.4245H15.1534C15.3953 16.4245 15.5853 16.2346 15.5853 15.9927V10.172C15.5853 9.93023 15.378 9.74023 15.1534 9.74023Z"
+                                    fill="#706F6F"
+                                />
+                                <path
+                                    d="M17.8837 9.44593L10.5431 3.59068C10.3876 3.46977 10.1631 3.46977 10.0076 3.59068L2.66699 9.44593C2.47699 9.60138 2.44245 9.86046 2.5979 10.0505C2.68426 10.1541 2.80516 10.2059 2.94334 10.2059C3.0297 10.2059 3.13333 10.1714 3.21969 10.1195L10.284 4.48883L17.3483 10.1195C17.5383 10.275 17.8146 10.2404 17.9528 10.0505C18.091 9.87774 18.0737 9.60138 17.8837 9.44593Z"
+                                    fill="#706F6F"
+                                />
+                            </svg>
+                        </Box>
+
+                        <ArrowForwardIosIcon sx={{ fontSize: "12px" }} />
+
+                        {rootCat.map((cat: any, id: number) => (
+                            <>
+                                <Box
+                                    sx={{
+                                        color: Colors.grey,
+                                        fontStyle: "normal",
+                                        fontWeight: 400,
+                                        fontSize: "12px",
+                                        lineHeight: "15px",
+                                        cursor: "pointer",
+                                    }}
+                                    onClick={() => {
+                                        router.push(
+                                            `categories?query=${cat.category.title}`
+                                        )
+                                    }}
+                                >
+                                    {cat.category.title}
+                                </Box>
+                                {id !== rootCat.length - 1 && (
+                                    <ArrowForwardIosIcon
+                                        sx={{ fontSize: "12px" }}
+                                    />
+                                )}
+                            </>
+                        ))}
+                        <ArrowForwardIosIcon sx={{ fontSize: "12px" }} />
+                        <Box
+                            sx={{
+                                color: Colors.grey,
+                                fontStyle: "normal",
+                                fontWeight: 400,
+                                fontSize: "12px",
+                                lineHeight: "15px",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => {
+                                router.push(`/products/${data.product_id}`)
+                            }}
+                        >
+                            {data.title}
+                        </Box>
+                    </Box>
+                    <ProductItem product={data} />
 
                     {/* <Grid container sx={{ justifyContent: "space-between" }}>
                         <Grid

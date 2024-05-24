@@ -95,9 +95,13 @@ const ProductsSearch = () => {
                     container
                     sx={{
                         flexWrap: "wrap",
-                        justifyContent: "space-between",
+
+                        rowGap: "24px",
                         "& > div": {
-                            width: "calc(25% - 24px)",
+                            width: "calc(25% - 18px)",
+                        },
+                        "& > div:not(:nth-child(4n))": {
+                            marginRight: "24px",
                         },
                     }}
                 >

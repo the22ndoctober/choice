@@ -47,7 +47,7 @@ export default function Product({ params }: any) {
             </Box>
         )
 
-    if (error)
+    if (error || !data) {
         return (
             <Box
                 sx={{
@@ -80,6 +80,7 @@ export default function Product({ params }: any) {
                 </Box>
             </Box>
         )
+    }
 
     return (
         <>
@@ -94,18 +95,6 @@ export default function Product({ params }: any) {
                         py: { sm: "28px" },
                     }}
                 >
-                    <HeadLinks
-                        links={[
-                            {
-                                url: params.product,
-                                title: "Category",
-                            },
-                            {
-                                url: params.product,
-                                title: data.products[0].title,
-                            },
-                        ]}
-                    />
                     <ProductItem product={data.products[0]} />
 
                     {/* <Grid container sx={{ justifyContent: "space-between" }}>

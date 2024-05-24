@@ -362,10 +362,12 @@ const CategoriesSearch = () => {
                             container
                             sx={{
                                 flexWrap: "wrap",
-                                justifyContent: "space-between",
-                                rowGap: "16px",
+                                rowGap: "24px",
                                 "& > div": {
-                                    width: "calc(25% - 16px) !important",
+                                    width: "calc(25% - 18px)",
+                                },
+                                "& > div:not(:nth-child(4n))": {
+                                    marginRight: "24px",
                                 },
                             }}
                         >

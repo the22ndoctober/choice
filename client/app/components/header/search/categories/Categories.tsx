@@ -81,6 +81,7 @@ const Categories = ({ categories }: any) => {
                         <Grid
                             key={selectedCategory.category_id + "_content"}
                             container
+                            className="categories-dropable"
                             sx={{
                                 width: { xl: 1200 },
                                 bgcolor: Colors.white,

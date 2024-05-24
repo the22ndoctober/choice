@@ -39,7 +39,13 @@ export const getProducts = () => async (dispatch) => {
                 },
             }
         )
-        dispatch(productsSuccess(response))
+        const result = response.filter(
+            (product) =>
+                product.store_id !== null &&
+                product.category !== null &&
+                product.sku !== ""
+        )
+        dispatch(productsSuccess(result))
     } catch (error) {
         dispatch(productsFailure(error.message))
     }

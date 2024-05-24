@@ -82,3 +82,16 @@ body {
 .favouritesBlue:hover {
     fill: #0c4178;
 }
+
+.categories-dropable {
+    animation: myAnim 0.5s ease 0s 1 normal forwards;
+}
+@keyframes myAnim {
+    0% {
+        transform: translateX(-100px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

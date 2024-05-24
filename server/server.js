@@ -9,6 +9,11 @@ const {
 } = require("./categories/categories");
 const smsVerify = require("./smsVerify.js/smsVerify");
 const dashBoardOrders = require("./user/dashboardOrders");
+const skipStores = [
+  "E4DB401B-717D-4F09-A223-B9E9D0446361",
+  "459307A2-460B-4052-84E5-16145AD098DD",
+  "833a605c-fa32-46b6-9735-067239c68634",
+];
 
 require("dotenv").config();
 
@@ -58,8 +63,7 @@ app.post("/server/searchProducts", async function (req, res) {
   const filtredStores = stores.stores
     .filter(
       (store) =>
-        store.is_sell === true &&
-        store.id !== "E4DB401B-717D-4F09-A223-B9E9D0446361"
+        store.is_sell === true && skipStores.every((str) => str !== store.id)
     )
     .map((store) => store.id);
 
@@ -140,10 +144,14 @@ app.post("/server/getGoods", async function (req, res) {
 
     const data = await resp.json();
 
-    if (data) {
+    if (
+      data &&
+      data.products[0].category !== null &&
+      data.products[0].store_id !== null
+    ) {
       res.json(data);
     } else {
-      res.status(401).send("error");
+      res.status(401).send("not founded");
     }
   } catch (error) {
     res.status(500).send(error);
@@ -222,10 +230,6 @@ app.get("/server/getAllCategories", async function (req, res) {
     (method = clientServerOptions.method),
     (headers = clientServerOptions.headers)
   );
-  const skipStores = [
-    "E4DB401B-717D-4F09-A223-B9E9D0446361",
-    "459307A2-460B-4052-84E5-16145AD098DD",
-  ];
 
   const stores = await post("/products/stores").then((data) => data.json());
 

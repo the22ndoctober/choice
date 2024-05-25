@@ -17,6 +17,7 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import BestOffers from "@/app/components/main/bestOffers/BestOffers"
 //
+import PriceFilter from "@/app/components/basic/filters/PriceFilter"
 
 const RecursiveSelect = ({
     rootCat,
@@ -119,6 +120,13 @@ const CategoriesSearch = () => {
     const [productsToShow, setProductsToShow] = useState([])
     const [pagesAmount, setPagesAmount] = useState<any>([])
 
+    //price filters
+
+    const [min, setMin] = useState<number>(0)
+    const [max, setMax] = useState<number>(0)
+
+    const [currentMin, setCurrentMin] = useState<number>()
+    const [currentMax, setCurrentMax] = useState<number>()
     //categories
 
     const [rootCat, setRootCat] = useState<any>([])
@@ -184,11 +192,11 @@ const CategoriesSearch = () => {
             setPagesAmount(
                 new Array(
                     Math.ceil(
-                        getProducts.data[0].length / (endPivot - startPivot + 1)
+                        getProducts.data.length / (endPivot - startPivot + 1)
                     )
                 ).fill(1)
             )
-            console.log(getProducts.data[0])
+            console.log(getProducts.data)
         }
     }, [getProducts.isSuccess])
 
@@ -196,6 +204,30 @@ const CategoriesSearch = () => {
         setStartPivot(8 * (selectedPage + 1) - 8)
         setEndPivot(8 * (selectedPage + 1) - 1)
     }, [selectedPage])
+
+    useEffect(() => {
+        if (getProducts.isSuccess) {
+            let lowest: number = +Infinity
+            let highest: number = -Infinity
+
+            getProducts.data.map((product: any) => {
+                const price = parseInt(product.price)
+                if (price > highest) {
+                    setMax(highest)
+                    highest = price
+                }
+                if (price < lowest) {
+                    setMin(lowest)
+                    lowest = price
+                }
+            })
+        }
+    }, [getProducts.isSuccess, getProducts.data])
+
+    useEffect(() => {
+        setCurrentMax(max)
+        setCurrentMin(min)
+    }, [min, max])
 
     return (
         <Box
@@ -336,6 +368,15 @@ const CategoriesSearch = () => {
                                 rowGap: "12px",
                             }}
                         >
+                            <PriceFilter
+                                key="price-filter-cat"
+                                min={min}
+                                max={max}
+                                currentMin={currentMin}
+                                currentMax={currentMax}
+                                setCurrentMin={setCurrentMin}
+                                setCurrentMax={setCurrentMax}
+                            />
                             {rootCat.length > 0 && (
                                 <RecursiveSelect
                                     key={
@@ -375,7 +416,7 @@ const CategoriesSearch = () => {
                                 <Box>Loading</Box>
                             ) : (
                                 getProducts.isSuccess &&
-                                getProducts.data[0].map(
+                                getProducts.data.map(
                                     (product: any, id: number) => {
                                         if (
                                             id >= startPivot &&

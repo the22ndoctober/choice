@@ -100,7 +100,7 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                             container
                             sx={{ flexDirection: "column", rowGap: "3px" }}
                         >
-                            {data[0].map(
+                            {data.map(
                                 (product: any, id: number) =>
                                     id < 4 && (
                                         <ProductLink

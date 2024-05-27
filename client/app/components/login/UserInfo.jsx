@@ -34,8 +34,6 @@ export default function UserInfo() {
                         ? localStorage.getItem("CHOICE_JWT")
                         : "",
             }),
-        retry: false,
-        refetchOnReconnect: false,
     })
 
     if (isSuccess) {
@@ -46,7 +44,7 @@ export default function UserInfo() {
         if (activeSideBar === sideBarOptions.MyCabinet) {
             setRenderedInfo(<MyCabinet />)
         }
-        if (!isLoading) {
+        if (isSuccess) {
             if (activeSideBar === sideBarOptions.MyOrders) {
                 setRenderedInfo(<MyOrders orders={data.orders} />)
             }

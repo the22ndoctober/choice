@@ -1,5 +1,8 @@
+"use client"
+
 import { Box, Grid, InputBase } from "@mui/material"
-import React from "react"
+import Slider from "@mui/joy/Slider"
+import React, { useState } from "react"
 import Accordion from "@mui/joy/Accordion"
 import AccordionDetails from "@mui/joy/AccordionDetails"
 import AccordionSummary from "@mui/joy/AccordionSummary"
@@ -13,9 +16,15 @@ const PriceFIlter = ({
     setCurrentMin,
     setCurrentMax,
 }) => {
+    const [query, setQuery] = useState([min, max])
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue)
+    }
+
     return (
         <>
-            <Accordion sx={{ width: "100%" }}>
+            <Accordion sx={{ width: "100%" }} defaultExpanded={true}>
                 <AccordionSummary
                     sx={{
                         py: "6px",
@@ -87,7 +96,6 @@ const PriceFIlter = ({
                                 fontSize: "14px",
                                 fontWeight: 600,
                                 lineHeight: "16.94px",
-
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -99,6 +107,14 @@ const PriceFIlter = ({
                             Ок
                         </Box>
                     </Grid>
+                    <Box sx={{ width: "100%" }}>
+                        <Slider
+                            getAriaLabel={() => "Price"}
+                            value={query}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto"
+                        />
+                    </Box>
                 </AccordionDetails>
             </Accordion>
         </>

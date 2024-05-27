@@ -17,7 +17,7 @@ import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import BestOffers from "@/app/components/main/bestOffers/BestOffers"
 //
-import PriceFilter from "@/app/components/basic/filters/PriceFilter"
+import PriceFIlter from "@/app/components/basic/filters/PriceFIlter"
 
 const RecursiveSelect = ({
     rootCat,
@@ -34,7 +34,7 @@ const RecursiveSelect = ({
                 defaultValue={rootCat[id].category.title}
                 onChange={handleChange}
                 sx={{
-                    width: 240,
+                    width: "100%",
                     py: "12px",
                     [`& .${selectClasses.indicator}`]: {
                         transition: "0.2s",
@@ -71,7 +71,7 @@ const RecursiveSelect = ({
                     indicator={<KeyboardArrowDown />}
                     onChange={handleChange}
                     sx={{
-                        width: 240,
+                        width: "100%",
                         py: "12px",
                         [`& .${selectClasses.indicator}`]: {
                             transition: "0.2s",
@@ -125,8 +125,8 @@ const CategoriesSearch = () => {
     const [min, setMin] = useState<number>(0)
     const [max, setMax] = useState<number>(0)
 
-    const [currentMin, setCurrentMin] = useState<number>()
-    const [currentMax, setCurrentMax] = useState<number>()
+    const [currentMin, setCurrentMin] = useState<number>(0)
+    const [currentMax, setCurrentMax] = useState<number>(0)
     //categories
 
     const [rootCat, setRootCat] = useState<any>([])
@@ -207,22 +207,31 @@ const CategoriesSearch = () => {
 
     useEffect(() => {
         if (getProducts.isSuccess) {
-            let lowest: number = +Infinity
-            let highest: number = -Infinity
+            let lowest: number = 0
+            let highest: number = 0
 
-            getProducts.data.map((product: any) => {
+            getProducts.data.map((product: any, id: number) => {
                 const price = parseInt(product.price)
+                console.log(price > highest)
+                console.log(price < lowest)
+                if (id === 0) {
+                    setMax(price)
+                    setMin(price)
+                    highest = price
+                    lowest = price
+                    return
+                }
                 if (price > highest) {
-                    setMax(highest)
+                    setMax(price)
                     highest = price
                 }
                 if (price < lowest) {
-                    setMin(lowest)
+                    setMin(price)
                     lowest = price
                 }
             })
         }
-    }, [getProducts.isSuccess, getProducts.data])
+    }, [getProducts.data])
 
     useEffect(() => {
         setCurrentMax(max)
@@ -368,7 +377,7 @@ const CategoriesSearch = () => {
                                 rowGap: "12px",
                             }}
                         >
-                            <PriceFilter
+                            <PriceFIlter
                                 key="price-filter-cat"
                                 min={min}
                                 max={max}
@@ -460,6 +469,7 @@ const CategoriesSearch = () => {
                                             id <= selectedPage + 2) ||
                                         id > pagesAmount.length - 5) && (
                                         <Box
+                                            key={item}
                                             sx={{
                                                 width: "24px",
                                                 height: "24px",

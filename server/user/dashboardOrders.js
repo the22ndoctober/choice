@@ -80,11 +80,12 @@ function DashboardOrders(app, PORT, bent) {
     );
 
     try {
-      const user = await User.findOne({ JWT: req.body.JWT });
+      const user = await User.findOne({ jwt: req.body.JWT });
       if (user) {
         res.json(user);
+      } else {
+        res.status(401).send("No valid user");
       }
-      res.status(401).send("No valid user");
     } catch (error) {
       res.status(500).send(error);
     }

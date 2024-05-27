@@ -41,6 +41,7 @@ export const getProfileByJWT = async ({ JWT }) => {
         )
 
         if (response) {
+            console.log(response.data)
             return response.data
         } else {
             alert(1)

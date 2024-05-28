@@ -119,6 +119,7 @@ const CategoriesSearch = () => {
     const [selectedPage, setSelectedPage] = useState(0)
     const [productsToShow, setProductsToShow] = useState([])
     const [pagesAmount, setPagesAmount] = useState<any>([])
+    const [suitProducts, setSuitProducts] = useState<any>([])
 
     //price filters
 
@@ -132,7 +133,9 @@ const CategoriesSearch = () => {
     const [rootCat, setRootCat] = useState<any>([])
     const [targetCat, setTargetCat] = useState<any>(null)
 
+    const products = useSelector((state: any) => state.products.data)
     const status = useSelector((state: any) => state.products.status)
+
     const categories = useSelector((state: any) => state.categories.data)
     const categoriesStatus = useSelector(
         (state: any) => state.categories.status
@@ -178,27 +181,28 @@ const CategoriesSearch = () => {
     }, [categoriesStatus, query])
 
     useEffect(() => {
-        if (targetCat !== null) {
+        if (targetCat !== null && status === "success") {
             getProducts.mutate(targetCat.category.category_id)
+            let target = products.filter((product: any) =>
+                targetCat.category.category_id.some(
+                    (id: string) => id === product.category.category_id
+                )
+            )
+            setSuitProducts(target)
         }
-    }, [targetCat])
+    }, [targetCat, status])
 
     useEffect(() => {
         setSelectedPage(0)
     }, [query])
 
     useEffect(() => {
-        if (getProducts.isSuccess) {
-            setPagesAmount(
-                new Array(
-                    Math.ceil(
-                        getProducts.data.length / (endPivot - startPivot + 1)
-                    )
-                ).fill(1)
-            )
-            console.log(getProducts.data)
-        }
-    }, [getProducts.isSuccess])
+        setPagesAmount(
+            new Array(
+                Math.ceil(suitProducts.length / (endPivot - startPivot + 1))
+            ).fill(1)
+        )
+    }, [suitProducts])
 
     useEffect(() => {
         setStartPivot(8 * (selectedPage + 1) - 8)
@@ -206,32 +210,28 @@ const CategoriesSearch = () => {
     }, [selectedPage])
 
     useEffect(() => {
-        if (getProducts.isSuccess) {
-            let lowest: number = 0
-            let highest: number = 0
+        let lowest: number = 0
+        let highest: number = 0
 
-            getProducts.data.map((product: any, id: number) => {
-                const price = parseInt(product.price)
-                console.log(price > highest)
-                console.log(price < lowest)
-                if (id === 0) {
-                    setMax(price)
-                    setMin(price)
-                    highest = price
-                    lowest = price
-                    return
-                }
-                if (price > highest) {
-                    setMax(price)
-                    highest = price
-                }
-                if (price < lowest) {
-                    setMin(price)
-                    lowest = price
-                }
-            })
-        }
-    }, [getProducts.data])
+        suitProducts.map((product: any, id: number) => {
+            const price = parseInt(product.price)
+            if (id === 0) {
+                setMax(price)
+                setMin(price)
+                highest = price
+                lowest = price
+                return
+            }
+            if (price > highest) {
+                setMax(price)
+                highest = price
+            }
+            if (price < lowest) {
+                setMin(price)
+                lowest = price
+            }
+        })
+    }, [suitProducts])
 
     useEffect(() => {
         setCurrentMax(max)
@@ -421,36 +421,27 @@ const CategoriesSearch = () => {
                                 },
                             }}
                         >
-                            {getProducts.isPending ? (
+                            {status === "loading" ? (
                                 <Box>Loading</Box>
                             ) : (
-                                getProducts.isSuccess &&
-                                getProducts.data.map(
-                                    (product: any, id: number) => {
-                                        if (
-                                            id >= startPivot &&
-                                            id <= endPivot
-                                        ) {
-                                            return (
-                                                <ProductCard
-                                                    key={
-                                                        product.product_id + id
-                                                    }
-                                                    title={product.title}
-                                                    price={Math.round(
-                                                        parseInt(product.price)
-                                                    )}
-                                                    currency={product.currency}
-                                                    tags={[]}
-                                                    img_path={
-                                                        product.image_path
-                                                    }
-                                                    product={product}
-                                                />
-                                            )
-                                        }
+                                status === "success" &&
+                                suitProducts.map((product: any, id: number) => {
+                                    if (id >= startPivot && id <= endPivot) {
+                                        return (
+                                            <ProductCard
+                                                key={product.product_id + id}
+                                                title={product.title}
+                                                price={Math.round(
+                                                    parseInt(product.price)
+                                                )}
+                                                currency={product.currency}
+                                                tags={[]}
+                                                img_path={product.image_path}
+                                                product={product}
+                                            />
+                                        )
                                     }
-                                )
+                                })
                             )}
                         </Grid>
                         <Grid

@@ -95,7 +95,7 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                 )}
 
                 {categoryInfo.child === null &&
-                    (!isLoading ? (
+                    (isSuccess ? (
                         <Grid
                             container
                             sx={{ flexDirection: "column", rowGap: "3px" }}

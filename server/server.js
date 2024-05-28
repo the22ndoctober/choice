@@ -111,8 +111,17 @@ app.post("/server/getCategoryProducts", async function (req, res) {
     const parsedData = await Promise.all(
       req.body.category_id.map((cat) => getCategoryProducts(cat))
     );
+
+    const stores = await post("/products/stores").then((data) => data.json());
+
     if (parsedData) {
-      res.json(parsedData[0]);
+      console.log(parsedData[0]);
+      const filtredData = parsedData[0]
+        .filter((product) =>
+          skipStores.every((str) => str !== product.store_id)
+        )
+        .map((store) => store.id);
+      res.json(filtredData);
     } else {
       res.status(401).send("no data");
     }

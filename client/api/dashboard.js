@@ -30,12 +30,11 @@ export const getProfileByJWT = async ({ JWT }) => {
     try {
         const response = await axios.post(
             baseURL + "/server/getProfileByJWT",
-            {
-                JWT: JWT,
-            },
+            {},
             {
                 headers: {
                     'secret': process.env.SECRET_KEY, // prettier-ignore
+                    JWT: JWT,
                 },
             }
         )

@@ -80,7 +80,9 @@ function DashboardOrders(app, PORT, bent) {
     );
 
     try {
-      const user = await User.findOne({ jwt: req.body.JWT });
+      console.log(req.headers.JWT);
+      const user = await User.findOne({ jwt: req.headers.JWT });
+
       if (user) {
         res.json(user);
       } else {

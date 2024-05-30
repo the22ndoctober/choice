@@ -14,13 +14,13 @@ const Navigtaion = () => {
     const router = useRouter()
 
     const NavButtons = [
-        {
-            key: "store",
-            value: "Магазин",
-            handle: () => {
-                router.push("/")
-            },
-        },
+        // {
+        //     key: "store",
+        //     value: "Магазин",
+        //     handle: () => {
+        //         router.push("/")
+        //     },
+        // },
         {
             key: "about",
             value: "Про нас",

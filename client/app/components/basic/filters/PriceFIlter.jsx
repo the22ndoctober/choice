@@ -2,7 +2,7 @@
 
 import { Box, Grid, InputBase } from "@mui/material"
 import Slider from "@mui/joy/Slider"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Accordion from "@mui/joy/Accordion"
 import AccordionDetails from "@mui/joy/AccordionDetails"
 import AccordionSummary from "@mui/joy/AccordionSummary"
@@ -16,10 +16,27 @@ const PriceFIlter = ({
     setCurrentMin,
     setCurrentMax,
 }) => {
-    const [query, setQuery] = useState([min, max])
+    const [queryMin, setQueryMin] = useState(min)
+    const [queryMax, setQueryMax] = useState(max)
+    const [sliderGap, setSliderGap] = useState([0, 0])
+
+    useEffect(() => {
+        setQueryMin(min)
+        setQueryMax(max)
+    }, [min, max])
+
+    useEffect(() => {
+        setSliderGap([min, max])
+    }, [min, max])
 
     const handleChange = (event, newValue) => {
-        setValue(newValue)
+        setQueryMin(newValue[0])
+        setQueryMax(newValue[1])
+    }
+
+    const handleMinMaxPrice = () => {
+        setCurrentMin(queryMin)
+        setCurrentMax(queryMax)
     }
 
     return (
@@ -44,8 +61,20 @@ const PriceFIlter = ({
                     >
                         <InputBase
                             placeholder="min value"
-                            value={currentMin}
-                            onChange={(e) => setCurrentMin(e.target.value)}
+                            value={queryMin}
+                            onChange={(e) => {
+                                if (e.target.value < min) {
+                                    alert("Число менше мінімального")
+                                    setQueryMin(min)
+                                    return
+                                }
+                                if (e.target.value > queryMax) {
+                                    alert("Число більше максимального")
+                                    setQueryMin(min)
+                                    return
+                                }
+                                setQueryMin(e.target.value)
+                            }}
                             sx={{
                                 width: "fit-content",
                                 height: "38px",
@@ -71,8 +100,20 @@ const PriceFIlter = ({
 
                         <InputBase
                             placeholder="max-value"
-                            value={currentMax}
-                            onChange={(e) => setCurrentMax(e.target.value)}
+                            value={queryMax}
+                            onChange={(e) => {
+                                if (e.target.value > max) {
+                                    alert("Число більше максимального")
+                                    setQueryMax(max)
+                                    return
+                                }
+                                if (e.target.value < queryMin) {
+                                    alert("Число менше мінімального")
+                                    setQueryMax(max)
+                                    return
+                                }
+                                setQueryMax(e.target.value)
+                            }}
                             sx={{
                                 width: "fit-content",
                                 height: "38px",
@@ -102,15 +143,19 @@ const PriceFIlter = ({
                                 height: "38px",
                                 px: "16px",
                                 width: "fit-content",
+                                cursor: "pointer",
                             }}
+                            onClick={handleMinMaxPrice}
                         >
                             Ок
                         </Box>
                     </Grid>
-                    <Box sx={{ width: "100%" }}>
+                    <Box sx={{ width: "calc(100% - 36px)", margin: "0 auto" }}>
                         <Slider
                             getAriaLabel={() => "Price"}
-                            value={query}
+                            min={sliderGap[0]}
+                            max={sliderGap[1]}
+                            value={[queryMin, queryMax]}
                             onChange={handleChange}
                             valueLabelDisplay="auto"
                         />

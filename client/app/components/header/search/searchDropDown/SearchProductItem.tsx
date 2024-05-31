@@ -169,12 +169,12 @@ const SearchProductItem = ({ product, setQuery, setOpenCat }: any) => {
                                 maxWidth: 100,
                                 textAlign: "center",
                                 fontSize: "14px",
-                                color: Colors.teal,
+                                color: Colors.neutral,
                                 borderRadius: "5px",
-                                border: `1px solid ${Colors.teal}`,
+                                border: `1px solid ${Colors.neutral}`,
                             }}
                         >
-                            {`${product.price} ${product.currency}`}
+                            {`${product.price} ₴`}
                         </Typography>
                     </Grid>
                 </Box>

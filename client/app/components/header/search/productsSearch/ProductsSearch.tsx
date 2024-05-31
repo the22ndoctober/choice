@@ -8,6 +8,7 @@ import { useSelector } from "react-redux"
 import ProductCard from "@/app/components/basic/productCard/ProductCard"
 import { Colors } from "@/client"
 import BestOffers from "@/app/components/main/bestOffers/BestOffers"
+import PriceFIlter from "@/app/components/basic/filters/PriceFIlter"
 
 const ProductsSearch = () => {
     const searchParams = useSearchParams()!
@@ -17,8 +18,16 @@ const ProductsSearch = () => {
     const [endPivot, setEndPivot] = useState(7)
     const [selectedPage, setSelectedPage] = useState(0)
     const [productsToShow, setProductsToShow] = useState([])
-
+    const [filtredItems, setFiltredItems] = useState([])
     const [pagesAmount, setPagesAmount] = useState<any>([])
+
+    //price filters
+
+    const [min, setMin] = useState<number>(0)
+    const [max, setMax] = useState<number>(0)
+
+    const [currentMin, setCurrentMin] = useState<number>(0)
+    const [currentMax, setCurrentMax] = useState<number>(0)
 
     const products = useSelector((state: any) => state.products.data)
     const status = useSelector((state: any) => state.products.status)
@@ -28,6 +37,10 @@ const ProductsSearch = () => {
     }, [selectedPage])
 
     useEffect(() => {
+        setSelectedPage(0)
+    }, [filtredItems])
+
+    useEffect(() => {
         if (status === "success") {
             setProductsToShow(
                 products.filter((item: any) =>
@@ -35,7 +48,7 @@ const ProductsSearch = () => {
                 )
             )
         }
-    }, [status, endPivot, query])
+    }, [status, query])
 
     useEffect(() => {
         setSelectedPage(0)
@@ -44,16 +57,63 @@ const ProductsSearch = () => {
     useEffect(() => {
         setPagesAmount(
             new Array(
-                Math.ceil(productsToShow.length / (endPivot - startPivot + 1))
+                Math.ceil(filtredItems.length / (endPivot - startPivot + 1))
             ).fill(1)
         )
-        console.log(productsToShow)
-    }, [productsToShow])
+    }, [filtredItems])
 
     useEffect(() => {
         setStartPivot(8 * (selectedPage + 1) - 8)
         setEndPivot(8 * (selectedPage + 1) - 1)
     }, [selectedPage])
+
+    //min max calculation
+
+    useEffect(() => {
+        if (status === "success") {
+            let lowest: number = 0
+            let highest: number = 0
+
+            productsToShow.map((product: any, id: number) => {
+                const price = parseInt(product.price)
+                if (id === 0) {
+                    setMax(price)
+                    setMin(price)
+                    highest = price
+                    lowest = price
+                    return
+                }
+                if (price > highest) {
+                    setMax(price)
+                    highest = price
+                }
+                if (price < lowest) {
+                    setMin(price)
+                    lowest = price
+                }
+            })
+        }
+    }, [productsToShow])
+
+    useEffect(() => {
+        setCurrentMax(max)
+        setCurrentMin(min)
+    }, [min, max])
+
+    //price filtration
+
+    useEffect(() => {
+        setFiltredItems(productsToShow)
+    }, [productsToShow])
+
+    useEffect(() => {
+        setFiltredItems(
+            productsToShow.filter(
+                (product: any) =>
+                    product.price >= currentMin && product.price <= currentMax
+            )
+        )
+    }, [currentMin, currentMax])
 
     return (
         <Box
@@ -91,45 +151,88 @@ const ProductsSearch = () => {
                         {query}
                     </Box>
                 </Box>
-                <Grid
-                    container
-                    sx={{
-                        flexWrap: "wrap",
-
-                        rowGap: "24px",
-                        "& > div": {
-                            width: "calc(25% - 18px)",
-                        },
-                        "& > div:not(:nth-child(4n))": {
-                            marginRight: "24px",
-                        },
-                    }}
-                >
-                    {status === "loading" ? (
-                        <Box>Loading</Box>
-                    ) : (
-                        productsToShow.map(
-                            (product: any, id: number) =>
-                                id >= startPivot &&
-                                id <= endPivot && (
-                                    <ProductCard
-                                        key={
-                                            product.product_id +
-                                            product.store_id
-                                        }
-                                        title={product.title}
-                                        price={Math.round(
-                                            parseInt(product.price)
-                                        )}
-                                        currency={product.currency}
-                                        tags={[]}
-                                        img_path={product.image_path}
-                                        product={product}
-                                    />
-                                )
-                        )
-                    )}
+                <Grid container sx={{ columnGap: "12px" }}>
+                    <Grid
+                        container
+                        sx={{
+                            flexDirection: "column",
+                            flex: "1 1 0",
+                            background: Colors.paper,
+                            borderRadius: "15px",
+                            p: "16px",
+                            rowGap: "12px",
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                fontWeight: 600,
+                                fontSize: "20px",
+                                lineHeight: "24px",
+                                color: Colors.maxDark,
+                            }}
+                        >
+                            Фільтр
+                        </Box>
+                        <Grid
+                            container
+                            sx={{
+                                flexDirection: "column",
+                                rowGap: "12px",
+                            }}
+                        >
+                            <PriceFIlter
+                                key="price-filter-cat"
+                                min={min}
+                                max={max}
+                                currentMin={currentMin}
+                                currentMax={currentMax}
+                                setCurrentMin={setCurrentMin}
+                                setCurrentMax={setCurrentMax}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        sx={{
+                            flex: "4 1 0",
+                            flexWrap: "wrap",
+                            rowGap: "24px",
+                            "& > div": {
+                                width: "calc(25% - 18px)",
+                            },
+                            "& > div:not(:nth-child(4n))": {
+                                marginRight: "24px",
+                            },
+                        }}
+                    >
+                        {status === "loading" ? (
+                            <Box>Loading</Box>
+                        ) : (
+                            status === "success" &&
+                            filtredItems.map(
+                                (product: any, id: number) =>
+                                    id >= startPivot &&
+                                    id <= endPivot && (
+                                        <ProductCard
+                                            key={
+                                                product.product_id +
+                                                product.store_id
+                                            }
+                                            title={product.title}
+                                            price={Math.round(
+                                                parseInt(product.price)
+                                            )}
+                                            currency={product.currency}
+                                            tags={[]}
+                                            img_path={product.image_path}
+                                            product={product}
+                                        />
+                                    )
+                            )
+                        )}
+                    </Grid>
                 </Grid>
+
                 <Grid
                     container
                     sx={{
@@ -141,10 +244,10 @@ const ProductsSearch = () => {
                 >
                     {pagesAmount.map((item: any, id: number) => {
                         return (
-                            (id < 2 ||
+                            (id <= 2 ||
                                 (id >= selectedPage - 2 &&
                                     id <= selectedPage + 2) ||
-                                id > pagesAmount.length - 5) && (
+                                id >= pagesAmount.length - 3) && (
                                 <Box
                                     sx={{
                                         width: "24px",

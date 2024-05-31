@@ -19,7 +19,7 @@ export default function UserInfo() {
         Reviews: "Мої відгуки",
         ReviewedProducts: "Переглянуті товари",
         Exchange: "Обмін",
-        PesonalData: "Персональні дані",
+        PersonalData: "Персональні дані",
     }
     const router = useRouter()
     const [activeSideBar, setActiveSideBar] = useState(sideBarOptions.MyCabinet)
@@ -41,10 +41,10 @@ export default function UserInfo() {
     }
 
     useEffect(() => {
-        if (activeSideBar === sideBarOptions.MyCabinet) {
-            setRenderedInfo(<MyCabinet />)
-        }
         if (isSuccess) {
+            if (activeSideBar === sideBarOptions.MyCabinet) {
+                setRenderedInfo(<MyCabinet />)
+            }
             if (activeSideBar === sideBarOptions.MyOrders) {
                 setRenderedInfo(<MyOrders orders={data.orders} />)
             }
@@ -335,86 +335,144 @@ export default function UserInfo() {
                                         display: "flex",
                                         columnGap: "12px",
                                         px: "40px",
-                                        py: "31px",
+                                        py: "17px",
                                         borderBottom: `2px solid ${Colors.light}`,
                                         cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(
+                                            sideBarOptions.MyCabinet
+                                        )
                                     }}
                                 >
                                     <svg
-                                        width="29"
-                                        height="25"
-                                        viewBox="0 0 29 25"
+                                        width="27"
+                                        height="24"
+                                        viewBox="0 0 27 24"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path
-                                            d="M23.6066 11.6426C23.1555 11.6426 22.801 11.9971 22.801 12.4482V22.5025H18.7084V18.1521C18.7084 15.8319 16.8071 13.9306 14.4869 13.9306C12.1667 13.9306 10.2654 15.8319 10.2654 18.1521V22.5025H6.20501V12.4482C6.20501 11.9971 5.85053 11.6426 5.39938 11.6426C4.94823 11.6426 4.59375 11.9971 4.59375 12.4482V23.3081C4.59375 23.7593 4.94823 24.1137 5.39938 24.1137H11.071C11.5222 24.1137 11.8766 23.7593 11.8766 23.3081V18.1521C11.8766 16.7019 13.0368 15.5418 14.4869 15.5418C15.937 15.5418 17.0971 16.7019 17.0971 18.1521V23.3081C17.0971 23.7593 17.4516 24.1137 17.9028 24.1137H23.6066C24.0578 24.1137 24.4123 23.7593 24.4123 23.3081V12.4482C24.4123 11.9971 24.0255 11.6426 23.6066 11.6426Z"
-                                            fill="#051B32"
-                                        />
-                                        <path
-                                            d="M28.702 11.0935L15.0062 0.169182C14.7162 -0.0563941 14.2973 -0.0563941 14.0073 0.169182L0.311551 11.0935C-0.0429267 11.3836 -0.107377 11.8669 0.18265 12.2214C0.343776 12.4148 0.569352 12.5114 0.827154 12.5114C0.98828 12.5114 1.18163 12.447 1.34276 12.3503L14.5229 1.84489L27.703 12.3503C28.0575 12.6403 28.5731 12.5759 28.8309 12.2214C29.0887 11.8992 29.0564 11.3836 28.702 11.0935Z"
-                                            fill="#051B32"
+                                            d="M4.09966 8.43918V20.8378C4.09966 22.2073 5.20987 23.3175 6.57939 23.3175H10.0612C10.1925 23.3175 10.299 23.2111 10.299 23.0798V17.7382C10.299 16.0263 11.6867 14.6385 13.3986 14.6385V14.6385C15.1105 14.6385 16.4983 16.0263 16.4983 17.7382V23.0798C16.4983 23.2111 16.6048 23.3175 16.7361 23.3175H20.2179C21.5874 23.3175 22.6976 22.2073 22.6976 20.8378V8.43918M4.09966 8.43918L13.3986 1L22.6976 8.43918M4.09966 8.43918L1 10.9189M22.6976 8.43918L25.7973 10.9189"
+                                            stroke="#706F6F"
+                                            stroke-width="1.23986"
+                                            stroke-linecap="round"
                                         />
                                     </svg>
+
                                     <Box
-                                        onClick={() => {
-                                            setActiveSideBar(
-                                                sideBarOptions.MyCabinet
-                                            )
-                                        }}
                                         sx={{
-                                            fontSize: "20px",
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
                                             fontWeight:
                                                 activeSideBar ===
                                                 sideBarOptions.MyCabinet
                                                     ? 600
                                                     : 400,
-                                            lineHeight: "24.2px",
                                         }}
                                     >
                                         {sideBarOptions.MyCabinet}
                                     </Box>
                                 </Box>
+
                                 <Box
                                     sx={{
                                         display: "flex",
                                         columnGap: "12px",
                                         px: "40px",
-                                        py: "31px",
+                                        py: "17px",
                                         borderBottom: `2px solid ${Colors.light}`,
                                         cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(
+                                            sideBarOptions.MyOrders
+                                        )
                                     }}
                                 >
                                     <svg
-                                        width="29"
-                                        height="25"
-                                        viewBox="0 0 29 25"
+                                        width="27"
+                                        height="24"
+                                        viewBox="0 0 27 24"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path
-                                            d="M23.6066 11.6426C23.1555 11.6426 22.801 11.9971 22.801 12.4482V22.5025H18.7084V18.1521C18.7084 15.8319 16.8071 13.9306 14.4869 13.9306C12.1667 13.9306 10.2654 15.8319 10.2654 18.1521V22.5025H6.20501V12.4482C6.20501 11.9971 5.85053 11.6426 5.39938 11.6426C4.94823 11.6426 4.59375 11.9971 4.59375 12.4482V23.3081C4.59375 23.7593 4.94823 24.1137 5.39938 24.1137H11.071C11.5222 24.1137 11.8766 23.7593 11.8766 23.3081V18.1521C11.8766 16.7019 13.0368 15.5418 14.4869 15.5418C15.937 15.5418 17.0971 16.7019 17.0971 18.1521V23.3081C17.0971 23.7593 17.4516 24.1137 17.9028 24.1137H23.6066C24.0578 24.1137 24.4123 23.7593 24.4123 23.3081V12.4482C24.4123 11.9971 24.0255 11.6426 23.6066 11.6426Z"
-                                            fill="#051B32"
+                                            d="M1 11.4451H3.53193M26.3193 11.4451H23.7874M3.53193 11.4451L4.7979 22.8388H22.5214L23.7874 11.4451M3.53193 11.4451H6.06386M23.7874 11.4451H21.2554M6.06386 11.4451L11.1277 1.31738M6.06386 11.4451H21.2554M21.2554 11.4451L16.1916 1.31738"
+                                            stroke="#706F6F"
+                                            stroke-width="1.26597"
+                                            stroke-linecap="round"
                                         />
                                         <path
-                                            d="M28.702 11.0935L15.0062 0.169182C14.7162 -0.0563941 14.2973 -0.0563941 14.0073 0.169182L0.311551 11.0935C-0.0429267 11.3836 -0.107377 11.8669 0.18265 12.2214C0.343776 12.4148 0.569352 12.5114 0.827154 12.5114C0.98828 12.5114 1.18163 12.447 1.34276 12.3503L14.5229 1.84489L27.703 12.3503C28.0575 12.6403 28.5731 12.5759 28.8309 12.2214C29.0887 11.8992 29.0564 11.3836 28.702 11.0935Z"
-                                            fill="#051B32"
+                                            d="M9.86133 15.2432H17.4571"
+                                            stroke="#706F6F"
+                                            stroke-width="1.26597"
+                                            stroke-linecap="round"
+                                        />
+                                        <path
+                                            d="M9.86133 17.7744H17.4571"
+                                            stroke="#706F6F"
+                                            stroke-width="1.26597"
+                                            stroke-linecap="round"
                                         />
                                     </svg>
+
                                     <Box
-                                        onClick={() => {
-                                            setActiveSideBar(
-                                                sideBarOptions.ChosenProducts
-                                            )
-                                        }}
                                         sx={{
-                                            fontSize: "20px",
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
+                                            fontWeight:
+                                                activeSideBar ===
+                                                sideBarOptions.MyOrders
+                                                    ? 600
+                                                    : 400,
+                                        }}
+                                    >
+                                        {sideBarOptions.MyOrders}
+                                    </Box>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        columnGap: "12px",
+                                        px: "40px",
+                                        py: "17px",
+                                        borderBottom: `2px solid ${Colors.light}`,
+                                        cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(
+                                            sideBarOptions.ChosenProducts
+                                        )
+                                    }}
+                                >
+                                    <svg
+                                        width="25"
+                                        height="23"
+                                        viewBox="0 0 25 23"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M11.6866 4.35238L12.1376 4.85306L12.5885 4.35242C15.1732 1.48299 17.9407 1.1339 20.0199 2.00585C22.1454 2.89717 23.6683 5.10292 23.6683 7.5901C23.6683 8.92075 23.0249 10.4633 21.9579 12.0758C20.8999 13.6748 19.4723 15.2729 18.0102 16.6994C16.5503 18.1238 15.0707 19.3629 13.921 20.244C13.3457 20.6849 12.858 21.0324 12.5004 21.267C12.3512 21.3649 12.23 21.4397 12.1377 21.4924C12.0453 21.4397 11.924 21.3649 11.7748 21.2669C11.4172 21.0323 10.9295 20.6848 10.3542 20.2439C9.20451 19.3627 7.72491 18.1237 6.26503 16.6993C4.80294 15.2728 3.37529 13.6747 2.31727 12.0758C1.25032 10.4633 0.60688 8.92072 0.60688 7.59007C0.60688 4.79862 2.14479 2.61244 4.24062 1.79705C6.3085 0.992543 9.08658 1.46534 11.6866 4.35238ZM11.9947 21.5669C11.9801 21.5729 11.9819 21.5709 11.9962 21.5662C11.9957 21.5665 11.9952 21.5667 11.9947 21.5669ZM12.2791 21.5662C12.2934 21.5709 12.2952 21.5729 12.2806 21.5669C12.2801 21.5667 12.2796 21.5665 12.2791 21.5662Z"
+                                            stroke="#706F6F"
+                                            stroke-width="1.21376"
+                                        />
+                                    </svg>
+
+                                    <Box
+                                        sx={{
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
                                             fontWeight:
                                                 activeSideBar ===
                                                 sideBarOptions.ChosenProducts
                                                     ? 600
                                                     : 400,
-                                            lineHeight: "24.2px",
                                         }}
                                     >
                                         {sideBarOptions.ChosenProducts}
@@ -426,44 +484,207 @@ export default function UserInfo() {
                                         display: "flex",
                                         columnGap: "12px",
                                         px: "40px",
-                                        py: "31px",
+                                        py: "17px",
                                         borderBottom: `2px solid ${Colors.light}`,
                                         cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(sideBarOptions.Reviews)
                                     }}
                                 >
                                     <svg
-                                        width="29"
-                                        height="25"
-                                        viewBox="0 0 29 25"
+                                        width="24"
+                                        height="23"
+                                        viewBox="0 0 24 23"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
                                         <path
-                                            d="M23.6066 11.6426C23.1555 11.6426 22.801 11.9971 22.801 12.4482V22.5025H18.7084V18.1521C18.7084 15.8319 16.8071 13.9306 14.4869 13.9306C12.1667 13.9306 10.2654 15.8319 10.2654 18.1521V22.5025H6.20501V12.4482C6.20501 11.9971 5.85053 11.6426 5.39938 11.6426C4.94823 11.6426 4.59375 11.9971 4.59375 12.4482V23.3081C4.59375 23.7593 4.94823 24.1137 5.39938 24.1137H11.071C11.5222 24.1137 11.8766 23.7593 11.8766 23.3081V18.1521C11.8766 16.7019 13.0368 15.5418 14.4869 15.5418C15.937 15.5418 17.0971 16.7019 17.0971 18.1521V23.3081C17.0971 23.7593 17.4516 24.1137 17.9028 24.1137H23.6066C24.0578 24.1137 24.4123 23.7593 24.4123 23.3081V12.4482C24.4123 11.9971 24.0255 11.6426 23.6066 11.6426Z"
-                                            fill="#051B32"
+                                            d="M1 15.9447V3.8575C1 2.36348 2.21114 1.15234 3.70515 1.15234H20.6124C22.1064 1.15234 23.3175 2.36348 23.3175 3.8575V15.3544C23.3175 16.8484 22.1064 18.0596 20.6124 18.0596H11.7445C11.3492 18.0596 10.9587 18.1462 10.6005 18.3134L4.84435 20.9996C3.95066 21.4166 3.14131 20.2954 3.78313 19.5466C4.27998 18.967 3.8783 18.0596 3.11485 18.0596C1.94685 18.0596 1 17.1127 1 15.9447Z"
+                                            stroke="#706F6F"
+                                            stroke-width="1.23986"
+                                            stroke-linecap="round"
                                         />
                                         <path
-                                            d="M28.702 11.0935L15.0062 0.169182C14.7162 -0.0563941 14.2973 -0.0563941 14.0073 0.169182L0.311551 11.0935C-0.0429267 11.3836 -0.107377 11.8669 0.18265 12.2214C0.343776 12.4148 0.569352 12.5114 0.827154 12.5114C0.98828 12.5114 1.18163 12.447 1.34276 12.3503L14.5229 1.84489L27.703 12.3503C28.0575 12.6403 28.5731 12.5759 28.8309 12.2214C29.0887 11.8992 29.0564 11.3836 28.702 11.0935Z"
-                                            fill="#051B32"
+                                            d="M5.33984 12.3115H18.9783"
+                                            stroke="#706F6F"
+                                            stroke-width="1.23986"
+                                            stroke-linecap="round"
+                                        />
+                                        <path
+                                            d="M5.33984 6.73242H18.9783"
+                                            stroke="#706F6F"
+                                            stroke-width="1.23986"
+                                            stroke-linecap="round"
                                         />
                                     </svg>
+
                                     <Box
-                                        onClick={() => {
-                                            setActiveSideBar(
-                                                sideBarOptions.MyOrders
-                                            )
-                                        }}
                                         sx={{
-                                            fontSize: "20px",
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
                                             fontWeight:
                                                 activeSideBar ===
-                                                sideBarOptions.MyOrders
+                                                sideBarOptions.Reviews
                                                     ? 600
                                                     : 400,
-                                            lineHeight: "24.2px",
                                         }}
                                     >
-                                        {sideBarOptions.MyOrders}
+                                        {sideBarOptions.Reviews}
+                                    </Box>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        columnGap: "12px",
+                                        px: "40px",
+                                        py: "17px",
+                                        borderBottom: `2px solid ${Colors.light}`,
+                                        cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(
+                                            sideBarOptions.ReviewedProducts
+                                        )
+                                    }}
+                                >
+                                    <svg
+                                        width="26"
+                                        height="24"
+                                        viewBox="0 0 26 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M21.9191 7.62V8.2169L22.513 8.15716L25.3742 7.86937V15.3706H22.459H21.9191V15.9105V22.6665C15.9253 22.1869 9.90268 22.1869 3.90883 22.6665V15.9105V15.3706H3.36895H0.539876V7.87081L3.31363 8.15655L3.90883 8.21787V7.61952V2.99303C3.90883 2.74904 4.08906 2.54256 4.33081 2.50958C10.0265 1.73267 15.8014 1.73267 21.4971 2.50958C21.7389 2.54256 21.9191 2.74904 21.9191 2.99303V7.62Z"
+                                            stroke="#706F6F"
+                                            stroke-width="1.07975"
+                                        />
+                                        <path
+                                            d="M13.3001 12.7749L15.724 15.257H25.2878V8.13603C17.0632 9.03903 8.76447 9.03903 0.539876 8.13603V15.257H10.1037L12.5276 12.7749L12.9138 12.3794L13.3001 12.7749Z"
+                                            stroke="#706F6F"
+                                            stroke-width="1.07975"
+                                        />
+                                    </svg>
+
+                                    <Box
+                                        sx={{
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
+                                            fontWeight:
+                                                activeSideBar ===
+                                                sideBarOptions.ReviewedProducts
+                                                    ? 600
+                                                    : 400,
+                                        }}
+                                    >
+                                        {sideBarOptions.ReviewedProducts}
+                                    </Box>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        columnGap: "12px",
+                                        px: "40px",
+                                        py: "17px",
+                                        borderBottom: `2px solid ${Colors.light}`,
+                                        cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(
+                                            sideBarOptions.Exchange
+                                        )
+                                    }}
+                                >
+                                    <svg
+                                        width="26"
+                                        height="23"
+                                        viewBox="0 0 26 23"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M21.9191 7.07898V7.67589L22.513 7.61615L25.3742 7.32835V14.8296H22.459H21.9191V15.3695V22.1255C15.9253 21.6459 9.90268 21.6459 3.90883 22.1255V15.3695V14.8296H3.36895H0.539876V7.3298L3.31363 7.61554L3.90883 7.67686V7.07851V2.45201C3.90883 2.20802 4.08906 2.00154 4.33081 1.96857C10.0265 1.19166 15.8014 1.19166 21.4971 1.96857C21.7389 2.00154 21.9191 2.20802 21.9191 2.45201V7.07898Z"
+                                            stroke="#706F6F"
+                                            stroke-width="1.07975"
+                                        />
+                                        <path
+                                            d="M13.3001 12.2339L15.724 14.716H25.2878V7.59501C17.0632 8.49801 8.76447 8.49801 0.539876 7.59501V14.716H10.1037L12.5276 12.2339L12.9138 11.8384L13.3001 12.2339Z"
+                                            stroke="#706F6F"
+                                            stroke-width="1.07975"
+                                        />
+                                    </svg>
+
+                                    <Box
+                                        sx={{
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
+                                            fontWeight:
+                                                activeSideBar ===
+                                                sideBarOptions.Exchange
+                                                    ? 600
+                                                    : 400,
+                                        }}
+                                    >
+                                        {sideBarOptions.Exchange}
+                                    </Box>
+                                </Box>
+
+                                <Box
+                                    sx={{
+                                        display: "flex",
+                                        columnGap: "12px",
+                                        px: "40px",
+                                        py: "17px",
+                                        borderBottom: `2px solid ${Colors.light}`,
+                                        cursor: "pointer",
+                                        alignItems: "center",
+                                    }}
+                                    onClick={() => {
+                                        setActiveSideBar(
+                                            sideBarOptions.PersonalData
+                                        )
+                                    }}
+                                >
+                                    <svg
+                                        width="26"
+                                        height="25"
+                                        viewBox="0 0 26 25"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M1 19.9555V23.8042H25V19.9555C25 16.4129 22.1281 13.541 18.5855 13.541H7.41452C3.87188 13.541 1 16.4129 1 19.9555Z"
+                                            fill="#706F6F"
+                                            stroke="#706F6F"
+                                            stroke-width="1.2829"
+                                            stroke-linecap="round"
+                                        />
+                                        <path
+                                            d="M19.2135 5.84353C19.2135 7.01281 18.5816 8.1208 17.4622 8.95856C16.3426 9.79643 14.7663 10.3337 12.9978 10.3337C11.2293 10.3337 9.65297 9.79643 8.53337 8.95856C7.41391 8.1208 6.78208 7.01281 6.78208 5.84353C6.78208 4.67425 7.41391 3.56625 8.53337 2.72849C9.65297 1.89062 11.2293 1.35337 12.9978 1.35337C14.7663 1.35337 16.3426 1.89062 17.4622 2.72849C18.5816 3.56625 19.2135 4.67425 19.2135 5.84353Z"
+                                            fill="#706F6F"
+                                            stroke="#706F6F"
+                                            stroke-width="1.2829"
+                                        />
+                                    </svg>
+
+                                    <Box
+                                        sx={{
+                                            fontSize: "16px",
+                                            lineHeight: "19px",
+                                            fontWeight:
+                                                activeSideBar ===
+                                                sideBarOptions.PersonalData
+                                                    ? 600
+                                                    : 400,
+                                        }}
+                                    >
+                                        {sideBarOptions.PersonalData}
                                     </Box>
                                 </Box>
 

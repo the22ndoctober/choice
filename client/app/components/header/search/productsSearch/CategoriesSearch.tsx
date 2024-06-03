@@ -29,6 +29,7 @@ const RecursiveSelect = ({
     return (
         <>
             <Select
+                key={rootCat[id].category.title + "1"}
                 placeholder="Виберіть категорію"
                 indicator={<KeyboardArrowDown />}
                 defaultValue={rootCat[id].category.title}
@@ -67,6 +68,7 @@ const RecursiveSelect = ({
 
             {(last || rootCat.length === 1) && rootCat[id].child !== null && (
                 <Select
+                    key={rootCat[id].category.title}
                     placeholder="Виберіть категорію"
                     indicator={<KeyboardArrowDown />}
                     onChange={handleChange}
@@ -117,7 +119,7 @@ const CategoriesSearch = () => {
     const [startPivot, setStartPivot] = useState(0)
     const [endPivot, setEndPivot] = useState(7)
     const [selectedPage, setSelectedPage] = useState(0)
-    const [productsToShow, setProductsToShow] = useState([])
+    const [filtredItems, setFiltredItems] = useState([])
     const [pagesAmount, setPagesAmount] = useState<any>([])
     const [suitProducts, setSuitProducts] = useState<any>([])
 
@@ -140,13 +142,6 @@ const CategoriesSearch = () => {
     const categoriesStatus = useSelector(
         (state: any) => state.categories.status
     )
-
-    //tanstack
-
-    const getProducts = useMutation({
-        mutationKey: ["getproductsbycat"],
-        mutationFn: (e) => GetCategoryProducts(e),
-    })
 
     const handleChange = (event: any, newValue: any) => {
         router.push(`categories?query=${newValue}`)
@@ -182,10 +177,9 @@ const CategoriesSearch = () => {
 
     useEffect(() => {
         if (targetCat !== null && status === "success") {
-            getProducts.mutate(targetCat.category.category_id)
             let target = products.filter((product: any) =>
                 targetCat.category.category_id.some(
-                    (id: string) => id === product.category.category_id
+                    (id: string) => id === product.category_id
                 )
             )
             setSuitProducts(target)
@@ -199,10 +193,10 @@ const CategoriesSearch = () => {
     useEffect(() => {
         setPagesAmount(
             new Array(
-                Math.ceil(suitProducts.length / (endPivot - startPivot + 1))
+                Math.ceil(filtredItems.length / (endPivot - startPivot + 1))
             ).fill(1)
         )
-    }, [suitProducts])
+    }, [filtredItems])
 
     useEffect(() => {
         setStartPivot(8 * (selectedPage + 1) - 8)
@@ -237,6 +231,25 @@ const CategoriesSearch = () => {
         setCurrentMax(max)
         setCurrentMin(min)
     }, [min, max])
+
+    useEffect(() => {
+        setSelectedPage(0)
+    }, [filtredItems])
+
+    //price filtration
+
+    useEffect(() => {
+        setFiltredItems(suitProducts)
+    }, [suitProducts])
+
+    useEffect(() => {
+        setFiltredItems(
+            suitProducts.filter(
+                (product: any) =>
+                    product.price >= currentMin && product.price <= currentMax
+            )
+        )
+    }, [currentMin, currentMax])
 
     return (
         <Box
@@ -425,7 +438,7 @@ const CategoriesSearch = () => {
                                 <Box>Loading</Box>
                             ) : (
                                 status === "success" &&
-                                suitProducts.map((product: any, id: number) => {
+                                filtredItems.map((product: any, id: number) => {
                                     if (id >= startPivot && id <= endPivot) {
                                         return (
                                             <ProductCard
@@ -453,14 +466,14 @@ const CategoriesSearch = () => {
                                 columnGap: "6px",
                             }}
                         >
-                            {pagesAmount.map((item: any, id: number) => {
-                                return (
-                                    (id < 2 ||
+                            {pagesAmount.map(
+                                (item: any, id: number) =>
+                                    (id <= 2 ||
                                         (id >= selectedPage - 2 &&
                                             id <= selectedPage + 2) ||
-                                        id > pagesAmount.length - 5) && (
+                                        id >= pagesAmount.length - 3) && (
                                         <Box
-                                            key={item}
+                                            key={id}
                                             sx={{
                                                 width: "24px",
                                                 height: "24px",
@@ -483,8 +496,7 @@ const CategoriesSearch = () => {
                                             {id + 1}
                                         </Box>
                                     )
-                                )
-                            })}
+                            )}
                         </Grid>
                     </Grid>
                 </Grid>

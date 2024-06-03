@@ -30,6 +30,7 @@ export const getProducts = () => async (dispatch) => {
     try {
         dispatch(productsLoading())
         const url = generateUrl(endpoints.getProducts)
+
         const response = await postRequest(
             url,
             {},

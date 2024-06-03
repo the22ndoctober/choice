@@ -122,7 +122,7 @@ app.post("/server/searchProducts", async function (req, res) {
   //       category: {
   //         title: product.category.title,
   //       },
-  //       store_id: product.stroe_id,
+  //       store_id: product.store_id,
   //       sku: product.sku,
   //       code: product.code,
   //       short_desription: product.short_desription,
@@ -192,6 +192,7 @@ app.post("/server/getCategoryProducts", async function (req, res) {
     res.status(500).send("Error when trying to get products");
   }
 });
+
 
 app.post("/server/getGoods", async function (req, res) {
   let clientServerOptions = {
@@ -313,4 +314,3 @@ app.get("/server/getAllCategories", async function (req, res) {
   res.json(data);
 });
 
-console.log("Hello!");

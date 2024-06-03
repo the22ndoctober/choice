@@ -34,7 +34,7 @@ export const getProfileByJWT = async ({ JWT }) => {
             {
                 headers: {
                     'secret': process.env.SECRET_KEY, // prettier-ignore
-                    JWT: JWT,
+                    'jwt': JWT, // prettier-ignore
                 },
             }
         )

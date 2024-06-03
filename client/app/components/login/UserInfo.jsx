@@ -10,6 +10,7 @@ import { getDashboardOrders, getProfileByJWT } from "@/api/dashboard"
 import { useQuery } from "@tanstack/react-query"
 import MyOrders from "./DashboarItems/MyOrders"
 import MyCabinet from "./DashboarItems/MyCabinet"
+import PersonalData from "./DashboarItems/PersonalData"
 
 export default function UserInfo() {
     const sideBarOptions = {
@@ -47,6 +48,21 @@ export default function UserInfo() {
             }
             if (activeSideBar === sideBarOptions.MyOrders) {
                 setRenderedInfo(<MyOrders orders={data.orders} />)
+            }
+            if (activeSideBar === sideBarOptions.ChosenProducts) {
+                setRenderedInfo(<MyCabinet />)
+            }
+            if (activeSideBar === sideBarOptions.Reviews) {
+                setRenderedInfo(<MyCabinet />)
+            }
+            if (activeSideBar === sideBarOptions.ReviewedProducts) {
+                setRenderedInfo(<MyCabinet />)
+            }
+            if (activeSideBar === sideBarOptions.Exchange) {
+                setRenderedInfo(<MyCabinet />)
+            }
+            if (activeSideBar === sideBarOptions.PersonalData) {
+                setRenderedInfo(<PersonalData user={data} />)
             }
         }
     }, [activeSideBar])
@@ -211,7 +227,8 @@ export default function UserInfo() {
                                             color: Colors.black,
                                         }}
                                     >
-                                        {isSuccess && data.name}
+                                        {isSuccess &&
+                                            `${data.name} ${data.surname}`}
                                     </Box>
                                     <Box
                                         sx={{

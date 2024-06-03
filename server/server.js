@@ -108,15 +108,19 @@ app.post("/server/searchProducts", async function (req, res) {
    const { connectMongoDB } = require("./lib/mongodb")
    connectMongoDB()
 
-   const Product = new mongoose.model("Product", productSchema)
+   try {
+      const Products = new mongoose.model("Product", productSchema)
 
-   console.log("started")
+      console.log("started")
 
-   const data = await Product.find()
+      const data = await Products.find()
 
-   console.log("ended")
+      console.log("ended")
 
-   res.json(data)
+      res.json(data)
+   } catch (error) {
+      console.log(error)
+   }
 })
 
 app.post("/server/getCategoryProducts", async function (req, res) {
@@ -147,16 +151,6 @@ app.post("/server/getCategoryProducts", async function (req, res) {
 
       return data.products
    }
-
-   const stores = await get("/products/stores").then((data) => data.json())
-
-   const filtredStores = stores.stores
-      .filter(
-         (store) =>
-            store.is_sell === true &&
-            skipStores.every((str) => str !== store.id)
-      )
-      .map((store) => store.id)
 
    try {
       const parsedData = await Promise.all(
@@ -281,6 +275,8 @@ app.get("/server/getAllCategories", async function (req, res) {
 
    const stores = await post("/products/stores").then((data) => data.json())
 
+   console.log("111")
+
    const filtredStores = stores.stores
       .filter(
          (store) =>
@@ -293,5 +289,3 @@ app.get("/server/getAllCategories", async function (req, res) {
 
    res.json(data)
 })
-
-console.log("Hello!")

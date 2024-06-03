@@ -49,3 +49,32 @@ export const getProfileByJWT = async ({ JWT }) => {
         console.log(error)
     }
 }
+
+export const changeInfo = async ({ JWT, name, surname, email, birthDate }) => {
+    try {
+        const response = await axios.post(
+            baseURL + "/server/changeInfo",
+            {
+                name: name,
+                surname: surname,
+                email: email,
+                birthDate: birthDate,
+            },
+            {
+                headers: {
+                    'secret': process.env.SECRET_KEY, // prettier-ignore
+                    'jwt': JWT, // prettier-ignore
+                },
+            }
+        )
+
+        if (response) {
+            console.log(response.data)
+            return response.data
+        } else {
+            alert(1)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}

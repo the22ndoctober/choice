@@ -266,7 +266,7 @@ const AboutProduct = ({ product }: any) => {
                                 textAlign: "left",
                             }}
                         >
-                            {product.price + product.currency}
+                            {product.price + "₴"}
                         </Box>
                         <Grid
                             container

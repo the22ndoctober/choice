@@ -16,6 +16,7 @@ import BestOffers from "../bestOffers/BestOffers"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
+import ProductReviews from "./ProductReviews"
 
 export default function Product({ params }: any) {
     // const { isLoading, error, data, isSuccess }: any = useQuery({
@@ -139,7 +140,7 @@ export default function Product({ params }: any) {
             <Box sx={{ width: "100%", background: Colors.white }}>
                 <Box
                     sx={{
-                        width: { xl: "1440px" },
+                        width: { xl: "1440px", lg: 1368 },
                         display: "flex",
                         flexDirection: "column",
                         margin: "0 auto",
@@ -198,7 +199,7 @@ export default function Product({ params }: any) {
                                     }}
                                     onClick={() => {
                                         router.push(
-                                            `categories?query=${cat.category.title}`
+                                            `/categories?query=${cat.category.title}`
                                         )
                                     }}
                                 >
@@ -416,6 +417,10 @@ export default function Product({ params }: any) {
                             </Grid>
                         </Grid>
                     </Grid> */}
+
+                    {targetCat !== null && (
+                        <ProductReviews cat={targetCat.category} />
+                    )}
                     <BestOffers />
                 </Box>
                 <DeliveryInfo />

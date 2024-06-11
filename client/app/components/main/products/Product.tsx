@@ -231,7 +231,7 @@ export default function Product({ params }: any) {
                     </Box>
                     <ProductItem product={data} />
 
-                    {/* <Grid container sx={{ justifyContent: "space-between" }}>
+                    <Grid container sx={{ justifyContent: "space-between" }}>
                         <Grid
                             container
                             direction={"column"}
@@ -285,7 +285,8 @@ export default function Product({ params }: any) {
                                 }}
                             >
                                 <div className="discription">
-                                    {parse(data.products[0].description)}
+                                    {/* {status === "success" &&
+                                        parse(data.products.description)} */}
                                 </div>
                                 <Grid
                                     container
@@ -416,7 +417,7 @@ export default function Product({ params }: any) {
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Grid> */}
+                    </Grid>
 
                     {targetCat !== null && (
                         <ProductReviews cat={targetCat.category} />

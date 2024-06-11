@@ -167,6 +167,7 @@ const AboutProduct = ({ product }: any) => {
                                 sm: 451,
                                 overflow: "hidden",
                                 height: "80px",
+                                justifyContent: "space-between",
                             },
                         }}
                     >
@@ -175,7 +176,7 @@ const AboutProduct = ({ product }: any) => {
                                 <Box
                                     key={product.title + id}
                                     sx={{
-                                        width: { sm: 140 },
+                                        width: { sm: "calc(25% - 5px)" },
                                         height: 80,
                                         borderRadius: "10px",
                                         overflow: "hidden",
@@ -187,7 +188,10 @@ const AboutProduct = ({ product }: any) => {
                                     <img
                                         src={url}
                                         alt=""
-                                        style={{ width: 140, height: "auto" }}
+                                        style={{
+                                            width: "100%",
+                                            height: "auto",
+                                        }}
                                     />
                                 </Box>
                             )

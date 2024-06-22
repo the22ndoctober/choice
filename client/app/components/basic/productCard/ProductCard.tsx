@@ -30,6 +30,7 @@ const ProductCard = ({
                 sx={{
                     width: "inherit",
                     flexDirection: "column",
+                    cursor: "pointer",
                     background: Colors.paper,
                     borderRadius: "15px",
                     rowGap: { lg: "10px" },
@@ -267,34 +268,40 @@ const ProductCard = ({
                     >
                         {favouritesTeal}
                     </Box>
-                    <Box
-                        onMouseEnter={() => {
-                            setActive(true)
-                        }}
-                        onMouseLeave={() => {
-                            setActive(false)
-                        }}
-                        onClick={() => {
-                            if (product) {
-                                dispatch(
-                                    changeCart<any>({
-                                        type: "ADD_ITEM",
-                                        payload: product,
-                                    })
-                                )
-                            }
-                        }}
-                        sx={{
-                            borderRadius: "12px",
-                            height: "38px",
-                            display: "flex",
-                            alignItems: "center",
-                            px: { lg: "12px" },
-                            background: active ? Colors.teal : Colors.neutral,
-                        }}
-                    >
-                        {cartCard}
-                    </Box>
+                    {product && parseInt(product.balance) > 0 ? (
+                        <Box
+                            onMouseEnter={() => {
+                                setActive(true)
+                            }}
+                            onMouseLeave={() => {
+                                setActive(false)
+                            }}
+                            onClick={() => {
+                                if (product) {
+                                    dispatch(
+                                        changeCart<any>({
+                                            type: "ADD_ITEM",
+                                            payload: product,
+                                        })
+                                    )
+                                }
+                            }}
+                            sx={{
+                                borderRadius: "12px",
+                                height: "38px",
+                                display: "flex",
+                                alignItems: "center",
+                                px: { lg: "12px" },
+                                background: active
+                                    ? Colors.teal
+                                    : Colors.neutral,
+                            }}
+                        >
+                            {cartCard}
+                        </Box>
+                    ) : (
+                        <Box>Товар закінчився</Box>
+                    )}
                 </Grid>
             </Grid>
         </>

@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const bent = require("bent");
+const cron = require("node-cron");
 const {
   GetCats,
   SortCategories,
@@ -23,25 +24,138 @@ app.use(express.json());
 
 const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
-  product_id: String,
-  balance: String,
-  title: String,
-  category_id: String,
-  category: {
-    title: String,
-  },
-  store_id: String,
-  sku: String,
-  code: Number,
-  short_description: String,
-  description: String,
-  image_path: String,
-  images: [String],
-  price: String,
-  tags: [mongoose.Schema.Types.Mixed],
+  products: [mongoose.Schema.Types.Mixed],
+  lastUpdated: String,
+  // product_id: String,
+  // balance: String,
+  // title: String,
+  // category_id: String,
+  // category: {
+  //   title: String,
+  // },
+  // store_id: String,
+  // sku: String,
+  // code: Number,
+  // short_description: String,
+  // description: String,
+  // image_path: String,
+  // images: [String],
+  // price: String,
+  // tags: [mongoose.Schema.Types.Mixed],
 });
 
 const PORT = 3002;
+
+const { connectMongoDB } = require("./lib/mongodb");
+connectMongoDB();
+
+const Product = new mongoose.model("Product", productSchema);
+
+async function updateDatabase() {
+  try {
+    let clientServerOptions = {
+      baseUrl: "https://api.dntrade.com.ua",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        ApiKey: process.env.API_KEY,
+      },
+    };
+
+    const post = bent(
+      (baseUrl = clientServerOptions.baseUrl),
+      (method = clientServerOptions.method),
+      (headers = clientServerOptions.headers)
+    );
+
+    const get = bent(
+      (baseUrl = clientServerOptions.baseUrl),
+      (method = "GET"),
+      (headers = clientServerOptions.headers)
+    );
+
+    const stores = await get("/products/stores").then((data) => data.json());
+
+    const filtredStores = stores.stores
+      .filter(
+        (store) =>
+          (store.is_sell === true ||
+            store.id === "5D06BC79-3901-46B3-A434-DEEA4965DC78") &&
+          skipStores.every((str) => str !== store.id)
+      )
+      .map((store) => store.id);
+
+    console.log(filtredStores);
+
+    async function getProductByStore(store, result, offset) {
+      const resp = await post(
+        `/products/list?store_id=${store}&offset=${offset}`
+      );
+      const data = await resp.json();
+      const resulted = [...result, ...data.products];
+      console.log(data.products.length);
+      if (data.products.length <= 99) {
+        return resulted;
+      }
+      return getProductByStore(store, resulted, offset + 100);
+    }
+
+    const parsedData = await Promise.all(
+      filtredStores.map((store) => getProductByStore(store, [], 0))
+    );
+
+    const response = [];
+    parsedData.map((array) => {
+      response.push(...array);
+    });
+
+    console.log("started");
+
+    const products = response.map((product) => {
+      return {
+        product_id: product.product_id,
+        balance: product.balance,
+        title: product.title,
+        category_id: product.category.category_id,
+        category: {
+          title: product.category.title,
+        },
+        store_id: product.store_id,
+        sku: product.sku,
+        code: product.code,
+        short_description: product.short_description,
+        description: product.description,
+        image_path: product.image_path,
+        images: product.images,
+        price: product.price,
+        tags: product.tags,
+      };
+    });
+
+    await Product.deleteMany({});
+
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    const currentDate = new Date().toLocaleDateString("en-US", options);
+
+    const item = new Product({ products: products, lastUpdated: currentDate });
+    item.save();
+    console.log(`i was updated ${currentDate}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+cron.schedule("*/3 * * * *", () => {
+  updateDatabase();
+});
 
 app.listen(PORT);
 
@@ -57,96 +171,7 @@ app.get("/server/test", async function (req, res) {
 });
 
 app.post("/server/searchProducts", async function (req, res) {
-  let clientServerOptions = {
-    baseUrl: "https://api.dntrade.com.ua",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ApiKey: process.env.API_KEY,
-    },
-  };
-
-  const post = bent(
-    (baseUrl = clientServerOptions.baseUrl),
-    (method = clientServerOptions.method),
-    (headers = clientServerOptions.headers)
-  );
-
-  const get = bent(
-    (baseUrl = clientServerOptions.baseUrl),
-    (method = "GET"),
-    (headers = clientServerOptions.headers)
-  );
-
-  //   const stores = await get("/products/stores").then((data) => data.json());
-
-  //   const filtredStores = stores.stores
-  //     .filter(
-  //       (store) =>
-  //         (store.is_sell === true ||
-  //           store.id === "5D06BC79-3901-46B3-A434-DEEA4965DC78") &&
-  //         skipStores.every((str) => str !== store.id)
-  //     )
-  //     .map((store) => store.id);
-
-  //   console.log(filtredStores);
-
-  //   async function getProductByStore(store, result, offset) {
-  //     const resp = await post(
-  //       `/products/list?store_id=${store}&offset=${offset}`
-  //     );
-  //     const data = await resp.json();
-  //     const resulted = [...result, ...data.products];
-  //     console.log(data.products.length);
-  //     if (data.products.length <= 99) {
-  //       return resulted;
-  //     }
-  //     return getProductByStore(store, resulted, offset + 100);
-  //   }
-
-  //   const parsedData = await Promise.all(
-  //     filtredStores.map((store) => getProductByStore(store, [], 0))
-  //   );
-
-  //   const response = [];
-  //   parsedData.map((array) => {
-  //     response.push(...array);
-  //   });
-
-  const { connectMongoDB } = require("./lib/mongodb");
-  connectMongoDB();
-
-  const Product = new mongoose.model("Product", productSchema);
-
-  //   await Product.deleteMany({});
-
-  //   console.log("started");
-
-  //   for (const product of response) {
-  //     const item = new Product({
-  //       product_id: product.product_id,
-  //       balance: product.balance,
-  //       title: product.title,
-  //       category_id: product.category.category_id,
-  //       category: {
-  //         title: product.category.title,
-  //       },
-  //       store_id: product.store_id,
-  //       sku: product.sku,
-  //       code: product.code,
-  //       short_description: product.short_description,
-  //       description: product.description,
-  //       image_path: product.image_path,
-  //       images: product.images,
-  //       price: product.price,
-  //       tags: product.tags,
-  //     });
-  //     item.save();
-  //   }
-
   const data = await Product.find();
-
-  console.log("ended");
 
   res.json(data);
 });

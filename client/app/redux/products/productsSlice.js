@@ -40,7 +40,7 @@ export const getProducts = () => async (dispatch) => {
                 },
             }
         )
-        const result = response.filter(
+        const result = response[0].products.filter(
             (product) =>
                 product.store_id !== null &&
                 product.category !== null &&

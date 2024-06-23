@@ -75,7 +75,7 @@ const Smartphones = () => {
 
     useEffect(() => {
         const updateWindowDimensions = () => {
-            const newWidth = window.innerWidth
+            const newWidth = document.documentElement.clientWidth
             setWidth(newWidth)
         }
 
@@ -85,21 +85,14 @@ const Smartphones = () => {
             window.removeEventListener("resize", updateWindowDimensions)
     }, [])
 
-    // useEffect(() => {
-    //     console.log(width)
-    //     if (width >= 1536) {
-    //         setSettings((state: any) => {
-    //             return { ...state, slidesToShow: 5, slidesToScroll: 5 }
-    //         })
-    //         return
-    //     }
-    //     if (width >= 1200 && width < 1536) {
-    //         setSettings((state: any) => {
-    //             return { ...state, slidesToShow: 4, slidesToScroll: 4 }
-    //         })
-    //         return
-    //     }
-    // }, [width])
+    useEffect(() => {
+        if (width <= 1280) {
+            setSettings((state: any) => {
+                return { ...state, slidesToShow: 2, slidesToScroll: 2 }
+            })
+            return
+        }
+    }, [width])
 
     return (
         <>
@@ -107,12 +100,12 @@ const Smartphones = () => {
                 container
                 sx={{
                     flexDirection: "column",
-                    rowGap: "27px",
-                    width: { lg: 1368, xl: 1440 },
+                    rowGap: { xs: "12px", lg: "27px" },
+                    width: { xs: 360, lg: 1368, xl: 1440 },
                     margin: "0 auto",
                     height: "auto",
-                    pt: "34px",
-                    pb: "50px",
+                    pt: { xs: "20px", lg: "34px" },
+                    pb: { xs: "30px", lg: "50px" },
                 }}
             >
                 <Box
@@ -124,7 +117,8 @@ const Smartphones = () => {
                 >
                     <Typography
                         sx={{
-                            fontSize: { lg: "24px", fontWeight: 600 },
+                            fontSize: { xs: "18px", lg: "24px" },
+                            fontWeight: 600,
                             color: Colors.black,
                         }}
                     >
@@ -136,7 +130,7 @@ const Smartphones = () => {
                     container
                     sx={{
                         justifyContent: "space-between",
-                        width: { lg: 1368, xl: 1440 },
+                        width: { xs: 360, lg: 1368, xl: 1440 },
                         height: "auto",
                         position: "relative",
                     }}
@@ -144,8 +138,8 @@ const Smartphones = () => {
                     <Box
                         className="small-slider"
                         sx={{
-                            width: { lg: 1368, xl: 1440 },
-                            height: { sm: "auto" },
+                            width: { xs: 360, lg: 1368, xl: 1440 },
+                            height: { xs: "auto" },
                         }}
                     >
                         <Slider {...settings}>

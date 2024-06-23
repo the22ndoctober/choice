@@ -46,7 +46,30 @@ export const getProducts = () => async (dispatch) => {
                 product.category !== null &&
                 product.sku !== ""
         )
-        dispatch(productsSuccess(result))
+
+        function quickSort(result) {
+            if (result.length <= 1) {
+                return result
+            }
+            let pivotIndex = Math.floor(result.length / 2)
+            let pivot = result[pivotIndex]
+            let less = []
+            let greater = []
+            for (let i = 0; i < result.length; i++) {
+                if (i === pivotIndex) continue
+                if (parseInt(result[i].balance) <= parseInt(pivot.balance)) {
+                    less.push(result[i])
+                } else {
+                    greater.push(result[i])
+                }
+            }
+
+            return [...quickSort(less), pivot, ...quickSort(greater)]
+        }
+
+        const sortedArray = quickSort(result).reverse()
+
+        dispatch(productsSuccess(sortedArray))
     } catch (error) {
         dispatch(productsFailure(error.message))
     }

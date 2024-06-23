@@ -33,7 +33,7 @@ const ProductCard = ({
                     cursor: "pointer",
                     background: Colors.paper,
                     borderRadius: "15px",
-                    rowGap: { lg: "10px" },
+                    rowGap: { xs: "6px", lg: "10px" },
                     overflow: "hidden",
                     WebkitBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
                     MozBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
@@ -211,7 +211,7 @@ const ProductCard = ({
                             color: Colors.grey,
                             fontSize: "12px",
                             maxWidth: "270px",
-                            px: { lg: "20px", xl: "22px" },
+                            px: { xs: "12px", lg: "20px", xl: "22px" },
                         }}
                     >
                         {product ? product.code : ""}
@@ -223,7 +223,7 @@ const ProductCard = ({
                             fontWeight: 500,
                             minHeight: "60px",
 
-                            px: { lg: "20px", xl: "22px" },
+                            px: { xs: "8px", lg: "20px", xl: "22px" },
                         }}
                     >
                         {title}
@@ -234,17 +234,17 @@ const ProductCard = ({
                     sx={{
                         justifyContent: "space-between",
                         alignItems: "center",
-                        px: { lg: "20px", xl: "22px" },
-                        pb: { lg: "20px", xl: "22px" },
+                        px: { xs: "8px", lg: "20px", xl: "22px" },
+                        pb: { xs: "8px", lg: "20px", xl: "22px" },
                     }}
                 >
                     <Box
                         sx={{
-                            fontSize: { lg: "24px" },
+                            fontSize: { xs: "14px", lg: "24px" },
                             px: "8px",
                             color: Colors.neutral,
                             background: "none",
-                            height: "38px",
+                            height: { xs: "36px", lg: "38px" },
                             display: "flex",
                             alignItems: "center",
                             border: `1px solid ${Colors.neutral}`,
@@ -258,7 +258,7 @@ const ProductCard = ({
                     </Box>
                     <Box
                         sx={{
-                            p: { lg: "3px", xl: "7px" },
+                            p: { xs: "3px", xl: "7px" },
                             display: "flex",
 
                             "& path": {
@@ -288,10 +288,10 @@ const ProductCard = ({
                             }}
                             sx={{
                                 borderRadius: "12px",
-                                height: "38px",
+                                height: { xs: "36px", lg: "38px" },
                                 display: "flex",
                                 alignItems: "center",
-                                px: { lg: "12px" },
+                                px: { xs: "8px", lg: "12px" },
                                 background: active
                                     ? Colors.teal
                                     : Colors.neutral,
@@ -300,7 +300,25 @@ const ProductCard = ({
                             {cartCard}
                         </Box>
                     ) : (
-                        <Box>Товар закінчився</Box>
+                        <Box
+                            onMouseEnter={() => {
+                                setActive(true)
+                            }}
+                            onMouseLeave={() => {
+                                setActive(false)
+                            }}
+                            onClick={() => {}}
+                            sx={{
+                                borderRadius: "12px",
+                                height: { xs: "36px", lg: "38px" },
+                                display: "flex",
+                                alignItems: "center",
+                                px: { xs: "8px", lg: "12px" },
+                                background: Colors.light,
+                            }}
+                        >
+                            {cartCard}
+                        </Box>
                     )}
                 </Grid>
             </Grid>

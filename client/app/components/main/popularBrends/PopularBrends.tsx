@@ -64,6 +64,12 @@ const PopularBrends = () => {
             })
             return
         }
+        if (width < 1200) {
+            setSettings((state: any) => {
+                return { ...state, slidesToShow: 2, slidesToScroll: 2 }
+            })
+            return
+        }
     }, [width])
 
     return (
@@ -72,12 +78,12 @@ const PopularBrends = () => {
                 container
                 sx={{
                     flexDirection: "column",
-                    rowGap: "27px",
-                    width: { lg: 1368, xl: 1440 },
+                    rowGap: { xs: "27px", lg: "27px" },
+                    width: { xs: 360, lg: 1368, xl: 1440 },
                     margin: "0 auto",
                     height: "auto",
-                    pt: "34px",
-                    pb: "50px",
+                    pt: { xs: "20px", lg: "34px" },
+                    pb: { xs: "30px", lg: "50px" },
                 }}
             >
                 <Box
@@ -89,7 +95,8 @@ const PopularBrends = () => {
                 >
                     <Typography
                         sx={{
-                            fontSize: { lg: "24px", fontWeight: 600 },
+                            fontSize: { xs: "18px", lg: "24px" },
+                            fontWeight: 600,
                             color: Colors.black,
                         }}
                     >
@@ -100,7 +107,7 @@ const PopularBrends = () => {
                 <Grid
                     container
                     sx={{
-                        width: { lg: 1368, xl: 1440 },
+                        width: { xs: 360, lg: 1368, xl: 1440 },
                         height: "auto",
                         position: "relative",
                     }}
@@ -108,8 +115,8 @@ const PopularBrends = () => {
                     <Box
                         className="slider-brands"
                         sx={{
-                            width: { lg: "calc(80%)" },
-                            height: { sm: "auto" },
+                            width: { xs: "64%", lg: "calc(80%)" },
+                            height: { xs: "auto" },
                         }}
                     >
                         <Slider {...settings}>
@@ -127,9 +134,9 @@ const PopularBrends = () => {
                                             background: Colors.paper,
                                             borderRadius: "15px",
 
-                                            height: { lg: 80 },
+                                            height: { xs: 80 },
                                             width: {
-                                                lg: "100%",
+                                                xs: "102px",
                                                 xl: "100%",
                                             },
                                             display: "flex",
@@ -173,8 +180,9 @@ const PopularBrends = () => {
                         sx={{
                             background: Colors.paper,
                             borderRadius: "15px",
-                            height: { lg: 80 },
+                            height: { xs: 80 },
                             width: {
+                                xs: "calc(33% - 2px)",
                                 lg: "calc(20% - 12px)",
                             },
                             ml: "12px",
@@ -182,7 +190,7 @@ const PopularBrends = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            fontSize: "24px",
+                            fontSize: { xs: "18px", lg: "24px" },
                             fontWeight: 500,
                             color: Colors.grey,
                             WebkitBoxShadow:

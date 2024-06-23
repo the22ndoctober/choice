@@ -73,32 +73,26 @@ const BestOffers = () => {
         slidesToScroll: 5,
     })
 
-    // useEffect(() => {
-    //     const updateWindowDimensions = () => {
-    //         const newWidth = window.innerWidth
-    //         setWidth(newWidth)
-    //     }
+    useEffect(() => {
+        const updateWindowDimensions = () => {
+            const newWidth = document.documentElement.clientWidth
+            setWidth(newWidth)
+        }
 
-    //     window.addEventListener("resize", updateWindowDimensions)
+        window.addEventListener("resize", updateWindowDimensions)
 
-    //     return () =>
-    //         window.removeEventListener("resize", updateWindowDimensions)
-    // }, [])
+        return () =>
+            window.removeEventListener("resize", updateWindowDimensions)
+    }, [])
 
-    // useEffect(() => {
-    //     if (width >= 1536) {
-    //         setSettings((state: any) => {
-    //             return { ...state, slidesToShow: 5, slidesToScroll: 5 }
-    //         })
-    //         return
-    //     }
-    //     if (width >= 1200 && width < 1536) {
-    //         setSettings((state: any) => {
-    //             return { ...state, slidesToShow: 4, slidesToScroll: 4 }
-    //         })
-    //         return
-    //     }
-    // }, [width])
+    useEffect(() => {
+        if (width <= 1280) {
+            setSettings((state: any) => {
+                return { ...state, slidesToShow: 2, slidesToScroll: 2 }
+            })
+            return
+        }
+    }, [width])
 
     return (
         <>
@@ -106,24 +100,26 @@ const BestOffers = () => {
                 container
                 sx={{
                     flexDirection: "column",
-                    rowGap: "27px",
-                    width: { lg: 1368, xl: 1440 },
+                    rowGap: { xs: "12px", lg: "27px" },
+                    width: { xs: 360, lg: 1368, xl: 1440 },
                     margin: "0 auto",
                     height: "auto",
-                    pt: "34px",
-                    pb: "50px",
+                    pt: { xs: "20px", lg: "34px" },
+                    pb: { xs: "30px", lg: "50px" },
                 }}
             >
                 <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
+
                         columnGap: { lg: "40px" },
                     }}
                 >
                     <Typography
                         sx={{
-                            fontSize: { lg: "24px", fontWeight: 600 },
+                            fontSize: { xs: "18px", lg: "24px" },
+                            fontWeight: 600,
                             color: Colors.black,
                         }}
                     >
@@ -135,7 +131,7 @@ const BestOffers = () => {
                     container
                     sx={{
                         justifyContent: "space-between",
-                        width: { lg: 1368, xl: 1440 },
+                        width: { xs: 360, lg: 1368, xl: 1440 },
                         height: "auto",
                         position: "relative",
                     }}
@@ -143,8 +139,8 @@ const BestOffers = () => {
                     <Box
                         className="small-slider"
                         sx={{
-                            width: { lg: 1368, xl: 1440 },
-                            height: { sm: "auto" },
+                            width: { xs: 360, lg: 1368, xl: 1440 },
+                            height: { xs: "auto" },
                         }}
                     >
                         <Slider {...settings}>

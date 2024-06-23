@@ -24,17 +24,19 @@ const AdvertismentMain = () => {
         <>
             <Box
                 sx={{
-                    width: { sm: "100%" },
-                    height: "610px",
+                    width: { xs: "100%" },
+                    height: { xs: "280px", lg: "610px" },
+                    mt: { xs: "50px", lg: 0 },
                 }}
             >
                 <Box
                     sx={{
                         width: {
+                            xs: 360,
                             lg: 1368,
                             xl: 1440,
                         },
-                        height: "610px",
+                        height: { xs: "280px", lg: "610px" },
                         margin: "0 auto",
                         display: "flex",
                         justifyContent: "right",
@@ -43,16 +45,16 @@ const AdvertismentMain = () => {
                     <Grid
                         container
                         sx={{
-                            width: { xl: 1105, lg: 1050 },
-                            height: "610px",
+                            width: { xs: "100%", xl: 1105, lg: 1050 },
+                            height: { xs: "280px", lg: "610px" },
                             py: "28px",
-                            justifyContent: { sm: "right" },
-                            alignItems: { sm: "center" },
+                            justifyContent: { xs: "center", sm: "right" },
+                            alignItems: { xs: "center" },
                         }}
                     >
                         <Box
                             sx={{
-                                width: { sm: "100%" },
+                                width: { xs: "100%" },
                             }}
                         >
                             <Slider {...settings}>
@@ -76,7 +78,11 @@ const AdvertismentMain = () => {
                                 </Box>
                                 <Box
                                     sx={{
-                                        width: { lg: 900, xl: 1136 },
+                                        width: {
+                                            xs: "100%",
+                                            lg: 900,
+                                            xl: 1136,
+                                        },
                                         height: "auto",
                                         bgcolor: "gray",
                                         borderRadius: "15px",
@@ -94,7 +100,11 @@ const AdvertismentMain = () => {
                                 </Box>
                                 <Box
                                     sx={{
-                                        width: { lg: 900, xl: 1136 },
+                                        width: {
+                                            xs: "100%",
+                                            lg: 900,
+                                            xl: 1136,
+                                        },
                                         height: "auto",
                                         bgcolor: "gray",
                                         borderRadius: "15px",
@@ -112,7 +122,11 @@ const AdvertismentMain = () => {
                                 </Box>
                                 <Box
                                     sx={{
-                                        width: { lg: 900, xl: 1136 },
+                                        width: {
+                                            xs: "100%",
+                                            lg: 900,
+                                            xl: 1136,
+                                        },
                                         height: "auto",
                                         bgcolor: "gray",
                                         borderRadius: "15px",

@@ -96,7 +96,7 @@ const SearchItem = ({ pageName, setOpenCat }) => {
             // vertical padding + font size from searchIcon
             width: "100%",
             borderRadius: "50px",
-            paddingLeft: "20px",
+            px: "20px",
         },
     }))
 
@@ -108,11 +108,11 @@ const SearchItem = ({ pageName, setOpenCat }) => {
             backgroundColor: alpha(theme.palette.common.white, 0.25),
         },
         marginLeft: 0,
-        width: "554px",
+        width: { xs: "100%", lg: "554px" },
         zIndex: 500,
         [theme.breakpoints.up("sm")]: {
             marginLeft: theme.spacing(1),
-            width: "554px",
+            width: { xs: "100%", lg: "554px" },
         },
     }))
 
@@ -126,14 +126,14 @@ const SearchItem = ({ pageName, setOpenCat }) => {
             >
                 <SearchComp
                     sx={{
-                        ml: "46px !important",
+                        ml: { xs: "0", lg: "46px !important" },
                         display: "flex",
                         background: Colors.neutral,
                         direction: "row",
                         borderRadius: "15px",
                         height: "40px",
-                        width: "554px",
-                        pr: "20px",
+                        width: { xs: "100%", lg: "554px" },
+                        px: "20px",
                         color: "#fff",
                         alignItems: "center",
                         zIndex: 500,

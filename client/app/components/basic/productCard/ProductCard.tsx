@@ -81,6 +81,10 @@ const ProductCard = ({
                                 width: "auto",
                                 height: "100%",
                                 margin: "0 auto",
+                                opacity:
+                                    product && parseInt(product.balance) === 0
+                                        ? 0.2
+                                        : 1,
                             }}
                         />
                     ) : (
@@ -90,6 +94,12 @@ const ProductCard = ({
                             viewBox="0 0 200 217"
                             fill="none"
                             xmlns="http://www.w3.org/2000/svg"
+                            style={{
+                                opacity:
+                                    product && parseInt(product.balance) === 0
+                                        ? 0.2
+                                        : 1,
+                            }}
                         >
                             <path
                                 d="M65.2436 139.986L64.2358 107.586L62.8943 106.795C59.156 116.222 57.1663 126.32 57.0272 136.465L65.2436 139.986Z"
@@ -242,12 +252,19 @@ const ProductCard = ({
                         sx={{
                             fontSize: { xs: "14px", lg: "24px" },
                             px: "8px",
-                            color: Colors.neutral,
+                            color:
+                                product && parseInt(product.balance) === 0
+                                    ? Colors.grey
+                                    : Colors.neutral,
                             background: "none",
                             height: { xs: "36px", lg: "38px" },
                             display: "flex",
                             alignItems: "center",
-                            border: `1px solid ${Colors.neutral}`,
+                            border: `1px solid ${
+                                product && parseInt(product.balance) === 0
+                                    ? Colors.grey
+                                    : Colors.neutral
+                            }`,
                             borderRadius: "12px",
                             textAlign: "center",
                             lineHeight: "1",
@@ -262,7 +279,10 @@ const ProductCard = ({
                             display: "flex",
 
                             "& path": {
-                                stroke: Colors.neutral,
+                                stroke:
+                                    product && parseInt(product.balance) === 0
+                                        ? Colors.grey
+                                        : Colors.neutral,
                             },
                         }}
                     >
@@ -314,7 +334,7 @@ const ProductCard = ({
                                 display: "flex",
                                 alignItems: "center",
                                 px: { xs: "8px", lg: "12px" },
-                                background: Colors.light,
+                                background: Colors.grey,
                             }}
                         >
                             {cartCard}

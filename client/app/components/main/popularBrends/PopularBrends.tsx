@@ -29,7 +29,9 @@ const cardsApi = [
 ]
 
 const PopularBrends = () => {
-    const [width, setWidth] = useState(0)
+    const [width, setWidth] = useState(
+        document.documentElement.clientWidth || 0
+    )
     const [settings, setSettings] = useState({
         dots: true,
         infinite: true,

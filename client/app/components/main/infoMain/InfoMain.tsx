@@ -35,7 +35,7 @@ const InfoMain = () => {
                 <Grid
                     container
                     sx={{
-                        width: { lg: 1368, xl: 1440 },
+                        width: { xs: 360, lg: 1368, xl: 1440 },
                         height: "100%",
                         margin: "0 auto",
                         flexDirection: "column",
@@ -57,8 +57,10 @@ const InfoMain = () => {
                         container
                         sx={{
                             width: "100%",
-                            height: 448,
-                            columnGap: "28px",
+                            height: { xs: 750, lg: 448 },
+                            columnGap: { lg: "28px" },
+                            rowGap: { xs: "16px", lg: "0px" },
+                            flexDirection: { xs: "column", lg: "row" },
                         }}
                     >
                         {infoBlock.map((block) => (
@@ -66,27 +68,34 @@ const InfoMain = () => {
                                 container
                                 sx={{
                                     background: Colors.paper,
-                                    px: "23px",
-                                    py: "34px",
+                                    px: { xs: "8px", lg: "23px" },
+                                    py: { xs: "8px", lg: "34px" },
                                     borderRadius: "15px",
-                                    flexDirection: "column",
+                                    flexDirection: { xs: "column" },
                                     justifyContent: "space-between",
                                     flex: "1 1 0",
-                                    height: "100%",
+                                    height: { xs: "auto", lg: "100%" },
                                 }}
                             >
                                 <Grid
                                     container
                                     sx={{
                                         flexDirection: "column",
-                                        rowGap: { lg: "15px", xl: "19px" },
+                                        rowGap: {
+                                            xs: "8px",
+                                            lg: "15px",
+                                            xl: "19px",
+                                        },
                                         textWrap: "wrap",
                                     }}
                                 >
                                     <Typography
                                         sx={{
                                             fontWeight: 400,
-                                            fontSize: "18px",
+                                            fontSize: {
+                                                xs: "12px",
+                                                lg: "18px",
+                                            },
                                             color: Colors.grey,
                                         }}
                                     >
@@ -95,9 +104,15 @@ const InfoMain = () => {
                                     <Typography
                                         sx={{
                                             fontWeight: 700,
-                                            fontSize: "24px",
+                                            fontSize: {
+                                                xs: "16px",
+                                                lg: "24px",
+                                            },
                                             color: Colors.black,
-                                            lineHeight: "29px",
+                                            lineHeight: {
+                                                xs: "20px",
+                                                lg: "29px",
+                                            },
                                         }}
                                     >
                                         {block.subtitle}
@@ -117,7 +132,7 @@ const InfoMain = () => {
                                     sx={{
                                         background: Colors.paper,
                                         color: Colors.black,
-                                        width: { lg: 160, xl: 200 },
+                                        width: { xs: 100, lg: 160, xl: 200 },
                                         boxShadow:
                                             " 2px 2px 2px 2px rgb(0,0,0,0.22)",
                                         textTransform: "none",

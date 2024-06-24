@@ -10,10 +10,26 @@ const CommentItem = ({ name, rating, text }) => {
                     background: Colors.paper,
                     borderRadius: "15px",
                     p: "21px",
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "12px",
+                    height: "100%",
                 }}
             >
-                <Box>{name}</Box>
-                <Box>{text}</Box>
+                <Box
+                    sx={{
+                        fontSize: "16px",
+                    }}
+                >
+                    {name}
+                </Box>
+                <Box
+                    sx={{
+                        fontSize: "14px",
+                    }}
+                >
+                    {text}
+                </Box>
             </Box>
         </>
     )

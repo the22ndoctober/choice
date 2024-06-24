@@ -19,9 +19,9 @@ const Footer = () => {
                     container
                     sx={{
                         width: { xs: 360, lg: 1368, xl: 1440 },
-                        rowGap: { lg: "140px", xl: "186px" },
+                        rowGap: { xs: "22px", lg: "140px", xl: "186px" },
                         margin: "0 auto",
-                        columnGap: { lg: "144px", xl: "186px" },
+                        columnGap: { xs: "22px", lg: "144px", xl: "186px" },
                     }}
                 >
                     <Grid

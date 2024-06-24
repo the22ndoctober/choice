@@ -24,12 +24,13 @@ const CartItem = ({
                 background: Colors.white,
                 borderRadius: "15px",
                 columnGap: "12px",
+                width: "100%",
             }}
         >
             <Box
                 sx={{
-                    width: "130px",
-                    height: "130px",
+                    width: { xs: "92px", lg: "130px" },
+                    height: { xs: "92px", lg: "130px" },
                     borderRadius: "15px",
                     overflow: "hidden",
                     display: "flex",
@@ -163,9 +164,10 @@ const CartItem = ({
                 container
                 sx={{
                     flexDirection: "column",
-                    width: "auto",
+
                     justifyContent: "space-between",
-                    flexGrow: "1",
+                    flex: "1 1 0",
+                    width: "150px",
                 }}
             >
                 <Grid container sx={{ flexDirection: "column", rowGap: "3px" }}>
@@ -177,12 +179,13 @@ const CartItem = ({
                     >
                         <Box
                             sx={{
-                                fontSize: "20px",
+                                fontSize: { xs: "14px", lg: "20px" },
                                 fontWeight: 600,
                                 lineHeight: "24px",
                                 letterSpacing: "0em",
                                 textAlign: "left",
                                 width: "auto",
+                                maxWidth: { xs: "100px", lg: "none" },
                             }}
                         >
                             {title}
@@ -206,7 +209,7 @@ const CartItem = ({
                 <Grid container sx={{ justifyContent: "space-between" }}>
                     <Box
                         sx={{
-                            fontSize: "24px",
+                            fontSize: { xs: "16px", lg: "24px" },
                             fontWeight: 800,
                             lineHeight: "29px",
                             letterSpacing: "0em",
@@ -226,7 +229,7 @@ const CartItem = ({
                         sx={{
                             width: "fit-content",
                             justifyContent: "space-between",
-                            minWidth: "300px",
+                            minWidth: { xs: "120px", lg: "300px" },
                         }}
                     >
                         <Grid
@@ -236,12 +239,13 @@ const CartItem = ({
                                 borderRadius: "15px",
                                 width: "auto",
                                 alignItems: "center",
+                                display: { xs: "none", lg: "flex" },
                             }}
                         >
                             <Box
                                 sx={{
                                     borderRight: `2px solid ${Colors.grey}`,
-                                    fontSize: "20px",
+                                    fontSize: { xs: "14px", lg: "20px" },
                                     fontWeight: 500,
                                     lineHeight: "12px",
                                     letterSpacing: "0em",
@@ -257,7 +261,7 @@ const CartItem = ({
                             </Box>
                             <Box
                                 sx={{
-                                    fontSize: "20px",
+                                    fontSize: { xs: "14px", lg: "20px" },
                                     fontWeight: 500,
                                     lineHeight: "12px",
                                     letterSpacing: "0em",
@@ -273,7 +277,7 @@ const CartItem = ({
                             <Box
                                 sx={{
                                     borderLeft: `2px solid ${Colors.grey}`,
-                                    fontSize: "20px",
+                                    fontSize: { xs: "14px", lg: "20px" },
                                     fontWeight: 500,
                                     lineHeight: "24px",
                                     letterSpacing: "0em",
@@ -290,13 +294,13 @@ const CartItem = ({
                         </Grid>
                         <Box
                             sx={{
-                                fontSize: "24px",
+                                fontSize: { xs: "16px", lg: "24px" },
                                 fontWeight: 800,
                                 lineHeight: "29px",
                                 letterSpacing: "0em",
                                 textAlign: "right",
                                 color: Colors.neutral,
-
+                                display: { xs: "none", lg: "block" },
                                 py: "12px",
                             }}
                         >

@@ -20,13 +20,15 @@ const ProductReviews = ({ cat }) => {
         <>
             <Box
                 sx={{
-                    py: "48px",
+                    py: { xs: "12px", lg: "48px" },
                 }}
             >
                 <Grid
                     container
                     sx={{
                         columnGap: "21px",
+                        flexDirection: "column",
+                        rowGap: "16px",
                     }}
                 >
                     <Box
@@ -110,7 +112,8 @@ const ProductReviews = ({ cat }) => {
                             background: Colors.paper,
                             display: "flex",
                             alignItems: "center",
-                            p: "20px 75px",
+                            p: { xs: "12px 12px", lg: "20px 75px" },
+                            columnGap: { xs: "12px", lg: "0px" },
                         }}
                     >
                         <Box
@@ -121,7 +124,7 @@ const ProductReviews = ({ cat }) => {
                                 fontFamily: "Inter",
                                 fontStyle: "normal",
                                 fontWeight: 400,
-                                fontSize: "20px",
+                                fontSize: { xs: "16px", lg: "20px" },
                                 lineHeight: "24px",
                             }}
                         >
@@ -140,7 +143,7 @@ const ProductReviews = ({ cat }) => {
                                 textAlign: "center",
                                 width: "fit-content",
                                 cursor: "pointer",
-                                p: "14px 58px",
+                                p: { xs: "12px 24px", lg: "14px 58px" },
                                 "&:hover": {
                                     background: Colors.lightGreen,
                                     color: Colors.white,

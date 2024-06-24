@@ -71,9 +71,10 @@ const ProductItem = ({ product }: any) => {
                 container
                 direction={"row"}
                 sx={{
-                    px: "36px",
+                    px: { xs: "17px", lg: "36px" },
                     py: "19px",
-                    width: { sm: "100%" },
+                    borderRadius: "15px",
+                    width: { xs: "100%" },
                     background: Colors.paper,
                 }}
             >

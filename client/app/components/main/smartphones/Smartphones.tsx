@@ -64,7 +64,9 @@ const cardsApi = [
 ]
 
 const Smartphones = () => {
-    const [width, setWidth] = useState(0)
+    const [width, setWidth] = useState(
+        document.documentElement.clientWidth || 0
+    )
     const [settings, setSettings] = useState({
         dots: true,
         infinite: true,
@@ -86,9 +88,15 @@ const Smartphones = () => {
     }, [])
 
     useEffect(() => {
-        if (width <= 1280) {
+        if (width < 1280) {
             setSettings((state: any) => {
                 return { ...state, slidesToShow: 2, slidesToScroll: 2 }
+            })
+            return
+        }
+        if (width >= 1280) {
+            setSettings((state: any) => {
+                return { ...state, slidesToShow: 5, slidesToScroll: 5 }
             })
             return
         }

@@ -31,7 +31,8 @@
         "app/api/authoptions/auth.js",
         "app/components/header/search/SearchItem.jsx",
         "app/categories/page.jsx",
-        "app/components/basic/filters/PriceFIlter.jsx"
+        "app/components/basic/filters/PriceFIlter.jsx",
+        "app/components/main/products/AboutProduct.jsx"
     ],
     "exclude": ["node_modules"]
 }

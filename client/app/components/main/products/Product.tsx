@@ -137,15 +137,21 @@ export default function Product({ params }: any) {
 
     return (
         <>
-            <Box sx={{ width: "100%", background: Colors.white }}>
+            <Box
+                sx={{
+                    width: "100%",
+                    background: Colors.white,
+                    mt: { xs: "50px", lg: 0 },
+                }}
+            >
                 <Box
                     sx={{
-                        width: { xl: "1440px", lg: 1368 },
+                        width: { xs: 360, lg: 1368, xl: 1440 },
                         display: "flex",
                         flexDirection: "column",
                         margin: "0 auto",
                         rowGap: "39px",
-                        py: { sm: "28px" },
+                        py: { xs: "28px" },
                     }}
                 >
                     <Box

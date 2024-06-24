@@ -159,7 +159,7 @@ const CartComp = ({ setOpen }: any) => {
                 sx={{
                     background: Colors.paper,
                     borderRadius: "15px",
-                    width: { lg: 892 },
+                    width: { xs: "95%", lg: 892 },
                     height: cart !== null && cart.length > 0 ? "85svh" : 443,
                     p: "32px 28px",
                     boxShadow: `10px 10px 10px -11px rgba(0,0,0,0.75)`,
@@ -206,7 +206,7 @@ const CartComp = ({ setOpen }: any) => {
                                     sx={{
                                         flexDirection: "column",
 
-                                        width: 836,
+                                        width: { xs: 260, lg: 836 },
                                         rowGap: "20px",
                                     }}
                                 >
@@ -296,10 +296,13 @@ const CartComp = ({ setOpen }: any) => {
                                 <Button
                                     sx={{
                                         borderRadius: "15px",
-                                        width: { lg: 240 },
+                                        width: { xs: 85, lg: 240 },
                                         color: Colors.grey,
                                         outline: `2px solid ${Colors.grey}`,
-                                        fontSize: "16px",
+                                        fontSize: {
+                                            xs: "12px",
+                                            lg: "16px",
+                                        },
                                         fontWeight: "500",
                                         lineHeight: "22px",
                                         letterSpacing: "0em",
@@ -315,15 +318,21 @@ const CartComp = ({ setOpen }: any) => {
                                 </Button>
                                 <Grid
                                     container
-                                    sx={{ columnGap: "16px", width: "auto" }}
+                                    sx={{
+                                        columnGap: { xs: "8px", lg: "16px" },
+                                        width: "auto",
+                                    }}
                                 >
                                     <Button
                                         sx={{
                                             borderRadius: "15px",
-                                            width: { lg: 240 },
+                                            width: { xs: 85, lg: 240 },
                                             color: Colors.neutral,
                                             outline: `2px solid ${Colors.neutral}`,
-                                            fontSize: "16px",
+                                            fontSize: {
+                                                xs: "12px",
+                                                lg: "16px",
+                                            },
                                             fontWeight: "500",
                                             lineHeight: "22px",
                                             letterSpacing: "0em",
@@ -340,10 +349,13 @@ const CartComp = ({ setOpen }: any) => {
                                     <Button
                                         sx={{
                                             borderRadius: "15px",
-                                            width: { lg: 240 },
+                                            width: { xs: 85, lg: 240 },
                                             color: Colors.white,
                                             background: Colors.neutral,
-                                            fontSize: "16px",
+                                            fontSize: {
+                                                xs: "12px",
+                                                lg: "16px",
+                                            },
                                             fontWeight: "500",
                                             lineHeight: "22px",
                                             letterSpacing: "0em",
@@ -375,7 +387,7 @@ const CartComp = ({ setOpen }: any) => {
                             <Grid
                                 container
                                 sx={{
-                                    width: { lg: 250 },
+                                    width: { xs: 100, lg: 240 },
                                     flexDirection: "column",
                                     rowGap: "36px",
                                 }}
@@ -421,7 +433,7 @@ const CartComp = ({ setOpen }: any) => {
                                     Перейти до головної
                                 </button>
                             </Grid>
-                            <Box sx={{ width: { lg: 306 }, mt: "-80px" }}>
+                            <Box sx={{ width: { xs: 306 }, mt: "-80px" }}>
                                 {cartNoProducts}
                             </Box>
                         </Grid>

@@ -44,7 +44,7 @@ const DeliveryInfo = () => {
         <Box
             sx={{
                 width: "100%",
-                height: "200px",
+                height: { xs: "500px", lg: "200px" },
                 py: "46px",
                 background: Colors.paper,
             }}
@@ -52,9 +52,11 @@ const DeliveryInfo = () => {
             <Grid
                 container
                 sx={{
-                    width: { lg: 1368, xl: 1440 },
-                    height: "100%",
+                    width: { xs: 360, lg: 1368, xl: 1440 },
+                    height: { xs: "auto", lg: "100%" },
+                    rowGap: { xs: "16px", lg: "0px" },
                     margin: "0 auto",
+                    flexDirection: { xs: "column", lg: "row" },
                     justifyContent: "space-between",
                 }}
             >

@@ -30,7 +30,7 @@ const Search = ({ params, session }: any) => {
     const [openLogin, setOpenLogin] = useState<boolean>(false)
     const [openCart, setOpenCart] = useState<boolean>(false)
     const [cartAmount, setCartAmount] = useState<number>(0)
-    const [windowWidth, setWindowWidth] = useState<number>(0)
+    const [windowWidth, setWindowWidth] = useState<number>(1280)
 
     const router = useRouter()
     const dispacth = useDispatch()
@@ -291,7 +291,7 @@ const Search = ({ params, session }: any) => {
                         height: 80,
                         background: Colors.paper,
                         position: "fixed",
-                        top: "calc(100vh - 80px)",
+                        top: "calc(100svh - 80px)",
                         zIndex: 302,
                         display: "flex",
                         alignItems: "center",

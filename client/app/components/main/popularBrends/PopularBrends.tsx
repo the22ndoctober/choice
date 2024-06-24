@@ -29,9 +29,7 @@ const cardsApi = [
 ]
 
 const PopularBrends = () => {
-    const [width, setWidth] = useState(
-        document.documentElement.clientWidth || 0
-    )
+    const [width, setWidth] = useState(0)
     const [settings, setSettings] = useState({
         dots: true,
         infinite: true,
@@ -42,7 +40,7 @@ const PopularBrends = () => {
 
     useEffect(() => {
         const updateWindowDimensions = () => {
-            const newWidth = window.innerWidth
+            const newWidth = document ? document.documentElement.clientWidth : 0
             setWidth(newWidth)
         }
 

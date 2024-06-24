@@ -30,9 +30,7 @@ const Search = ({ params, session }: any) => {
     const [openLogin, setOpenLogin] = useState<boolean>(false)
     const [openCart, setOpenCart] = useState<boolean>(false)
     const [cartAmount, setCartAmount] = useState<number>(0)
-    const [windowWidth, setWindowWidth] = useState<number>(
-        document.documentElement.clientWidth || 0
-    )
+    const [windowWidth, setWindowWidth] = useState<number>(0)
 
     const router = useRouter()
     const dispacth = useDispatch()
@@ -46,7 +44,7 @@ const Search = ({ params, session }: any) => {
     useEffect(() => {
         const handleResize = () => {
             // Function to handle window resize
-            setWindowWidth(document.documentElement.clientWidth)
+            setWindowWidth(document ? document.documentElement.clientWidth : 0)
             // You can add your logic here to handle the resize event
         }
 

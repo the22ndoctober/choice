@@ -64,9 +64,7 @@ const cardsApi = [
 ]
 
 const BestOffers = () => {
-    const [width, setWidth] = useState(
-        document.documentElement.clientWidth || 0
-    )
+    const [width, setWidth] = useState<any>(0)
     const [settings, setSettings] = useState({
         dots: true,
         infinite: true,
@@ -77,7 +75,7 @@ const BestOffers = () => {
 
     useEffect(() => {
         const updateWindowDimensions = () => {
-            const newWidth = document.documentElement.clientWidth
+            const newWidth = document ? document.documentElement.clientWidth : 0
             setWidth(newWidth)
         }
 

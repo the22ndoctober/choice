@@ -60,9 +60,10 @@ const Navigtaion = () => {
 
     return (
         <>
-            {/* <Box
+            <Box
                 sx={{
                     width: { sm: "100%" },
+                    display: { xs: "none", lg: "block" },
                     background: "#F9FAFD",
                     height: "85px",
                 }}
@@ -189,7 +190,7 @@ const Navigtaion = () => {
                         </Box>
                     </Grid>
                 </Grid>
-            </Box> */}
+            </Box>
         </>
     )
 }

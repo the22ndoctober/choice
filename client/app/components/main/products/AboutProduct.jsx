@@ -15,16 +15,14 @@ import { useEffect, useState } from "react"
 import Slider from "react-slick"
 
 const AboutProduct = ({ product }) => {
-    const [windowWidth, setWindowWidth] = useState(
-        document.documentElement.clientWidth || 0
-    )
+    const [windowWidth, setWindowWidth] = useState(0)
 
     const dispatch = useDispatch()
 
     useEffect(() => {
         const handleResize = () => {
             // Function to handle window resize
-            setWindowWidth(document.documentElement.clientWidth)
+            setWindowWidth(document ? document.documentElement.clientWidth : 0)
             // You can add your logic here to handle the resize event
         }
 

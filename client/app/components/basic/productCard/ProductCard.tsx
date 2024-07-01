@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import src from "@/public/test_item.png"
 import Image from "next/image"
 import { Box, Grid, Typography, Button } from "@mui/material"
@@ -13,7 +13,10 @@ import { useRouter } from "next/navigation"
 
 const ProductCard = ({
     title,
+    elementRef,
     price,
+    observeStart,
+    setObserveStart,
     currency,
     tags,
     img_path,
@@ -23,10 +26,22 @@ const ProductCard = ({
     const dispatch = useDispatch()
     const router = useRouter()
 
+    useEffect(() => {
+        if (setObserveStart) {
+            if (elementRef) {
+                setObserveStart(true)
+            }
+            return () => {
+                setObserveStart(false)
+            }
+        }
+    }, [])
+
     return (
         <>
             <Grid
                 container
+                ref={elementRef}
                 sx={{
                     width: "inherit",
                     flexDirection: "column",
@@ -56,7 +71,7 @@ const ProductCard = ({
                         margin: "0 auto",
                         overflow: "hidden",
                         width: "100%",
-                        height: { lg: "257px", xl: "317px" },
+                        height: { xs: 130, lg: "257px", xl: "317px" },
                     }}
                     onClick={() => {
                         product.product_id &&
@@ -229,7 +244,7 @@ const ProductCard = ({
                     <Box
                         sx={{
                             color: Colors.black,
-                            fontSize: "16px",
+                            fontSize: { xs: "12px", lg: "16px" },
                             fontWeight: 500,
                             minHeight: "60px",
 

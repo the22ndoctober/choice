@@ -13,10 +13,9 @@ import { useRouter } from "next/navigation"
 
 const ProductCard = ({
     title,
-    elementRef,
+
     price,
-    observeStart,
-    setObserveStart,
+
     currency,
     tags,
     img_path,
@@ -26,22 +25,10 @@ const ProductCard = ({
     const dispatch = useDispatch()
     const router = useRouter()
 
-    useEffect(() => {
-        if (setObserveStart) {
-            if (elementRef) {
-                setObserveStart(true)
-            }
-            return () => {
-                setObserveStart(false)
-            }
-        }
-    }, [])
-
     return (
         <>
             <Grid
                 container
-                ref={elementRef}
                 sx={{
                     width: "inherit",
                     flexDirection: "column",

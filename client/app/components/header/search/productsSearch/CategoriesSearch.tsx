@@ -125,10 +125,10 @@ const CategoriesSearch = () => {
 
     //responsive
 
-    const [width, setWidth] = useState(0)
-    const [itemToShow, setItemsToShow] = useState(8)
-    const [observerStart, setObserveStart] = useState(false)
-    const elementRef = useRef(null)
+    const [width, setWidth] = useState(1281)
+    const [amountToShow, setAmountToShow] = useState(8)
+    const [itemsToShow, setItemsToShow] = useState([])
+    const [filtersOpen, setFiltersOpen] = useState(false)
 
     useEffect(() => {
         const updateWindowDimensions = () => {
@@ -142,33 +142,28 @@ const CategoriesSearch = () => {
             window.removeEventListener("resize", updateWindowDimensions)
     }, [])
 
+    const handleScroll = () => {
+        console.log(window.innerHeight)
+        // if (
+        //     window.innerHeight + document.documentElement.scrollTop !==
+        //     document.documentElement.offsetHeight
+        // ) {
+        //     return
+        // }
+        // setAmountToShow((state: number) => state + 8)
+    }
+
     useEffect(() => {
-        if (observerStart) {
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    // When the observed element intersects with the viewport
-                    if (entry.isIntersecting) {
-                        setItemsToShow((state: number) => state + 8)
-                        console.log("selected")
-                    }
-                },
-                { threshold: 0.5 } // Optionally, define the threshold as needed
-            )
+        setItemsToShow([...filtredItems])
+    }, [amountToShow, filtredItems])
 
-            console.log(elementRef.current)
-
-            if (elementRef.current) {
-                observer.observe(elementRef.current)
-            }
-
-            // Cleanup the observer
-            return () => {
-                if (elementRef.current) {
-                    observer.unobserve(elementRef.current)
-                }
-            }
+    // Add scroll event listener when component mounts
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
         }
-    }, [observerStart, filtredItems])
+    }, [])
 
     //price filters
 
@@ -306,14 +301,6 @@ const CategoriesSearch = () => {
                 background: Colors.white,
             }}
         >
-            <button
-                style={{ marginTop: "200px" }}
-                onClick={() => {
-                    console.log(elementRef ? elementRef.current : "none")
-                }}
-            >
-                12312312
-            </button>
             <Grid
                 container
                 sx={{
@@ -424,8 +411,15 @@ const CategoriesSearch = () => {
                             flex: "1 1 0",
                             background: Colors.paper,
                             borderRadius: "15px",
+
                             p: "16px",
                             rowGap: "12px",
+                            position: { xs: "fixed", lg: "static" },
+                            left: { xs: 0 },
+                            top: { xs: 50 },
+                            minHeight: { xs: "100svh", lg: 0 },
+                            overflowY: "scroll",
+                            zIndex: 300,
                         }}
                     >
                         <Box
@@ -434,9 +428,18 @@ const CategoriesSearch = () => {
                                 fontSize: "20px",
                                 lineHeight: "24px",
                                 color: Colors.maxDark,
+                                display: "flex",
+                                justifyContent: "space-between",
                             }}
                         >
                             Фільтр
+                            <Box
+                                onClick={() => {
+                                    setFiltersOpen(false)
+                                }}
+                            >
+                                X
+                            </Box>
                         </Box>
                         <Grid
                             container
@@ -499,10 +502,35 @@ const CategoriesSearch = () => {
                                 <Box>Loading</Box>
                             ) : (
                                 status === "success" &&
-                                filtredItems.map((product: any, id: number) =>
-                                    width > 1280
-                                        ? id >= startPivot &&
-                                          id <= endPivot && (
+                                (width > 1280
+                                    ? filtredItems.map(
+                                          (product: any, id: number) =>
+                                              id >= startPivot &&
+                                              id <= endPivot && (
+                                                  <ProductCard
+                                                      key={
+                                                          product.product_id +
+                                                          id
+                                                      }
+                                                      title={product.title}
+                                                      price={Math.round(
+                                                          parseInt(
+                                                              product.price
+                                                          )
+                                                      )}
+                                                      currency={
+                                                          product.currency
+                                                      }
+                                                      tags={[]}
+                                                      img_path={
+                                                          product.image_path
+                                                      }
+                                                      product={product}
+                                                  />
+                                              )
+                                      )
+                                    : itemsToShow.map(
+                                          (product: any, id: number) => (
                                               <ProductCard
                                                   key={product.product_id + id}
                                                   title={product.title}
@@ -515,38 +543,7 @@ const CategoriesSearch = () => {
                                                   product={product}
                                               />
                                           )
-                                        : id < itemToShow &&
-                                          (id === itemToShow - 1 ? (
-                                              <ProductCard
-                                                  key={product.product_id + id}
-                                                  elementRef={elementRef}
-                                                  observeStart={observerStart}
-                                                  setObserveStart={
-                                                      setObserveStart
-                                                  }
-                                                  title={product.title}
-                                                  price={Math.round(
-                                                      parseInt(product.price)
-                                                  )}
-                                                  currency={product.currency}
-                                                  tags={[]}
-                                                  img_path={product.image_path}
-                                                  product={product}
-                                              />
-                                          ) : (
-                                              <ProductCard
-                                                  key={product.product_id + id}
-                                                  title={product.title}
-                                                  price={Math.round(
-                                                      parseInt(product.price)
-                                                  )}
-                                                  currency={product.currency}
-                                                  tags={[]}
-                                                  img_path={product.image_path}
-                                                  product={product}
-                                              />
-                                          ))
-                                )
+                                      ))
                             )}
                         </Grid>
                         {width > 1280 && (

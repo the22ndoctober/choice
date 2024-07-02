@@ -253,7 +253,7 @@ const ProductCard = ({
                     <Box
                         sx={{
                             fontSize: { xs: "14px", lg: "24px" },
-                            px: "8px",
+                            px: { xs: "4px", lg: "8px" },
                             color:
                                 product && parseInt(product.balance) === 0
                                     ? Colors.grey

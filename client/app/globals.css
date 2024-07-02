@@ -18,7 +18,7 @@ body {
 
 .slick-prev,
 .slick-next {
-    z-index: 300;
+    z-index: 250;
 }
 
 .slick-next {

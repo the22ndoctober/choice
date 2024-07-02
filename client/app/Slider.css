@@ -1,11 +1,13 @@
 .small-slider .slick-next {
     right: 25px !important;
     top: -40px;
+    z-index: 250;
 }
 
 .small-slider .slick-prev {
     left: 1320px !important;
     top: -40px;
+    z-index: 250;
 }
 
 @media only screen and (max-width: 1536px) {
@@ -18,11 +20,13 @@
 .slider-brands .slick-next {
     right: -235px !important;
     top: -40px;
+    z-index: 250;
 }
 
 .slider-brands .slick-prev {
     left: 1300px !important;
     top: -40px;
+    z-index: 250;
 }
 
 @media only screen and (max-width: 1536px) {

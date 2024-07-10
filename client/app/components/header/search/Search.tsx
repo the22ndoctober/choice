@@ -42,6 +42,10 @@ const Search = ({ params, session }: any) => {
     }
 
     useEffect(() => {
+        if (window) {
+            setWindowWidth(document.documentElement.clientWidth)
+        }
+
         const handleResize = () => {
             // Function to handle window resize
             setWindowWidth(document ? document.documentElement.clientWidth : 0)
@@ -58,7 +62,9 @@ const Search = ({ params, session }: any) => {
     }, [])
 
     useEffect(() => {
-        console.log(windowWidth)
+        if (windowWidth < 1280) {
+            setOpenCat(false)
+        }
     }, [windowWidth])
 
     useEffect(() => {
@@ -73,6 +79,14 @@ const Search = ({ params, session }: any) => {
 
     return (
         <>
+            {windowWidth < 1280 && (
+                <Box>
+                    {getStatus === "success" && openCat && (
+                        <Categories categories={data} />
+                    )}
+                </Box>
+            )}
+
             {windowWidth >= 1280 ? (
                 <Box
                     sx={{
@@ -304,6 +318,9 @@ const Search = ({ params, session }: any) => {
                             margin: "0 auto",
                             alignItems: "center",
                             justifyContent: "space-between",
+                            "& > *": {
+                                cursor: "pointer",
+                            },
                         }}
                     >
                         <Box
@@ -333,7 +350,11 @@ const Search = ({ params, session }: any) => {
                             </svg>
                         </Box>
 
-                        <Box onClick={() => {}}>
+                        <Box
+                            onClick={() => {
+                                setOpenCat((state: boolean) => !state)
+                            }}
+                        >
                             <svg
                                 width="40"
                                 height="48"
@@ -385,7 +406,7 @@ const Search = ({ params, session }: any) => {
 
                         <Box
                             onClick={() => {
-                                setOpenCart(true)
+                                setOpenCart((state: boolean) => !state)
                             }}
                         >
                             <svg

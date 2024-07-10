@@ -836,7 +836,7 @@ const Order = () => {
                 <Grid
                     container
                     sx={{
-                        width: { xl: 1440, lg: 1368 },
+                        width: { xl: 1440, lg: 1368, xs: 360 },
                         margin: "0 auto",
                         flexDirection: "column",
                         py: "38px",
@@ -853,14 +853,20 @@ const Order = () => {
                     >
                         Оформлення замовлення
                     </Box>
-                    <Grid container sx={{ columnGap: "17px" }}>
+                    <Grid
+                        container
+                        sx={{
+                            columnGap: "17px",
+                            flexDirection: { xs: "column", lg: "row" },
+                        }}
+                    >
                         <Box
                             sx={{
                                 display: "flex",
                                 flexDirection: "column",
                                 background: Colors.paper,
                                 borderRadius: "15px",
-                                flex: "5 1 0",
+                                flex: { xs: "none", lg: "5 1 0" },
                                 p: "46px 34px",
                                 rowGap: "19px",
                             }}
@@ -1152,7 +1158,7 @@ const Order = () => {
                                 flexDirection: "column",
                                 background: Colors.paper,
                                 borderRadius: "15px",
-                                flex: "3 1 0",
+                                flex: { xs: "none", lg: "3 1 0" },
                                 p: "46px 34px",
                                 rowGap: "20px",
                                 maxHeight: "fit-content",
@@ -1183,8 +1189,8 @@ const Order = () => {
                                     <Grid container sx={{ columnGap: "13px" }}>
                                         <Box
                                             sx={{
-                                                width: { sm: 80 },
-                                                height: { sm: 80 },
+                                                width: { xs: 80 },
+                                                height: { xs: 80 },
                                                 overflow: "hidden",
                                                 display: "flex",
                                                 justifyContent: "center",
@@ -1491,15 +1497,15 @@ const Order = () => {
                                         background: Colors.neutral,
                                         color: Colors.white,
                                         borderRadius: "15px",
-                                        fontSize: "18px",
-                                        fontWeight: 600,
+                                        fontSize: { xs: "14px", lg: "18px" },
+                                        fontWeight: { xs: 400, lg: 600 },
                                         lineHeight: "16.94px",
                                         cursor: "pointer",
                                         display: "flex",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        py: "24px",
-                                        px: "38px",
+                                        py: { xs: "16px", lg: "24px" },
+                                        px: { xs: "16px", lg: "38px" },
                                         height: "fit-content",
                                         ":hover": {
                                             background: Colors.lightGreen,

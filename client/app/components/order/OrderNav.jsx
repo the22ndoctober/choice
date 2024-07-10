@@ -2,6 +2,7 @@
 import { Box, Grid } from "@mui/material"
 import { Colors } from "@/client"
 import { useRouter } from "next/navigation"
+import { logoSmall } from "../static/logoSmall"
 
 const OrderNav = () => {
     const router = useRouter()
@@ -13,14 +14,28 @@ const OrderNav = () => {
                     container
                     sx={{
                         margin: "0 auto",
-                        width: { xl: 1440, lg: 1368 },
+                        width: { xl: 1440, lg: 1368, xs: 360 },
                         height: "100%",
                         justifyContent: "space-between",
                     }}
                 >
                     <Box
                         sx={{
-                            display: "flex",
+                            display: { xs: "flex", lg: "none" },
+                            width: "auto",
+                            alignItems: "center",
+                            height: "100%",
+                            cursor: "pointer",
+                        }}
+                        onClick={() => {
+                            router.push("/")
+                        }}
+                    >
+                        {logoSmall}
+                    </Box>
+                    <Box
+                        sx={{
+                            display: { xs: "none", lg: "flex" },
                             width: "auto",
                             alignItems: "center",
                             height: "100%",
@@ -144,7 +159,7 @@ const OrderNav = () => {
                     >
                         <Box
                             sx={{
-                                fontSize: "16px",
+                                fontSize: { xs: "12px", lg: "16px" },
                                 fontWeight: 400,
                                 lineHeight: "19.36px",
                                 color: Colors.white,
@@ -155,7 +170,7 @@ const OrderNav = () => {
                         </Box>
                         <Box
                             sx={{
-                                fontSize: "24px",
+                                fontSize: { xs: "16px", lg: "24px" },
                                 fontWeight: 600,
                                 lineHeight: "29.05px",
                                 color: Colors.white,

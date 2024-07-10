@@ -74,6 +74,9 @@ const BestOffers = () => {
     })
 
     useEffect(() => {
+        if (window) {
+            setWidth(document.documentElement.clientWidth)
+        }
         const updateWindowDimensions = () => {
             const newWidth = document ? document.documentElement.clientWidth : 0
             setWidth(newWidth)

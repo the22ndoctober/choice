@@ -222,7 +222,7 @@ const CartItem = ({
                             alignItems: "center",
                         }}
                     >
-                        {price + ` ${currency === "грн." && "₴"}`}
+                        {price + " ₴"}
                     </Box>
                     <Grid
                         container
@@ -304,7 +304,7 @@ const CartItem = ({
                                 py: "12px",
                             }}
                         >
-                            {price + ` ${currency === "грн." && "₴"}`}
+                            {price + " ₴"}
                         </Box>
                     </Grid>
                 </Grid>

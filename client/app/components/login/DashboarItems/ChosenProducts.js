@@ -1,6 +1,11 @@
-import { Box } from "@mui/material"
+"use client"
+
+import { Box, Grid } from "@mui/material"
+import { useSelector } from "react-redux"
 
 const ChosenProducts = ({ user }) => {
+    const products = useSelector()
+
     return (
         <>
             <Box
@@ -199,7 +204,14 @@ const ChosenProducts = ({ user }) => {
                     />
                 </svg>
 
-                <Box>В розробці</Box>
+                <Grid
+                    container
+                    sx={{
+                        flexDirection: "column",
+                    }}
+                >
+                    {user && user.favproducts.map((item) => <Box>{item}</Box>)}
+                </Grid>
             </Box>
         </>
     )

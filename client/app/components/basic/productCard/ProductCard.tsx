@@ -10,6 +10,7 @@ import { cartCard } from "../../static/cartCard"
 import { useDispatch } from "react-redux"
 import { changeCart } from "@/app/redux/cart/cartSlice"
 import { useRouter } from "next/navigation"
+import { addFavProduct } from "@/api/dashboard"
 
 const ProductCard = ({
     title,
@@ -276,6 +277,14 @@ const ProductCard = ({
                         {price + " " + "₴"}
                     </Box>
                     <Box
+                        onClick={() => {
+                            if (product.product_id && window?.localStorage) {
+                                addFavProduct(
+                                    window.localStorage.getItem("CHOICE_JWT"),
+                                    product.product_id
+                                )
+                            }
+                        }}
                         sx={{
                             p: { xs: "3px", xl: "7px" },
                             display: "flex",

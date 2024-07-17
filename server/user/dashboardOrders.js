@@ -1,6 +1,10 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 
+const favProduct = new mongoose.Schema({
+  product_id: String,
+});
+
 const orderSchema = new mongoose.Schema({
   id: String,
   createdAt: Date,
@@ -30,6 +34,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   birthDate: String,
   orders: [orderSchema],
+  favProducts: [favProduct],
 });
 
 function DashboardOrders(app, PORT, bent) {
@@ -96,21 +101,6 @@ function DashboardOrders(app, PORT, bent) {
   });
 
   app.post("/server/changeInfo", async function (req, res) {
-    let clientServerOptions = {
-      baseUrl: "https://api.dntrade.com.ua",
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        ApiKey: process.env.API_KEY,
-      },
-    };
-
-    const post = bent(
-      (baseUrl = clientServerOptions.baseUrl),
-      (method = clientServerOptions.method),
-      (headers = clientServerOptions.headers)
-    );
-
     try {
       const user = await User.findOne({ jwt: req.headers.jwt });
       console.log(123);
@@ -126,6 +116,34 @@ function DashboardOrders(app, PORT, bent) {
           }
         ).then((result) => result);
         res.json(newUser);
+      } else {
+        res.status(401).send("No valid user");
+      }
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  });
+
+  app.post("/server/addFavProducts", async function (req, res) {
+    try {
+      const user = await User.findOne({ jwt: req.headers.jwt });
+      console.log(user.favProducts);
+
+      if (user) {
+        if (user.favProducts) {
+          const newUser = await User.findOneAndUpdate(
+            { jwt: req.headers.jwt },
+            { $push: { favProducts: req.body.product_id } }
+          ).then((result) => result);
+          newUser.save();
+          res.json(newUser);
+        } else {
+          const newUser = await User.findOneAndUpdate(
+            { jwt: req.headers.jwt },
+            { favProducts: req.body.product_id }
+          ).then((result) => result);
+          res.json(newUser);
+        }
       } else {
         res.status(401).send("No valid user");
       }

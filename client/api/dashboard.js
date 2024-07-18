@@ -46,7 +46,7 @@ export const getProfileByJWT = async ({ JWT }) => {
             alert(1)
         }
     } catch (error) {
-        console.log(error)
+        return error.response
     }
 }
 

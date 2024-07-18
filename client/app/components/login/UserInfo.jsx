@@ -38,7 +38,12 @@ export default function UserInfo() {
     })
 
     if (isSuccess) {
-        console.log(data.orders)
+        if (data.status === 401) {
+            localStorage.removeItem("CHOICE_JWT")
+            setTimeout(() => {
+                router.push("/")
+            }, 1500)
+        }
     }
 
     useEffect(() => {

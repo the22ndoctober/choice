@@ -24,24 +24,22 @@ app.use(express.json());
 
 const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema({
-  products: [mongoose.Schema.Types.Mixed],
-  lastUpdated: String,
-  // product_id: String,
-  // balance: String,
-  // title: String,
-  // category_id: String,
-  // category: {
-  //   title: String,
-  // },
-  // store_id: String,
-  // sku: String,
-  // code: Number,
-  // short_description: String,
-  // description: String,
-  // image_path: String,
-  // images: [String],
-  // price: String,
-  // tags: [mongoose.Schema.Types.Mixed],
+  product_id: String,
+  balance: String,
+  title: String,
+  category_id: String,
+  category: {
+    title: String,
+  },
+  store_id: String,
+  sku: String,
+  code: Number,
+  short_description: String,
+  description: String,
+  image_path: String,
+  images: [String],
+  price: String,
+  tags: [mongoose.Schema.Types.Mixed],
 });
 
 const PORT = 3002;
@@ -145,8 +143,16 @@ async function updateDatabase() {
     };
     const currentDate = new Date().toLocaleDateString("en-US", options);
 
-    const item = new Product({ products: products, lastUpdated: currentDate });
-    item.save();
+    Product.create(products)
+      .then((createdItems) => {
+        console.log("Successfully created items:");
+        // Handle success
+      })
+      .catch((error) => {
+        console.error("Error creating items:", error);
+        // Handle error
+      });
+
     console.log(`i was updated ${currentDate}`);
   } catch (error) {
     console.log(error);

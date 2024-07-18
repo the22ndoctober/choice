@@ -1,3 +1,5 @@
+"use client"
+
 import { createSlice } from "@reduxjs/toolkit"
 import { generateUrl, endpoints } from "@/api/endPoints"
 import { getRequest } from "@/api/request"
@@ -32,8 +34,6 @@ export const getCategories = () => async (dispatch) => {
         const url = generateUrl(endpoints.getCategories)
 
         const response = await getRequest(url)
-
-        console.log(response)
 
         class Category {
             constructor(category, child = null) {

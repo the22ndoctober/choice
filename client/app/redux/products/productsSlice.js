@@ -1,3 +1,5 @@
+"use client"
+
 import { createSlice } from "@reduxjs/toolkit"
 import { generateUrl, endpoints } from "@/api/endPoints"
 import { postRequest } from "@/api/request"
@@ -41,9 +43,7 @@ export const getProducts = () => async (dispatch) => {
             }
         )
 
-        console.log(response)
-
-        const result = response[0].products.filter(
+        const result = response.filter(
             (product) =>
                 product.store_id !== null &&
                 product.category !== null &&

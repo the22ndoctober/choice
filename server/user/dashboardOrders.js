@@ -138,7 +138,7 @@ function DashboardOrders(app, PORT, bent) {
           newUser.save();
           res.json(newUser);
         } else {
-          const newUser = await User.findOneAndUpdate(
+          const newUser = await User.updateOne(
             { jwt: req.headers.jwt },
             { favProducts: req.body.product_id }
           ).then((result) => result);

@@ -308,7 +308,8 @@ const Search = ({ params, session }: any) => {
                         height: 80,
                         background: Colors.paper,
                         position: "fixed",
-                        top: "calc(100dvh - 80px)",
+                        bottom: "0",
+
                         zIndex: 302,
                         display: "flex",
                         alignItems: "center",

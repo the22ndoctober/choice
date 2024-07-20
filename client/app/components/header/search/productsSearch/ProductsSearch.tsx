@@ -29,6 +29,10 @@ const ProductsSearch = () => {
     const [filtersOpen, setFiltersOpen] = useState(false)
 
     useEffect(() => {
+        if (window) {
+            setWidth(document.documentElement.clientWidth)
+        }
+
         const updateWindowDimensions = () => {
             const newWidth = document ? document.documentElement.clientWidth : 0
             setWidth(newWidth)
@@ -788,6 +792,8 @@ const ProductsSearch = () => {
                                 currentMax={currentMax}
                                 setCurrentMin={setCurrentMin}
                                 setCurrentMax={setCurrentMax}
+                                setFiltersOpen={setFiltersOpen}
+                                screenWidth={width}
                             />
                         </Grid>
                     </Grid>

@@ -162,9 +162,9 @@ async function updateDatabase() {
   }
 }
 
-cron.schedule("*/3 * * * *", () => {
-  updateDatabase();
-});
+// cron.schedule("*/3 * * * *", () => {
+//   updateDatabase();
+// });
 
 app.listen(PORT);
 

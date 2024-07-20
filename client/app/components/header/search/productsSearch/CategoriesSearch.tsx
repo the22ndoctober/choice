@@ -132,6 +132,10 @@ const CategoriesSearch = () => {
     const [filtersOpen, setFiltersOpen] = useState(false)
 
     useEffect(() => {
+        if (window) {
+            setWidth(document.documentElement.clientWidth)
+        }
+
         const updateWindowDimensions = () => {
             const newWidth = document ? document.documentElement.clientWidth : 0
             setWidth(newWidth)
@@ -867,6 +871,7 @@ const CategoriesSearch = () => {
                                 width: "fit-content",
                             }}
                             onClick={() => {
+                                6
                                 setFiltersOpen(true)
                             }}
                         >
@@ -978,6 +983,8 @@ const CategoriesSearch = () => {
                                 currentMax={currentMax}
                                 setCurrentMin={setCurrentMin}
                                 setCurrentMax={setCurrentMax}
+                                setFiltersOpen={setFiltersOpen}
+                                screenWidth={width}
                             />
                             {rootCat.length > 0 && (
                                 <RecursiveSelect
@@ -1024,93 +1031,67 @@ const CategoriesSearch = () => {
                                 <Box>Loading</Box>
                             ) : (
                                 status === "success" &&
-                                (width > 1280
-                                    ? filtredItems.map(
-                                          (product: any, id: number) =>
-                                              id >= startPivot &&
-                                              id <= endPivot && (
-                                                  <ProductCard
-                                                      key={
-                                                          product.product_id +
-                                                          id
-                                                      }
-                                                      title={product.title}
-                                                      price={Math.round(
-                                                          parseInt(
-                                                              product.price
-                                                          )
-                                                      )}
-                                                      currency={
-                                                          product.currency
-                                                      }
-                                                      tags={[]}
-                                                      img_path={
-                                                          product.image_path
-                                                      }
-                                                      product={product}
-                                                  />
-                                              )
-                                      )
-                                    : itemsToShow.map(
-                                          (product: any, id: number) => (
-                                              <ProductCard
-                                                  key={product.product_id + id}
-                                                  title={product.title}
-                                                  price={Math.round(
-                                                      parseInt(product.price)
-                                                  )}
-                                                  currency={product.currency}
-                                                  tags={[]}
-                                                  img_path={product.image_path}
-                                                  product={product}
-                                              />
-                                          )
-                                      ))
+                                filtredItems.map(
+                                    (product: any, id: number) =>
+                                        id >= startPivot &&
+                                        id <= endPivot && (
+                                            <ProductCard
+                                                key={product.product_id + id}
+                                                title={product.title}
+                                                price={Math.round(
+                                                    parseInt(product.price)
+                                                )}
+                                                currency={product.currency}
+                                                tags={[]}
+                                                img_path={product.image_path}
+                                                product={product}
+                                            />
+                                        )
+                                )
                             )}
                         </Grid>
-                        {width > 1280 && (
-                            <Grid
-                                container
-                                sx={{
-                                    margin: "0 auto",
-                                    justifyContent: "center",
-                                    mt: "24px",
-                                    columnGap: "6px",
-                                }}
-                            >
-                                {pagesAmount.map(
-                                    (item: any, id: number) =>
-                                        (id <= 2 ||
-                                            (id >= selectedPage - 2 &&
-                                                id <= selectedPage + 2) ||
-                                            id >= pagesAmount.length - 3) && (
-                                            <Box
-                                                key={id}
-                                                sx={{
-                                                    width: "24px",
-                                                    height: "24px",
-                                                    display: "flex",
-                                                    justifyContent: "center",
-                                                    alignItems: "center",
-                                                    background:
-                                                        selectedPage === id
-                                                            ? Colors.light
-                                                            : "none",
-                                                    color: Colors.black,
-                                                    borderRadius: "100%",
-                                                    border: `1px solid ${Colors.light}`,
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() => {
-                                                    setSelectedPage(id)
-                                                }}
-                                            >
-                                                {id + 1}
-                                            </Box>
-                                        )
-                                )}
-                            </Grid>
-                        )}
+
+                        <Grid
+                            container
+                            sx={{
+                                margin: "0 auto",
+                                justifyContent: "center",
+                                mt: "24px",
+                                columnGap: "6px",
+                            }}
+                        >
+                            {pagesAmount.map(
+                                (item: any, id: number) =>
+                                    (id <= 2 ||
+                                        (id >= selectedPage - 2 &&
+                                            id <= selectedPage + 2) ||
+                                        id >= pagesAmount.length - 3) && (
+                                        <Box
+                                            key={id}
+                                            sx={{
+                                                width: "24px",
+                                                height: "24px",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                background:
+                                                    selectedPage === id
+                                                        ? Colors.light
+                                                        : "none",
+                                                color: Colors.black,
+                                                borderRadius: "100%",
+                                                border: `1px solid ${Colors.light}`,
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() => {
+                                                setSelectedPage(id)
+                                            }}
+                                        >
+                                            {id + 1}
+                                        </Box>
+                                    )
+                            )}
+                        </Grid>
                     </Grid>
                 </Grid>
                 <BestOffers />

@@ -15,6 +15,8 @@ const PriceFIlter = ({
     currentMax,
     setCurrentMin,
     setCurrentMax,
+    setFiltersOpen,
+    screenWidth,
 }) => {
     const [queryMin, setQueryMin] = useState(min)
     const [queryMax, setQueryMax] = useState(max)
@@ -37,6 +39,9 @@ const PriceFIlter = ({
     const handleMinMaxPrice = () => {
         setCurrentMin(queryMin)
         setCurrentMax(queryMax)
+        if (screenWidth <= 1280) {
+            setFiltersOpen(false)
+        }
     }
 
     return (

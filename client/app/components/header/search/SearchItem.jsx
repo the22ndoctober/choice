@@ -140,7 +140,6 @@ const SearchItem = ({ pageName, setOpenCat }) => {
                     }}
                 >
                     <StyledInputBase
-                        autoFocus={true}
                         className="search-placeholder"
                         placeholder="Пошук"
                         value={searchQuery}

@@ -68,8 +68,12 @@ const CategoryItem = ({
                                 sx={{
                                     textWrap: "break-line",
                                     width: "auto",
-                                    maxWidth: { lg: 162 },
-                                    fontSize: { lg: "14px", xl: "14px" },
+                                    maxWidth: { xs: 182, lg: 162 },
+                                    fontSize: {
+                                        xs: "14px",
+                                        lg: "14px",
+                                        xl: "14px",
+                                    },
                                     fontWeight: 400,
                                     lineHeight: "17px",
                                     letterSpacing: "0em",

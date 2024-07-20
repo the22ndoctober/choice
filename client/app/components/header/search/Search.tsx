@@ -291,7 +291,11 @@ const Search = ({ params, session }: any) => {
 
                     <Box>
                         {getStatus === "success" && openCat && (
-                            <CategoriesMob key="categories-mob" data={data} />
+                            <CategoriesMob
+                                key="categories-mob"
+                                data={data}
+                                setCat={setOpenCat}
+                            />
                         )}
                     </Box>
                 </Box>

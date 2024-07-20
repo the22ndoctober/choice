@@ -20,7 +20,7 @@ import { getCart } from "@/app/redux/cart/cartSlice"
 import { useSelector, useDispatch } from "react-redux"
 import CartComp from "../../order/Cart"
 import { getCategories } from "@/app/redux/categories/categoriesSlice"
-import CircularProgress from "@mui/joy/CircularProgress"
+import CategoriesMob from "@/app/components/header/search/categories/CategoriesMob"
 import { logoSmall } from "../../static/logoSmall"
 
 const Search = ({ params, session }: any) => {
@@ -79,14 +79,6 @@ const Search = ({ params, session }: any) => {
 
     return (
         <>
-            {windowWidth < 1280 && (
-                <Box>
-                    {getStatus === "success" && openCat && (
-                        <Categories categories={data} />
-                    )}
-                </Box>
-            )}
-
             {windowWidth >= 1280 ? (
                 <Box
                     sx={{
@@ -296,6 +288,12 @@ const Search = ({ params, session }: any) => {
                             setOpenCat={setOpenCat}
                         />
                     </Box>
+
+                    <Box>
+                        {getStatus === "success" && openCat && (
+                            <CategoriesMob key="categories-mob" data={data} />
+                        )}
+                    </Box>
                 </Box>
             )}
             {windowWidth < 1280 && (
@@ -305,7 +303,7 @@ const Search = ({ params, session }: any) => {
                         height: 80,
                         background: Colors.paper,
                         position: "fixed",
-                        top: "calc(100svh - 80px)",
+                        top: "calc(100dvh - 80px)",
                         zIndex: 302,
                         display: "flex",
                         alignItems: "center",

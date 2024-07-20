@@ -21,6 +21,7 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
     const router = useRouter()
 
     const level2Styles = {
+        mt: "12px",
         color: Colors.dark,
         fontStyle: "normal",
         fontWeight: 400,
@@ -50,8 +51,8 @@ const SubCategory = ({ categoryInfo, parent }: any) => {
                 container
                 sx={{
                     flexDirection: "column",
-                    rowGap: "3px",
-                    maxWidth: { lg: 350 },
+                    rowGap: { xs: "6px", lg: "3px" },
+                    maxWidth: { xs: 360, lg: 350 },
                 }}
             >
                 <Box

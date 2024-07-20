@@ -253,42 +253,7 @@ const Search = ({ params, session }: any) => {
                     </Box>
                 </Box>
             ) : (
-                <Box
-                    sx={{
-                        background: Colors.dark,
-                        width: "100%",
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        zIndex: 301,
-                    }}
-                >
-                    <Box
-                        sx={{
-                            width: { xs: 360 },
-                            margin: "0 auto",
-                            display: "flex",
-                            alignItems: "center",
-                            columnGap: "14px",
-                            p: "10px",
-                            background: Colors.dark,
-                        }}
-                    >
-                        <Box
-                            onClick={() => {
-                                router.push("/")
-                            }}
-                        >
-                            {logoSmall}
-                        </Box>
-
-                        <SearchItem
-                            pageName={params}
-                            key={"search-component"}
-                            setOpenCat={setOpenCat}
-                        />
-                    </Box>
-
+                <>
                     <Box>
                         {getStatus === "success" && openCat && (
                             <CategoriesMob
@@ -298,7 +263,43 @@ const Search = ({ params, session }: any) => {
                             />
                         )}
                     </Box>
-                </Box>
+                    <Box
+                        sx={{
+                            background: Colors.dark,
+                            width: "100%",
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            zIndex: 301,
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                width: { xs: 360 },
+                                margin: "0 auto",
+                                display: "flex",
+                                alignItems: "center",
+                                columnGap: "14px",
+                                p: "10px",
+                                background: Colors.dark,
+                            }}
+                        >
+                            <Box
+                                onClick={() => {
+                                    router.push("/")
+                                }}
+                            >
+                                {logoSmall}
+                            </Box>
+
+                            <SearchItem
+                                pageName={params}
+                                key={"search-component"}
+                                setOpenCat={setOpenCat}
+                            />
+                        </Box>
+                    </Box>
+                </>
             )}
             {windowWidth < 1280 && (
                 <Box

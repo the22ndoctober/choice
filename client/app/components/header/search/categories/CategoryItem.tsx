@@ -5,16 +5,9 @@ import Grid from "@mui/material/Grid"
 
 import { Colors } from "@/client"
 import { Box, Button } from "@mui/material"
-
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
-import SubCategory from "./SubCategory"
 
-const CategoryItem = ({
-    categoryInfo,
-    scrollOffset,
-    setSelected,
-    selectedCat,
-}: any) => {
+const CategoryItem = ({ categoryInfo, setSelected, selectedCat }: any) => {
     return (
         <>
             <Box

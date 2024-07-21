@@ -79,10 +79,36 @@ export const changeInfo = async ({ JWT, name, surname, email, birthDate }) => {
     }
 }
 
-export const addFavProduct = async (JWT, product_id) => {
+export const addFavProduct = async (JWT, product) => {
     try {
         const response = await axios.post(
             baseURL + "/server/addFavProducts",
+            {
+                product: product,
+            },
+            {
+                headers: {
+                    'secret': process.env.SECRET_KEY, // prettier-ignore
+                    'jwt': JWT, // prettier-ignore
+                },
+            }
+        )
+
+        if (response) {
+            console.log(response.data)
+            return response.data
+        } else {
+            alert(1)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const removeFavProduct = async (JWT, product_id) => {
+    try {
+        const response = await axios.post(
+            baseURL + "/server/removeFavProducts",
             {
                 product_id: product_id,
             },

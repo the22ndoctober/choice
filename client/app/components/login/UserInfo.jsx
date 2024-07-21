@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query"
 import MyOrders from "./DashboarItems/MyOrders"
 import MyCabinet from "./DashboarItems/MyCabinet"
 import PersonalData from "./DashboarItems/PersonalData"
+import ChosenProducts from "./DashboarItems/ChosenProducts"
 
 export default function UserInfo() {
     const sideBarOptions = {
@@ -55,7 +56,7 @@ export default function UserInfo() {
                 setRenderedInfo(<MyOrders orders={data.orders} />)
             }
             if (activeSideBar === sideBarOptions.ChosenProducts) {
-                setRenderedInfo(<MyCabinet />)
+                setRenderedInfo(<ChosenProducts user={data} />)
             }
             if (activeSideBar === sideBarOptions.Reviews) {
                 setRenderedInfo(<MyCabinet />)

@@ -281,7 +281,7 @@ const ProductCard = ({
                             if (product.product_id && window?.localStorage) {
                                 addFavProduct(
                                     window.localStorage.getItem("CHOICE_JWT"),
-                                    product.product_id
+                                    product
                                 )
                             }
                         }}

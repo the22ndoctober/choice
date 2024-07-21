@@ -174,6 +174,8 @@ function DashboardOrders(app, PORT, bent) {
                 err
               )
             );
+        } else {
+          console.log("1");
         }
       } else {
         res.status(401).send("No valid user");

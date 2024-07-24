@@ -40,21 +40,13 @@ const SearchItem = ({ pageName, setOpenCat }) => {
 
     useEffect(() => {
         if (searchQuery !== "") {
-            let result = productsData.filter(
-                function (product) {
-                    if (
-                        this.count < 4 &&
-                        product.title
-                            .toUpperCase()
-                            .includes(searchQuery.toUpperCase())
-                    ) {
-                        this.count++
-                        return true
-                    }
-                    return false
-                },
-                { count: 0 }
-            )
+            let result = productsData
+                .filter((product) =>
+                    product.title
+                        .toUpperCase()
+                        .includes(searchQuery.toUpperCase())
+                )
+                .slice(0, 4)
 
             setProducts(result)
             return
@@ -64,21 +56,13 @@ const SearchItem = ({ pageName, setOpenCat }) => {
 
     useEffect(() => {
         if (searchQuery !== "") {
-            let result = categoriesData.filter(
-                function (category) {
-                    if (
-                        this.count < 4 &&
-                        category.category.title
-                            .toUpperCase()
-                            .includes(searchQuery.toUpperCase())
-                    ) {
-                        this.count++
-                        return true
-                    }
-                    return false
-                },
-                { count: 0 }
-            )
+            let result = categoriesData
+                .filter((category) =>
+                    category.category.title
+                        .toUpperCase()
+                        .includes(searchQuery.toUpperCase())
+                )
+                .slice(0, 4)
 
             setCategories(result)
             return
@@ -86,80 +70,56 @@ const SearchItem = ({ pageName, setOpenCat }) => {
         setCategories([])
     }, [searchQuery])
 
-    //STYLED
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: "inherit",
-        width: "100%",
-
-        "& input": {
-            padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
-            width: "100%",
-            borderRadius: "50px",
-            px: "20px",
-        },
-    }))
-
-    const SearchComp = styled("div")(({ theme }) => ({
-        position: "relative",
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
-        "&:hover": {
-            backgroundColor: alpha(theme.palette.common.white, 0.25),
-        },
-        marginLeft: 0,
-        width: { xs: "100%", lg: "554px" },
-        zIndex: 500,
-        [theme.breakpoints.up("sm")]: {
-            marginLeft: theme.spacing(1),
-            width: { xs: "100%", lg: "554px" },
-        },
-    }))
-
     return (
         <>
             <Box
                 sx={{
                     position: "relative",
                     flex: "5 1 0",
+                    px: { lg: "32px" },
                 }}
             >
-                <SearchComp
+                <Box
                     sx={{
-                        ml: { xs: "0", lg: "46px !important" },
                         display: "flex",
                         background: Colors.neutral,
                         direction: "row",
                         borderRadius: "15px",
                         height: "40px",
-                        width: { xs: "100%", lg: "554px" },
+                        width: "100%",
                         px: "20px",
                         color: "#fff",
                         alignItems: "center",
+                        justifyContent: "space-between",
                         zIndex: 500,
                     }}
                 >
-                    <StyledInputBase
-                        className="search-placeholder"
+                    <InputBase
                         placeholder="Пошук"
                         value={searchQuery}
                         onChange={(e) => {
-                            if (productsLoading !== "loading")
+                            if (productsLoading !== "loading") {
                                 return setSearchQuery(e.target.value)
+                            }
+
                             setSearchQuery("")
                         }}
+                        sx={{
+                            color: Colors.white,
+                        }}
                     />
-
-                    {searchQuery !== "" && (
-                        <CloseIcon
-                            sx={{ zIndex: 500 }}
-                            onClick={() => {
-                                setSearchQuery("")
-                            }}
-                        />
-                    )}
-                    <SearchIcon sx={{ zIndex: 500 }} />
-                </SearchComp>
+                    <Box>
+                        {searchQuery !== "" && (
+                            <CloseIcon
+                                sx={{ zIndex: 500 }}
+                                onClick={() => {
+                                    setSearchQuery("")
+                                }}
+                            />
+                        )}
+                        <SearchIcon sx={{ zIndex: 500 }} />
+                    </Box>
+                </Box>
                 {searchQuery !== "" && pageName !== "search" && (
                     <SearchDropDrown
                         query={searchQuery}

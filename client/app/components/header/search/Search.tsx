@@ -65,6 +65,9 @@ const Search = ({ params, session }: any) => {
         if (windowWidth < 1280) {
             setOpenCat(false)
         }
+        if (windowWidth >= 1280 && params === "") {
+            setOpenCat(true)
+        }
     }, [windowWidth])
 
     useEffect(() => {

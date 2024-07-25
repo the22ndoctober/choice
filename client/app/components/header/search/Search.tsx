@@ -359,7 +359,7 @@ const Search = ({ params, session }: any) => {
 
                         <Box
                             onClick={() => {
-                                setOpenCat((state: boolean) => !state)
+                                setOpenCat((state: boolean) => true)
                             }}
                         >
                             <svg

@@ -12,16 +12,7 @@ import { changeCart } from "@/app/redux/cart/cartSlice"
 import { useRouter } from "next/navigation"
 import { addFavProduct } from "@/api/dashboard"
 
-const ProductCard = ({
-    title,
-
-    price,
-
-    currency,
-    tags,
-    img_path,
-    product,
-}: any) => {
+const ProductCard = ({ title, price, img_path, product }: any) => {
     const [active, setActive] = useState<boolean>(false)
     const dispatch = useDispatch()
     const router = useRouter()

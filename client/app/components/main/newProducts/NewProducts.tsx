@@ -9,59 +9,8 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import ProductCard from "../../basic/productCard/ProductCard"
 import Slider from "react-slick"
 import "@/app/Slider.css"
-
-const cardsApi = [
-    {
-        id: 0,
-        title: "Iphone 13",
-        price: 5000,
-        currency: "₴",
-        tags: [
-            { color: Colors.lightBlue, title: "Найкраща ціна" },
-            { color: Colors.maxDark, title: "Відмінний стан" },
-        ],
-    },
-    {
-        id: 1,
-        title: "Iphone 7",
-        price: 3500,
-        currency: "₴",
-        tags: [
-            { color: Colors.lightBlue, title: "Найкраща ціна" },
-            { color: Colors.maxDark, title: "Відмінний стан" },
-        ],
-    },
-    {
-        id: 2,
-        title: "Samsung G9",
-        price: 3000,
-        currency: "₴",
-        tags: [
-            { color: Colors.lightBlue, title: "Найкраща ціна" },
-            { color: Colors.maxDark, title: "Відмінний стан" },
-        ],
-    },
-    {
-        id: 3,
-        title: "Motorolla 4/64",
-        price: 3000,
-        currency: "₴",
-        tags: [
-            { color: Colors.lightBlue, title: "Найкраща ціна" },
-            { color: Colors.maxDark, title: "Відмінний стан" },
-        ],
-    },
-    {
-        id: 4,
-        title: "Redmi Note 9A 4/64",
-        price: 2500,
-        currency: "₴",
-        tags: [
-            { color: Colors.lightBlue, title: "Найкраща ціна" },
-            { color: Colors.maxDark, title: "Відмінний стан" },
-        ],
-    },
-]
+import { useSelector } from "react-redux"
+import { CircularProgress } from "@mui/material"
 
 const NewProducts = () => {
     const [width, setWidth] = useState(0)
@@ -72,6 +21,29 @@ const NewProducts = () => {
         slidesToShow: 5,
         slidesToScroll: 5,
     })
+    const [cards, setCards] = useState<any[]>([])
+    const smarphonesApi = useSelector((state: any) => state.products.data)
+    const status = useSelector((state: any) => state.products.status)
+
+    useEffect(() => {
+        if (status === "success") {
+            let dataAmount = 8
+            let result: any[] = []
+            smarphonesApi.map((product: any) => {
+                if (result.length < dataAmount) {
+                    if (
+                        parseInt(product.balance) > 0 &&
+                        product.image_path !== null
+                    ) {
+                        result.push(product)
+                    }
+                }
+                return
+            })
+
+            setCards(result)
+        }
+    }, [status, smarphonesApi])
 
     useEffect(() => {
         if (window) {
@@ -151,17 +123,25 @@ const NewProducts = () => {
                             height: { xs: "auto" },
                         }}
                     >
-                        <Slider {...settings}>
-                            {cardsApi.map((card: any) => (
-                                <ProductCard
-                                    key={card.id}
-                                    title={card.title}
-                                    price={card.price}
-                                    currency={card.currency}
-                                    tags={card.tags}
-                                />
-                            ))}
-                        </Slider>
+                        {status === "success" ? (
+                            <>
+                                <Slider {...settings}>
+                                    {cards.map((card: any) => (
+                                        <ProductCard
+                                            key={card.product_id}
+                                            title={card.title}
+                                            price={parseInt(card.price)}
+                                            img_path={card.image_path}
+                                            product={card}
+                                        />
+                                    ))}
+                                </Slider>
+                            </>
+                        ) : status === "loading" ? (
+                            <CircularProgress />
+                        ) : (
+                            <Box>No data</Box>
+                        )}
                     </Box>
                 </Grid>
             </Grid>

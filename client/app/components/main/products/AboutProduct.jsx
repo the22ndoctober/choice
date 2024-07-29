@@ -199,6 +199,7 @@ const AboutProduct = ({ product }) => {
                             sx={{
                                 width: {
                                     lg: 451,
+                                    xs: 360,
                                 },
                                 overflow: "hidden",
                                 height: "80px",
@@ -304,7 +305,7 @@ const AboutProduct = ({ product }) => {
                     {windowWidth < 1280 && (
                         <Box
                             sx={{
-                                width: { xs: "360" },
+                                width: { xs: 340 },
                                 height: "fit-content",
                                 py: "24px",
                                 "& .slick-list": {
@@ -331,13 +332,9 @@ const AboutProduct = ({ product }) => {
                                                 src={link}
                                                 alt="images"
                                                 style={{
-                                                    width: "100%",
-                                                    height: "auto",
-                                                    position: "absolute",
-                                                    top: "50%",
-                                                    left: "50%",
-                                                    transform:
-                                                        "translate(-50%,-50%)",
+                                                    margin: "0 auto",
+                                                    width: "auto",
+                                                    height: "100%",
                                                 }}
                                             />
                                         </Box>

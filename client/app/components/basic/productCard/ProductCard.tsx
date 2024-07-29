@@ -34,6 +34,10 @@ const ProductCard = ({ title, price, img_path, product }: any) => {
                     boxShadow: "3px 3px 11px -4px rgba(0,0,0,0.25)",
                     transformOrigin: "center",
                     transitionDuration: "0.3s",
+                    minWidth: {
+                        xs: "calc(50% - 12px)",
+                        lg: "calc(20% - 12px)",
+                    },
                     ":hover": {
                         scale: "1.05",
                         WebkitBoxShadow: "3px 3px 11px -4px rgba(0,0,0,0.56)",

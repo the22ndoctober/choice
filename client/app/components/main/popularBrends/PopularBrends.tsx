@@ -140,6 +140,7 @@ const PopularBrends = () => {
                                             height: { xs: 80 },
                                             width: {
                                                 xs: "102px",
+                                                lg: "100%",
                                                 xl: "100%",
                                             },
                                             display: "flex",

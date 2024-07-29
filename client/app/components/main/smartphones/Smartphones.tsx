@@ -5,7 +5,6 @@ import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Typography from "@mui/material/Typography"
 import { Colors } from "@/client"
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos"
 import ProductCard from "../../basic/productCard/ProductCard"
 import Slider from "react-slick"
 import "@/app/Slider.css"
@@ -34,6 +33,7 @@ const Smartphones = () => {
                 if (result.length < dataAmount) {
                     if (
                         product.category.title.includes("Смартфони") &&
+                        !product.title.includes("Телевізор") &&
                         parseInt(product.balance) > 0 &&
                         product.image_path !== null
                     ) {

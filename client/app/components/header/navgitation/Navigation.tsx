@@ -14,13 +14,15 @@ const Navigtaion = () => {
     const router = useRouter()
 
     const NavButtons = [
-        // {
-        //     key: "store",
-        //     value: "Магазин",
-        //     handle: () => {
-        //         router.push("/")
-        //     },
-        // },
+        {
+            key: "store",
+            value: "Магазин",
+            handle: () => {
+                router.push(
+                    "/categories?query=%D0%A1%D0%BC%D0%B0%D1%80%D1%82%D1%84%D0%BE%D0%BD%D0%B8"
+                )
+            },
+        },
         {
             key: "about",
             value: "Про нас",
@@ -135,7 +137,7 @@ const Navigtaion = () => {
                                                 color: Colors.teal,
                                             },
                                         }}
-                                        // onClick={button.handle}
+                                        onClick={button.handle}
                                     >
                                         {button.value}
                                     </Typography>

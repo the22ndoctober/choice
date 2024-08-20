@@ -24,19 +24,23 @@ const VideoAbout = () => {
                         container
                         sx={{
                             flexDirection: "column",
-                            alignItems: "left",
+                            alignItems: "center",
                             justifyContent: "center",
                             rowGap: "14px",
                             height: "100%",
-                            width: "auto",
+                            flex: "1 1 0",
                             mt: "-30px",
+                            pr: "24px",
                         }}
                     >
                         <Typography
                             sx={{
-                                fontSize: "24px",
-                                fontWeight: 600,
-                                color: Colors.black,
+                                fontFamily: "Inter, sans-serif",
+                                fontStyle: "normal",
+                                fontWeight: "600",
+                                fontSize: "54px",
+                                lineHeight: "64px",
+                                color: Colors.maxDark,
                             }}
                         >
                             Заголовок під відео
@@ -48,7 +52,9 @@ const VideoAbout = () => {
                                 color: Colors.grey,
                             }}
                         >
-                            Текст під відео
+                            Повторне використання вживаних телефонів стає все
+                            більше популярним у світі. Чому? Відповіді у нашому
+                            відео.
                         </Typography>
                     </Grid>
                     <Box
